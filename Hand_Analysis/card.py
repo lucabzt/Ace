@@ -37,8 +37,9 @@ class Card:
         return f"{self.rank.value} of {self.suit.value}"
 
     def __eq__(self, other):
-        # Compares two cards for equality based on suit and rank
-        return self.suit == other.suit and self.rank == other.rank
+        if isinstance(other, Card):
+            return self.suit == other.suit and self.rank == other.rank
+        return False
 
     def __hash__(self):
         return hash((self.rank, self.suit))
