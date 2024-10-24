@@ -1,7 +1,7 @@
 import unittest
 
-from card import Card, Suit, Rank
-from hand_analyzer import PokerHandAnalyzer  # Adjust this import based on your actual module structure
+from Hand_Analysis.card import Card, Suit, Rank
+from Hand_Analysis.hand_analyzer import PokerHandAnalyzer  # Adjust this import based on your actual module structure
 
 
 class TestPokerHandAnalyzer(unittest.TestCase):
