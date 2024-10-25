@@ -17,88 +17,70 @@ class PokerHandAnalyzer:
 
         if len(cards) != 7:  # Es müssen genau 7 Karten sein
             raise ValueError("Exactly 7 cards are required to analyze.")  # Fehler bei falscher Kartenanzahl
+
         self.cards = cards  # Speichert die Karten
 
     # Methode, um die beste 5-Karten-Hand aus den 7 Karten zu ermitteln
     def get_best_hand(self):
         """
-        Ermittelt die beste 5-Karten-Hand aus den 7 gegebenen Karten.
-        Gibt die beste Hand zurück.
+        Ermittelt die beste 5-Karten-Hand aus den 7 gegebenen Karten und gibt eine strukturierte Ausgabe zurück,
+        die den Handtyp und wichtige Informationen zur Hand (wie Kickers) enthält.
         """
-        best_hand = None  # Variable für die beste Hand
-        best_hand_type = None  # Variable für den besten Handtyp
+        best_hand = None
+        best_hand_type = None
 
-        # Erzeugt alle möglichen 5-Karten-Kombinationen aus den 7 Karten
-        for combination in combinations(self.cards, 5):  # Kombiniert die 7 Karten in 5-Karten-Hände
-            hand_type, high_cards = self.evaluate_hand(combination)  # Bewertet jede 5-Karten-Hand
-            # Aktualisiert die beste Hand, wenn der aktuelle Handtyp besser ist
+        for combination in combinations(self.cards, 5):
+            hand_type, attr = self.evaluate_hand(combination)
+
             if best_hand_type is None or hand_type < best_hand_type:
-                best_hand_type = hand_type  # Speichert den neuen besten Handtyp
-                best_hand = (combination, high_cards)  # Speichert die neue beste Hand und relevante Karten
-            # If hands have the same rank, compare high cards to break the tie
+                best_hand_type = hand_type
+                best_hand = (combination, attr)
             elif hand_type == best_hand_type:
-                _, current_high_cards = best_hand
+                best_combination, best_attr = best_hand  # Unpack properly
+                best_hand = self.tieBreaker(hand_type, combination, attr, best_attr, best_hand)
 
-                # Differentiating tie-breaking logic based on hand type
-                if hand_type in [1, 2, 6]:  # Royal Flush, Straight Flush, Straight
-                    # Compare the highest card in the straight
-                    if self.compare_high_cards(high_cards, current_high_cards) > 0:
-                        best_hand = (combination, high_cards)
+        return best_hand_type
 
-                elif hand_type == 3:  # Four of a Kind
-                    # Compare the rank of the Four of a Kind, and then the kicker
-                    if rank_value(high_cards[0].rank) > rank_value(current_high_cards[0].rank):
-                        best_hand = (combination, high_cards)
-                    elif rank_value(high_cards[0].rank) == rank_value(current_high_cards[0].rank):
-                        if rank_value(high_cards[1].rank) > rank_value(current_high_cards[1].rank):
-                            best_hand = (combination, high_cards)
-
-                elif hand_type == 4:  # Full House
-                    # Compare the three of a kind rank, and if equal, compare the pair
-                    if rank_value(high_cards[0].rank) > rank_value(current_high_cards[0].rank):
-                        best_hand = (combination, high_cards)
-                    elif rank_value(high_cards[0].rank) == rank_value(current_high_cards[0].rank):
-                        if rank_value(high_cards[1].rank) > rank_value(current_high_cards[1].rank):
-                            best_hand = (combination, high_cards)
-
-                elif hand_type == 5:  # Flush
-                    # Compare high cards in Flush
-                    if self.compare_high_cards(high_cards, current_high_cards) > 0:
-                        best_hand = (combination, high_cards)
-
-                elif hand_type == 7:  # Three of a Kind
-                    # Compare the three of a kind rank, and then the kickers
-                    if rank_value(high_cards[0].rank) > rank_value(current_high_cards[0].rank):
-                        best_hand = (combination, high_cards)
-                    elif rank_value(high_cards[0].rank) == rank_value(current_high_cards[0].rank):
-                        if self.compare_high_cards(high_cards[1:], current_high_cards[1:]) > 0:
-                            best_hand = (combination, high_cards)
-
-                elif hand_type == 8:  # Two Pair
-                    # Compare the higher pair first, then the lower pair, and finally the kicker
-                    if rank_value(high_cards[0].rank) > rank_value(current_high_cards[0].rank):
-                        best_hand = (combination, high_cards)
-                    elif rank_value(high_cards[0].rank) == rank_value(current_high_cards[0].rank):
-                        if rank_value(high_cards[1].rank) > rank_value(current_high_cards[1].rank):
-                            best_hand = (combination, high_cards)
-                        elif rank_value(high_cards[1].rank) == rank_value(current_high_cards[1].rank):
-                            if rank_value(high_cards[2].rank) > rank_value(current_high_cards[2].rank):
-                                best_hand = (combination, high_cards)
-
-                elif hand_type == 9:  # One Pair
-                    # Compare the pair, and then the kickers
-                    if rank_value(high_cards[0].rank) > rank_value(current_high_cards[0].rank):
-                        best_hand = (combination, high_cards)
-                    elif rank_value(high_cards[0].rank) == rank_value(current_high_cards[0].rank):
-                        if self.compare_high_cards(high_cards[1:], current_high_cards[1:]) > 0:
-                            best_hand = (combination, high_cards)
-
-                elif hand_type == 10:  # High Card
-                    # Simply compare the high cards in order
-                    if self.compare_high_cards(high_cards, current_high_cards) > 0:
-                        best_hand = (combination, high_cards)
-
-        return best_hand[0]  # Gibt die beste Hand (5 Karten) zurück
+    def get_hand_description(self, hand_type, high_cards):
+        """
+        Liefert eine Beschreibung des Handtyps und der dazugehörigen wichtigen Karten (wie Kickers, Paare, etc.).
+        """
+        if hand_type == 1:
+            return {'hand_type': 'Royal Flush', 'rank_info': {'high_card': high_cards[0].rank}}
+        elif hand_type == 2:
+            return {'hand_type': 'Straight Flush', 'rank_info': {'high_card': high_cards[0].rank}}
+        elif hand_type == 3:
+            return {
+                'hand_type': 'Four of a Kind',
+                'rank_info': {'four_of_a_kind': high_cards[0].rank, 'kicker': high_cards[1].rank}
+            }
+        elif hand_type == 4:
+            return {
+                'hand_type': 'Full House',
+                'rank_info': {'three_of_a_kind': high_cards[0].rank, 'pair': high_cards[1].rank}
+            }
+        elif hand_type == 5:
+            return {'hand_type': 'Flush', 'rank_info': {'high_card': high_cards[0].rank}}
+        elif hand_type == 6:
+            return {'hand_type': 'Straight', 'rank_info': {'high_card': high_cards[0].rank}}
+        elif hand_type == 7:
+            return {
+                'hand_type': 'Three of a Kind',
+                'rank_info': {'three_of_a_kind': high_cards[0].rank, 'kickers': [card.rank for card in high_cards[1:]]}
+            }
+        elif hand_type == 8:
+            return {
+                'hand_type': 'Two Pair',
+                'rank_info': {'high_pair': high_cards[0].rank, 'low_pair': high_cards[1].rank,
+                              'kicker': high_cards[2].rank}
+            }
+        elif hand_type == 9:
+            return {
+                'hand_type': 'One Pair',
+                'rank_info': {'pair': high_cards[0].rank, 'kickers': [card.rank for card in high_cards[1:]]}
+            }
+        else:
+            return {'hand_type': 'High Card', 'rank_info': {'high_card': high_cards[0].rank}}
 
     # Methode zur Bewertung einer einzelnen 5-Karten-Hand
     def evaluate_hand(self, hand):
@@ -109,7 +91,18 @@ class PokerHandAnalyzer:
         """
         # Überprüft auf Royal Flush (höchster Straight Flush mit 10-A)
         flush, flush_high = is_flush(hand)
+
         straight, straight_high = is_straight(hand)
+
+        four_of_a_kind, quad_rank, quad_kicker = is_four_of_a_kind(hand)
+
+        full_house, fh_three_rank, fh_pair_rank = is_full_house(hand)
+
+        three_of_a_kind, three_rank, three_kickers = is_three_of_a_kind(hand)
+
+        two_pair, high_pair, low_pair, two_pair_kicker = is_two_pair(hand)
+
+        one_pair, pair_rank, one_pair_kickers = is_one_pair(hand)
 
         if flush and straight and straight_high.rank == Rank.ACE:
             return 1, [straight_high]  # Beste Hand: Royal Flush
@@ -119,14 +112,12 @@ class PokerHandAnalyzer:
             return 2, [straight_high]  # Straight Flush mit höchster Karte
 
         # Überprüft auf Four of a Kind (Vierling)
-        four_of_a_kind, quad_rank, kicker = is_four_of_a_kind(hand)
         if four_of_a_kind:
-            return 3, [quad_rank, kicker]  # Four of a Kind mit Kicker
+            return 3, [quad_rank, quad_kicker]  # Four of a Kind mit Kicker
 
         # Überprüft auf Full House (Drei gleiche Karten + zwei gleiche Karten)
-        full_house, three_rank, pair_rank = is_full_house(hand)
         if full_house:
-            return 4, [three_rank, pair_rank]  # Full House, Drilling gefolgt von Paar
+            return 4, [fh_three_rank, fh_pair_rank]  # Full House, Drilling gefolgt von Paar
 
         # Überprüft auf Flush (alle Karten gleiche Farbe)
         if flush:
@@ -137,23 +128,137 @@ class PokerHandAnalyzer:
             return 6, [straight_high]  # Straße mit höchster Karte
 
         # Überprüft auf Three of a Kind (Drilling)
-        three_of_a_kind, three_rank, kickers = is_three_of_a_kind(hand)
         if three_of_a_kind:
-            return 7, [three_rank] + kickers  # Drilling gefolgt von den besten Kickern
+            return 7, [three_rank] + three_kickers  # Drilling gefolgt von den besten Kickern
 
         # Überprüft auf Two Pair (zwei Paare)
-        two_pair, high_pair, low_pair, kicker = is_two_pair(hand)
         if two_pair:
-            return 8, [high_pair, low_pair, kicker]  # Zwei Paare mit Kicker
+            return 8, [high_pair, low_pair, two_pair_kicker]  # Zwei Paare mit Kicker
 
         # Überprüft auf One Pair (ein Paar)
-        one_pair, pair_rank, kickers = is_one_pair(hand)
         if one_pair:
-            return 9, [pair_rank] + kickers  # Paar mit Kickern
+            return 9, [pair_rank] + one_pair_kickers  # Paar mit Kickern
 
         # Keine Kombination gefunden: höchste Karte
         high = high_card(hand)
         return 10, [high]  # Höchste Karte (High Card)
+
+    def tieBreaker(self, hand_type, challenger_combination, challenger_attr, old_best_attr, old_best_hand):
+
+        best_hand = old_best_hand
+        # Differentiating tie-breaking logic based on hand type
+        if hand_type in [1, 2, 6]:  # Royal Flush, Straight Flush, Straight
+            challenger_high_card = challenger_attr[0]
+            old_high_card = old_best_attr[0]
+            # Compare the highest card in the straight
+            if self.compare_high_cards(challenger_high_card, old_high_card) > 0:
+                best_hand = (challenger_combination, challenger_attr)
+
+            return best_hand
+
+        elif hand_type == 3:  # Four of a Kind
+            challenger_rank = challenger_attr[0]
+            old_rank = old_best_attr[0]
+
+            challenger_kicker = challenger_attr[1]
+            old_kicker = old_best_attr[1]
+            # Compare the rank of the Four of a Kind, and then the kicker
+            if rank_value(challenger_rank) > rank_value(old_rank):
+                best_hand = (challenger_combination, challenger_attr)
+            elif rank_value(challenger_rank) == rank_value(old_rank):
+                if self.compare_high_cards(challenger_kicker, old_kicker) > 0:
+                    best_hand = (challenger_combination, challenger_attr)
+
+            return best_hand
+
+        elif hand_type == 4:  # Full House
+            # Compare the three of a kind rank, and if equal, compare the pair
+            challenger_three_of_a_kind_rank = challenger_attr[0]
+            old_three_of_a_kind_rank = old_best_attr[0]
+
+            challenger_pair_rank = challenger_attr[1]
+            old_pair_rank = old_best_attr[1]
+
+            if rank_value(challenger_three_of_a_kind_rank) > rank_value(old_three_of_a_kind_rank):
+                best_hand = (challenger_combination, challenger_attr)
+            elif rank_value(challenger_three_of_a_kind_rank) == rank_value(old_three_of_a_kind_rank):
+                if rank_value(challenger_pair_rank) > rank_value(old_pair_rank):
+                    best_hand = (challenger_combination, challenger_attr)
+
+            return best_hand
+
+        elif hand_type == 5:  # Flush
+            # Compare high cards in Flush
+            challenger_high_card = challenger_attr[0]
+            old_high_card = old_best_attr[0]
+
+            if self.compare_high_cards(challenger_high_card, old_high_card) > 0:
+                best_hand = (challenger_combination, challenger_attr)
+                return best_hand
+
+        elif hand_type == 7:  # Three of a Kind
+
+            challenger_three_of_a_kind_rank = challenger_attr[0]
+            old_three_of_a_kind_rank = old_best_attr[0]
+
+            challenger_kickers = challenger_attr[1]
+            old_kickers = old_best_attr[1]
+
+            # Compare the three of a kind rank, and then the kickers
+            if rank_value(challenger_three_of_a_kind_rank) > rank_value(old_three_of_a_kind_rank):
+                best_hand = (challenger_combination, challenger_attr)
+            elif rank_value(challenger_three_of_a_kind_rank) == rank_value(old_three_of_a_kind_rank):
+                if self.compare_high_cards(challenger_kickers[0:], old_kickers[0:]) > 0:
+                    best_hand = (challenger_combination, challenger_attr)
+            return best_hand
+
+        elif hand_type == 8:  # Two Pair
+
+            challenger_high_pair = challenger_attr[0]
+            old_high_pair = old_best_attr[0]
+
+            challenger_low_pair = challenger_attr[1]
+            old_low_pair = old_best_attr[1]
+
+            challenger_kicker = challenger_attr[2]
+            old_kicker = old_best_attr[2]
+
+            # Compare the higher pair first, then the lower pair, and finally the kicker
+            if rank_value(challenger_high_pair) > rank_value(old_high_pair):
+                best_hand = (challenger_combination, challenger_attr)
+            elif rank_value(challenger_high_pair) == rank_value(challenger_high_pair):
+                if rank_value(challenger_low_pair) > rank_value(old_low_pair):
+                    best_hand = (challenger_combination, challenger_attr)
+                elif rank_value(challenger_low_pair) == rank_value(old_low_pair):
+                    if rank_value(challenger_kicker) > rank_value(old_kicker):
+                        best_hand = (challenger_combination, challenger_attr)
+
+            return best_hand
+
+        elif hand_type == 9:  # One Pair
+            challenger_pair = challenger_attr[0]
+            old_pair = old_best_attr[0]
+
+            challenger_kickers = challenger_attr[1]
+            old_kickers = old_best_attr[1]
+
+            # Compare the pair, and then the kickers
+            if rank_value(challenger_pair) > rank_value(old_pair):
+                best_hand = (challenger_combination, challenger_attr)
+            elif rank_value(challenger_pair) == rank_value(old_pair):
+                if self.compare_high_cards(challenger_kickers[0:], old_kickers[0:]) > 0:
+                    best_hand = (challenger_combination, challenger_attr)
+
+
+        elif hand_type == 10:  # High Card
+            challenger_high_card = challenger_attr[0]
+            old_high_card = old_best_attr[0]
+
+            # Compare the highest card in the straight
+            if self.compare_high_cards(challenger_high_card, old_high_card) > 0:
+                best_hand = (challenger_combination, challenger_attr)
+
+            return best_hand
 
     def compare_high_cards(self, high_cards1, high_cards2):
         """

@@ -59,7 +59,7 @@ def is_straight(hand):
     ranks = sorted([rank_value(card.rank) for card in hand])  # Sortiert die Ränge der Hand
     # Spezieller Fall: Ace kann als 1 verwendet werden in der Reihenfolge A-2-3-4-5 wobei 5 höchste Karte
     if ranks == [2, 3, 4, 5, 14]:
-        return True, max(hand, key=lambda card: rank_value(card.rank) if rank_value(card.rank) != 14 else 5)
+        return True, next((card for card in hand if rank_value(card.rank) == 5), None)
     # Überprüft, ob die Ränge eine lückenlose Folge bilden
     return all(ranks[i] + 1 == ranks[i + 1] for i in range(len(ranks) - 1)), max(hand, key=lambda card: rank_value(card.rank))
 

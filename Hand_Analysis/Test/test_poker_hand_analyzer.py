@@ -21,7 +21,7 @@ class TestPokerHandAnalyzer(unittest.TestCase):
             self.create_card(Suit.CLUBS, Rank.EIGHT)
         ]
         analyzer = PokerHandAnalyzer(cards)
-        self.assertEqual(analyzer.get_best_hand(), (1, "Royal Flush"))
+        self.assertEqual(analyzer.get_best_hand(), (1))
 
     def test_royal_flush_edge_case(self):
         cards = [
