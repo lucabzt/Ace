@@ -39,7 +39,7 @@ class PokerHandAnalyzer:
                 best_combination, best_attr = best_hand  # Unpack properly
                 best_hand = self.tieBreaker(hand_type, combination, attr, best_attr, best_hand)
 
-        return best_hand_type
+        return best_hand_type, best_hand[0]
 
     def get_hand_description(self, hand_type, high_cards):
         """
@@ -163,9 +163,9 @@ class PokerHandAnalyzer:
             challenger_kicker = challenger_attr[1]
             old_kicker = old_best_attr[1]
             # Compare the rank of the Four of a Kind, and then the kicker
-            if rank_value(challenger_rank) > rank_value(old_rank):
+            if rank_value(challenger_rank.rank) > rank_value(old_rank.rank):
                 best_hand = (challenger_combination, challenger_attr)
-            elif rank_value(challenger_rank) == rank_value(old_rank):
+            elif rank_value(challenger_rank.rank) == rank_value(old_rank.rank):
                 if self.compare_high_cards(challenger_kicker, old_kicker) > 0:
                     best_hand = (challenger_combination, challenger_attr)
 
@@ -179,10 +179,10 @@ class PokerHandAnalyzer:
             challenger_pair_rank = challenger_attr[1]
             old_pair_rank = old_best_attr[1]
 
-            if rank_value(challenger_three_of_a_kind_rank) > rank_value(old_three_of_a_kind_rank):
+            if rank_value(challenger_three_of_a_kind_rank.rank) > rank_value(old_three_of_a_kind_rank.rank):
                 best_hand = (challenger_combination, challenger_attr)
-            elif rank_value(challenger_three_of_a_kind_rank) == rank_value(old_three_of_a_kind_rank):
-                if rank_value(challenger_pair_rank) > rank_value(old_pair_rank):
+            elif rank_value(challenger_three_of_a_kind_rank.rank) == rank_value(old_three_of_a_kind_rank.rank):
+                if rank_value(challenger_pair_rank.rank) > rank_value(old_pair_rank.rank):
                     best_hand = (challenger_combination, challenger_attr)
 
             return best_hand
@@ -204,12 +204,19 @@ class PokerHandAnalyzer:
             challenger_kickers = challenger_attr[1]
             old_kickers = old_best_attr[1]
 
+            # Ensure kickers are lists
+            if not isinstance(challenger_kickers, list):
+                challenger_kickers = [challenger_kickers]  # Convert to list if it's a single Card
+            if not isinstance(old_kickers, list):
+                old_kickers = [old_kickers]  # Convert to list if it's a single Card
+
             # Compare the three of a kind rank, and then the kickers
             if rank_value(challenger_three_of_a_kind_rank) > rank_value(old_three_of_a_kind_rank):
                 best_hand = (challenger_combination, challenger_attr)
             elif rank_value(challenger_three_of_a_kind_rank) == rank_value(old_three_of_a_kind_rank):
-                if self.compare_high_cards(challenger_kickers[0:], old_kickers[0:]) > 0:
+                if self.compare_high_cards(challenger_kickers, old_kickers) > 0:
                     best_hand = (challenger_combination, challenger_attr)
+
             return best_hand
 
         elif hand_type == 8:  # Two Pair
@@ -230,24 +237,42 @@ class PokerHandAnalyzer:
                 if rank_value(challenger_low_pair) > rank_value(old_low_pair):
                     best_hand = (challenger_combination, challenger_attr)
                 elif rank_value(challenger_low_pair) == rank_value(old_low_pair):
-                    if rank_value(challenger_kicker) > rank_value(old_kicker):
+                    if rank_value(challenger_kicker.rank) > rank_value(old_kicker.rank):
                         best_hand = (challenger_combination, challenger_attr)
 
             return best_hand
 
+
         elif hand_type == 9:  # One Pair
+
             challenger_pair = challenger_attr[0]
+
             old_pair = old_best_attr[0]
 
             challenger_kickers = challenger_attr[1]
+
             old_kickers = old_best_attr[1]
 
+            # Ensure kickers are lists
+
+            if not isinstance(challenger_kickers, list):
+                challenger_kickers = [challenger_kickers]  # Convert to list if it's a single Card
+
+            if not isinstance(old_kickers, list):
+                old_kickers = [old_kickers]  # Convert to list if it's a single Card
+
             # Compare the pair, and then the kickers
+
             if rank_value(challenger_pair) > rank_value(old_pair):
+
                 best_hand = (challenger_combination, challenger_attr)
+
             elif rank_value(challenger_pair) == rank_value(old_pair):
-                if self.compare_high_cards(challenger_kickers[0:], old_kickers[0:]) > 0:
+
+                if self.compare_high_cards(challenger_kickers, old_kickers) > 0:
                     best_hand = (challenger_combination, challenger_attr)
+
+            return best_hand
 
 
         elif hand_type == 10:  # High Card
@@ -265,11 +290,21 @@ class PokerHandAnalyzer:
         Vergleicht zwei Listen von High Cards und bestimmt, welche Liste stärker ist.
         Gibt 1 zurück, wenn high_cards1 stärker ist, -1, wenn high_cards2 stärker ist, und 0 bei Gleichheit.
         """
+
+        # Ensure that both high_cards1 and high_cards2 are lists
+        if not isinstance(high_cards1, list):
+            high_cards1 = [high_cards1]  # Convert to a list if it's a single Card
+        if not isinstance(high_cards2, list):
+            high_cards2 = [high_cards2]  # Convert to a list if it's a single Card
+
+        # Iterate over the pairs of high cards
         for card1, card2 in zip(high_cards1, high_cards2):
             if rank_value(card1.rank) > rank_value(card2.rank):
                 return 1
             elif rank_value(card1.rank) < rank_value(card2.rank):
                 return -1
+
+        # If all compared cards are equal, return 0
         return 0  # Hände sind gleich stark
 
     def has_duplicate_cards(self, cards):
