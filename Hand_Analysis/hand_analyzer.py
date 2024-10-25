@@ -37,7 +37,7 @@ class PokerHandAnalyzer:
                 best_hand = (combination, attr)
             elif hand_type == best_hand_type:
                 best_combination, best_attr = best_hand  # Unpack properly
-                best_hand = self.tieBreaker(hand_type, combination, attr, best_attr, best_hand)
+                best_hand = self.tie_breaker(hand_type, combination, attr, best_attr, best_hand)
 
         return best_hand_type, best_hand[0]
 
@@ -143,7 +143,7 @@ class PokerHandAnalyzer:
         high = high_card(hand)
         return 10, [high]  # Höchste Karte (High Card)
 
-    def tieBreaker(self, hand_type, challenger_combination, challenger_attr, old_best_attr, old_best_hand):
+    def tie_breaker(self, hand_type, challenger_combination, challenger_attr, old_best_attr, old_best_hand):
 
         best_hand = old_best_hand
         # Differentiating tie-breaking logic based on hand type
