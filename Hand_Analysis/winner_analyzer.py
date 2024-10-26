@@ -17,7 +17,7 @@ class WinnerAnalyzer:
 
         :return: A list of tuples containing player names and their best hands.
         """
-
+        winners = []
         best_hand = None
         best_hand_type = None
         best_player_name = None
@@ -29,16 +29,26 @@ class WinnerAnalyzer:
             if best_hand_type is None or hand_type < best_hand_type:
                 best_hand_type = hand_type
                 best_hand = (player_cards, attr)
-                best_player_name = player_name
+
+                winners.clear()
+                winners.append((player_name, best_hand_type, best_hand))
+
             elif hand_type == best_hand_type:
                 best_combination, best_attr = best_hand  # Unpack properly
 
                 temp = best_hand
-                best_hand = self.tie_breaker(hand_type, player_cards, attr, best_attr, best_hand)
+                best_hand, split_pot = self.tie_breaker(hand_type, player_cards, attr, best_attr, best_hand)
                 if temp != best_hand:
-                    best_player_name = player_name
+                    best_hand_type = hand_type
+                    best_hand = (player_cards, attr)
 
-        return best_player_name, best_hand_type, best_hand
+                    winners.clear()
+                    winners.append((player_name, best_hand_type, best_hand))
+
+                elif split_pot:
+                    winners.append((player_name, best_hand_type, best_hand))
+
+        return winners
 
     # Methode zur Bewertung einer einzelnen 5-Karten-Hand
     def evaluate_hand(self, hand):
@@ -106,15 +116,21 @@ class WinnerAnalyzer:
         best_hand = old_best_hand
         # Differentiating tie-breaking logic based on hand type
         if hand_type in [1, 2, 6]:  # Royal Flush, Straight Flush, Straight
+            split_pot = False
+
             challenger_high_card = challenger_attr[0]
             old_high_card = old_best_attr[0]
             # Compare the highest card in the straight
             if self.compare_high_cards(challenger_high_card, old_high_card) > 0:
                 best_hand = (challenger_combination, challenger_attr)
+            elif self.compare_high_cards(challenger_high_card, old_high_card) == 0:
+                split_pot = True
 
-            return best_hand
+            return best_hand, split_pot
 
         elif hand_type == 3:  # Four of a Kind
+            split_pot = False
+
             challenger_rank = challenger_attr[0]
             old_rank = old_best_attr[0]
 
@@ -126,35 +142,48 @@ class WinnerAnalyzer:
             elif rank_value(challenger_rank.rank) == rank_value(old_rank.rank):
                 if self.compare_high_cards(challenger_kicker, old_kicker) > 0:
                     best_hand = (challenger_combination, challenger_attr)
+                elif self.compare_high_cards(challenger_kicker, old_kicker) == 0:
+                    split_pot = True
 
-            return best_hand
+            return best_hand, split_pot
 
         elif hand_type == 4:  # Full House
             # Compare the three of a kind rank, and if equal, compare the pair
+            split_pot = False
+
             challenger_three_of_a_kind_rank = challenger_attr[0]
             old_three_of_a_kind_rank = old_best_attr[0]
 
             challenger_pair_rank = challenger_attr[1]
             old_pair_rank = old_best_attr[1]
 
-            if rank_value(challenger_three_of_a_kind_rank.rank) > rank_value(old_three_of_a_kind_rank.rank):
+            if rank_value(challenger_three_of_a_kind_rank) > rank_value(old_three_of_a_kind_rank):
                 best_hand = (challenger_combination, challenger_attr)
-            elif rank_value(challenger_three_of_a_kind_rank.rank) == rank_value(old_three_of_a_kind_rank.rank):
-                if rank_value(challenger_pair_rank.rank) > rank_value(old_pair_rank.rank):
+            elif rank_value(challenger_three_of_a_kind_rank) == rank_value(old_three_of_a_kind_rank):
+                if rank_value(challenger_pair_rank) > rank_value(old_pair_rank):
                     best_hand = (challenger_combination, challenger_attr)
+                elif rank_value(challenger_pair_rank) == rank_value(old_pair_rank):
+                    split_pot = True
 
-            return best_hand
+            return best_hand, split_pot
 
         elif hand_type == 5:  # Flush
             # Compare high cards in Flush
+            split_pot = False
+
             challenger_high_card = challenger_attr[0]
             old_high_card = old_best_attr[0]
 
             if self.compare_high_cards(challenger_high_card, old_high_card) > 0:
                 best_hand = (challenger_combination, challenger_attr)
-                return best_hand
+            elif self.compare_high_cards(challenger_high_card, old_high_card) == 0:
+                split_pot = True
+
+            return best_hand, split_pot
 
         elif hand_type == 7:  # Three of a Kind
+
+            split_pot = False
 
             challenger_three_of_a_kind_rank = challenger_attr[0]
             old_three_of_a_kind_rank = old_best_attr[0]
@@ -174,10 +203,13 @@ class WinnerAnalyzer:
             elif rank_value(challenger_three_of_a_kind_rank) == rank_value(old_three_of_a_kind_rank):
                 if self.compare_high_cards(challenger_kickers, old_kickers) > 0:
                     best_hand = (challenger_combination, challenger_attr)
+                elif self.compare_high_cards(challenger_kickers, old_kickers) == 0:
+                    split_pot = True
 
-            return best_hand
+            return best_hand, split_pot
 
         elif hand_type == 8:  # Two Pair
+            split_pot = False
 
             challenger_high_pair = challenger_attr[0]
             old_high_pair = old_best_attr[0]
@@ -197,11 +229,15 @@ class WinnerAnalyzer:
                 elif rank_value(challenger_low_pair) == rank_value(old_low_pair):
                     if rank_value(challenger_kicker.rank) > rank_value(old_kicker.rank):
                         best_hand = (challenger_combination, challenger_attr)
+                    elif rank_value(challenger_kicker.rank) == rank_value(old_kicker.rank):
+                        split_pot = True
 
-            return best_hand
+            return best_hand, split_pot
 
 
         elif hand_type == 9:  # One Pair
+
+            split_pot = False
 
             challenger_pair = challenger_attr[0]
 
@@ -230,7 +266,10 @@ class WinnerAnalyzer:
                 if self.compare_high_cards(challenger_kickers, old_kickers) > 0:
                     best_hand = (challenger_combination, challenger_attr)
 
-            return best_hand
+                elif self.compare_high_cards(challenger_kickers, old_kickers) == 0:
+                    split_pot = True
+
+            return best_hand, split_pot
 
 
         elif hand_type == 10:  # High Card

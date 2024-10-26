@@ -179,10 +179,10 @@ class PokerHandAnalyzer:
             challenger_pair_rank = challenger_attr[1]
             old_pair_rank = old_best_attr[1]
 
-            if rank_value(challenger_three_of_a_kind_rank.rank) > rank_value(old_three_of_a_kind_rank.rank):
+            if rank_value(challenger_three_of_a_kind_rank) > rank_value(old_three_of_a_kind_rank):
                 best_hand = (challenger_combination, challenger_attr)
-            elif rank_value(challenger_three_of_a_kind_rank.rank) == rank_value(old_three_of_a_kind_rank.rank):
-                if rank_value(challenger_pair_rank.rank) > rank_value(old_pair_rank.rank):
+            elif rank_value(challenger_three_of_a_kind_rank) == rank_value(old_three_of_a_kind_rank):
+                if rank_value(challenger_pair_rank) > rank_value(old_pair_rank):
                     best_hand = (challenger_combination, challenger_attr)
 
             return best_hand

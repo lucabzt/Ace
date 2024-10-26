@@ -10,6 +10,8 @@ class Player:
     def receive_card(self, card):
         """Adds a card to the player's hand, limited to 2 cards."""
         if len(self.cards) < 2:
+            if card in self.cards:
+                raise Exception("Duplicate card found in " + self.name)
             self.cards.append(card)
         else:
             raise Exception("Player already has 2 cards.")
