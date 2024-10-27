@@ -104,7 +104,7 @@ class PokerHandAnalyzer:
         und der höchsten Karte zur Tie-Breaking.
         """
         # Überprüft auf Royal Flush (höchster Straight Flush mit 10-A)
-        flush, flush_high = is_flush(hand)
+        flush, flush_high, flush_kicker_1, flush_kicker_2, flush_kicker_3, flush_kicker_4 = is_flush(hand)
 
         straight, straight_high = is_straight(hand)
 
@@ -135,7 +135,8 @@ class PokerHandAnalyzer:
 
         # Überprüft auf Flush (alle Karten gleiche Farbe)
         if flush:
-            return 5, [flush_high]  # Flush mit höchster Karte
+            return 5, [flush_high, flush_kicker_1, flush_kicker_2, flush_kicker_3,
+                       flush_kicker_4]  # Flush mit höchster Karte
 
         # Überprüft auf Straight (alle Karten in Folge, aber unterschiedliche Farben)
         if straight:
@@ -154,8 +155,8 @@ class PokerHandAnalyzer:
             return 9, [pair_rank, kicker_1_rank, kicker_2_rank, kicker_3_rank]  # Paar mit Kickern
 
         # Keine Kombination gefunden: höchste Karte
-        high = high_card(hand)
-        return 10, [high]  # Höchste Karte (High Card)
+        high, kicker_1, kicker_2, kicker_3, kicker_4 = high_card(hand)
+        return 10, [high, kicker_1, kicker_2, kicker_3, kicker_4]  # Höchste Karte mit Kickern (High Card)
 
     def tie_breaker(self, hand_type, challenger_combination, challenger_attr, old_best_attr, old_best_hand):
 
@@ -212,8 +213,31 @@ class PokerHandAnalyzer:
             challenger_high_card = challenger_attr[0]
             old_high_card = old_best_attr[0]
 
+            challenger_kicker_1 = challenger_attr[1]
+            challenger_kicker_2 = challenger_attr[2]
+            challenger_kicker_3 = challenger_attr[3]
+            challenger_kicker_4 = challenger_attr[4]
+
+            old_kicker_1 = old_best_attr[1]
+            old_kicker_2 = old_best_attr[2]
+            old_kicker_3 = old_best_attr[3]
+            old_kicker_4 = old_best_attr[4]
+
+            # Compare the highest cards
             if self.compare_high_cards(challenger_high_card, old_high_card) > 0:
                 best_hand = (challenger_combination, challenger_attr)
+            elif self.compare_high_cards(challenger_high_card, old_high_card) == 0:
+                if self.compare_high_cards(challenger_kicker_1, old_kicker_1) > 0:
+                    best_hand = (challenger_combination, challenger_attr)
+                elif self.compare_high_cards(challenger_kicker_1, old_kicker_1) == 0:
+                    if self.compare_high_cards(challenger_kicker_2, old_kicker_2) > 0:
+                        best_hand = (challenger_combination, challenger_attr)
+                    elif self.compare_high_cards(challenger_kicker_2, old_kicker_2) == 0:
+                        if self.compare_high_cards(challenger_kicker_3, old_kicker_3) > 0:
+                            best_hand = (challenger_combination, challenger_attr)
+                        elif self.compare_high_cards(challenger_kicker_3, old_kicker_3) == 0:
+                            if self.compare_high_cards(challenger_kicker_4, old_kicker_4) > 0:
+                                best_hand = (challenger_combination, challenger_attr)
 
             return best_hand
 
@@ -297,9 +321,31 @@ class PokerHandAnalyzer:
             challenger_high_card = challenger_attr[0]
             old_high_card = old_best_attr[0]
 
+            challenger_kicker_1 = challenger_attr[1]
+            challenger_kicker_2 = challenger_attr[2]
+            challenger_kicker_3 = challenger_attr[3]
+            challenger_kicker_4 = challenger_attr[4]
+
+            old_kicker_1 = old_best_attr[1]
+            old_kicker_2 = old_best_attr[2]
+            old_kicker_3 = old_best_attr[3]
+            old_kicker_4 = old_best_attr[4]
+
             # Compare the highest card in the straight
             if self.compare_high_cards(challenger_high_card, old_high_card) > 0:
                 best_hand = (challenger_combination, challenger_attr)
+            elif self.compare_high_cards(challenger_high_card, old_high_card) == 0:
+                if self.compare_high_cards(challenger_kicker_1, old_kicker_1) > 0:
+                    best_hand = (challenger_combination, challenger_attr)
+                elif self.compare_high_cards(challenger_kicker_1, old_kicker_1) == 0:
+                    if self.compare_high_cards(challenger_kicker_2, old_kicker_2) > 0:
+                        best_hand = (challenger_combination, challenger_attr)
+                    elif self.compare_high_cards(challenger_kicker_2, old_kicker_2) == 0:
+                        if self.compare_high_cards(challenger_kicker_3, old_kicker_3) > 0:
+                            best_hand = (challenger_combination, challenger_attr)
+                        elif self.compare_high_cards(challenger_kicker_3, old_kicker_3) == 0:
+                            if self.compare_high_cards(challenger_kicker_4, old_kicker_4) > 0:
+                                best_hand = (challenger_combination, challenger_attr)
 
             return best_hand
 

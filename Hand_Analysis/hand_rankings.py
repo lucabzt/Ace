@@ -46,9 +46,23 @@ def is_flush(hand):
     Überprüft, ob alle Karten in der Hand die gleiche Farbe (Suit) haben.
     Wenn ja, gibt die Funktion True zurück, ansonsten False.
     """
-    suits = [card.suit for card in hand]  # Extrahiert die Farben der Karten
-    return len(set(suits)) == 1, max(hand, key=lambda card: rank_value(card.rank))   # Prüft, ob alle Farben gleich sind (Set hat nur ein Element)
+    suits = [card.suit for card in hand]  # Extract the suits of each card
+    is_flush_hand = len(set(suits)) == 1  # Check if all suits are the same
 
+    if is_flush_hand:
+        # Sort the hand by rank in descending order to identify the high card and kickers
+        sorted_hand = sorted(hand, key=lambda card: rank_value(card.rank), reverse=True)
+
+        # Assign the highest card and the next four kickers
+        high_card = sorted_hand[0]
+        kicker_1 = sorted_hand[1] if len(sorted_hand) > 1 else None
+        kicker_2 = sorted_hand[2] if len(sorted_hand) > 2 else None
+        kicker_3 = sorted_hand[3] if len(sorted_hand) > 3 else None
+        kicker_4 = sorted_hand[4] if len(sorted_hand) > 4 else None
+
+        return True, high_card, kicker_1, kicker_2, kicker_3, kicker_4
+
+    return False, None, None, None, None, None
 
 # Prüft, ob die Hand eine Straße ist, also ob die Ränge aufeinanderfolgend sind
 def is_straight(hand):
@@ -168,7 +182,17 @@ def is_one_pair(hand):
 # Gibt die Karte mit dem höchsten Rang in der Hand zurück
 def high_card(hand):
     """
-    Gibt die Karte mit dem höchsten Rang in der Hand zurück.
-    Wird oft verwendet, wenn keine speziellen Kombinationen vorliegen.
+    Returns the highest card in the hand along with the next four highest kickers.
+    Typically used when no other combinations are present.
     """
-    return max(hand, key=lambda card: rank_value(card.rank))  # Bestimmt die Karte mit dem höchsten Rang
+    # Sort the hand by rank in descending order
+    sorted_hand = sorted(hand, key=lambda card: rank_value(card.rank), reverse=True)
+
+    # Assign high card and four kickers individually
+    high_card = sorted_hand[0]
+    kicker_1 = sorted_hand[1] if len(sorted_hand) > 1 else None
+    kicker_2 = sorted_hand[2] if len(sorted_hand) > 2 else None
+    kicker_3 = sorted_hand[3] if len(sorted_hand) > 3 else None
+    kicker_4 = sorted_hand[4] if len(sorted_hand) > 4 else None
+
+    return high_card, kicker_1, kicker_2, kicker_3, kicker_4
