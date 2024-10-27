@@ -28,6 +28,7 @@ class Player:
 
     def show_cards(self):
         """Returns a string representation of the player's cards."""
+        self.cards.sort()
         return ', '.join(str(card) for card in self.cards)
 
     def clear_cards(self):

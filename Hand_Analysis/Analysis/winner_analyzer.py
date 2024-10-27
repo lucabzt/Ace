@@ -22,7 +22,7 @@ class WinnerAnalyzer:
 
             if best_hand_type is None or hand_type < best_hand_type:
                 best_hand_type = hand_type
-                best_hand = (player_cards, attr)
+                best_hand = (sorted(player_cards), attr)
 
                 winners.clear()
                 winners.append((player_name, best_hand_type, best_hand))
@@ -31,13 +31,13 @@ class WinnerAnalyzer:
                 best_combination, best_attr = best_hand  # Unpack properly
 
                 temp = best_hand
-                best_hand, split_pot = tie_breaker(hand_type, player_cards, attr, best_attr, best_hand)
+                best_hand, split_pot = tie_breaker(hand_type, sorted(player_cards), attr, best_attr, best_hand)
 
                 if split_pot:
                     winners.append((player_name, best_hand_type, best_hand))
                 elif temp != best_hand:
                     best_hand_type = hand_type
-                    best_hand = (player_cards, attr)
+                    best_hand = (sorted(player_cards), attr)
 
                     winners.clear()
                     winners.append((player_name, best_hand_type, best_hand))

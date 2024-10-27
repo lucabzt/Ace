@@ -52,7 +52,7 @@ def main():
 
     # Print each player's best hand
     for player_name, hand_type, best_hand in best_hands:
-        print(f"{player_name}'s Best Hand: {hand_type} with cards {best_hand}")
+        print(f"{player_name}'s Best Hand: {hand_type} with cards {sorted(best_hand)}")
 
     # To find winners, you would integrate this with WinnerAnalyzer
     analyzer = WinnerAnalyzer([(player_name, best_hand) for player_name, _, best_hand in best_hands])
