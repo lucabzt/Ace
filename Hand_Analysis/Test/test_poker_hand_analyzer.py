@@ -21,7 +21,7 @@ class TestPokerHandAnalyzer(unittest.TestCase):
             self.create_card(Suit.CLUBS, Rank.EIGHT)
         ]
         analyzer = PokerHandAnalyzer(cards)
-        self.assertEqual(analyzer.get_best_hand(), (1, (self.create_card(Suit.HEARTS, Rank.TEN),
+        self.assertEqual(analyzer.get_best_hand(), ('Royal Flush', (self.create_card(Suit.HEARTS, Rank.TEN),
             self.create_card(Suit.HEARTS, Rank.JACK),
             self.create_card(Suit.HEARTS, Rank.QUEEN),
             self.create_card(Suit.HEARTS, Rank.KING),
@@ -38,7 +38,7 @@ class TestPokerHandAnalyzer(unittest.TestCase):
             self.create_card(Suit.CLUBS, Rank.ACE)
         ]
         analyzer = PokerHandAnalyzer(cards)
-        self.assertEqual(analyzer.get_best_hand(), (1, (self.create_card(Suit.HEARTS, Rank.ACE),
+        self.assertEqual(analyzer.get_best_hand(), ('Royal Flush', (self.create_card(Suit.HEARTS, Rank.ACE),
             self.create_card(Suit.HEARTS, Rank.KING),
             self.create_card(Suit.HEARTS, Rank.QUEEN),
             self.create_card(Suit.HEARTS, Rank.JACK),
@@ -81,7 +81,7 @@ class TestPokerHandAnalyzer(unittest.TestCase):
             self.create_card(Suit.CLUBS, Rank.ACE)
         ]
         analyzer = PokerHandAnalyzer(cards)
-        self.assertEqual(analyzer.get_best_hand(), (2, (self.create_card(Suit.HEARTS, Rank.NINE),
+        self.assertEqual(analyzer.get_best_hand(), ('Straight Flush', (self.create_card(Suit.HEARTS, Rank.NINE),
             self.create_card(Suit.HEARTS, Rank.TEN),
             self.create_card(Suit.HEARTS, Rank.JACK),
             self.create_card(Suit.HEARTS, Rank.QUEEN),
@@ -98,7 +98,7 @@ class TestPokerHandAnalyzer(unittest.TestCase):
             self.create_card(Suit.CLUBS, Rank.SEVEN)
         ]
         analyzer = PokerHandAnalyzer(cards)
-        self.assertEqual(analyzer.get_best_hand(), (2, (self.create_card(Suit.HEARTS, Rank.ACE),
+        self.assertEqual(analyzer.get_best_hand(), ('Straight Flush', (self.create_card(Suit.HEARTS, Rank.ACE),
             self.create_card(Suit.HEARTS, Rank.TWO),
             self.create_card(Suit.HEARTS, Rank.THREE),
             self.create_card(Suit.HEARTS, Rank.FOUR),
@@ -115,7 +115,7 @@ class TestPokerHandAnalyzer(unittest.TestCase):
             self.create_card(Suit.CLUBS, Rank.ACE)
         ]
         analyzer = PokerHandAnalyzer(cards)
-        self.assertEqual(analyzer.get_best_hand(), (2, (self.create_card(Suit.HEARTS, Rank.NINE),
+        self.assertEqual(analyzer.get_best_hand(), ('Straight Flush', (self.create_card(Suit.HEARTS, Rank.NINE),
             self.create_card(Suit.HEARTS, Rank.TEN),
             self.create_card(Suit.HEARTS, Rank.JACK),
             self.create_card(Suit.HEARTS, Rank.QUEEN),
@@ -145,7 +145,7 @@ class TestPokerHandAnalyzer(unittest.TestCase):
             self.create_card(Suit.CLUBS, Rank.QUEEN)
         ]
         analyzer = PokerHandAnalyzer(cards)
-        self.assertEqual(analyzer.get_best_hand(), (3, (self.create_card(Suit.HEARTS, Rank.TEN),
+        self.assertEqual(analyzer.get_best_hand(), ('Four of a Kind', (self.create_card(Suit.HEARTS, Rank.TEN),
             self.create_card(Suit.DIAMONDS, Rank.TEN),
             self.create_card(Suit.CLUBS, Rank.TEN),
             self.create_card(Suit.SPADES, Rank.TEN),
@@ -163,7 +163,7 @@ class TestPokerHandAnalyzer(unittest.TestCase):
             self.create_card(Suit.CLUBS, Rank.QUEEN)
         ]
         analyzer = PokerHandAnalyzer(cards)
-        self.assertEqual(analyzer.get_best_hand(), (3, (self.create_card(Suit.HEARTS, Rank.TEN),
+        self.assertEqual(analyzer.get_best_hand(), ('Four of a Kind', (self.create_card(Suit.HEARTS, Rank.TEN),
             self.create_card(Suit.DIAMONDS, Rank.TEN),
             self.create_card(Suit.CLUBS, Rank.TEN),
             self.create_card(Suit.SPADES, Rank.TEN),
@@ -180,7 +180,7 @@ class TestPokerHandAnalyzer(unittest.TestCase):
             self.create_card(Suit.CLUBS, Rank.QUEEN)
         ]
         analyzer = PokerHandAnalyzer(cards)
-        self.assertNotEqual(analyzer.get_best_hand(), (3, "Four of a Kind"))
+        self.assertNotEqual(analyzer.get_best_hand(), ('Four of a Kind', "Four of a Kind"))
 
     def test_full_house(self):
         cards = [
@@ -193,7 +193,7 @@ class TestPokerHandAnalyzer(unittest.TestCase):
             self.create_card(Suit.CLUBS, Rank.QUEEN)
         ]
         analyzer = PokerHandAnalyzer(cards)
-        self.assertEqual(analyzer.get_best_hand(), (4, (self.create_card(Suit.HEARTS, Rank.TEN),
+        self.assertEqual(analyzer.get_best_hand(), ('Full House', (self.create_card(Suit.HEARTS, Rank.TEN),
             self.create_card(Suit.DIAMONDS, Rank.TEN),
             self.create_card(Suit.CLUBS, Rank.TEN),
             self.create_card(Suit.SPADES, Rank.NINE),
@@ -223,7 +223,7 @@ class TestPokerHandAnalyzer(unittest.TestCase):
             self.create_card(Suit.HEARTS, Rank.EIGHT)
         ]
         analyzer = PokerHandAnalyzer(cards)
-        self.assertEqual(analyzer.get_best_hand(), (5, (self.create_card(Suit.HEARTS, Rank.TEN),
+        self.assertEqual(analyzer.get_best_hand(), ('Flush', (self.create_card(Suit.HEARTS, Rank.TEN),
             self.create_card(Suit.HEARTS, Rank.JACK),
             self.create_card(Suit.HEARTS, Rank.KING),
             self.create_card(Suit.HEARTS, Rank.ACE),
@@ -240,7 +240,7 @@ class TestPokerHandAnalyzer(unittest.TestCase):
             self.create_card(Suit.SPADES, Rank.ACE)
         ]
         analyzer = PokerHandAnalyzer(cards)
-        self.assertEqual(analyzer.get_best_hand(), (5, (self.create_card(Suit.HEARTS, Rank.TEN),
+        self.assertEqual(analyzer.get_best_hand(), ('Flush', (self.create_card(Suit.HEARTS, Rank.TEN),
             self.create_card(Suit.HEARTS, Rank.JACK),
             self.create_card(Suit.HEARTS, Rank.QUEEN),
             self.create_card(Suit.HEARTS, Rank.KING),
@@ -270,7 +270,7 @@ class TestPokerHandAnalyzer(unittest.TestCase):
             self.create_card(Suit.CLUBS, Rank.EIGHT)
         ]
         analyzer = PokerHandAnalyzer(cards)
-        self.assertEqual(analyzer.get_best_hand(), (6, (
+        self.assertEqual(analyzer.get_best_hand(), ('Straight', (
             self.create_card(Suit.HEARTS, Rank.NINE),
             self.create_card(Suit.DIAMONDS, Rank.TEN),
             self.create_card(Suit.CLUBS, Rank.JACK),
@@ -289,13 +289,13 @@ class TestPokerHandAnalyzer(unittest.TestCase):
             self.create_card(Suit.CLUBS, Rank.JACK)
         ]
         analyzer = PokerHandAnalyzer(cards)
-        self.assertEqual(analyzer.get_best_hand(), (6, (self.create_card(Suit.HEARTS, Rank.TEN),
+        self.assertEqual(analyzer.get_best_hand(), ('Straight', (self.create_card(Suit.HEARTS, Rank.TEN),
             self.create_card(Suit.HEARTS, Rank.ACE),
             self.create_card(Suit.CLUBS, Rank.QUEEN),
             self.create_card(Suit.SPADES, Rank.KING),
             self.create_card(Suit.CLUBS, Rank.JACK))))
 
-    def test_straight_with_flush(self):
+    def test_straight_High(self):
         cards = [
             self.create_card(Suit.HEARTS, Rank.TEN),
             self.create_card(Suit.HEARTS, Rank.JACK),
@@ -306,7 +306,7 @@ class TestPokerHandAnalyzer(unittest.TestCase):
             self.create_card(Suit.CLUBS, Rank.EIGHT)
         ]
         analyzer = PokerHandAnalyzer(cards)
-        self.assertEqual(analyzer.get_best_hand(), (6, (self.create_card(Suit.HEARTS, Rank.TEN),
+        self.assertEqual(analyzer.get_best_hand(), ('Straight', (self.create_card(Suit.HEARTS, Rank.TEN),
             self.create_card(Suit.HEARTS, Rank.JACK),
             self.create_card(Suit.HEARTS, Rank.QUEEN),
             self.create_card(Suit.HEARTS, Rank.KING),

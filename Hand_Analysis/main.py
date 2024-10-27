@@ -1,46 +1,67 @@
+import random
 from Hand_Analysis.card import Card, Rank, Suit
 from Hand_Analysis.player import Player
 from Hand_Analysis.winner_analyzer import WinnerAnalyzer
 
-if __name__ == "__main__":
+# Create a full deck of cards
+def create_deck():
+    """Create a full deck of cards."""
+    return [Card(suit, rank) for suit in Suit for rank in Rank]
+
+def draw_random_card(deck):
+    """Draw a random card from the deck and remove it to avoid duplicates."""
+    card = random.choice(deck)
+    deck.remove(card)  # Remove the card from the deck
+    return card
+
+def generate_random_hand(deck, num_cards=2):
+    """Generate a random hand of cards for a player."""
+    return [draw_random_card(deck) for _ in range(num_cards)]
+
+def generate_random_community_cards(deck, num_cards=5):
+    """Generate random community cards."""
+    return [draw_random_card(deck) for _ in range(num_cards)]
+
+def main():
+    # Create a full deck of cards
+    deck = create_deck()
+
     # Create player instances
-    player1 = Player("Alice")
-    player2 = Player("Bob")
-    player3 = Player("Jonas")
+    players = [Player("Alice"), Player("Bob"), Player("Jonas"), Player("Eve")]
 
     # Players receive their cards
-    player1.receive_card(Card(Suit.DIAMONDS, Rank.SEVEN))
-    player1.receive_card(Card(Suit.CLUBS, Rank.ACE))  # Fixed this line to match the format
+    for player in players:
+        cards = generate_random_hand(deck)
+        player.receive_card(cards[0])
+        player.receive_card(cards[1])
+        print(f"{player.name} received: {cards[0]} and {cards[1]}")
 
-    player2.receive_card(Card(Suit.CLUBS, Rank.SEVEN))
-    player2.receive_card(Card(Suit.HEARTS, Rank.ACE))
+    print("----------------------------------------")
+    print(" ")
 
-    player3.receive_card(Card(Suit.CLUBS, Rank.SEVEN))
-    player3.receive_card(Card(Suit.SPADES, Rank.ACE))
-
-    # Set community cards (for example)
-    community_cards = [
-        Card(Suit.SPADES, Rank.TWO),
-        Card(Suit.CLUBS, Rank.THREE),
-        Card(Suit.SPADES, Rank.FIVE),
-        Card(Suit.SPADES, Rank.SEVEN),
-        Card(Suit.DIAMONDS, Rank.ACE)
-    ]
+    # Generate community cards
+    community_cards = generate_random_community_cards(deck)
+    print("Community Cards:", community_cards)
+    print(" ")
 
     # Get the best hand for each player
-    best_hand1 = player1.get_best_hand(community_cards)[1]
-    best_hand2 = player2.get_best_hand(community_cards)[1]
-    best_hand3 = player3.get_best_hand(community_cards)[1]
+    best_hands = []
+    for player in players:
+        best_hand = player.get_best_hand(community_cards)
+        best_hands.append((player.name, best_hand[0], best_hand[1]))  # Store the player's name, hand type, and cards
 
-    print(f"{player1.name}'s Best Hand: {best_hand1}")
-    print(f"{player2.name}'s Best Hand: {best_hand2}")
-    print(f"{player3.name}'s Best Hand: {best_hand3}")
-
+    # Print each player's best hand
+    for player_name, hand_type, best_hand in best_hands:
+        print(f"{player_name}'s Best Hand: {hand_type} with cards {best_hand}")
 
     # To find winners, you would integrate this with WinnerAnalyzer
-    analyzer = WinnerAnalyzer([(player1.name, best_hand1), (player2.name, best_hand2), (player3.name, best_hand3)])
+    analyzer = WinnerAnalyzer([(player_name, best_hand) for player_name, _, best_hand in best_hands])
     winners = analyzer.analyze_winners()
 
     print("Winners:")
     for winner in winners:
         print(winner)
+
+
+if __name__ == "__main__":
+    main()

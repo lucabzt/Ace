@@ -3,10 +3,10 @@ from enum import Enum
 
 # Enum for the card suits
 class Suit(Enum):
-    HEARTS = 'hearts'
-    DIAMONDS = 'diamonds'
-    SPADES = 'spades'
-    CLUBS = 'clubs'
+    HEARTS = 'HEARTS'
+    DIAMONDS = 'DIAMONDS'
+    SPADES = 'SPADES'
+    CLUBS = 'CLUBS'
 
 
 # Enum for the card ranks
@@ -20,10 +20,10 @@ class Rank(Enum):
     EIGHT = '8'
     NINE = '9'
     TEN = '10'
-    JACK = 'jack'
-    QUEEN = 'queen'
-    KING = 'king'
-    ACE = 'ace'
+    JACK = 'JACK'
+    QUEEN = 'QUEEN'
+    KING = 'KING'
+    ACE = 'ACE'
 
 
 # The Card class, using Suit and Rank enums
