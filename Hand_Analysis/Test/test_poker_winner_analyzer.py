@@ -433,6 +433,217 @@ class TestWinnerAnalyzer(unittest.TestCase):
         self.assertEqual(set(winner_names), {"Alice", "Bob", "Charlie", "Diana"},
                          "Four-way split pot with straight test failed")
 
+    def test_one_pair_single_winner(self):
+        player1 = Player("Alice")
+        player2 = Player("Bob")
+        player3 = Player("Charlie")
+        player4 = Player("Diana")
+
+        # Player 1 has the highest pair
+        player1.receive_card(Card(Suit.SPADES, Rank.ACE))
+        player1.receive_card(Card(Suit.HEARTS, Rank.KING))
+
+        player2.receive_card(Card(Suit.CLUBS, Rank.KING))
+        player2.receive_card(Card(Suit.DIAMONDS, Rank.QUEEN))
+
+        player3.receive_card(Card(Suit.SPADES, Rank.JACK))
+        player3.receive_card(Card(Suit.CLUBS, Rank.TEN))
+
+        player4.receive_card(Card(Suit.CLUBS, Rank.NINE))
+        player4.receive_card(Card(Suit.DIAMONDS, Rank.EIGHT))
+
+        # Community cards
+        community_cards = [
+            Card(Suit.HEARTS, Rank.ACE),
+            Card(Suit.HEARTS, Rank.JACK),
+            Card(Suit.CLUBS, Rank.SEVEN),
+            Card(Suit.DIAMONDS, Rank.FIVE),
+            Card(Suit.HEARTS, Rank.TWO)
+        ]
+
+        analyzer = WinnerAnalyzer([
+            (player1.name, player1.get_best_hand(community_cards)[1]),
+            (player2.name, player2.get_best_hand(community_cards)[1]),
+            (player3.name, player3.get_best_hand(community_cards)[1]),
+            (player4.name, player4.get_best_hand(community_cards)[1])
+        ])
+        winners = analyzer.analyze_winners()
+
+        # Extract winner names
+        winner_names = [winner[0] for winner in winners]
+        self.assertEqual(winner_names, ["Alice"],
+                         "Single winner test failed")
+
+    def test_one_pair_two_winners(self):
+        player1 = Player("Alice")
+        player2 = Player("Bob")
+        player3 = Player("Charlie")
+        player4 = Player("Diana")
+
+        # Players 1 and 2 both have the same pair
+        player1.receive_card(Card(Suit.SPADES, Rank.NINE))
+        player1.receive_card(Card(Suit.HEARTS, Rank.THREE))
+
+        player2.receive_card(Card(Suit.CLUBS, Rank.NINE))
+        player2.receive_card(Card(Suit.DIAMONDS, Rank.FOUR))
+
+        player3.receive_card(Card(Suit.SPADES, Rank.FIVE))
+        player3.receive_card(Card(Suit.CLUBS, Rank.TWO))
+
+        player4.receive_card(Card(Suit.CLUBS, Rank.SIX))
+        player4.receive_card(Card(Suit.DIAMONDS, Rank.TWO))
+
+        # Community cards
+        community_cards = [
+            Card(Suit.HEARTS, Rank.NINE),
+            Card(Suit.HEARTS, Rank.FIVE),
+            Card(Suit.CLUBS, Rank.TEN),
+            Card(Suit.DIAMONDS, Rank.JACK),
+            Card(Suit.HEARTS, Rank.QUEEN)
+        ]
+
+        analyzer = WinnerAnalyzer([
+            (player1.name, player1.get_best_hand(community_cards)[1]),
+            (player2.name, player2.get_best_hand(community_cards)[1]),
+            (player3.name, player3.get_best_hand(community_cards)[1]),
+            (player4.name, player4.get_best_hand(community_cards)[1])
+        ])
+        winners = analyzer.analyze_winners()
+
+        # Extract winner names
+        winner_names = [winner[0] for winner in winners]
+        self.assertEqual(set(winner_names), {"Alice", "Bob"},
+                         "Two winners test failed")
+
+    def test_one_pair_three_winners(self):
+        player1 = Player("Alice")
+        player2 = Player("Bob")
+        player3 = Player("Charlie")
+        player4 = Player("Diana")
+
+        # Players 1, 2, and 3 all have the same pair
+        player1.receive_card(Card(Suit.SPADES, Rank.TEN))
+        player1.receive_card(Card(Suit.HEARTS, Rank.FOUR))
+
+        player2.receive_card(Card(Suit.CLUBS, Rank.TEN))
+        player2.receive_card(Card(Suit.DIAMONDS, Rank.TWO))
+
+        player3.receive_card(Card(Suit.SPADES, Rank.TEN))
+        player3.receive_card(Card(Suit.CLUBS, Rank.THREE))
+
+        player4.receive_card(Card(Suit.CLUBS, Rank.SIX))
+        player4.receive_card(Card(Suit.DIAMONDS, Rank.EIGHT))
+
+        # Community cards
+        community_cards = [
+            Card(Suit.SPADES, Rank.NINE),
+            Card(Suit.HEARTS, Rank.TEN),
+            Card(Suit.CLUBS, Rank.JACK),
+            Card(Suit.DIAMONDS, Rank.ACE),
+            Card(Suit.HEARTS, Rank.KING)
+        ]
+
+        analyzer = WinnerAnalyzer([
+            (player1.name, player1.get_best_hand(community_cards)[1]),
+            (player2.name, player2.get_best_hand(community_cards)[1]),
+            (player3.name, player3.get_best_hand(community_cards)[1]),
+            (player4.name, player4.get_best_hand(community_cards)[1])
+        ])
+        winners = analyzer.analyze_winners()
+
+        # Extract winner names
+        winner_names = [winner[0] for winner in winners]
+        self.assertEqual(set(winner_names), {"Alice", "Bob", "Charlie"},
+                         "Three winners test failed")
+
+    def test_one_pair_kicker_decides(self):
+        player1 = Player("Alice")
+        player2 = Player("Bob")
+        player3 = Player("Charlie")
+        player4 = Player("Diana")
+
+        # Player 1 and Player 2 have the same pair
+        player1.receive_card(Card(Suit.SPADES, Rank.QUEEN))
+        player1.receive_card(Card(Suit.HEARTS, Rank.ACE))
+
+        player2.receive_card(Card(Suit.CLUBS, Rank.QUEEN))
+        player2.receive_card(Card(Suit.DIAMONDS, Rank.ACE))
+
+        player3.receive_card(Card(Suit.SPADES, Rank.ACE))
+        player3.receive_card(Card(Suit.CLUBS, Rank.FIVE))
+
+        player4.receive_card(Card(Suit.CLUBS, Rank.TWO))
+        player4.receive_card(Card(Suit.DIAMONDS, Rank.SIX))
+
+        # Community cards
+        community_cards = [
+            Card(Suit.SPADES, Rank.TWO),
+            Card(Suit.HEARTS, Rank.QUEEN),
+            Card(Suit.CLUBS, Rank.THREE),
+            Card(Suit.DIAMONDS, Rank.NINE),
+            Card(Suit.HEARTS, Rank.EIGHT)
+        ]
+
+        analyzer = WinnerAnalyzer([
+            (player1.name, player1.get_best_hand(community_cards)[1]),
+            (player2.name, player2.get_best_hand(community_cards)[1]),
+            (player3.name, player3.get_best_hand(community_cards)[1]),
+            (player4.name, player4.get_best_hand(community_cards)[1])
+        ])
+
+        print(player1.get_best_hand(community_cards))
+        print(player2.get_best_hand(community_cards))
+
+        winners = analyzer.analyze_winners()
+
+        print(winners)
+
+        # Extract winner names
+        winner_names = [winner[0] for winner in winners]
+        self.assertEqual(winner_names, ["Alice", "Bob"],
+                         "Kicker decides winner test failed")
+
+    def test_one_pair_kicker_two_players(self):
+        player1 = Player("Alice")
+        player2 = Player("Bob")
+        player3 = Player("Charlie")
+        player4 = Player("Diana")
+
+        # Players 1 and 2 both have the same pair
+        player1.receive_card(Card(Suit.SPADES, Rank.SEVEN))
+        player1.receive_card(Card(Suit.HEARTS, Rank.TEN))
+
+        player2.receive_card(Card(Suit.CLUBS, Rank.SEVEN))
+        player2.receive_card(Card(Suit.DIAMONDS, Rank.TEN))
+
+        player3.receive_card(Card(Suit.SPADES, Rank.ACE))
+        player3.receive_card(Card(Suit.CLUBS, Rank.TWO))
+
+        player4.receive_card(Card(Suit.CLUBS, Rank.THREE))
+        player4.receive_card(Card(Suit.DIAMONDS, Rank.FOUR))
+
+        # Community cards
+        community_cards = [
+            Card(Suit.SPADES, Rank.TEN),
+            Card(Suit.HEARTS, Rank.SEVEN),
+            Card(Suit.CLUBS, Rank.EIGHT),
+            Card(Suit.DIAMONDS, Rank.NINE),
+            Card(Suit.HEARTS, Rank.FIVE)
+        ]
+
+        analyzer = WinnerAnalyzer([
+            (player1.name, player1.get_best_hand(community_cards)[1]),
+            (player2.name, player2.get_best_hand(community_cards)[1]),
+            (player3.name, player3.get_best_hand(community_cards)[1]),
+            (player4.name, player4.get_best_hand(community_cards)[1])
+        ])
+        winners = analyzer.analyze_winners()
+
+        # Extract winner names
+        winner_names = [winner[0] for winner in winners]
+        self.assertEqual(set(winner_names), {"Alice", "Bob"},
+                         "Kicker deciding two players test failed")
+
 
 if __name__ == "__main__":
     unittest.main()

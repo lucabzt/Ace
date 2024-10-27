@@ -94,17 +94,32 @@ def is_full_house(hand):
 # Prüft, ob die Hand einen Drilling (three of a kind) enthält
 def is_three_of_a_kind(hand):
     """
-    Überprüft, ob die Hand drei Karten des gleichen Rangs enthält.
-    Gibt True zurück, wenn dies der Fall ist, ansonsten False.
+    Checks if the hand contains three cards of the same rank.
+    Returns True if that's the case, otherwise False.
     """
-    counts = get_rank_counts(hand)  # Zählt die Häufigkeiten der Ränge in der Hand
-    if 3 in counts.values():
-        three_of_a_kind_rank = max([rank for rank, count in counts.items() if count == 3], key=rank_value)
-        kickers = sorted([card for card in hand if card.rank != three_of_a_kind_rank],
-                         key=lambda card: rank_value(card.rank), reverse=True)[:2]
-        return True, three_of_a_kind_rank, kickers
-    return False, None, None
+    counts = get_rank_counts(hand)  # Counts the frequencies of ranks in the hand
 
+    if 3 in counts.values():
+        # Identify the rank of the three-of-a-kind
+        three_of_a_kind_rank = max([rank for rank, count in counts.items() if count == 3], key=rank_value)
+
+        kicker_ranks = []
+
+        # Use a for loop to add the ranks of the kickers
+        for card in hand:
+            if card.rank != three_of_a_kind_rank:
+                kicker_ranks.append(rank_value(card.rank))
+
+        # Sort the kicker ranks in descending order and select the top 2 kickers
+        kicker_ranks = sorted(kicker_ranks, reverse=True)[:2]
+
+        # Assign kickers individually for return
+        kicker_1_rank = kicker_ranks[0] if len(kicker_ranks) > 0 else None
+        kicker_2_rank = kicker_ranks[1] if len(kicker_ranks) > 1 else None
+
+        return True, three_of_a_kind_rank, kicker_1_rank, kicker_2_rank
+
+    return False, None, None, None
 # Prüft, ob die Hand zwei Paare enthält
 def is_two_pair(hand):
     """
@@ -121,16 +136,34 @@ def is_two_pair(hand):
 # Prüft, ob die Hand ein Paar enthält
 def is_one_pair(hand):
     """
-    Überprüft, ob die Hand genau ein Paar enthält.
-    Gibt True zurück, wenn dies der Fall ist, ansonsten False.
+    Checks if the hand contains exactly one pair.
+    Returns True if that's the case, otherwise False.
     """
-    counts = get_rank_counts(hand)  # Zählt die Häufigkeiten der Ränge in der Hand
+    counts = get_rank_counts(hand)  # Counts the frequencies of ranks in the hand
+
     if list(counts.values()).count(2) == 1:
+        # Identify the rank of the pair
         pair_rank = max([rank for rank, count in counts.items() if count == 2], key=rank_value)
-        kickers = sorted([card for card in hand if card.rank != pair_rank], key=lambda card: rank_value(card.rank),
-                         reverse=True)[:3]
-        return True, pair_rank, kickers
-    return False, None, None
+
+        # Initialize an empty list to store kicker ranks
+        kicker_ranks = []
+
+        # Use a for loop to collect the ranks of the kickers
+        for card in hand:
+            if card.rank != pair_rank:
+                kicker_ranks.append(rank_value(card.rank))
+
+        # Sort the kicker ranks in descending order and select the top 3 kickers
+        kicker_ranks = sorted(kicker_ranks, reverse=True)[:3]
+
+        # Assign kickers individually for return
+        kicker_1_rank = kicker_ranks[0] if len(kicker_ranks) > 0 else None
+        kicker_2_rank = kicker_ranks[1] if len(kicker_ranks) > 1 else None
+        kicker_3_rank = kicker_ranks[2] if len(kicker_ranks) > 2 else None
+
+        return True, pair_rank, kicker_1_rank, kicker_2_rank, kicker_3_rank
+
+    return False, None, None, None, None
 
 # Gibt die Karte mit dem höchsten Rang in der Hand zurück
 def high_card(hand):

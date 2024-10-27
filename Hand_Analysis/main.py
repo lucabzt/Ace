@@ -26,8 +26,8 @@ def main():
     # Create a full deck of cards
     deck = create_deck()
 
-    # Create player instances
-    players = [Player("Alice"), Player("Bob"), Player("Jonas"), Player("Eve")]
+    # Create player instances, including Markus and Luca
+    players = [Player("Alice"), Player("Bob"), Player("Jonas"), Player("Eve"), Player("Markus"), Player("Luca")]
 
     # Players receive their cards
     for player in players:
@@ -58,10 +58,10 @@ def main():
     analyzer = WinnerAnalyzer([(player_name, best_hand) for player_name, _, best_hand in best_hands])
     winners = analyzer.analyze_winners()
 
+    print(" ")
     print("Winners:")
     for winner in winners:
         print(winner)
-
 
 if __name__ == "__main__":
     main()
