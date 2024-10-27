@@ -1,7 +1,7 @@
 import random
-from Hand_Analysis.card import Card, Rank, Suit
-from Hand_Analysis.player import Player
-from Hand_Analysis.winner_analyzer import WinnerAnalyzer
+from Hand_Analysis.Resources.card import Card, Rank, Suit
+from Hand_Analysis.Resources.player import Player
+from Hand_Analysis.Analysis.winner_analyzer import WinnerAnalyzer
 
 # Create a full deck of cards
 def create_deck():

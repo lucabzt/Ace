@@ -1,7 +1,7 @@
 import unittest
 
-from Hand_Analysis.card import Card, Suit, Rank
-from Hand_Analysis.hand_analyzer import PokerHandAnalyzer  # Adjust this import based on your actual module structure
+from Hand_Analysis.Resources.card import Card, Suit, Rank
+from Hand_Analysis.Analysis.hand_analyzer import PokerHandAnalyzer  # Adjust this import based on your actual module structure
 
 
 class TestPokerHandAnalyzer(unittest.TestCase):
@@ -167,7 +167,7 @@ class TestPokerHandAnalyzer(unittest.TestCase):
             self.create_card(Suit.DIAMONDS, Rank.TEN),
             self.create_card(Suit.CLUBS, Rank.TEN),
             self.create_card(Suit.SPADES, Rank.TEN),
-            self.create_card(Suit.HEARTS, Rank.ACE))))
+            self.create_card(Suit.DIAMONDS, Rank.ACE))))
 
     def test_four_of_a_kind_invalid(self):
         cards = [

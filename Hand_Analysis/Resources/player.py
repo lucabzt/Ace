@@ -1,5 +1,4 @@
-from Hand_Analysis.card import Card  # Import your Card class
-from Hand_Analysis.hand_analyzer import PokerHandAnalyzer  # Assuming your PokerHandAnalyzer is in this module
+from Hand_Analysis.Analysis.hand_analyzer import PokerHandAnalyzer  # Assuming your PokerHandAnalyzer is in this module
 
 
 class Player:
