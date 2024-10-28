@@ -1,3 +1,4 @@
-research/SpadeClassifier/data/
+research/classifier/data/
 venv/
-resarch/SpadeClassifier/.idea
+research/classifier/.idea
+research/classifier/__pycache__
