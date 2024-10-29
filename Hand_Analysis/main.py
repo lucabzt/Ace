@@ -1,12 +1,14 @@
 import random
-from Hand_Analysis.Resources.card import Card, Rank, Suit
-from Hand_Analysis.Resources.player import Player
-from Hand_Analysis.Analysis.winner_analyzer import WinnerAnalyzer
+from hand_analysis.resources.card import Card, Rank, Suit
+from hand_analysis.resources.player import Player
+from hand_analysis.analysis.winner_analyzer import WinnerAnalyzer
+
 
 # Create a full deck of cards
 def create_deck():
     """Create a full deck of cards."""
     return [Card(suit, rank) for suit in Suit for rank in Rank]
+
 
 def draw_random_card(deck):
     """Draw a random card from the deck and remove it to avoid duplicates."""
@@ -14,13 +16,16 @@ def draw_random_card(deck):
     deck.remove(card)  # Remove the card from the deck
     return card
 
+
 def generate_random_hand(deck, num_cards=2):
     """Generate a random hand of cards for a player."""
     return [draw_random_card(deck) for _ in range(num_cards)]
 
+
 def generate_random_community_cards(deck, num_cards=5):
     """Generate random community cards."""
     return [draw_random_card(deck) for _ in range(num_cards)]
+
 
 def main():
     # Create a full deck of cards
@@ -62,6 +67,7 @@ def main():
     print("Winners:")
     for winner in winners:
         print(winner)
+
 
 if __name__ == "__main__":
     main()

@@ -1,8 +1,8 @@
 # utils.py
 
 from collections import Counter
-from Hand_Analysis.Resources.card import Rank
-from Hand_Analysis.Analysis.hand_rankings import rank_value, high_card, is_one_pair, is_two_pair, is_three_of_a_kind, \
+from hand_analysis.resources.card import Rank
+from hand_analysis.analysis.hand_rankings import rank_value, high_card, is_one_pair, is_two_pair, is_three_of_a_kind, \
     is_full_house, is_four_of_a_kind, is_straight, is_flush
 
 

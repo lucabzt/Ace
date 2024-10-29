@@ -1,12 +1,12 @@
 import unittest
-from Hand_Analysis.Resources.card import Card, Rank, Suit
-from Hand_Analysis.Resources.player import Player
-from Hand_Analysis.Analysis.winner_analyzer import WinnerAnalyzer
+from hand_analysis.resources.card import Card, Rank, Suit
+from hand_analysis.resources.player import Player
+from hand_analysis.analysis.winner_analyzer import WinnerAnalyzer
 
 
 class TestWinnerAnalyzer(unittest.TestCase):
 
-    # Test case for Royal Flush vs. Four of a Kind
+    # test case for Royal Flush vs. Four of a Kind
     def test_royal_flush_vs_four_of_a_kind(self):
         player1 = Player("Alice")
         player2 = Player("Bob")
@@ -37,7 +37,7 @@ class TestWinnerAnalyzer(unittest.TestCase):
         winner_names = [winner[0] for winner in winners]
         self.assertEqual(winner_names, ["Alice"], "Royal Flush vs. Four of a Kind test failed")
 
-    # Test case for Split Pot with Full House
+    # test case for Split Pot with Full House
     def test_full_house_split_pot(self):
         player1 = Player("Alice")
         player2 = Player("Bob")
@@ -67,7 +67,7 @@ class TestWinnerAnalyzer(unittest.TestCase):
         winner_names = [winner[0] for winner in winners]
         self.assertEqual(set(winner_names), {"Alice", "Bob"}, "Full House split pot test failed")
 
-    # Test case for Straight Flush vs. Flush
+    # test case for Straight Flush vs. Flush
     def test_straight_flush_vs_flush(self):
         player1 = Player("Alice")
         player2 = Player("Bob")
@@ -98,7 +98,7 @@ class TestWinnerAnalyzer(unittest.TestCase):
         winner_names = [winner[0] for winner in winners]
         self.assertEqual(winner_names, ["Alice"], "Straight Flush vs. Flush test failed")
 
-    # Test case for Split Pot with High Card
+    # test case for Split Pot with High Card
     def test_high_card_split_pot(self):
         player1 = Player("Alice")
         player2 = Player("Bob")
@@ -128,7 +128,7 @@ class TestWinnerAnalyzer(unittest.TestCase):
         winner_names = [winner[0] for winner in winners]
         self.assertEqual(set(winner_names), {"Alice", "Bob"}, "High Card split pot test failed")
 
-    # Test case for Flush vs. Two Pair
+    # test case for Flush vs. Two Pair
     def test_flush_vs_two_pair(self):
         player1 = Player("Alice")
         player2 = Player("Bob")
@@ -159,7 +159,7 @@ class TestWinnerAnalyzer(unittest.TestCase):
         winner_names = [winner[0] for winner in winners]
         self.assertEqual(winner_names, ["Alice"], "Flush vs. Two Pair test failed")
 
-    # Test case for Full House vs. Straight
+    # test case for Full House vs. Straight
     def test_full_house_vs_straight(self):
         player1 = Player("Alice")
         player2 = Player("Bob")
@@ -188,7 +188,7 @@ class TestWinnerAnalyzer(unittest.TestCase):
         winner_names = [winner[0] for winner in winners]
         self.assertEqual(winner_names, ["Alice"], "Full House vs. Straight test failed")
 
-    # Test case for Three of a Kind vs. Two Pair
+    # test case for Three of a Kind vs. Two Pair
     def test_three_of_a_kind_vs_two_pair(self):
         player1 = Player("Alice")
         player2 = Player("Bob")
@@ -217,7 +217,7 @@ class TestWinnerAnalyzer(unittest.TestCase):
         winner_names = [winner[0] for winner in winners]
         self.assertEqual(winner_names, ["Alice"], "Three of a Kind vs. Two Pair test failed")
 
-    # Test case for Full House vs. Flush
+    # test case for Full House vs. Flush
     def test_full_house_vs_flush(self):
         player1 = Player("Alice")
         player2 = Player("Bob")
@@ -246,7 +246,7 @@ class TestWinnerAnalyzer(unittest.TestCase):
         winner_names = [winner[0] for winner in winners]
         self.assertEqual(winner_names, ["Alice"], "Full House vs. Flush test failed")
 
-    # Test case for Straight vs. Three of a Kind
+    # test case for Straight vs. Three of a Kind
     def test_straight_vs_three_of_a_kind(self):
         player1 = Player("Alice")
         player2 = Player("Bob")
@@ -275,7 +275,7 @@ class TestWinnerAnalyzer(unittest.TestCase):
         winner_names = [winner[0] for winner in winners]
         self.assertEqual(winner_names, ["Alice"], "Straight vs. Three of a Kind test failed")
 
-    # Test case for One Pair vs. High Card
+    # test case for One Pair vs. High Card
     def test_one_pair_vs_high_card(self):
         player1 = Player("Alice")
         player2 = Player("Bob")
@@ -304,7 +304,7 @@ class TestWinnerAnalyzer(unittest.TestCase):
         winner_names = [winner[0] for winner in winners]
         self.assertEqual(winner_names, ["Alice"], "One Pair vs. High Card test failed")
 
-    # Test case for Split Pot with Two Pair
+    # test case for Split Pot with Two Pair
     def test_two_pair_split_pot(self):
         player1 = Player("Alice")
         player2 = Player("Bob")
@@ -332,7 +332,7 @@ class TestWinnerAnalyzer(unittest.TestCase):
         winner_names = [winner[0] for winner in winners]
         self.assertEqual(set(winner_names), {"Alice", "Bob"}, "Two Pair split pot test failed")
 
-    # Test case for Straight vs. Two Pair
+    # test case for Straight vs. Two Pair
     def test_straight_vs_two_pair(self):
         player1 = Player("Alice")
         player2 = Player("Bob")
@@ -361,7 +361,7 @@ class TestWinnerAnalyzer(unittest.TestCase):
         winner_names = [winner[0] for winner in winners]
         self.assertEqual(winner_names, ["Alice"], "Straight vs. Two Pair test failed")
 
-    # Test case for Split Pot with Low Straight (Ace through Five)
+    # test case for Split Pot with Low Straight (Ace through Five)
     def test_low_straight_split_pot(self):
         player1 = Player("Alice")
         player2 = Player("Bob")
@@ -391,7 +391,7 @@ class TestWinnerAnalyzer(unittest.TestCase):
         winner_names = [winner[0] for winner in winners]
         self.assertEqual(set(winner_names), {"Alice", "Bob"}, "Low Straight split pot test failed")
 
-    # Test case for Four-Way Split Pot with Straight on the Board
+    # test case for Four-Way Split Pot with Straight on the Board
     def test_four_way_split_pot_with_straight(self):
         player1 = Player("Alice")
         player2 = Player("Bob")

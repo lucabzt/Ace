@@ -1,6 +1,6 @@
 from collections import Counter  # Imports Counter from collections to count frequencies of card ranks
 
-from Hand_Analysis.Resources.card import Rank  # Imports Card, Suit, and Rank classes from an external module
+from hand_analysis.resources.card import Rank  # Imports Card, Suit, and Rank classes from an external module
 
 
 # Helper function to determine the number of different ranks in a hand
