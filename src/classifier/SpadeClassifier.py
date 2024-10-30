@@ -64,18 +64,6 @@ class Block(nn.Module):
         return out
 
 
-def make_layers(in_features: int, features: int, num_layers: int, downsample: bool = False) -> nn.Sequential:
-    layers = []
-
-    # First layer downsamples the image and changes the features
-    first_layer = Block(in_features, features, downsample)
-    layers.append(first_layer)
-    in_features = features
-    for _ in range(1, num_layers):
-        layers.append(Block(in_features, features))
-    return nn.Sequential(*layers)
-
-
 class SpadeClassifier(torch.nn.Module):
     def __init__(self, num_classes: int) -> None:
         super().__init__()
@@ -85,12 +73,24 @@ class SpadeClassifier(torch.nn.Module):
         self.bn1 = nn.BatchNorm2d(features[0])
         self.relu = nn.ReLU(inplace=True)
         self.maxpool = nn.MaxPool2d(kernel_size=3, stride=2, padding=1)
-        self.layer1 = self._make_layer(64, 64, num_layers[0])
+        self.layer1 = self._make_layer(64, 64, num_layers[0]) #test
         self.layer2 = self._make_layer(64, 128, num_layers[1], downsample=True)
         self.layer3 = self._make_layer(128, 256, num_layers[2], downsample=True)
         self.layer4 = self._make_layer(256, 512, num_layers[3], downsample=True)
         self.avgpool = nn.AdaptiveAvgPool2d((1, 1))
         self.fc = nn.Linear(512, num_classes)
+
+    @staticmethod
+    def _make_layer(in_features: int, features: int, num_layers: int, downsample: bool = False) -> nn.Sequential:
+        layers = []
+
+        # First layer downsamples the image and changes the features
+        first_layer = Block(in_features, features, downsample)
+        layers.append(first_layer)
+        in_features = features
+        for _ in range(1, num_layers):
+            layers.append(Block(in_features, features))
+        return nn.Sequential(*layers)
 
     def forward(self, x: Tensor) -> Tensor:
         # Preprocessing
