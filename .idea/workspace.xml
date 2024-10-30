@@ -4,23 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c0babd6b-3393-44b8-be9f-8b13a8d5748d" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/hand_analysis/analysis/hand_analyzer.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/hand_analysis/analysis/hand_rankings.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/hand_analysis/analysis/winner_analyzer.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/hand_analysis/main.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/hand_analysis/resources/card.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/hand_analysis/resources/player.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/hand_analysis/tests/test_poker_hand_analyzer.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/hand_analysis/tests/test_poker_winner_analyzer.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/hand_analysis/utils.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/research/classifier/SpadeClassifier.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/research/classifier/convert_coco.ipynb" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/research/classifier/dataset.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/research/classifier/load_csv.ipynb" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/research/classifier/mapping.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/research/classifier/playing_card_dataset.pt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/research/classifier/requirements.txt" beforeDir="false" />
+    <list default="true" id="c0babd6b-3393-44b8-be9f-8b13a8d5748d" name="Changes" comment="Markus ist ein Eierlecker">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -154,6 +139,10 @@
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Markus ist ein Eierlecker" />
+    <option name="LAST_COMMIT_MESSAGE" value="Markus ist ein Eierlecker" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/Spade$main.coverage" NAME="main Coverage Results" MODIFIED="1730240539163" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Hand_Analysis" />
