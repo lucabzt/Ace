@@ -47,9 +47,9 @@ class Block(nn.Module):
     def forward(self, x: Tensor) -> Tensor:
         identity = x
         if self.identity_matching:
-            identity = self.identity_matching(x)
+            identity = self.identity_matching(identity)
         if self.downsample:
-            identity = self.maxpool(x)
+            identity = self.maxpool(identity)
 
         out = self.conv1(x)
         out = self.bn1(out)
@@ -73,7 +73,7 @@ class SpadeClassifier(torch.nn.Module):
         self.bn1 = nn.BatchNorm2d(features[0])
         self.relu = nn.ReLU(inplace=True)
         self.maxpool = nn.MaxPool2d(kernel_size=3, stride=2, padding=1)
-        self.layer1 = self._make_layer(64, 64, num_layers[0]) #test
+        self.layer1 = self._make_layer(64, 64, num_layers[0])
         self.layer2 = self._make_layer(64, 128, num_layers[1], downsample=True)
         self.layer3 = self._make_layer(128, 256, num_layers[2], downsample=True)
         self.layer4 = self._make_layer(256, 512, num_layers[3], downsample=True)
