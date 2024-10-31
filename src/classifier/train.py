@@ -37,39 +37,49 @@ def train_one_epoch() -> None:
 
     model.train()
     for iteration, data in enumerate(train_load):
-        # get data
+        # Get data and move to the correct device
         images, labels = data
-        images.to(device)
-        labels.to(device)
+        images = images.to(device)
+        labels = labels.to(device)
 
-        # optimizer and loss function
+        # Zero the parameter gradients
         optimizer.zero_grad()
+
+        # Forward pass
         outputs = model(images)
         loss = loss_fn(outputs, labels)
+
+        # Backward pass and optimization
         loss.backward()
         optimizer.step()
-        running_loss += loss.item()
-        if iteration % 100 == 0:
-            print(f"Iteration: {iteration}, Loss: {loss.item()}")
 
-    train_loss.append(running_loss / len(train_load))
+        running_loss += loss.item()
+        if iteration % 500 == 0:
+            print(f"Iteration: {iteration}, Loss: {loss.item()}")
 
 
 def test_one_epoch() -> None:
+    labeled_correctly = 0
     running_loss = 0.0
 
     model.eval()
-    for images, labels in test_load:
-        images.to(device)
-        labels.to(device)
+    with torch.no_grad():
+        for images, labels in test_load:
+            # Get data and move to the correct device
+            images = images.to(device)
+            labels = labels.to(device)
 
-        outputs = model(images)
-        loss = loss_fn(outputs, labels)
-        running_loss += loss.item()
+            # Forward pass
+            outputs = model(images)
+            loss = loss_fn(outputs, labels)
+            running_loss += loss.item()
+            if outputs.argmax() == labels.argmax():
+                labeled_correctly += 1
 
     running_loss /= len(test_load)
     print("--------------------")
     print(f"Test Loss: {running_loss}\n")
+    print(f"Accuracy: {labeled_correctly / len(test_load) * 100:.2f}%")
 
     test_loss.append(running_loss)
 
@@ -77,3 +87,10 @@ def test_one_epoch() -> None:
 for epoch in range(epochs):
     train_one_epoch()
     test_one_epoch()
+
+plt.plot(train_loss, label="Training loss")
+plt.plot(test_loss, label="Test Loss")
+plt.legend()
+plt.show()
+
+torch.save(model, f"./models/model_{next(reversed(test_loss))}")
