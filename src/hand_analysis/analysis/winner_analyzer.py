@@ -1,4 +1,4 @@
-from hand_analysis.utils import evaluate_hand, translate_winner_hands, tie_breaker
+from src.hand_analysis.utils import evaluate_hand, tie_breaker, translate_winner_hands
 
 
 class WinnerAnalyzer:

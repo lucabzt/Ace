@@ -1,7 +1,8 @@
 import unittest
-from hand_analysis.resources.card import Card, Rank, Suit
-from hand_analysis.resources.player import Player
-from hand_analysis.analysis.winner_analyzer import WinnerAnalyzer
+
+from src.hand_analysis.analysis.winner_analyzer import WinnerAnalyzer
+from src.hand_analysis.resources.card import Card, Suit, Rank
+from src.hand_analysis.resources.player import Player
 
 
 class TestWinnerAnalyzer(unittest.TestCase):

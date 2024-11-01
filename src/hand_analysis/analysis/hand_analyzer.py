@@ -1,7 +1,6 @@
 from itertools import combinations
 
-from hand_analysis.utils import evaluate_hand, has_duplicate_cards, get_duplicate_cards, \
-    tie_breaker
+from src.hand_analysis.utils import has_duplicate_cards, get_duplicate_cards, evaluate_hand, tie_breaker
 
 
 class PokerHandAnalyzer:

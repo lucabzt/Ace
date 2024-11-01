@@ -1,7 +1,8 @@
 import random
-from hand_analysis.resources.card import Card, Rank, Suit
-from hand_analysis.resources.player import Player
-from hand_analysis.analysis.winner_analyzer import WinnerAnalyzer
+
+from src.hand_analysis.analysis.winner_analyzer import WinnerAnalyzer
+from src.hand_analysis.resources.card import Card, Suit, Rank
+from src.hand_analysis.resources.player import Player
 
 
 # Create a full deck of cards
