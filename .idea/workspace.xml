@@ -4,10 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c0babd6b-3393-44b8-be9f-8b13a8d5748d" name="Changes" comment="audio version">
-      <change afterPath="$PROJECT_DIR$/images/video.mp4" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/sounds/Phrases/Spade_Initiation.mp3" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/sounds/music/Casino Royale - Chris Cornell - You Know My Name.mp3" afterDir="false" />
+    <list default="true" id="c0babd6b-3393-44b8-be9f-8b13a8d5748d" name="Changes" comment="hightech version">
+      <change afterPath="$PROJECT_DIR$/sounds/music/Rocket Man - Elton John.mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sounds/music/Tainted Love - Soft Cell.mp3" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/mediaplayer/SpadeAssistant.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/mediaplayer/SpadeAssistant.py" afterDir="false" />
     </list>
@@ -82,12 +81,35 @@
       <recent name="$PROJECT_DIR$/images" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/sounds/Phrases" />
       <recent name="$PROJECT_DIR$/sounds/music" />
+      <recent name="$PROJECT_DIR$/sounds/Phrases" />
       <recent name="$PROJECT_DIR$/images" />
     </key>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Python.SpadeAssistant">
+    <configuration name="SpadeAssistant" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="Spade" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/src/mediaplayer" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/src/mediaplayer/SpadeAssistant.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <configuration name="main (1)" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="Spade" />
       <option name="ENV_FILES" value="" />
@@ -205,6 +227,7 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.SpadeAssistant" />
         <item itemvalue="Python.main (2)" />
         <item itemvalue="Python.main" />
         <item itemvalue="Python.mediaplayer" />
@@ -231,7 +254,9 @@
       <workItem from="1730504758257" duration="348000" />
       <workItem from="1730505109230" duration="4749000" />
       <workItem from="1730561137515" duration="1467000" />
-      <workItem from="1730563461256" duration="4226000" />
+      <workItem from="1730563461256" duration="6671000" />
+      <workItem from="1730570920240" duration="593000" />
+      <workItem from="1730576047991" duration="946000" />
     </task>
     <task id="LOCAL-00001" summary="Markus ist ein Eierlecker">
       <option name="closed" value="true" />
@@ -257,7 +282,15 @@
       <option name="project" value="LOCAL" />
       <updated>1730563468796</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="hightech version">
+      <option name="closed" value="true" />
+      <created>1730568537880</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1730568537880</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -278,13 +311,14 @@
     <MESSAGE value="Markus ist ein Eierlecker" />
     <MESSAGE value="Fix import paths" />
     <MESSAGE value="audio version" />
-    <option name="LAST_COMMIT_MESSAGE" value="audio version" />
+    <MESSAGE value="hightech version" />
+    <option name="LAST_COMMIT_MESSAGE" value="hightech version" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/Spade$hand_rankings.coverage" NAME="hand_rankings Coverage Results" MODIFIED="1730505064430" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/hand_analysis/analysis" />
     <SUITE FILE_PATH="coverage/Spade$card.coverage" NAME="card Coverage Results" MODIFIED="1730505070831" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/hand_analysis/resources" />
     <SUITE FILE_PATH="coverage/Spade$main__1_.coverage" NAME="main (1) Coverage Results" MODIFIED="1730240622281" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/hand_analysis" />
-    <SUITE FILE_PATH="coverage/Spade$SpadeAssistant.coverage" NAME="SpadeAssistant Coverage Results" MODIFIED="1730568174377" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/mediaplayer" />
+    <SUITE FILE_PATH="coverage/Spade$SpadeAssistant.coverage" NAME="SpadeAssistant Coverage Results" MODIFIED="1730576986313" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/mediaplayer" />
     <SUITE FILE_PATH="coverage/Spade$.coverage" NAME=" Coverage Results" MODIFIED="1730505206582" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/hand_analysis/tests" />
     <SUITE FILE_PATH="coverage/Spade$main__2_.coverage" NAME="main (2) Coverage Results" MODIFIED="1730561177005" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/hand_analysis" />
     <SUITE FILE_PATH="coverage/Spade$utils.coverage" NAME="utils Coverage Results" MODIFIED="1730505209670" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/hand_analysis" />
@@ -292,6 +326,6 @@
     <SUITE FILE_PATH="coverage/Spade$player.coverage" NAME="player Coverage Results" MODIFIED="1730505073644" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/hand_analysis/resources" />
     <SUITE FILE_PATH="coverage/Spade$hand_analyzer.coverage" NAME="hand_analyzer Coverage Results" MODIFIED="1730505060990" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/hand_analysis/analysis" />
     <SUITE FILE_PATH="coverage/Spade$winner_analyzer.coverage" NAME="winner_analyzer Coverage Results" MODIFIED="1730505067106" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/hand_analysis/analysis" />
-    <SUITE FILE_PATH="coverage/Spade$main.coverage" NAME="main Coverage Results" MODIFIED="1730505091831" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/hand_analysis" />
+    <SUITE FILE_PATH="coverage/Spade$main.coverage" NAME="main Coverage Results" MODIFIED="1730569974445" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/hand_analysis" />
   </component>
 </project>

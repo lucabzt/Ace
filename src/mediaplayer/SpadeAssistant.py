@@ -3,84 +3,139 @@ import pygame
 import cv2
 import numpy as np
 from PIL import Image, ImageTk
+import random
 
-# Initialize Pygame for audio playback
+# Initialize Pygame mixer for audio playback only (avoid display initialization)
 pygame.mixer.init()
 
 # Create main application window
-root = tk.Tk()
-root.title("Spade Audio Visualizer")
-root.attributes('-fullscreen', True)  # Set window to fullscreen
-root.configure(bg='#2f2e31')  # Set background to dark
+class AudioVisualizerApp:
+    def __init__(self, master):
+        self.master = master
+        master.title("Spade Audio Visualizer")
+        master.attributes('-fullscreen', True)  # Set window to fullscreen
+        master.configure(bg='#2f2e31')  # Set background to dark
 
-# Create a canvas for the video playback
-canvas = tk.Canvas(root, bg='#2f2e31', highlightthickness=0)
-canvas.pack(fill=tk.BOTH, expand=True)
+        # Create a canvas for the video playback
+        self.canvas = tk.Canvas(master, bg='#2f2e31', highlightthickness=0)
+        self.canvas.pack(fill=tk.BOTH, expand=True)
 
-# Load the video and initialize OpenCV
-video_path = "/Users/sebastianrogg/PycharmProjects/Spade/images/video.mp4"  # Replace with the path to your video file
-video_capture = cv2.VideoCapture(video_path)
+        # Load the video and initialize OpenCV
+        self.video_path = "/Users/sebastianrogg/PycharmProjects/Spade/images/video.mp4"  # Replace with your video file path
+        self.video_capture = cv2.VideoCapture(self.video_path)
 
-# Get screen dimensions
-screen_width = root.winfo_screenwidth()
-screen_height = root.winfo_screenheight()
+        # Get screen dimensions
+        self.screen_width = master.winfo_screenwidth()
+        self.screen_height = master.winfo_screenheight()
 
-# Function to show the first frame of the video
-def show_first_frame():
-    video_capture.set(cv2.CAP_PROP_POS_FRAMES, 0)  # Go to the first frame
-    ret, frame = video_capture.read()  # Read the first frame
-    if ret:
-        frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)  # Convert to RGB
-        img = Image.fromarray(frame)  # Create an Image object
-        img = img.resize((screen_width, screen_height), Image.LANCZOS)  # Resize to full screen
-        img = ImageTk.PhotoImage(img)  # Convert to PhotoImage
-        canvas.create_image(0, 0, anchor=tk.NW, image=img)  # Display it on canvas
-        canvas.image = img  # Keep a reference to avoid garbage collection
+        # List to hold audio file paths
+        self.audio_files = []
+        self.current_audio_index = 0  # Track the current audio file index
 
-# Function to play video on the canvas
-def play_video():
-    if pygame.mixer.music.get_busy():  # Check if audio is still playing
-        ret, frame = video_capture.read()  # Read the next frame
+        # Create play and skip buttons
+        self.play_button = tk.Button(master, text="Play", command=self.play_audio, bg='black', fg='white', font=("Arial", 24))
+        button_y_position = self.screen_height - 50  # 50 pixels from the bottom
+        self.canvas.create_window(self.screen_width // 2 - 100, button_y_position, window=self.play_button)
+
+        self.skip_button = tk.Button(master, text="Skip", command=self.skip_audio, bg='black', fg='white', font=("Arial", 24))
+        self.canvas.create_window(self.screen_width // 2 + 100, button_y_position, window=self.skip_button)
+
+        # Show the first frame initially
+        self.show_first_frame()
+
+        # Flag to indicate whether the audio is playing
+        self.audio_playing = False
+
+    def set_audio_files(self, file_paths):
+        """Set the audio files to be used for playback."""
+        self.audio_files = file_paths
+
+    def show_first_frame(self):
+        self.video_capture.set(cv2.CAP_PROP_POS_FRAMES, 0)  # Go to the first frame
+        ret, frame = self.video_capture.read()  # Read the first frame
         if ret:
             frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)  # Convert to RGB
             img = Image.fromarray(frame)  # Create an Image object
-            img = img.resize((screen_width, screen_height), Image.LANCZOS)  # Resize to full screen
+            img = img.resize((self.screen_width, self.screen_height), Image.LANCZOS)  # Resize to full screen
+            img = ImageTk.PhotoImage(img)  # Convert to PhotoImage
+            self.canvas.create_image(0, 0, anchor=tk.NW, image=img)  # Display it on canvas
+            self.canvas.image = img  # Keep a reference to avoid garbage collection
+
+    def play_video(self):
+        """Continuously play the video frames."""
+        ret, frame = self.video_capture.read()  # Read the next frame
+        if ret:
+            frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)  # Convert to RGB
+            img = Image.fromarray(frame)  # Create an Image object
+            img = img.resize((self.screen_width, self.screen_height), Image.LANCZOS)  # Resize to full screen
             img = ImageTk.PhotoImage(img)  # Convert to PhotoImage
 
             # Display the image on the canvas
-            canvas.create_image(0, 0, anchor=tk.NW, image=img)
-            canvas.image = img  # Keep a reference to avoid garbage collection
+            self.canvas.create_image(0, 0, anchor=tk.NW, image=img)
+            self.canvas.image = img  # Keep a reference to avoid garbage collection
 
             # Schedule the next frame, adjust the delay based on the video frame rate
-            canvas.after(33, play_video)  # Call this function again after ~33 ms (~30 FPS)
+            self.canvas.after(33, self.play_video)  # Call this function again after ~33 ms (~30 FPS)
         else:
             # Video has ended; reset to the first frame and continue playing
-            video_capture.set(cv2.CAP_PROP_POS_FRAMES, 0)  # Loop video
-            play_video()  # Continue playing video
-    else:
-        # Stop video playback when audio ends
-        show_first_frame()  # Reset to the first frame
+            self.video_capture.set(cv2.CAP_PROP_POS_FRAMES, 0)  # Loop video
+            self.play_video()  # Continue playing
 
-# Function to play audio and start video
-def play_audio():
-    audio_path = "/Users/sebastianrogg/PycharmProjects/Spade/sounds/Phrases/Spade_Initiation.mp3"  # Audio file path
-    pygame.mixer.music.load(audio_path)  # Load audio file
-    pygame.mixer.music.play()  # Play audio
-    play_video()  # Start playing video
+    def play_audio(self):
+        """Play the current audio file based on the current audio index."""
+        if self.audio_files:  # Check if there are audio files
+            audio_path = self.audio_files[self.current_audio_index]  # Get the current audio file
+            pygame.mixer.music.load(audio_path)  # Load audio file
+            pygame.mixer.music.play()  # Play audio
+            self.audio_playing = True  # Mark audio as playing
+            self.play_video()  # Start playing video
+            self.check_audio_end()  # Start checking for audio end
 
-# Create play button
-play_button = tk.Button(root, text="Play", command=play_audio, bg='black', fg='white', font=("Arial", 24))
+    def skip_audio(self):
+        """Skip the current audio file and play the next one."""
+        self.current_audio_index = (self.current_audio_index + 1) % len(self.audio_files)  # Loop back to the first if at the end
+        if self.audio_playing:
+            pygame.mixer.music.stop()  # Stop the current audio
+            self.audio_playing = False  # Reset the audio playing flag
 
-# Place the button at the bottom of the canvas
-button_y_position = screen_height - 50  # 50 pixels from the bottom
-canvas.create_window(screen_width // 2, button_y_position, window=play_button)
+        self.play_audio()  # Play the next audio
 
-# Show the first frame initially
-show_first_frame()
+    def check_audio_end(self):
+        """Check if the audio has finished playing and skip to the next one if so."""
+        if not pygame.mixer.music.get_busy() and self.audio_playing:
+            self.skip_audio()  # Skip to the next song if the current one has finished
+        else:
+            # Check again after a short delay
+            self.master.after(100, self.check_audio_end)
 
-# Start the main event loop
-root.mainloop()
+    def on_audio_end(self):
+        """Handle the event when audio ends."""
+        self.audio_playing = False  # Mark audio as not playing
+        self.show_first_frame()  # Reset to the first frame
 
-# Clean up resources on close
-video_capture.release()
-pygame.mixer.quit()
+
+def main():
+    # Create the main window
+    root = tk.Tk()
+
+    # Create an instance of the application
+    app = AudioVisualizerApp(root)
+
+    # Set audio files for testing
+    app.set_audio_files([
+        "/Users/sebastianrogg/PycharmProjects/Spade/sounds/Players/Bozzetti/ElevenLabs_2024-10-28T19_30_25_Daniel_pre_s50_sb75_se0_b_m2.mp3",
+        "/Users/sebastianrogg/PycharmProjects/Spade/sounds/Phrases/Spade_Initiation.mp3",
+        "/Users/sebastianrogg/PycharmProjects/Spade/sounds/music/Rocket Man - Elton John.mp3",
+        "/Users/sebastianrogg/PycharmProjects/Spade/sounds/music/Tainted Love - Soft Cell.mp3"
+    ])
+
+    # Start the main event loop
+    root.mainloop()
+
+    # Clean up resources on close
+    app.video_capture.release()
+    pygame.mixer.quit()
+
+
+if __name__ == "__main__":
+    main()
