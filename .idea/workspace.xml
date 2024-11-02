@@ -4,11 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c0babd6b-3393-44b8-be9f-8b13a8d5748d" name="Changes" comment="Fix import paths">
-      <change afterPath="$PROJECT_DIR$/images/spade_assistant_1920x1080.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/mediaplayer/SpadeAssistant.py" afterDir="false" />
+    <list default="true" id="c0babd6b-3393-44b8-be9f-8b13a8d5748d" name="Changes" comment="audio version">
+      <change afterPath="$PROJECT_DIR$/images/video.mp4" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sounds/Phrases/Spade_Initiation.mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sounds/music/Casino Royale - Chris Cornell - You Know My Name.mp3" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/mediaplayer/mediaplayer.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/mediaplayer/mediaplayer.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/mediaplayer/SpadeAssistant.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/mediaplayer/SpadeAssistant.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -49,35 +50,40 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Python tests.Python tests in test_poker_hand_analyzer.py.executor": "Run",
-    "Python tests.Python tests in test_poker_winner_analyzer.py.executor": "Run",
-    "Python.SpadeAssistant.executor": "Run",
-    "Python.card.executor": "Run",
-    "Python.hand_analyzer.executor": "Run",
-    "Python.hand_rankings.executor": "Run",
-    "Python.main (1).executor": "Run",
-    "Python.main (2).executor": "Run",
-    "Python.main.executor": "Run",
-    "Python.mediaplayer.executor": "Run",
-    "Python.player.executor": "Run",
-    "Python.utils.executor": "Debug",
-    "Python.winner_analyzer.executor": "Run",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "main",
-    "ignore.virus.scanning.warn.message": "true",
-    "last_opened_file_path": "/Users/sebastianrogg/PycharmProjects/Spade/images",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Python tests.Python tests in test_poker_hand_analyzer.py.executor&quot;: &quot;Run&quot;,
+    &quot;Python tests.Python tests in test_poker_winner_analyzer.py.executor&quot;: &quot;Run&quot;,
+    &quot;Python.SpadeAssistant.executor&quot;: &quot;Run&quot;,
+    &quot;Python.card.executor&quot;: &quot;Run&quot;,
+    &quot;Python.hand_analyzer.executor&quot;: &quot;Run&quot;,
+    &quot;Python.hand_rankings.executor&quot;: &quot;Run&quot;,
+    &quot;Python.main (1).executor&quot;: &quot;Run&quot;,
+    &quot;Python.main (2).executor&quot;: &quot;Run&quot;,
+    &quot;Python.main.executor&quot;: &quot;Run&quot;,
+    &quot;Python.mediaplayer.executor&quot;: &quot;Run&quot;,
+    &quot;Python.player.executor&quot;: &quot;Run&quot;,
+    &quot;Python.utils.executor&quot;: &quot;Debug&quot;,
+    &quot;Python.winner_analyzer.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/sebastianrogg/PycharmProjects/Spade/images&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/images" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/sounds/Phrases" />
+      <recent name="$PROJECT_DIR$/sounds/music" />
       <recent name="$PROJECT_DIR$/images" />
     </key>
   </component>
@@ -225,6 +231,7 @@
       <workItem from="1730504758257" duration="348000" />
       <workItem from="1730505109230" duration="4749000" />
       <workItem from="1730561137515" duration="1467000" />
+      <workItem from="1730563461256" duration="4226000" />
     </task>
     <task id="LOCAL-00001" summary="Markus ist ein Eierlecker">
       <option name="closed" value="true" />
@@ -242,7 +249,15 @@
       <option name="project" value="LOCAL" />
       <updated>1730505248679</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="audio version">
+      <option name="closed" value="true" />
+      <created>1730563468796</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1730563468796</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -262,13 +277,14 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Markus ist ein Eierlecker" />
     <MESSAGE value="Fix import paths" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fix import paths" />
+    <MESSAGE value="audio version" />
+    <option name="LAST_COMMIT_MESSAGE" value="audio version" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/Spade$hand_rankings.coverage" NAME="hand_rankings Coverage Results" MODIFIED="1730505064430" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/hand_analysis/analysis" />
     <SUITE FILE_PATH="coverage/Spade$card.coverage" NAME="card Coverage Results" MODIFIED="1730505070831" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/hand_analysis/resources" />
     <SUITE FILE_PATH="coverage/Spade$main__1_.coverage" NAME="main (1) Coverage Results" MODIFIED="1730240622281" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/hand_analysis" />
-    <SUITE FILE_PATH="coverage/Spade$SpadeAssistant.coverage" NAME="SpadeAssistant Coverage Results" MODIFIED="1730562541612" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/mediaplayer" />
+    <SUITE FILE_PATH="coverage/Spade$SpadeAssistant.coverage" NAME="SpadeAssistant Coverage Results" MODIFIED="1730568174377" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/mediaplayer" />
     <SUITE FILE_PATH="coverage/Spade$.coverage" NAME=" Coverage Results" MODIFIED="1730505206582" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/hand_analysis/tests" />
     <SUITE FILE_PATH="coverage/Spade$main__2_.coverage" NAME="main (2) Coverage Results" MODIFIED="1730561177005" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/hand_analysis" />
     <SUITE FILE_PATH="coverage/Spade$utils.coverage" NAME="utils Coverage Results" MODIFIED="1730505209670" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/hand_analysis" />

@@ -1,7 +1,8 @@
 import tkinter as tk
 import pygame
-import random
-from PIL import Image, ImageTk  # Import Image and ImageTk from PIL for image handling
+import cv2
+import numpy as np
+from PIL import Image, ImageTk
 
 # Initialize Pygame for audio playback
 pygame.mixer.init()
@@ -12,92 +13,74 @@ root.title("Spade Audio Visualizer")
 root.attributes('-fullscreen', True)  # Set window to fullscreen
 root.configure(bg='#2f2e31')  # Set background to dark
 
-# Create a canvas for the logo and audio bars that takes up the whole screen
+# Create a canvas for the video playback
 canvas = tk.Canvas(root, bg='#2f2e31', highlightthickness=0)
 canvas.pack(fill=tk.BOTH, expand=True)
 
-# Create a list to store the audio bars
-bars = []
-bar_width = 8  # Set bar width to 10 for larger bars
-vertical_center = root.winfo_screenheight() // 2  # Calculate vertical center of the canvas
+# Load the video and initialize OpenCV
+video_path = "/Users/sebastianrogg/PycharmProjects/Spade/images/video.mp4"  # Replace with the path to your video file
+video_capture = cv2.VideoCapture(video_path)
 
-# Load the spade logo image
-spade_image_path = "/Users/sebastianrogg/PycharmProjects/Spade/images/spade_assistant_1920x1080.png"  # Path to your spade logo image
-spade_image = Image.open(spade_image_path)
-# Resize the image to be much larger to fit fullscreen
-spade_image = spade_image.resize((root.winfo_screenwidth(), int(root.winfo_screenwidth()*0.5)), Image.LANCZOS)  # Resize the image
-spade_logo = ImageTk.PhotoImage(spade_image)
+# Get screen dimensions
+screen_width = root.winfo_screenwidth()
+screen_height = root.winfo_screenheight()
 
-# Function to draw the spade logo image
-def draw_spade_logo(center_x, center_y):
-    # Draw the spade logo on the canvas
-    canvas.create_image(center_x, center_y+200, image=spade_logo)
+# Function to show the first frame of the video
+def show_first_frame():
+    video_capture.set(cv2.CAP_PROP_POS_FRAMES, 0)  # Go to the first frame
+    ret, frame = video_capture.read()  # Read the first frame
+    if ret:
+        frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)  # Convert to RGB
+        img = Image.fromarray(frame)  # Create an Image object
+        img = img.resize((screen_width, screen_height), Image.LANCZOS)  # Resize to full screen
+        img = ImageTk.PhotoImage(img)  # Convert to PhotoImage
+        canvas.create_image(0, 0, anchor=tk.NW, image=img)  # Display it on canvas
+        canvas.image = img  # Keep a reference to avoid garbage collection
 
-# Function to create audio bars
-def create_bars():
-    global bars, vertical_center  # Ensure we modify the global bars list and access vertical_center
-    bars.clear()  # Clear previous bars if they exist
-    num_bars = 30  # Number of bars
-    canvas.delete("bars")  # Clear previous bars from canvas
+# Function to play video on the canvas
+def play_video():
+    if pygame.mixer.music.get_busy():  # Check if audio is still playing
+        ret, frame = video_capture.read()  # Read the next frame
+        if ret:
+            frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)  # Convert to RGB
+            img = Image.fromarray(frame)  # Create an Image object
+            img = img.resize((screen_width, screen_height), Image.LANCZOS)  # Resize to full screen
+            img = ImageTk.PhotoImage(img)  # Convert to PhotoImage
 
-    # Center position for the bars
-    center_x = root.winfo_screenwidth() // 2
-    start_x = center_x - (num_bars * 15)  # Adjust starting position based on number of bars
+            # Display the image on the canvas
+            canvas.create_image(0, 0, anchor=tk.NW, image=img)
+            canvas.image = img  # Keep a reference to avoid garbage collection
 
-    for i in range(num_bars):
-        x_position = start_x + (i * 30)  # Adjust spacing between bars
-        # Create initial bar with height 0 at the baseline
-        bar = canvas.create_rectangle(
-            x_position, vertical_center,  # Set baseline to vertical center
-            x_position + bar_width, vertical_center,
-            fill="white", outline="", tags="bars")  # Changed fill color to black
-        bars.append(bar)
-
-    # Draw the Poker Spade logo in the center
-    draw_spade_logo(center_x, vertical_center - 200)  # Adjust logo position if necessary
-
-# Function to animate audio bars with a smooth gradient height
-def animate_bars():
-    if pygame.mixer.music.get_busy():
-        center_index = len(bars) // 2  # Find the center bar index
-        max_height = 150  # Maximum height for the bars
-
-        for i, bar in enumerate(bars):
-            # Calculate height based on distance from the center
-            distance_from_center = abs(center_index - i)
-            height_factor = max(0, 1 - (distance_from_center / center_index))  # Increase height towards center
-
-            # Calculate the height of the bar
-            up_height = int(max_height * height_factor * random.uniform(0.5, 1))  # Randomize height
-            down_height = int(max_height * height_factor * random.uniform(0.5, 1))  # Randomize downward height
-
-            # Update bar to extend from the center line
-            canvas.coords(bar,
-                          canvas.coords(bar)[0],
-                          vertical_center - up_height,  # Upward height from the vertical center
-                          canvas.coords(bar)[0] + bar_width,
-                          vertical_center + down_height)  # Downward height from the vertical center
-        canvas.after(100, animate_bars)  # Repeat every 100ms
+            # Schedule the next frame, adjust the delay based on the video frame rate
+            canvas.after(33, play_video)  # Call this function again after ~33 ms (~30 FPS)
+        else:
+            # Video has ended; reset to the first frame and continue playing
+            video_capture.set(cv2.CAP_PROP_POS_FRAMES, 0)  # Loop video
+            play_video()  # Continue playing video
     else:
-        # Return all bars to baseline after audio ends
-        for bar in bars:
-            canvas.coords(bar,
-                          canvas.coords(bar)[0],
-                          vertical_center,  # Reset to vertical center
-                          canvas.coords(bar)[0] + bar_width,
-                          vertical_center)  # Bar width is still 10
+        # Stop video playback when audio ends
+        show_first_frame()  # Reset to the first frame
 
-# Function to play audio and start animation
+# Function to play audio and start video
 def play_audio():
-    pygame.mixer.music.load(
-        "/Users/sebastianrogg/PycharmProjects/Spade/sounds/LUSTIG/Checks like a pussy.mp3")  # Audio file path
-    pygame.mixer.music.play()
-    animate_bars()  # Start animating bars
+    audio_path = "/Users/sebastianrogg/PycharmProjects/Spade/sounds/Phrases/Spade_Initiation.mp3"  # Audio file path
+    pygame.mixer.music.load(audio_path)  # Load audio file
+    pygame.mixer.music.play()  # Play audio
+    play_video()  # Start playing video
 
 # Create play button
-play_button = tk.Button(root, text="Play", command=lambda: [create_bars(), play_audio()], bg='black', fg='white',
-                        font=("Arial", 24))
-play_button.pack(pady=20)
+play_button = tk.Button(root, text="Play", command=play_audio, bg='black', fg='white', font=("Arial", 24))
+
+# Place the button at the bottom of the canvas
+button_y_position = screen_height - 50  # 50 pixels from the bottom
+canvas.create_window(screen_width // 2, button_y_position, window=play_button)
+
+# Show the first frame initially
+show_first_frame()
 
 # Start the main event loop
 root.mainloop()
+
+# Clean up resources on close
+video_capture.release()
+pygame.mixer.quit()
