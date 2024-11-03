@@ -3,10 +3,12 @@ import pygame
 import cv2
 import numpy as np
 from PIL import Image, ImageTk
+from pathlib import Path
 import random
 
 # Initialize Pygame mixer for audio playback only
 pygame.mixer.init()
+
 
 # Create main application window
 class AudioVisualizerApp:
@@ -21,8 +23,9 @@ class AudioVisualizerApp:
         self.canvas.pack(fill=tk.BOTH, expand=True)
 
         # Load the video and initialize OpenCV
-        self.video_path = "/Users/sebastianrogg/PycharmProjects/Spade/images/spade_OG.mp4"  # Replace with your video file path
-        self.video_capture = cv2.VideoCapture(self.video_path)
+        base_path = Path(__file__).resolve().parent.parent.parent  # Go up three directories from mediaplayer
+        self.video_path = base_path / "images/spade_OG.mp4"
+        self.video_capture = cv2.VideoCapture(str(self.video_path))  # Ensure the path is a string for OpenCV
 
         # Get screen dimensions
         self.screen_width = master.winfo_screenwidth()
@@ -33,15 +36,20 @@ class AudioVisualizerApp:
         self.current_audio_index = 0  # Track the current audio file index
 
         # Create play and skip buttons
-        self.play_button = tk.Button(master, text="Play", command=self.play_audio, bg='black', fg='white', font=("Arial", 24))
+        self.play_button = tk.Button(master, text="Play", command=self.play_audio, bg='black', fg='white',
+                                     font=("Arial", 24))
         button_y_position = self.screen_height - 50  # 50 pixels from the bottom
         self.canvas.create_window(self.screen_width // 2 - 100, button_y_position, window=self.play_button)
 
-        self.skip_button = tk.Button(master, text="Skip", command=self.skip_audio, bg='black', fg='white', font=("Arial", 24))
+        self.skip_button = tk.Button(master, text="Skip", command=self.skip_audio, bg='black', fg='white',
+                                     font=("Arial", 24))
         self.canvas.create_window(self.screen_width // 2 + 100, button_y_position, window=self.skip_button)
 
         # Flag to indicate whether the audio is playing
         self.audio_playing = False
+
+        self.audio_finished = False
+
 
     def set_audio_files(self, file_paths):
         """Set the audio files to be used for playback."""
@@ -49,6 +57,10 @@ class AudioVisualizerApp:
 
     def play_video(self):
         """Continuously play the video frames."""
+        # Check if audio has finished, stop playing the video if it has
+        if self.audio_finished:
+            return  # Stop the video playback
+
         ret, frame = self.video_capture.read()  # Read the next frame
         if ret:
             frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)  # Convert to RGB
@@ -82,6 +94,9 @@ class AudioVisualizerApp:
     def play_audio(self):
         """Play the current audio file and start video if not already playing."""
         if self.audio_files:  # Check if there are audio files
+            # Reset the audio_finished flag when playing audio
+            self.audio_finished = False
+
             audio_path = self.audio_files[self.current_audio_index]  # Get the current audio file
             pygame.mixer.music.load(audio_path)  # Load audio file
             pygame.mixer.music.play()  # Play audio
@@ -104,6 +119,9 @@ class AudioVisualizerApp:
             pygame.mixer.music.stop()  # Stop the current audio
             self.audio_playing = False  # Reset the audio playing flag
 
+        # Reset the audio_finished flag when skipping audio
+        self.audio_finished = False
+
         self.play_audio()  # Play the next audio
 
     def check_audio_end(self):
@@ -114,11 +132,11 @@ class AudioVisualizerApp:
                 self.skip_audio()  # Go to the next audio track
             else:
                 self.audio_playing = False  # Stop audio playing flag
+                self.audio_finished = True  # Set the flag to indicate audio has finished
                 self.video_started = False  # Reset video flag to stop looping
 
-                # Stop video playback by releasing video capture if audio is done
+                # Stop video playback by showing the first frame
                 self.show_first_frame()
-                self.video_capture.release()
         else:
             # Check again after a short delay
             self.master.after(100, self.check_audio_end)
@@ -135,16 +153,15 @@ def main():
     # Create an instance of the application
     app = AudioVisualizerApp(root)
 
-    # Set audio files for testing
+    # Display the first frame on startup
+    app.show_first_frame()
+
+    # Set audio files with corrected paths
+    base_path = Path(__file__).resolve().parent.parent.parent  # Go up three directories from mediaplayer
     app.set_audio_files([
-        "/Users/sebastianrogg/PycharmProjects/Spade/sounds/Player Actions/Checks/ElevenLabs_2024-10-28T20_29_07_Daniel_pre_s50_sb75_se0_b_m2.mp3",
-        "/Users/sebastianrogg/PycharmProjects/Spade/sounds/Player Actions/Checks/ElevenLabs_2024-10-28T20_31_11_Daniel_pre_s50_sb75_se0_b_m2.mp3",
-        "/Users/sebastianrogg/PycharmProjects/Spade/sounds/Player Actions/Checks/ElevenLabs_2024-10-28T20_31_11_Daniel_pre_s50_sb75_se0_b_m2.mp3",
-        "/Users/sebastianrogg/PycharmProjects/Spade/sounds/Player Actions/Checks/ElevenLabs_2024-10-28T20_31_11_Daniel_pre_s50_sb75_se0_b_m2.mp3",
-        "/Users/sebastianrogg/PycharmProjects/Spade/sounds/Players/Bozzetti/ElevenLabs_2024-10-28T19_30_25_Daniel_pre_s50_sb75_se0_b_m2.mp3",
-        "/Users/sebastianrogg/PycharmProjects/Spade/sounds/Phrases/Spade_Initiation.mp3",
-        "/Users/sebastianrogg/PycharmProjects/Spade/sounds/music/Rocket Man - Elton John.mp3",
-        "/Users/sebastianrogg/PycharmProjects/Spade/sounds/music/Tainted Love - Soft Cell.mp3"
+        base_path / "sounds/Phrases/Spade_Initiation.mp3",
+        base_path / "sounds/Phrases/Spade_Initiation.mp3",
+        base_path / "sounds/LUSTIG/Eierlecker Epic.mp3",
     ])
 
     # Start the main event loop
@@ -153,7 +170,6 @@ def main():
     # Clean up resources on close
     app.video_capture.release()
     pygame.mixer.quit()
-
 
 if __name__ == "__main__":
     main()
