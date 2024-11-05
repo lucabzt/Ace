@@ -32,7 +32,6 @@ class PlayingCardDataset(Dataset):
         image, lab = self.data.__getitem__(index)
         one_hot = torch.zeros(self.label_size)
         one_hot[lab[0]['category_id'] - 1] = 1
-        self.len -= 1
         return image, one_hot
 
     def __len__(self):

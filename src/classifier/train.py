@@ -42,7 +42,7 @@ optimizer = torch.optim.SGD(model.parameters(), lr=0.01, momentum=0.5)
 loss_fn = torch.nn.CrossEntropyLoss()
 train_loss = []
 test_loss = []
-epochs = 100
+epochs = 200
 
 
 # TRAINING CODE
@@ -121,13 +121,14 @@ for epoch in range(epochs):
     train_one_epoch()
     test_one_epoch()
     torch.cuda.empty_cache()  # Empty memory cache of GPU
-    torch.save(model.state_dict(), f"./models/model_{epoch}_.pt")
 
-plt.plot(train_loss, label="Training loss")
-plt.plot(test_loss, label="Test Loss")
-plt.legend()
-plt.show()
-plt.savefig("train_test_loss_.png")
+    # Save plot and model to file
+    os.mkdir(f'models/model_{epoch}')
+    plt.plot(train_loss, label="Training loss")
+    plt.plot(test_loss, label="Test Loss")
+    plt.legend()
+    plt.savefig(f".models/model_{epoch}/plot.png")
+    torch.save(model.state_dict(), f"./models/model_{epoch}/model.pt")
 
 torch.save(model.state_dict(), f"./models/model_{test_loss[-1]:.4f}_.pt")
 
