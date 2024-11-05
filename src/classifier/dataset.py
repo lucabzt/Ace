@@ -16,6 +16,7 @@ class PlayingCardDataset(Dataset):
     def __init__(self, images_path, labels_path):
         # Define transformations to convert Images to PyTorch Tensors
         transform = transforms.Compose([
+            transforms.Resize((640, 480)),
             transforms.ToTensor()
         ])
 
@@ -23,12 +24,12 @@ class PlayingCardDataset(Dataset):
         coco_dataset = CocoDetection(root=images_path,
                                      annFile=labels_path,
                                      transform=transform)
-        self.data = iter(coco_dataset)
+        self.data = coco_dataset
         self.len = len(coco_dataset)
         self.label_size = len(cards)
 
     def __getitem__(self, index):
-        image, lab = next(self.data)
+        image, lab = self.data.__getitem__(index)
         one_hot = torch.zeros(self.label_size)
         one_hot[lab[0]['category_id'] - 1] = 1
         self.len -= 1

@@ -6,7 +6,7 @@
       <sourceFolder url="file://$MODULE_DIR$/hand_analysis/analysis" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/hand_analysis/resources" isTestSource="false" />
     </content>
-    <orderEntry type="jdk" jdkName="Python 3.12 (eist24l06p01-go98teb)" jdkType="Python SDK" />
+    <orderEntry type="jdk" jdkName="Python 3.12 (Spade)" jdkType="Python SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
   </component>
   <component name="PyDocumentationSettings">

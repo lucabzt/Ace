@@ -68,17 +68,17 @@ class SpadeClassifier(torch.nn.Module):
     def __init__(self, num_classes: int) -> None:
         super().__init__()
         features = [64, 64, 128, 256, 512]
-        num_layers = [2 for _ in range(4)]
+        num_layers = [3 for _ in range(4)]
         self.conv1 = nn.Conv2d(3, features[0], kernel_size=7, stride=2, padding=3, bias=False)
         self.bn1 = nn.BatchNorm2d(features[0])
         self.relu = nn.ReLU(inplace=True)
         self.maxpool = nn.MaxPool2d(kernel_size=3, stride=2, padding=1)
-        self.layer1 = self._make_layer(64, 64, num_layers[0])
-        self.layer2 = self._make_layer(64, 128, num_layers[1], downsample=True)
-        self.layer3 = self._make_layer(128, 256, num_layers[2], downsample=True)
-        self.layer4 = self._make_layer(256, 512, num_layers[3], downsample=True)
+        self.layer1 = self._make_layer(features[1], features[1], num_layers[0])
+        self.layer2 = self._make_layer(features[1], features[2], num_layers[1], downsample=True)
+        self.layer3 = self._make_layer(features[2], features[3], num_layers[2], downsample=True)
+        self.layer4 = self._make_layer(features[3], features[4], num_layers[3], downsample=True)
         self.avgpool = nn.AdaptiveAvgPool2d((1, 1))
-        self.fc = nn.Linear(512, num_classes)
+        self.fc = nn.Linear(features[4], num_classes)
 
     @staticmethod
     def _make_layer(in_features: int, features: int, num_layers: int, downsample: bool = False) -> nn.Sequential:
