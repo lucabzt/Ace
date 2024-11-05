@@ -4,18 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c0babd6b-3393-44b8-be9f-8b13a8d5748d" name="Changes" comment="Bugfixxing SpadeAssistant.py">
-      <change afterPath="$PROJECT_DIR$/.idea/other.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/classifier/test_classifier.ipynb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/Spade.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Spade.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+    <list default="true" id="c0babd6b-3393-44b8-be9f-8b13a8d5748d" name="Changes" comment="model_200.pt">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/classifier/SpadeClassifier.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/classifier/SpadeClassifier.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/classifier/convert_coco.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/src/classifier/convert_coco.ipynb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/classifier/dataset.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/classifier/dataset.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/classifier/train.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/src/classifier/train.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/classifier/models/model_1_.pt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/classifier/models/model_50.pt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/classifier/models/model_99.pt" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/classifier/train.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/classifier/train.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/mediaplayer/SpadeAssistant.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/mediaplayer/SpadeAssistant.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -279,7 +273,8 @@
       <workItem from="1730585124806" duration="840000" />
       <workItem from="1730673633630" duration="1618000" />
       <workItem from="1730743594761" duration="16996000" />
-      <workItem from="1730787086307" duration="1066000" />
+      <workItem from="1730787086307" duration="5405000" />
+      <workItem from="1730826228753" duration="906000" />
     </task>
     <task id="LOCAL-00001" summary="Markus ist ein Eierlecker">
       <option name="closed" value="true" />
@@ -329,7 +324,31 @@
       <option name="project" value="LOCAL" />
       <updated>1730675244729</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="Bugfixxing SpadeAssistant.py">
+      <option name="closed" value="true" />
+      <created>1730788407473</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1730788407473</updated>
+    </task>
+    <task id="LOCAL-00008" summary="model_80_.pt">
+      <option name="closed" value="true" />
+      <created>1730823318936</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1730823318936</updated>
+    </task>
+    <task id="LOCAL-00009" summary="model_200.pt">
+      <option name="closed" value="true" />
+      <created>1730823360764</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1730823360764</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -352,7 +371,9 @@
     <MESSAGE value="audio version" />
     <MESSAGE value="hightech version" />
     <MESSAGE value="Bugfixxing SpadeAssistant.py" />
-    <option name="LAST_COMMIT_MESSAGE" value="Bugfixxing SpadeAssistant.py" />
+    <MESSAGE value="model_80_.pt" />
+    <MESSAGE value="model_200.pt" />
+    <option name="LAST_COMMIT_MESSAGE" value="model_200.pt" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/Spade$main.coverage" NAME="main Coverage Results" MODIFIED="1730505091831" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/hand_analysis" />

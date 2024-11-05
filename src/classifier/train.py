@@ -28,13 +28,13 @@ os.environ["PYTORCH_CUDA_ALLOC_CONF"] = "expandable_segments:True"
 
 # DATASET, train/test split, create dataloaders
 dataset: PlayingCardDataset = PlayingCardDataset(PATH_TO_IMAGES, PATH_TO_LABELS)
-train_set, test_set = torch.utils.data.random_split(dataset, [0.8, 0.2])
+train_set, test_set, _  = torch.utils.data.random_split(dataset, [0.05, 0.05, 0.9])
 train_load, test_load = DataLoader(train_set, batch_size=BATCH_SIZE, shuffle=True), DataLoader(test_set, batch_size=BATCH_SIZE, shuffle=True)
 
 
 # LOAD MODEL
 model = SpadeClassifier.SpadeClassifier(53).to(device)
-model.load_state_dict(torch.load("models/model_99.pt", weights_only=True))
+# model.load_state_dict(torch.load("models/model_99.pt", weights_only=True))
 
 
 # TRAINING PARAMS
@@ -42,6 +42,7 @@ optimizer = torch.optim.SGD(model.parameters(), lr=0.01, momentum=0.5)
 loss_fn = torch.nn.CrossEntropyLoss()
 train_loss = []
 test_loss = []
+test_accuracy = []
 epochs = 200
 
 
@@ -114,6 +115,21 @@ def test_one_epoch() -> None:
     print(f"Accuracy: {accuracy:.2f}%")
 
     test_loss.append(running_loss)
+    test_accuracy.append(accuracy)
+
+
+def plot_training_history(tr_loss, te_loss, accuracy, epoch):
+    # Save plot and model to file
+    os.makedirs(f'models/model_{epoch}', exist_ok=True)
+    plt.clf()
+    plt.plot(train_loss, label="Training loss")
+    plt.plot(test_loss, label="Test Loss")
+    plt.legend()
+    plt.savefig(f"./models/model_{epoch}/loss.png")
+    plt.clf()
+    plt.plot(accuracy, label="Test accuracy")
+    plt.legend()
+    plt.savefig(f"./models/model_{epoch}/accuracy.png")
 
 
 # TRAINING LOOP
@@ -122,12 +138,7 @@ for epoch in range(epochs):
     test_one_epoch()
     torch.cuda.empty_cache()  # Empty memory cache of GPU
 
-    # Save plot and model to file
-    os.mkdir(f'models/model_{epoch}')
-    plt.plot(train_loss, label="Training loss")
-    plt.plot(test_loss, label="Test Loss")
-    plt.legend()
-    plt.savefig(f".models/model_{epoch}/plot.png")
+    plot_training_history(train_loss, test_loss, test_accuracy, epoch)
     torch.save(model.state_dict(), f"./models/model_{epoch}/model.pt")
 
 torch.save(model.state_dict(), f"./models/model_{test_loss[-1]:.4f}_.pt")
