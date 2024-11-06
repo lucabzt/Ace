@@ -2,3 +2,4 @@ research/classifier/data/
 venv/
 research/classifier/.idea
 research/classifier/__pycache__
+.idea
