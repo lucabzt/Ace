@@ -3,6 +3,8 @@ import os
 from src.game.game_round.game_round import GameRound
 from src.game.resources.player import Player
 
+PATH_TO_SPADE = "/home/lucabozzetti/Code/Spade"
+
 # Initialize Pygame
 pygame.init()
 
@@ -57,7 +59,7 @@ class VisualGameRound(GameRound):
         self.round_step += 1
 
     def load_card_images(self):
-        image_path = "/Users/sebastianrogg/PycharmProjects/Spade/images/card_deck"
+        image_path = os.path.join(PATH_TO_SPADE, "images/card_deck")
         images = {}
         ranks = ['2', '3', '4', '5', '6', '7', '8', '9', '10', 'jack', 'queen', 'king', 'ace']
         suits = ['hearts', 'diamonds', 'clubs', 'spades']
@@ -77,7 +79,7 @@ class VisualGameRound(GameRound):
 
     def load_background_image(self):
         try:
-            bg_image = pygame.image.load("/Users/sebastianrogg/PycharmProjects/Spade/images/PokerTable.png")
+            bg_image = pygame.image.load(os.path.join(PATH_TO_SPADE, "images/PokerTable.png"))
             return pygame.transform.scale(bg_image, (SCREEN_WIDTH, SCREEN_HEIGHT))
         except pygame.error:
             print("Background image not found.")
