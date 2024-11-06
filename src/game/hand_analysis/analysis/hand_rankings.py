@@ -1,6 +1,6 @@
 from collections import Counter
 
-from src.hand_analysis.resources.card import Rank
+from src.game.resources.card import Rank
 
 
 # Helper function to determine the number of different ranks in a hand

@@ -1,7 +1,7 @@
 import unittest
 
-from src.hand_analysis.analysis.hand_analyzer import PokerHandAnalyzer
-from src.hand_analysis.resources.card import Card, Suit, Rank
+from src.game.hand_analysis.analysis.hand_analyzer import PokerHandAnalyzer
+from src.game.resources.card import Card, Suit, Rank
 
 
 class TestPokerHandAnalyzer(unittest.TestCase):

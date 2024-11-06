@@ -1,6 +1,6 @@
 from collections import Counter
-from src.hand_analysis.resources.card import Rank
-from src.hand_analysis.analysis.hand_rankings import rank_value, high_card, is_one_pair, is_two_pair, is_three_of_a_kind, \
+from src.game.resources.card import Rank
+from src.game.hand_analysis.analysis.hand_rankings import rank_value, high_card, is_one_pair, is_two_pair, is_three_of_a_kind, \
     is_full_house, is_four_of_a_kind, is_straight, is_flush
 
 def translate_winner_hands(winners):

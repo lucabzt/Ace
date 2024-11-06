@@ -1,4 +1,4 @@
-from src.hand_analysis.analysis.hand_analyzer import PokerHandAnalyzer
+from src.game.hand_analysis.analysis.hand_analyzer import PokerHandAnalyzer
 
 
 class Player:
