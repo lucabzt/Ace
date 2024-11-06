@@ -28,7 +28,7 @@ os.environ["PYTORCH_CUDA_ALLOC_CONF"] = "expandable_segments:True"
 
 # DATASET, train/test split, create dataloaders
 dataset: PlayingCardDataset = PlayingCardDataset(PATH_TO_IMAGES, PATH_TO_LABELS)
-train_set, test_set = torch.utils.data.random_split(dataset, [0.8, 0.2])
+train_set, test_set, _ = torch.utils.data.random_split(dataset, [0.1, 0.1, 0.8])
 train_load, test_load = DataLoader(train_set, batch_size=BATCH_SIZE, shuffle=True), DataLoader(test_set, batch_size=BATCH_SIZE, shuffle=True)
 
 
