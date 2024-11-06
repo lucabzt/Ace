@@ -5,89 +5,20 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c0babd6b-3393-44b8-be9f-8b13a8d5748d" name="Changes" comment="Vids">
-      <change afterPath="$PROJECT_DIR$/images/card_deck/10_of_clubs.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/images/card_deck/10_of_diamonds.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/images/card_deck/10_of_hearts.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/images/card_deck/10_of_spades.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/images/card_deck/2_of_clubs.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/images/card_deck/2_of_diamonds.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/images/card_deck/2_of_hearts.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/images/card_deck/2_of_spades.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/images/card_deck/3_of_clubs.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/images/card_deck/3_of_diamonds.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/images/card_deck/3_of_hearts.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/images/card_deck/3_of_spades.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/images/card_deck/4_of_clubs.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/images/card_deck/4_of_diamonds.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/images/card_deck/4_of_hearts.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/images/card_deck/4_of_spades.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/images/card_deck/5_of_clubs.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/images/card_deck/5_of_diamonds.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/images/card_deck/5_of_hearts.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/images/card_deck/5_of_spades.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/images/card_deck/6_of_clubs.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/images/card_deck/6_of_diamonds.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/images/card_deck/6_of_hearts.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/images/card_deck/6_of_spades.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/images/card_deck/7_of_clubs.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/images/card_deck/7_of_diamonds.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/images/card_deck/7_of_hearts.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/images/card_deck/7_of_spades.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/images/card_deck/8_of_clubs.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/images/card_deck/8_of_diamonds.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/images/card_deck/8_of_hearts.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/images/card_deck/8_of_spades.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/images/card_deck/9_of_clubs.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/images/card_deck/9_of_diamonds.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/images/card_deck/9_of_hearts.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/images/card_deck/9_of_spades.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/images/card_deck/ace_of_clubs.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/images/card_deck/ace_of_diamonds.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/images/card_deck/ace_of_hearts.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/images/card_deck/ace_of_spades.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/images/card_deck/ace_of_spades2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/images/card_deck/black_joker.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/images/card_deck/jack_of_clubs.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/images/card_deck/jack_of_clubs2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/images/card_deck/jack_of_diamonds.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/images/card_deck/jack_of_diamonds2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/images/card_deck/jack_of_hearts.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/images/card_deck/jack_of_hearts2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/images/card_deck/jack_of_spades.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/images/card_deck/jack_of_spades2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/images/card_deck/king_of_clubs.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/images/card_deck/king_of_clubs2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/images/card_deck/king_of_diamonds.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/images/card_deck/king_of_diamonds2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/images/card_deck/king_of_hearts.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/images/card_deck/king_of_hearts2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/images/card_deck/king_of_spades.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/images/card_deck/king_of_spades2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/images/card_deck/queen_of_clubs.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/images/card_deck/queen_of_clubs2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/images/card_deck/queen_of_diamonds.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/images/card_deck/queen_of_diamonds2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/images/card_deck/queen_of_hearts.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/images/card_deck/queen_of_hearts2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/images/card_deck/queen_of_spades.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/images/card_deck/queen_of_spades2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/images/card_deck/red_joker.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/game/game_round/game_round.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/game/game_round/main.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/game/pokerGUI.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/game/resources/deck.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/Spade.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Spade.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/images/logo/Spade_ver1.mp4" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/images/poker_desk.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/hand_analysis/analysis/hand_analyzer.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/game/hand_analysis/analysis/hand_analyzer.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/hand_analysis/analysis/hand_rankings.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/game/hand_analysis/analysis/hand_rankings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/hand_analysis/analysis/winner_analyzer.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/game/hand_analysis/analysis/winner_analyzer.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/hand_analysis/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/game/hand_analysis/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/hand_analysis/resources/card.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/game/resources/card.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/hand_analysis/resources/player.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/game/resources/player.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/hand_analysis/tests/test_poker_hand_analyzer.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/game/hand_analysis/tests/test_poker_hand_analyzer.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/hand_analysis/tests/test_poker_winner_analyzer.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/game/hand_analysis/tests/test_poker_winner_analyzer.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/hand_analysis/utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/game/hand_analysis/utils.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/images/Spade_ver2.mp4" beforeDir="false" afterPath="$PROJECT_DIR$/images/logo/Spade_ver2.mp4" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/images/spade_OG.mp4" beforeDir="false" afterPath="$PROJECT_DIR$/images/logo/spade_OG.mp4" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/images/spade_assistant_1920x1080.png" beforeDir="false" afterPath="$PROJECT_DIR$/images/logo/spade_assistant_1920x1080.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/images/spade_empty.png" beforeDir="false" afterPath="$PROJECT_DIR$/images/logo/spade_empty.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/images/spade_logo_rectangle.png" beforeDir="false" afterPath="$PROJECT_DIR$/images/logo/spade_logo_rectangle.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/images/spade_logo_squared.png" beforeDir="false" afterPath="$PROJECT_DIR$/images/logo/spade_logo_squared.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/images/spade_ver1.mp4" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/images/spade_ver3.mp4" beforeDir="false" afterPath="$PROJECT_DIR$/images/logo/spade_ver3.mp4" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/images/video-vmake.mp4" beforeDir="false" afterPath="$PROJECT_DIR$/images/logo/video-vmake.mp4" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/game/pokerGUI.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/game/pokerGUI.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -178,13 +109,37 @@
       <recent name="$PROJECT_DIR$/images" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/images/logo" />
       <recent name="$PROJECT_DIR$/src/game" />
       <recent name="$PROJECT_DIR$/sounds/Phrases" />
       <recent name="$PROJECT_DIR$/images" />
       <recent name="$PROJECT_DIR$/sounds/music" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.pokerGUI">
+  <component name="RunManager" selected="Python.SpadeAssistant">
+    <configuration name="SpadeAssistant" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="Spade" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/src/mediaplayer" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/src/mediaplayer/SpadeAssistant.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <configuration name="main (1)" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="Spade" />
       <option name="ENV_FILES" value="" />
@@ -254,29 +209,6 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="main" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="Spade" />
-      <option name="ENV_FILES" value="" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/src/mediaplayer" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="C:\Users\Markus\Nextcloud\Projekte\Python-Projekte\Spade\src\mediaplayer\main.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
     <configuration name="pokerGUI" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="Spade" />
       <option name="ENV_FILES" value="" />
@@ -300,36 +232,13 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="train" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="Spade" />
-      <option name="ENV_FILES" value="" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/src/classifier" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/src/classifier/train.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.SpadeAssistant" />
         <item itemvalue="Python.pokerGUI" />
         <item itemvalue="Python.main (3)" />
         <item itemvalue="Python.main (1)" />
         <item itemvalue="Python.main (2)" />
-        <item itemvalue="Python.train" />
       </list>
     </recent_temporary>
   </component>
@@ -361,6 +270,8 @@
       <workItem from="1730787086307" duration="5405000" />
       <workItem from="1730826228753" duration="906000" />
       <workItem from="1730911710291" duration="55000" />
+      <workItem from="1730913201475" duration="5108000" />
+      <workItem from="1730919175717" duration="58000" />
     </task>
     <task id="LOCAL-00001" summary="Markus ist ein Eierlecker">
       <option name="closed" value="true" />
@@ -477,7 +388,7 @@
     <SUITE FILE_PATH="coverage/Spade$hand_rankings.coverage" NAME="hand_rankings Coverage Results" MODIFIED="1730505064430" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/hand_analysis/analysis" />
     <SUITE FILE_PATH="coverage/Spade$main__1_.coverage" NAME="main (1) Coverage Results" MODIFIED="1730903499253" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/game_round" />
     <SUITE FILE_PATH="coverage/Spade$main__3_.coverage" NAME="main (3) Coverage Results" MODIFIED="1730904775031" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/game/game_round" />
-    <SUITE FILE_PATH="coverage/Spade$SpadeAssistant.coverage" NAME="SpadeAssistant Coverage Results" MODIFIED="1730747383782" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/mediaplayer" />
+    <SUITE FILE_PATH="coverage/Spade$SpadeAssistant.coverage" NAME="SpadeAssistant Coverage Results" MODIFIED="1730917532968" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/mediaplayer" />
     <SUITE FILE_PATH="coverage/Spade$.coverage" NAME=" Coverage Results" MODIFIED="1730665435937" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/hand_analysis/tests" />
     <SUITE FILE_PATH="coverage/Spade$main__2_.coverage" NAME="main (2) Coverage Results" MODIFIED="1730902609785" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/hand_analysis" />
     <SUITE FILE_PATH="coverage/Spade$utils.coverage" NAME="utils Coverage Results" MODIFIED="1730505094540" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/hand_analysis" />
@@ -486,7 +397,7 @@
     <SUITE FILE_PATH="coverage/Spade$hand_analyzer.coverage" NAME="hand_analyzer Coverage Results" MODIFIED="1730505060990" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/hand_analysis/analysis" />
     <SUITE FILE_PATH="coverage/Spade$main.coverage" NAME="main Coverage Results" MODIFIED="1730505091831" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/hand_analysis" />
     <SUITE FILE_PATH="coverage/Spade$winner_analyzer.coverage" NAME="winner_analyzer Coverage Results" MODIFIED="1730505067106" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/hand_analysis/analysis" />
-    <SUITE FILE_PATH="coverage/Spade$pokerGUI.coverage" NAME="pokerGUI Coverage Results" MODIFIED="1730906151499" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/game" />
+    <SUITE FILE_PATH="coverage/Spade$pokerGUI.coverage" NAME="pokerGUI Coverage Results" MODIFIED="1730917492852" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/game" />
     <SUITE FILE_PATH="coverage/Spade$train.coverage" NAME="train Coverage Results" MODIFIED="1730787554139" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/classifier" />
   </component>
 </project>

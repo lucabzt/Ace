@@ -16,13 +16,12 @@ BLACK = (0, 0, 0)
 GREEN = (34, 139, 34)
 RED = (255, 0, 0)
 
-# Initialize pygame screen with new dimensions
+# Initialize pygame screen with fullscreen mode
 screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
 pygame.display.set_caption("Poker Game")
 
 # Font settings
 FONT = pygame.font.Font(None, 32)  # Slightly smaller font for more players
-
 
 class VisualGameRound(GameRound):
     def __init__(self, players, small_blind, big_blind):
@@ -68,9 +67,9 @@ class VisualGameRound(GameRound):
                 image_name = f"{rank}_of_{suit}.png"
                 full_path = os.path.join(image_path, image_name)
                 try:
-                    # Load and resize the image to 60x90
+                    # Load and resize the image to 90x131
                     card_image = pygame.image.load(full_path)
-                    card_image = pygame.transform.scale(card_image, (60, 90))
+                    card_image = pygame.transform.scale(card_image, (90, 131))
                     images[f"{rank}_{suit}"] = card_image
                 except pygame.error:
                     print(f"Image {full_path} not found.")
@@ -78,7 +77,7 @@ class VisualGameRound(GameRound):
 
     def load_background_image(self):
         try:
-            bg_image = pygame.image.load("/path/to/background_image.jpg")  # Replace with actual path
+            bg_image = pygame.image.load("/Users/sebastianrogg/PycharmProjects/Spade/images/PokerTable.png")
             return pygame.transform.scale(bg_image, (SCREEN_WIDTH, SCREEN_HEIGHT))
         except pygame.error:
             print("Background image not found.")
@@ -89,57 +88,89 @@ class VisualGameRound(GameRound):
             card_key = f"{card.rank.value.lower()}_{card.suit.value.lower()}"
             card_image = self.card_images.get(card_key)
             if card_image:
-                screen.blit(card_image, (x + i * 70, y))  # Adjusted spacing for readability
+                # Adjusted spacing for the new card size
+                screen.blit(card_image, (x + i * 95, y))  # Slightly more space between cards
             else:
                 placeholder_text = FONT.render("?", True, WHITE)
-                screen.blit(placeholder_text, (x + i * 70, y))
+                screen.blit(placeholder_text, (x + i * 95, y))
 
     def display_community_cards(self):
-        self.display_cards(self.community_cards, SCREEN_WIDTH // 2 - 150, SCREEN_HEIGHT // 2 - 100)
+        # Adjusted position for the larger cards to keep centered
+        self.display_cards(self.community_cards, SCREEN_WIDTH // 2 - 235, SCREEN_HEIGHT // 2 - 100)
 
     def display_player_cards(self, player, x, y):
-        self.display_cards(player.cards, x, y)
+        """Displays player cards. If the player has folded, the cards are displayed in grayscale."""
+        is_folded = player.name in self.folded_players
+        for i, card in enumerate(player.cards):
+            card_key = f"{card.rank.value.lower()}_{card.suit.value.lower()}"
+            card_image = self.card_images.get(card_key)
+            if card_image:
+                # Apply grayscale effect if player has folded
+                if is_folded:
+                    card_image = self.apply_grayscale(card_image)
+                screen.blit(card_image, (x + i * 95, y))  # Increased space for larger cards
+            else:
+                placeholder_text = FONT.render("?", True, WHITE)
+                screen.blit(placeholder_text, (x + i * 95, y))
+
+    def apply_grayscale(self, image):
+        grayscale_image = pygame.Surface(image.get_size())
+        grayscale_image.blit(image, (0, 0))
+
+        grayscale_image.lock()
+        for x in range(grayscale_image.get_width()):
+            for y in range(grayscale_image.get_height()):
+                red, green, blue, alpha = grayscale_image.get_at((x, y))
+                gray = int(0.3 * red + 0.59 * green + 0.11 * blue)
+                grayscale_image.set_at((x, y), (gray, gray, gray, alpha))
+        grayscale_image.unlock()
+
+        return grayscale_image
 
     def display_pot(self):
         pot_text = FONT.render(f"Pot: {self.pot}", True, WHITE)
-        screen.blit(pot_text, (SCREEN_WIDTH // 2 - pot_text.get_width() // 2, SCREEN_HEIGHT - 100))
+        screen.blit(pot_text, (SCREEN_WIDTH // 2 - pot_text.get_width() // 2, SCREEN_HEIGHT - 350))
 
     def display_player_info(self):
         positions = [
-            (50, SCREEN_HEIGHT - 150),       # Player 1
-            (SCREEN_WIDTH - 250, SCREEN_HEIGHT - 150),  # Player 2
-            (50, 50),                         # Player 3
-            (SCREEN_WIDTH - 250, 50),         # Player 4
-            (SCREEN_WIDTH // 2 - 150, 50),    # Player 5 - Center top
-            (SCREEN_WIDTH // 2 - 150, SCREEN_HEIGHT - 150)  # Player 6 - Center bottom
+            (50, SCREEN_HEIGHT - 350),  # Player 1
+            (SCREEN_WIDTH - 220, SCREEN_HEIGHT - 350),  # Player 2
+            (50, 50),  # Player 3
+            (SCREEN_WIDTH - 290, 50),  # Player 4
+            (SCREEN_WIDTH // 2 - 100, 20),  # Player 5 - Center top
+            (SCREEN_WIDTH // 2 - 100, SCREEN_HEIGHT - 200)  # Player 6 - Center bottom
         ]
 
         for i, player in enumerate(self.players):
             x, y = positions[i]
             self.display_player_cards(player, x, y)
-            player_text = FONT.render(f"{player.name}: {self.bets[player.name]} Chips", True, WHITE)
-            screen.blit(player_text, (x, y - 30))
+
+            # Check if player is folded and set text color accordingly
+            is_folded = player.name in self.folded_players
+            text_color = RED if is_folded else WHITE
+
+            # Render player name and chips in the chosen color
+            player_text = FONT.render(f"{player.name}: {self.bets[player.name]} Chips", True, text_color)
+            screen.blit(player_text, (x, y + 140))  # Adjusted for the larger card size
 
     def update_display(self):
         if self.background_image:
+            screen.fill((112, 4, 52))
             screen.blit(self.background_image, (0, 0))
         else:
-            screen.fill(GREEN)  # Fallback color
+            screen.fill((75, 0, 130))
 
         self.display_community_cards()
         self.display_pot()
         self.display_player_info()
         pygame.display.flip()
 
-
 # Function to run the game loop
 def main():
-    # Initialize the players and the game round
-    player_names = ['Markus', 'Jonas', 'Luca', 'Paul', 'Sebastian', 'Anna']
+    player_names = ['Player 1', 'Player 2', 'Player 3', 'Player 4', 'Player 5', 'Player 6']
     players = [Player(name) for name in player_names]
     game = VisualGameRound(players, small_blind=10, big_blind=20)
 
-    # Main game loop
     running = True
     while running:
         for event in pygame.event.get():
