@@ -1,0 +1,6 @@
+numpy
+matplotlib
+opencv-python
+pygame
+playsound3
+pillow

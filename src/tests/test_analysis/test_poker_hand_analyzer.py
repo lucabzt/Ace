@@ -1,6 +1,6 @@
 import unittest
 
-from src.game.hand_analysis.analysis.hand_analyzer import PokerHandAnalyzer
+from src.game.hand_analysis.poker_hand_analyzer import PokerHandAnalyzer
 from src.game.resources.card import Card, Suit, Rank
 
 

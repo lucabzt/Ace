@@ -1,7 +1,9 @@
-import pygame
 import os
-from src.game.game_round.game_round import GameRound
+
+import pygame
+
 from src.game.resources.player import Player
+from src.game.rounds.poker_round import GameRound
 
 PATH_TO_SPADE = "/home/lucabozzetti/Code/Spade"
 
@@ -25,7 +27,8 @@ pygame.display.set_caption("Poker Game")
 # Font settings
 FONT = pygame.font.Font(None, 32)  # Slightly smaller font for more players
 
-class VisualGameRound(GameRound):
+
+class poker_game_ui(GameRound):
     def __init__(self, players, small_blind, big_blind):
         super().__init__(players, small_blind, big_blind)
         self.card_images = self.load_card_images()
@@ -167,11 +170,12 @@ class VisualGameRound(GameRound):
         self.display_player_info()
         pygame.display.flip()
 
+
 # Function to run the game loop
 def main():
     player_names = ['Jonas', 'Luca', 'Markus', 'Paul', 'Sebastian']
     players = [Player(name) for name in player_names]
-    game = VisualGameRound(players, small_blind=10, big_blind=20)
+    game = poker_game_ui(players, small_blind=10, big_blind=20)
 
     running = True
     while running:
@@ -184,6 +188,7 @@ def main():
         pygame.time.delay(500)
 
     pygame.quit()
+
 
 if __name__ == "__main__":
     main()

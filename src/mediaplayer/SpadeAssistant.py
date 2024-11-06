@@ -1,17 +1,16 @@
 import tkinter as tk
-import pygame
-import cv2
-import numpy as np
-from PIL import Image, ImageTk
 from pathlib import Path
-import random
+
+import cv2
+import pygame
+from PIL import Image, ImageTk
 
 # Initialize Pygame mixer for audio playback only
 pygame.mixer.init()
 
 
 # Create main application window
-class AudioVisualizerApp:
+class SpadeAssistant:
     def __init__(self, master):
         self.master = master
         master.title("Spade Audio Visualizer")
@@ -151,7 +150,7 @@ def main():
     root = tk.Tk()
 
     # Create an instance of the application
-    app = AudioVisualizerApp(root)
+    app = SpadeAssistant(root)
 
     # Display the first frame on startup
     app.show_first_frame()

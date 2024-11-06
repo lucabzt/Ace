@@ -1,6 +1,6 @@
 import unittest
 
-from src.game.hand_analysis.analysis.winner_analyzer import WinnerAnalyzer
+from src.game.hand_analysis.winner_determiner import WinnerAnalyzer
 from src.game.resources.card import Card, Suit, Rank
 from src.game.resources.player import Player
 

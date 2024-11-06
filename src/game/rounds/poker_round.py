@@ -1,5 +1,6 @@
-from src.game.hand_analysis.analysis.winner_analyzer import WinnerAnalyzer
-from src.game.resources.deck import Deck
+from src.game.hand_analysis.winner_determiner import WinnerAnalyzer
+from src.game.resources.player import Player
+from src.game.resources.poker_deck import Deck
 
 
 class GameRound:
@@ -210,3 +211,19 @@ class GameRound:
         # Showdown if more than one player remains
         self.showdown()
         self.reset_game()
+
+
+def main():
+    # Initialisiere Spieler
+    player_names = ['Alice', 'Bob', 'Charlie', 'Diana']
+    players = [Player(name) for name in player_names]
+
+    # Initialisiere das Spiel
+    game = GameRound(players, small_blind=10, big_blind=20)
+
+    # Simuliere eine Pokerrunde
+    game.play_round()
+
+
+if __name__ == "__main__":
+    main()

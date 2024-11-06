@@ -1,6 +1,6 @@
 # Spade - The AI Poker Dealer
 
-![Spade Logo](images/logo/spade_logo_rectangle.png)
+![Spade Logo](assets/images/logo/spade_logo_rectangle.png)
 
 **Welcome to the Future of Poker**  
 Unleash the sophistication of a high-stakes casino at your own poker table with **Spade**, the AI-powered poker dealer. Spade is built to enhance your poker nights with cutting-edge automation, blending the thrill of a professional dealer with the flair of a casino pro.
