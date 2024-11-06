@@ -4,361 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c0babd6b-3393-44b8-be9f-8b13a8d5748d" name="Changes" comment="update pathing">
-      <change afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/PokerTable.png" beforeDir="false" afterPath="$PROJECT_DIR$/assets/images/PokerTable.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/card_deck/10_of_clubs.png" beforeDir="false" afterPath="$PROJECT_DIR$/assets/images/card_deck/10_of_clubs.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/card_deck/10_of_diamonds.png" beforeDir="false" afterPath="$PROJECT_DIR$/assets/images/card_deck/10_of_diamonds.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/card_deck/10_of_hearts.png" beforeDir="false" afterPath="$PROJECT_DIR$/assets/images/card_deck/10_of_hearts.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/card_deck/10_of_spades.png" beforeDir="false" afterPath="$PROJECT_DIR$/assets/images/card_deck/10_of_spades.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/card_deck/2_of_clubs.png" beforeDir="false" afterPath="$PROJECT_DIR$/assets/images/card_deck/2_of_clubs.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/card_deck/2_of_diamonds.png" beforeDir="false" afterPath="$PROJECT_DIR$/assets/images/card_deck/2_of_diamonds.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/card_deck/2_of_hearts.png" beforeDir="false" afterPath="$PROJECT_DIR$/assets/images/card_deck/2_of_hearts.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/card_deck/2_of_spades.png" beforeDir="false" afterPath="$PROJECT_DIR$/assets/images/card_deck/2_of_spades.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/card_deck/3_of_clubs.png" beforeDir="false" afterPath="$PROJECT_DIR$/assets/images/card_deck/3_of_clubs.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/card_deck/3_of_diamonds.png" beforeDir="false" afterPath="$PROJECT_DIR$/assets/images/card_deck/3_of_diamonds.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/card_deck/3_of_hearts.png" beforeDir="false" afterPath="$PROJECT_DIR$/assets/images/card_deck/3_of_hearts.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/card_deck/3_of_spades.png" beforeDir="false" afterPath="$PROJECT_DIR$/assets/images/card_deck/3_of_spades.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/card_deck/4_of_clubs.png" beforeDir="false" afterPath="$PROJECT_DIR$/assets/images/card_deck/4_of_clubs.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/card_deck/4_of_diamonds.png" beforeDir="false" afterPath="$PROJECT_DIR$/assets/images/card_deck/4_of_diamonds.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/card_deck/4_of_hearts.png" beforeDir="false" afterPath="$PROJECT_DIR$/assets/images/card_deck/4_of_hearts.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/card_deck/4_of_spades.png" beforeDir="false" afterPath="$PROJECT_DIR$/assets/images/card_deck/4_of_spades.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/card_deck/5_of_clubs.png" beforeDir="false" afterPath="$PROJECT_DIR$/assets/images/card_deck/5_of_clubs.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/card_deck/5_of_diamonds.png" beforeDir="false" afterPath="$PROJECT_DIR$/assets/images/card_deck/5_of_diamonds.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/card_deck/5_of_hearts.png" beforeDir="false" afterPath="$PROJECT_DIR$/assets/images/card_deck/5_of_hearts.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/card_deck/5_of_spades.png" beforeDir="false" afterPath="$PROJECT_DIR$/assets/images/card_deck/5_of_spades.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/card_deck/6_of_clubs.png" beforeDir="false" afterPath="$PROJECT_DIR$/assets/images/card_deck/6_of_clubs.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/card_deck/6_of_diamonds.png" beforeDir="false" afterPath="$PROJECT_DIR$/assets/images/card_deck/6_of_diamonds.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/card_deck/6_of_hearts.png" beforeDir="false" afterPath="$PROJECT_DIR$/assets/images/card_deck/6_of_hearts.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/card_deck/6_of_spades.png" beforeDir="false" afterPath="$PROJECT_DIR$/assets/images/card_deck/6_of_spades.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/card_deck/7_of_clubs.png" beforeDir="false" afterPath="$PROJECT_DIR$/assets/images/card_deck/7_of_clubs.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/card_deck/7_of_diamonds.png" beforeDir="false" afterPath="$PROJECT_DIR$/assets/images/card_deck/7_of_diamonds.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/card_deck/7_of_hearts.png" beforeDir="false" afterPath="$PROJECT_DIR$/assets/images/card_deck/7_of_hearts.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/card_deck/7_of_spades.png" beforeDir="false" afterPath="$PROJECT_DIR$/assets/images/card_deck/7_of_spades.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/card_deck/8_of_clubs.png" beforeDir="false" afterPath="$PROJECT_DIR$/assets/images/card_deck/8_of_clubs.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/card_deck/8_of_diamonds.png" beforeDir="false" afterPath="$PROJECT_DIR$/assets/images/card_deck/8_of_diamonds.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/card_deck/8_of_hearts.png" beforeDir="false" afterPath="$PROJECT_DIR$/assets/images/card_deck/8_of_hearts.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/card_deck/8_of_spades.png" beforeDir="false" afterPath="$PROJECT_DIR$/assets/images/card_deck/8_of_spades.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/card_deck/9_of_clubs.png" beforeDir="false" afterPath="$PROJECT_DIR$/assets/images/card_deck/9_of_clubs.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/card_deck/9_of_diamonds.png" beforeDir="false" afterPath="$PROJECT_DIR$/assets/images/card_deck/9_of_diamonds.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/card_deck/9_of_hearts.png" beforeDir="false" afterPath="$PROJECT_DIR$/assets/images/card_deck/9_of_hearts.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/card_deck/9_of_spades.png" beforeDir="false" afterPath="$PROJECT_DIR$/assets/images/card_deck/9_of_spades.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/card_deck/ace_of_clubs.png" beforeDir="false" afterPath="$PROJECT_DIR$/assets/images/card_deck/ace_of_clubs.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/card_deck/ace_of_diamonds.png" beforeDir="false" afterPath="$PROJECT_DIR$/assets/images/card_deck/ace_of_diamonds.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/card_deck/ace_of_hearts.png" beforeDir="false" afterPath="$PROJECT_DIR$/assets/images/card_deck/ace_of_hearts.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/card_deck/ace_of_spades.png" beforeDir="false" afterPath="$PROJECT_DIR$/assets/images/card_deck/ace_of_spades.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/card_deck/ace_of_spades2.png" beforeDir="false" afterPath="$PROJECT_DIR$/assets/images/card_deck/ace_of_spades2.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/card_deck/black_joker.png" beforeDir="false" afterPath="$PROJECT_DIR$/assets/images/card_deck/black_joker.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/card_deck/jack_of_clubs.png" beforeDir="false" afterPath="$PROJECT_DIR$/assets/images/card_deck/jack_of_clubs.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/card_deck/jack_of_clubs2.png" beforeDir="false" afterPath="$PROJECT_DIR$/assets/images/card_deck/jack_of_clubs2.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/card_deck/jack_of_diamonds.png" beforeDir="false" afterPath="$PROJECT_DIR$/assets/images/card_deck/jack_of_diamonds.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/card_deck/jack_of_diamonds2.png" beforeDir="false" afterPath="$PROJECT_DIR$/assets/images/card_deck/jack_of_diamonds2.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/card_deck/jack_of_hearts.png" beforeDir="false" afterPath="$PROJECT_DIR$/assets/images/card_deck/jack_of_hearts.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/card_deck/jack_of_hearts2.png" beforeDir="false" afterPath="$PROJECT_DIR$/assets/images/card_deck/jack_of_hearts2.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/card_deck/jack_of_spades.png" beforeDir="false" afterPath="$PROJECT_DIR$/assets/images/card_deck/jack_of_spades.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/card_deck/jack_of_spades2.png" beforeDir="false" afterPath="$PROJECT_DIR$/assets/images/card_deck/jack_of_spades2.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/card_deck/king_of_clubs.png" beforeDir="false" afterPath="$PROJECT_DIR$/assets/images/card_deck/king_of_clubs.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/card_deck/king_of_clubs2.png" beforeDir="false" afterPath="$PROJECT_DIR$/assets/images/card_deck/king_of_clubs2.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/card_deck/king_of_diamonds.png" beforeDir="false" afterPath="$PROJECT_DIR$/assets/images/card_deck/king_of_diamonds.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/card_deck/king_of_diamonds2.png" beforeDir="false" afterPath="$PROJECT_DIR$/assets/images/card_deck/king_of_diamonds2.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/card_deck/king_of_hearts.png" beforeDir="false" afterPath="$PROJECT_DIR$/assets/images/card_deck/king_of_hearts.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/card_deck/king_of_hearts2.png" beforeDir="false" afterPath="$PROJECT_DIR$/assets/images/card_deck/king_of_hearts2.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/card_deck/king_of_spades.png" beforeDir="false" afterPath="$PROJECT_DIR$/assets/images/card_deck/king_of_spades.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/card_deck/king_of_spades2.png" beforeDir="false" afterPath="$PROJECT_DIR$/assets/images/card_deck/king_of_spades2.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/card_deck/queen_of_clubs.png" beforeDir="false" afterPath="$PROJECT_DIR$/assets/images/card_deck/queen_of_clubs.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/card_deck/queen_of_clubs2.png" beforeDir="false" afterPath="$PROJECT_DIR$/assets/images/card_deck/queen_of_clubs2.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/card_deck/queen_of_diamonds.png" beforeDir="false" afterPath="$PROJECT_DIR$/assets/images/card_deck/queen_of_diamonds.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/card_deck/queen_of_diamonds2.png" beforeDir="false" afterPath="$PROJECT_DIR$/assets/images/card_deck/queen_of_diamonds2.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/card_deck/queen_of_hearts.png" beforeDir="false" afterPath="$PROJECT_DIR$/assets/images/card_deck/queen_of_hearts.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/card_deck/queen_of_hearts2.png" beforeDir="false" afterPath="$PROJECT_DIR$/assets/images/card_deck/queen_of_hearts2.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/card_deck/queen_of_spades.png" beforeDir="false" afterPath="$PROJECT_DIR$/assets/images/card_deck/queen_of_spades.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/card_deck/queen_of_spades2.png" beforeDir="false" afterPath="$PROJECT_DIR$/assets/images/card_deck/queen_of_spades2.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/card_deck/red_joker.png" beforeDir="false" afterPath="$PROJECT_DIR$/assets/images/card_deck/red_joker.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/logo/Spade_ver1.mp4" beforeDir="false" afterPath="$PROJECT_DIR$/assets/images/logo/Spade_ver1.mp4" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/logo/Spade_ver2.mp4" beforeDir="false" afterPath="$PROJECT_DIR$/assets/images/logo/Spade_ver2.mp4" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/logo/spade_OG.mp4" beforeDir="false" afterPath="$PROJECT_DIR$/assets/images/logo/spade_OG.mp4" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/logo/spade_assistant_1920x1080.png" beforeDir="false" afterPath="$PROJECT_DIR$/assets/images/logo/spade_assistant_1920x1080.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/logo/spade_empty.png" beforeDir="false" afterPath="$PROJECT_DIR$/assets/images/logo/spade_empty.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/logo/spade_logo_rectangle.png" beforeDir="false" afterPath="$PROJECT_DIR$/assets/images/logo/spade_logo_rectangle.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/logo/spade_logo_squared.png" beforeDir="false" afterPath="$PROJECT_DIR$/assets/images/logo/spade_logo_squared.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/logo/spade_ver3.mp4" beforeDir="false" afterPath="$PROJECT_DIR$/assets/images/logo/spade_ver3.mp4" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/logo/video-vmake.mp4" beforeDir="false" afterPath="$PROJECT_DIR$/assets/images/logo/video-vmake.mp4" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/poker_desk.png" beforeDir="false" afterPath="$PROJECT_DIR$/assets/images/poker_desk.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sounds/Community Cards/Flop/ElevenLabs_2024-10-28T20_06_08_Daniel_pre_s50_sb75_se0_b_m2.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sounds/Community Cards/Flop/ElevenLabs_2024-10-28T20_06_08_Daniel_pre_s50_sb75_se0_b_m2.mp3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sounds/Community Cards/River/ElevenLabs_2024-10-28T20_08_32_Daniel_pre_s50_sb75_se0_b_m2.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sounds/Community Cards/River/ElevenLabs_2024-10-28T20_08_32_Daniel_pre_s50_sb75_se0_b_m2.mp3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sounds/Community Cards/Turn/ElevenLabs_2024-10-28T20_07_12_Daniel_pre_s50_sb75_se0_b_m2.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sounds/Community Cards/Turn/ElevenLabs_2024-10-28T20_07_12_Daniel_pre_s50_sb75_se0_b_m2.mp3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sounds/LUSTIG/Checks like a pussy.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sounds/LUSTIG/Checks like a pussy.mp3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sounds/LUSTIG/Cursed.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sounds/LUSTIG/Cursed.mp3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sounds/LUSTIG/Eierlecker Epic.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sounds/LUSTIG/Eierlecker Epic.mp3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sounds/LUSTIG/Eierlecker.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sounds/LUSTIG/Eierlecker.mp3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sounds/LUSTIG/Mr Hörter.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sounds/LUSTIG/Mr Hörter.mp3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sounds/LUSTIG/QUEENS.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sounds/LUSTIG/QUEENS.mp3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sounds/LUSTIG/SCHREIEN.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sounds/LUSTIG/SCHREIEN.mp3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sounds/Phrases/ElevenLabs_2024-10-28T19_56_54_Daniel_pre_s50_sb75_se0_b_m2.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sounds/Phrases/ElevenLabs_2024-10-28T19_56_54_Daniel_pre_s50_sb75_se0_b_m2.mp3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sounds/Phrases/ElevenLabs_2024-11-02T17_04_09_Daniel_pre_s50_sb75_se10_b_m2.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sounds/Phrases/ElevenLabs_2024-11-02T17_04_09_Daniel_pre_s50_sb75_se10_b_m2.mp3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sounds/Phrases/Spade_Initiation.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sounds/Phrases/Spade_Initiation.mp3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sounds/Player Actions/Call/ElevenLabs_2024-10-28T20_42_26_Daniel_pre_s50_sb75_se0_b_m2.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sounds/Player Actions/Call/ElevenLabs_2024-10-28T20_42_26_Daniel_pre_s50_sb75_se0_b_m2.mp3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sounds/Player Actions/Call/ElevenLabs_2024-10-28T20_42_37_Daniel_pre_s50_sb75_se0_b_m2.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sounds/Player Actions/Call/ElevenLabs_2024-10-28T20_42_37_Daniel_pre_s50_sb75_se0_b_m2.mp3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sounds/Player Actions/Call/ElevenLabs_2024-10-28T20_43_04_Daniel_pre_s50_sb75_se0_b_m2.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sounds/Player Actions/Call/ElevenLabs_2024-10-28T20_43_04_Daniel_pre_s50_sb75_se0_b_m2.mp3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sounds/Player Actions/Call/ElevenLabs_2024-10-28T20_43_16_Daniel_pre_s50_sb75_se0_b_m2.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sounds/Player Actions/Call/ElevenLabs_2024-10-28T20_43_16_Daniel_pre_s50_sb75_se0_b_m2.mp3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sounds/Player Actions/Call/ElevenLabs_2024-10-28T20_43_30_Daniel_pre_s50_sb75_se0_b_m2.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sounds/Player Actions/Call/ElevenLabs_2024-10-28T20_43_30_Daniel_pre_s50_sb75_se0_b_m2.mp3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sounds/Player Actions/Call/ElevenLabs_2024-10-28T20_43_56_Daniel_pre_s50_sb75_se0_b_m2.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sounds/Player Actions/Call/ElevenLabs_2024-10-28T20_43_56_Daniel_pre_s50_sb75_se0_b_m2.mp3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sounds/Player Actions/Call/ElevenLabs_2024-10-28T20_44_37_Daniel_pre_s50_sb75_se0_b_m2.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sounds/Player Actions/Call/ElevenLabs_2024-10-28T20_44_37_Daniel_pre_s50_sb75_se0_b_m2.mp3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sounds/Player Actions/Checks/ElevenLabs_2024-10-28T20_29_07_Daniel_pre_s50_sb75_se0_b_m2.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sounds/Player Actions/Checks/ElevenLabs_2024-10-28T20_29_07_Daniel_pre_s50_sb75_se0_b_m2.mp3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sounds/Player Actions/Checks/ElevenLabs_2024-10-28T20_29_50_Daniel_pre_s50_sb75_se0_b_m2.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sounds/Player Actions/Checks/ElevenLabs_2024-10-28T20_29_50_Daniel_pre_s50_sb75_se0_b_m2.mp3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sounds/Player Actions/Checks/ElevenLabs_2024-10-28T20_31_11_Daniel_pre_s50_sb75_se0_b_m2.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sounds/Player Actions/Checks/ElevenLabs_2024-10-28T20_31_11_Daniel_pre_s50_sb75_se0_b_m2.mp3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sounds/Player Actions/Checks/ElevenLabs_2024-10-28T20_31_43_Daniel_pre_s50_sb75_se0_b_m2.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sounds/Player Actions/Checks/ElevenLabs_2024-10-28T20_31_43_Daniel_pre_s50_sb75_se0_b_m2.mp3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sounds/Player Actions/Checks/ElevenLabs_2024-10-28T20_32_12_Daniel_pre_s50_sb75_se0_b_m2.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sounds/Player Actions/Checks/ElevenLabs_2024-10-28T20_32_12_Daniel_pre_s50_sb75_se0_b_m2.mp3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sounds/Player Actions/Checks/ElevenLabs_2024-10-28T20_33_34_Daniel_pre_s50_sb75_se0_b_m2.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sounds/Player Actions/Checks/ElevenLabs_2024-10-28T20_33_34_Daniel_pre_s50_sb75_se0_b_m2.mp3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sounds/Player Actions/Checks/ElevenLabs_2024-10-28T20_35_16_Daniel_pre_s50_sb75_se0_b_m2.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sounds/Player Actions/Checks/ElevenLabs_2024-10-28T20_35_16_Daniel_pre_s50_sb75_se0_b_m2.mp3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sounds/Player Actions/Folds/ElevenLabs_2024-10-28T20_37_37_Daniel_pre_s50_sb75_se0_b_m2.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sounds/Player Actions/Folds/ElevenLabs_2024-10-28T20_37_37_Daniel_pre_s50_sb75_se0_b_m2.mp3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sounds/Player Actions/Folds/ElevenLabs_2024-10-28T20_38_11_Daniel_pre_s50_sb75_se0_b_m2.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sounds/Player Actions/Folds/ElevenLabs_2024-10-28T20_38_11_Daniel_pre_s50_sb75_se0_b_m2.mp3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sounds/Player Actions/Folds/ElevenLabs_2024-10-28T20_38_31_Daniel_pre_s50_sb75_se0_b_m2.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sounds/Player Actions/Folds/ElevenLabs_2024-10-28T20_38_31_Daniel_pre_s50_sb75_se0_b_m2.mp3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sounds/Player Actions/Folds/ElevenLabs_2024-10-28T20_38_50_Daniel_pre_s50_sb75_se0_b_m2.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sounds/Player Actions/Folds/ElevenLabs_2024-10-28T20_38_50_Daniel_pre_s50_sb75_se0_b_m2.mp3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sounds/Player Actions/Folds/ElevenLabs_2024-10-28T20_39_10_Daniel_pre_s50_sb75_se0_b_m2.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sounds/Player Actions/Folds/ElevenLabs_2024-10-28T20_39_10_Daniel_pre_s50_sb75_se0_b_m2.mp3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sounds/Player Actions/Folds/ElevenLabs_2024-10-28T20_39_42_Callum_pre_s50_sb75_se0_b_m2.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sounds/Player Actions/Folds/ElevenLabs_2024-10-28T20_39_42_Callum_pre_s50_sb75_se0_b_m2.mp3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sounds/Player Actions/Folds/ElevenLabs_2024-10-28T20_39_59_Callum_pre_s50_sb75_se0_b_m2.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sounds/Player Actions/Folds/ElevenLabs_2024-10-28T20_39_59_Callum_pre_s50_sb75_se0_b_m2.mp3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sounds/Player Actions/Folds/ElevenLabs_2024-10-28T20_40_22_Daniel_pre_s50_sb75_se0_b_m2.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sounds/Player Actions/Folds/ElevenLabs_2024-10-28T20_40_22_Daniel_pre_s50_sb75_se0_b_m2.mp3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sounds/Player Actions/Folds/ElevenLabs_2024-10-28T20_40_35_Daniel_pre_s50_sb75_se0_b_m2.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sounds/Player Actions/Folds/ElevenLabs_2024-10-28T20_40_35_Daniel_pre_s50_sb75_se0_b_m2.mp3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sounds/Player Actions/Folds/ElevenLabs_2024-10-28T20_40_46_Daniel_pre_s50_sb75_se0_b_m2.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sounds/Player Actions/Folds/ElevenLabs_2024-10-28T20_40_46_Daniel_pre_s50_sb75_se0_b_m2.mp3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sounds/Player Actions/Folds/ElevenLabs_2024-10-28T20_41_31_Daniel_pre_s50_sb75_se0_b_m2.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sounds/Player Actions/Folds/ElevenLabs_2024-10-28T20_41_31_Daniel_pre_s50_sb75_se0_b_m2.mp3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sounds/Player Actions/Raise/ElevenLabs_2024-10-28T20_20_37_Daniel_pre_s50_sb75_se0_b_m2.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sounds/Player Actions/Raise/ElevenLabs_2024-10-28T20_20_37_Daniel_pre_s50_sb75_se0_b_m2.mp3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sounds/Player Actions/Raise/ElevenLabs_2024-10-28T20_21_46_Daniel_pre_s50_sb75_se0_b_m2.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sounds/Player Actions/Raise/ElevenLabs_2024-10-28T20_21_46_Daniel_pre_s50_sb75_se0_b_m2.mp3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sounds/Player Actions/Raise/ElevenLabs_2024-10-28T20_25_54_Daniel_pre_s50_sb75_se0_b_m2.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sounds/Player Actions/Raise/ElevenLabs_2024-10-28T20_25_54_Daniel_pre_s50_sb75_se0_b_m2.mp3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sounds/Player Actions/Raise/ElevenLabs_2024-10-28T20_28_05_Daniel_pre_s50_sb75_se0_b_m2.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sounds/Player Actions/Raise/ElevenLabs_2024-10-28T20_28_05_Daniel_pre_s50_sb75_se0_b_m2.mp3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sounds/Player Actions/Raise/ElevenLabs_2024-10-28T20_28_54_Daniel_pre_s50_sb75_se0_b_m2.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sounds/Player Actions/Raise/ElevenLabs_2024-10-28T20_28_54_Daniel_pre_s50_sb75_se0_b_m2.mp3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sounds/Players/Bozzetti/ElevenLabs_2024-10-28T19_29_34_Daniel_pre_s50_sb75_se0_b_m2.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sounds/Players/Bozzetti/ElevenLabs_2024-10-28T19_29_34_Daniel_pre_s50_sb75_se0_b_m2.mp3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sounds/Players/Bozzetti/ElevenLabs_2024-10-28T19_29_45_Daniel_pre_s50_sb75_se0_b_m2.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sounds/Players/Bozzetti/ElevenLabs_2024-10-28T19_29_45_Daniel_pre_s50_sb75_se0_b_m2.mp3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sounds/Players/Bozzetti/ElevenLabs_2024-10-28T19_30_25_Daniel_pre_s50_sb75_se0_b_m2.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sounds/Players/Bozzetti/ElevenLabs_2024-10-28T19_30_25_Daniel_pre_s50_sb75_se0_b_m2.mp3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sounds/Players/Bozzetti/ElevenLabs_2024-10-28T19_31_14_Daniel_pre_s50_sb75_se0_b_m2.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sounds/Players/Bozzetti/ElevenLabs_2024-10-28T19_31_14_Daniel_pre_s50_sb75_se0_b_m2.mp3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sounds/Players/Bozzetti/ElevenLabs_2024-10-28T19_52_44_Daniel_pre_s50_sb75_se0_b_m2.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sounds/Players/Bozzetti/ElevenLabs_2024-10-28T19_52_44_Daniel_pre_s50_sb75_se0_b_m2.mp3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sounds/Players/Greetings/ElevenLabs_2024-10-28T19_59_36_Daniel_pre_s50_sb75_se0_b_m2.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sounds/Players/Greetings/ElevenLabs_2024-10-28T19_59_36_Daniel_pre_s50_sb75_se0_b_m2.mp3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sounds/Players/Greetings/ElevenLabs_2024-10-28T20_00_24_Daniel_pre_s50_sb75_se0_b_m2.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sounds/Players/Greetings/ElevenLabs_2024-10-28T20_00_24_Daniel_pre_s50_sb75_se0_b_m2.mp3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sounds/Players/Greetings/ElevenLabs_2024-10-28T20_01_34_Daniel_pre_s50_sb75_se0_b_m2.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sounds/Players/Greetings/ElevenLabs_2024-10-28T20_01_34_Daniel_pre_s50_sb75_se0_b_m2.mp3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sounds/Players/Greetings/ElevenLabs_2024-10-28T20_02_19_Daniel_pre_s50_sb75_se0_b_m2.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sounds/Players/Greetings/ElevenLabs_2024-10-28T20_02_19_Daniel_pre_s50_sb75_se0_b_m2.mp3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sounds/Players/Greetings/ElevenLabs_2024-10-28T20_03_12_Daniel_pre_s50_sb75_se0_b_m2.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sounds/Players/Greetings/ElevenLabs_2024-10-28T20_03_12_Daniel_pre_s50_sb75_se0_b_m2.mp3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sounds/Players/Greetings/ElevenLabs_2024-10-28T20_03_45_Daniel_pre_s50_sb75_se0_b_m2.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sounds/Players/Greetings/ElevenLabs_2024-10-28T20_03_45_Daniel_pre_s50_sb75_se0_b_m2.mp3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sounds/Players/Greetings/ElevenLabs_2024-10-28T20_04_56_Daniel_pre_s50_sb75_se0_b_m2.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sounds/Players/Greetings/ElevenLabs_2024-10-28T20_04_56_Daniel_pre_s50_sb75_se0_b_m2.mp3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sounds/Players/Huber/ElevenLabs_2024-10-28T19_37_12_Daniel_pre_s50_sb75_se0_b_m2.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sounds/Players/Huber/ElevenLabs_2024-10-28T19_37_12_Daniel_pre_s50_sb75_se0_b_m2.mp3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sounds/Players/Huber/ElevenLabs_2024-10-28T19_38_04_Daniel_pre_s50_sb75_se0_b_m2.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sounds/Players/Huber/ElevenLabs_2024-10-28T19_38_04_Daniel_pre_s50_sb75_se0_b_m2.mp3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sounds/Players/Huber/ElevenLabs_2024-10-28T19_38_49_Daniel_pre_s50_sb75_se0_b_m2.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sounds/Players/Huber/ElevenLabs_2024-10-28T19_38_49_Daniel_pre_s50_sb75_se0_b_m2.mp3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sounds/Players/Huber/ElevenLabs_2024-10-28T19_39_28_Daniel_pre_s50_sb75_se0_b_m2.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sounds/Players/Huber/ElevenLabs_2024-10-28T19_39_28_Daniel_pre_s50_sb75_se0_b_m2.mp3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sounds/Players/Huber/ElevenLabs_2024-10-28T19_39_44_Daniel_pre_s50_sb75_se0_b_m2.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sounds/Players/Huber/ElevenLabs_2024-10-28T19_39_44_Daniel_pre_s50_sb75_se0_b_m2.mp3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sounds/Players/Hörter/ElevenLabs_2024-10-28T19_31_39_Daniel_pre_s50_sb75_se0_b_m2.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sounds/Players/Hörter/ElevenLabs_2024-10-28T19_31_39_Daniel_pre_s50_sb75_se0_b_m2.mp3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sounds/Players/Hörter/ElevenLabs_2024-10-28T19_32_18_Daniel_pre_s50_sb75_se0_b_m2.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sounds/Players/Hörter/ElevenLabs_2024-10-28T19_32_18_Daniel_pre_s50_sb75_se0_b_m2.mp3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sounds/Players/Hörter/ElevenLabs_2024-10-28T19_32_35_Daniel_pre_s50_sb75_se0_b_m2.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sounds/Players/Hörter/ElevenLabs_2024-10-28T19_32_35_Daniel_pre_s50_sb75_se0_b_m2.mp3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sounds/Players/Hörter/ElevenLabs_2024-10-28T19_33_18_Daniel_pre_s50_sb75_se0_b_m2.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sounds/Players/Hörter/ElevenLabs_2024-10-28T19_33_18_Daniel_pre_s50_sb75_se0_b_m2.mp3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sounds/Players/Hörter/ElevenLabs_2024-10-28T19_33_40_Daniel_pre_s50_sb75_se0_b_m2.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sounds/Players/Hörter/ElevenLabs_2024-10-28T19_33_40_Daniel_pre_s50_sb75_se0_b_m2.mp3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sounds/Players/Hörter/HörterSpiel/ElevenLabs_2024-10-28T20_11_55_Daniel_pre_s50_sb75_se0_b_m2.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sounds/Players/Hörter/HörterSpiel/ElevenLabs_2024-10-28T20_11_55_Daniel_pre_s50_sb75_se0_b_m2.mp3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sounds/Players/Hörter/HörterSpiel/ElevenLabs_2024-10-28T20_13_53_Daniel_pre_s50_sb75_se0_b_m2.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sounds/Players/Hörter/HörterSpiel/ElevenLabs_2024-10-28T20_13_53_Daniel_pre_s50_sb75_se0_b_m2.mp3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sounds/Players/Maier/ElevenLabs_2024-10-28T19_50_43_Daniel_pre_s50_sb75_se0_b_m2.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sounds/Players/Maier/ElevenLabs_2024-10-28T19_50_43_Daniel_pre_s50_sb75_se0_b_m2.mp3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sounds/Players/Maier/ElevenLabs_2024-10-28T19_51_14_Daniel_pre_s50_sb75_se0_b_m2.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sounds/Players/Maier/ElevenLabs_2024-10-28T19_51_14_Daniel_pre_s50_sb75_se0_b_m2.mp3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sounds/Players/Maier/ElevenLabs_2024-10-28T19_51_33_Daniel_pre_s50_sb75_se0_b_m2.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sounds/Players/Maier/ElevenLabs_2024-10-28T19_51_33_Daniel_pre_s50_sb75_se0_b_m2.mp3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sounds/Players/Maier/ElevenLabs_2024-10-28T19_51_57_Daniel_pre_s50_sb75_se0_b_m2.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sounds/Players/Maier/ElevenLabs_2024-10-28T19_51_57_Daniel_pre_s50_sb75_se0_b_m2.mp3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sounds/Players/Maier/ElevenLabs_2024-10-28T19_52_14_Daniel_pre_s50_sb75_se0_b_m2.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sounds/Players/Maier/ElevenLabs_2024-10-28T19_52_14_Daniel_pre_s50_sb75_se0_b_m2.mp3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sounds/Players/Meierlohr/ElevenLabs_2024-10-28T19_40_16_Daniel_pre_s50_sb75_se0_b_m2.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sounds/Players/Meierlohr/ElevenLabs_2024-10-28T19_40_16_Daniel_pre_s50_sb75_se0_b_m2.mp3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sounds/Players/Meierlohr/ElevenLabs_2024-10-28T19_41_04_Daniel_pre_s50_sb75_se0_b_m2.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sounds/Players/Meierlohr/ElevenLabs_2024-10-28T19_41_04_Daniel_pre_s50_sb75_se0_b_m2.mp3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sounds/Players/Meierlohr/ElevenLabs_2024-10-28T19_41_25_Daniel_pre_s50_sb75_se0_b_m2.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sounds/Players/Meierlohr/ElevenLabs_2024-10-28T19_41_25_Daniel_pre_s50_sb75_se0_b_m2.mp3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sounds/Players/Meierlohr/ElevenLabs_2024-10-28T19_42_18_Daniel_pre_s50_sb75_se0_b_m2.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sounds/Players/Meierlohr/ElevenLabs_2024-10-28T19_42_18_Daniel_pre_s50_sb75_se0_b_m2.mp3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sounds/Players/Meierlohr/ElevenLabs_2024-10-28T19_43_34_Daniel_pre_s50_sb75_se0_b_m2.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sounds/Players/Meierlohr/ElevenLabs_2024-10-28T19_43_34_Daniel_pre_s50_sb75_se0_b_m2.mp3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sounds/Players/Rogg/ElevenLabs_2024-10-28T19_26_29_Charlie_pre_s50_sb75_se0_b_m2.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sounds/Players/Rogg/ElevenLabs_2024-10-28T19_26_29_Charlie_pre_s50_sb75_se0_b_m2.mp3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sounds/Players/Rogg/ElevenLabs_2024-10-28T19_27_50_Charlie_pre_s50_sb75_se0_b_m2.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sounds/Players/Rogg/ElevenLabs_2024-10-28T19_27_50_Charlie_pre_s50_sb75_se0_b_m2.mp3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sounds/Players/Rogg/ElevenLabs_2024-10-28T19_28_12_Charlie_pre_s50_sb75_se0_b_m2.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sounds/Players/Rogg/ElevenLabs_2024-10-28T19_28_12_Charlie_pre_s50_sb75_se0_b_m2.mp3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sounds/Players/Rogg/ElevenLabs_2024-10-28T19_28_28_Charlie_pre_s50_sb75_se0_b_m2.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sounds/Players/Rogg/ElevenLabs_2024-10-28T19_28_28_Charlie_pre_s50_sb75_se0_b_m2.mp3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sounds/Players/Rogg/ElevenLabs_2024-10-28T19_29_02_Charlie_pre_s50_sb75_se0_b_m2.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sounds/Players/Rogg/ElevenLabs_2024-10-28T19_29_02_Charlie_pre_s50_sb75_se0_b_m2.mp3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sounds/Poker Cards/Card/Plural/ACES.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sounds/Poker Cards/Card/Plural/ACES.mp3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sounds/Poker Cards/Card/Plural/EIGHTS.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sounds/Poker Cards/Card/Plural/EIGHTS.mp3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sounds/Poker Cards/Card/Plural/FIVES.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sounds/Poker Cards/Card/Plural/FIVES.mp3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sounds/Poker Cards/Card/Plural/FOURS.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sounds/Poker Cards/Card/Plural/FOURS.mp3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sounds/Poker Cards/Card/Plural/JACKS.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sounds/Poker Cards/Card/Plural/JACKS.mp3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sounds/Poker Cards/Card/Plural/KINGS.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sounds/Poker Cards/Card/Plural/KINGS.mp3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sounds/Poker Cards/Card/Plural/NINES.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sounds/Poker Cards/Card/Plural/NINES.mp3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sounds/Poker Cards/Card/Plural/QUEENS.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sounds/Poker Cards/Card/Plural/QUEENS.mp3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sounds/Poker Cards/Card/Plural/SEVENS.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sounds/Poker Cards/Card/Plural/SEVENS.mp3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sounds/Poker Cards/Card/Plural/SIXES.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sounds/Poker Cards/Card/Plural/SIXES.mp3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sounds/Poker Cards/Card/Plural/TENS.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sounds/Poker Cards/Card/Plural/TENS.mp3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sounds/Poker Cards/Card/Plural/THREES.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sounds/Poker Cards/Card/Plural/THREES.mp3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sounds/Poker Cards/Card/Plural/TWOS.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sounds/Poker Cards/Card/Plural/TWOS.mp3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sounds/Poker Cards/Card/Single Card/10/TEN CLUBS.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sounds/Poker Cards/Card/Single Card/10/TEN CLUBS.mp3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sounds/Poker Cards/Card/Single Card/10/TEN DIAMONDS.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sounds/Poker Cards/Card/Single Card/10/TEN DIAMONDS.mp3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sounds/Poker Cards/Card/Single Card/10/TEN HEARTS.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sounds/Poker Cards/Card/Single Card/10/TEN HEARTS.mp3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sounds/Poker Cards/Card/Single Card/10/TEN SPADES.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sounds/Poker Cards/Card/Single Card/10/TEN SPADES.mp3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sounds/Poker Cards/Card/Single Card/11/JACK CLUBS.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sounds/Poker Cards/Card/Single Card/11/JACK CLUBS.mp3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sounds/Poker Cards/Card/Single Card/11/JACK DIAMONDS.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sounds/Poker Cards/Card/Single Card/11/JACK DIAMONDS.mp3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sounds/Poker Cards/Card/Single Card/11/JACK HEARTS.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sounds/Poker Cards/Card/Single Card/11/JACK HEARTS.mp3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sounds/Poker Cards/Card/Single Card/11/JACK SPADES.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sounds/Poker Cards/Card/Single Card/11/JACK SPADES.mp3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sounds/Poker Cards/Card/Single Card/12/QUEEN CLUBS.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sounds/Poker Cards/Card/Single Card/12/QUEEN CLUBS.mp3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sounds/Poker Cards/Card/Single Card/12/QUEEN DIAMONDS.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sounds/Poker Cards/Card/Single Card/12/QUEEN DIAMONDS.mp3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sounds/Poker Cards/Card/Single Card/12/QUEEN HEARTS.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sounds/Poker Cards/Card/Single Card/12/QUEEN HEARTS.mp3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sounds/Poker Cards/Card/Single Card/12/QUEEN SPADES.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sounds/Poker Cards/Card/Single Card/12/QUEEN SPADES.mp3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sounds/Poker Cards/Card/Single Card/13/KING CLUBS.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sounds/Poker Cards/Card/Single Card/13/KING CLUBS.mp3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sounds/Poker Cards/Card/Single Card/13/KING DIAMONDS.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sounds/Poker Cards/Card/Single Card/13/KING DIAMONDS.mp3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sounds/Poker Cards/Card/Single Card/13/KING HEARTS.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sounds/Poker Cards/Card/Single Card/13/KING HEARTS.mp3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sounds/Poker Cards/Card/Single Card/13/KING SPADES.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sounds/Poker Cards/Card/Single Card/13/KING SPADES.mp3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sounds/Poker Cards/Card/Single Card/14/ACE CLUBS.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sounds/Poker Cards/Card/Single Card/14/ACE CLUBS.mp3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sounds/Poker Cards/Card/Single Card/14/ACE DIAMONDS.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sounds/Poker Cards/Card/Single Card/14/ACE DIAMONDS.mp3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sounds/Poker Cards/Card/Single Card/14/ACE KING.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sounds/Poker Cards/Card/Single Card/14/ACE KING.mp3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sounds/Poker Cards/Card/Single Card/14/ACE SPADES.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sounds/Poker Cards/Card/Single Card/14/ACE SPADES.mp3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sounds/Poker Cards/Card/Single Card/2/TWO CLUBS.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sounds/Poker Cards/Card/Single Card/2/TWO CLUBS.mp3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sounds/Poker Cards/Card/Single Card/2/TWO DIAMONDS.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sounds/Poker Cards/Card/Single Card/2/TWO DIAMONDS.mp3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sounds/Poker Cards/Card/Single Card/2/TWO HEARTS.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sounds/Poker Cards/Card/Single Card/2/TWO HEARTS.mp3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sounds/Poker Cards/Card/Single Card/2/TWO SPADES.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sounds/Poker Cards/Card/Single Card/2/TWO SPADES.mp3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sounds/Poker Cards/Card/Single Card/3/THREE CLUBS.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sounds/Poker Cards/Card/Single Card/3/THREE CLUBS.mp3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sounds/Poker Cards/Card/Single Card/3/THREE DIAMONDS.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sounds/Poker Cards/Card/Single Card/3/THREE DIAMONDS.mp3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sounds/Poker Cards/Card/Single Card/3/THREE HEARTS.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sounds/Poker Cards/Card/Single Card/3/THREE HEARTS.mp3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sounds/Poker Cards/Card/Single Card/3/THREE SPADES.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sounds/Poker Cards/Card/Single Card/3/THREE SPADES.mp3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sounds/Poker Cards/Card/Single Card/4/FOUR CLUBS.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sounds/Poker Cards/Card/Single Card/4/FOUR CLUBS.mp3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sounds/Poker Cards/Card/Single Card/4/FOUR DIAMONDS.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sounds/Poker Cards/Card/Single Card/4/FOUR DIAMONDS.mp3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sounds/Poker Cards/Card/Single Card/4/FOUR HEARTS.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sounds/Poker Cards/Card/Single Card/4/FOUR HEARTS.mp3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sounds/Poker Cards/Card/Single Card/4/FOUR SPADES.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sounds/Poker Cards/Card/Single Card/4/FOUR SPADES.mp3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sounds/Poker Cards/Card/Single Card/5/FIVE CLUBS.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sounds/Poker Cards/Card/Single Card/5/FIVE CLUBS.mp3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sounds/Poker Cards/Card/Single Card/5/FIVE DIAMONDS.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sounds/Poker Cards/Card/Single Card/5/FIVE DIAMONDS.mp3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sounds/Poker Cards/Card/Single Card/5/FIVE HEARTS.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sounds/Poker Cards/Card/Single Card/5/FIVE HEARTS.mp3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sounds/Poker Cards/Card/Single Card/5/FIVE SPADES.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sounds/Poker Cards/Card/Single Card/5/FIVE SPADES.mp3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sounds/Poker Cards/Card/Single Card/6/SIX CLUBS.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sounds/Poker Cards/Card/Single Card/6/SIX CLUBS.mp3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sounds/Poker Cards/Card/Single Card/6/SIX DIAMONDS.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sounds/Poker Cards/Card/Single Card/6/SIX DIAMONDS.mp3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sounds/Poker Cards/Card/Single Card/6/SIX HEARTS.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sounds/Poker Cards/Card/Single Card/6/SIX HEARTS.mp3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sounds/Poker Cards/Card/Single Card/6/SIX SPADES.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sounds/Poker Cards/Card/Single Card/6/SIX SPADES.mp3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sounds/Poker Cards/Card/Single Card/7/SEVEN CLUBS.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sounds/Poker Cards/Card/Single Card/7/SEVEN CLUBS.mp3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sounds/Poker Cards/Card/Single Card/7/SEVEN DIAMONDS.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sounds/Poker Cards/Card/Single Card/7/SEVEN DIAMONDS.mp3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sounds/Poker Cards/Card/Single Card/7/SEVEN HEARTS.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sounds/Poker Cards/Card/Single Card/7/SEVEN HEARTS.mp3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sounds/Poker Cards/Card/Single Card/7/SEVEN SPADES.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sounds/Poker Cards/Card/Single Card/7/SEVEN SPADES.mp3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sounds/Poker Cards/Card/Single Card/8/EIGHT CLUBS.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sounds/Poker Cards/Card/Single Card/8/EIGHT CLUBS.mp3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sounds/Poker Cards/Card/Single Card/8/EIGHT DIAMONDS.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sounds/Poker Cards/Card/Single Card/8/EIGHT DIAMONDS.mp3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sounds/Poker Cards/Card/Single Card/8/EIGHT HEARTS.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sounds/Poker Cards/Card/Single Card/8/EIGHT HEARTS.mp3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sounds/Poker Cards/Card/Single Card/8/EIGHT SPADES.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sounds/Poker Cards/Card/Single Card/8/EIGHT SPADES.mp3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sounds/Poker Cards/Card/Single Card/9/NINE CLUBS.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sounds/Poker Cards/Card/Single Card/9/NINE CLUBS.mp3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sounds/Poker Cards/Card/Single Card/9/NINE DIAMONDS.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sounds/Poker Cards/Card/Single Card/9/NINE DIAMONDS.mp3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sounds/Poker Cards/Card/Single Card/9/NINE HEARTS.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sounds/Poker Cards/Card/Single Card/9/NINE HEARTS.mp3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sounds/Poker Cards/Card/Single Card/9/NINE SPADES.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sounds/Poker Cards/Card/Single Card/9/NINE SPADES.mp3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sounds/Poker Cards/Pocket Suited/Pocket Jacks.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sounds/Poker Cards/Pocket Suited/Pocket Jacks.mp3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sounds/Poker Cards/Pocket Suited/Pocket Tens.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sounds/Poker Cards/Pocket Suited/Pocket Tens.mp3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sounds/Poker Cards/Pocket Suited/Suited.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sounds/Poker Cards/Pocket Suited/Suited.mp3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sounds/Poker Cards/Poker Cards/Card/Plural/ACES.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sounds/Poker Cards/Poker Cards/Card/Plural/ACES.mp3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sounds/Poker Cards/Poker Cards/Card/Plural/EIGHTS.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sounds/Poker Cards/Poker Cards/Card/Plural/EIGHTS.mp3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sounds/Poker Cards/Poker Cards/Card/Plural/FIVES.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sounds/Poker Cards/Poker Cards/Card/Plural/FIVES.mp3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sounds/Poker Cards/Poker Cards/Card/Plural/FOURS.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sounds/Poker Cards/Poker Cards/Card/Plural/FOURS.mp3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sounds/Poker Cards/Poker Cards/Card/Plural/JACKS.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sounds/Poker Cards/Poker Cards/Card/Plural/JACKS.mp3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sounds/Poker Cards/Poker Cards/Card/Plural/KINGS.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sounds/Poker Cards/Poker Cards/Card/Plural/KINGS.mp3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sounds/Poker Cards/Poker Cards/Card/Plural/NINES.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sounds/Poker Cards/Poker Cards/Card/Plural/NINES.mp3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sounds/Poker Cards/Poker Cards/Card/Plural/QUEENS.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sounds/Poker Cards/Poker Cards/Card/Plural/QUEENS.mp3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sounds/Poker Cards/Poker Cards/Card/Plural/SEVENS.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sounds/Poker Cards/Poker Cards/Card/Plural/SEVENS.mp3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sounds/Poker Cards/Poker Cards/Card/Plural/SIXES.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sounds/Poker Cards/Poker Cards/Card/Plural/SIXES.mp3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sounds/Poker Cards/Poker Cards/Card/Plural/TENS.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sounds/Poker Cards/Poker Cards/Card/Plural/TENS.mp3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sounds/Poker Cards/Poker Cards/Card/Plural/THREES.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sounds/Poker Cards/Poker Cards/Card/Plural/THREES.mp3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sounds/Poker Cards/Poker Cards/Card/Plural/TWOS.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sounds/Poker Cards/Poker Cards/Card/Plural/TWOS.mp3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sounds/Poker Cards/Poker Cards/Card/Single Card/10/TEN CLUBS.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sounds/Poker Cards/Poker Cards/Card/Single Card/10/TEN CLUBS.mp3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sounds/Poker Cards/Poker Cards/Card/Single Card/10/TEN DIAMONDS.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sounds/Poker Cards/Poker Cards/Card/Single Card/10/TEN DIAMONDS.mp3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sounds/Poker Cards/Poker Cards/Card/Single Card/10/TEN HEARTS.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sounds/Poker Cards/Poker Cards/Card/Single Card/10/TEN HEARTS.mp3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sounds/Poker Cards/Poker Cards/Card/Single Card/10/TEN SPADES.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sounds/Poker Cards/Poker Cards/Card/Single Card/10/TEN SPADES.mp3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sounds/Poker Cards/Poker Cards/Card/Single Card/11/JACK CLUBS.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sounds/Poker Cards/Poker Cards/Card/Single Card/11/JACK CLUBS.mp3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sounds/Poker Cards/Poker Cards/Card/Single Card/11/JACK DIAMONDS.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sounds/Poker Cards/Poker Cards/Card/Single Card/11/JACK DIAMONDS.mp3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sounds/Poker Cards/Poker Cards/Card/Single Card/11/JACK HEARTS.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sounds/Poker Cards/Poker Cards/Card/Single Card/11/JACK HEARTS.mp3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sounds/Poker Cards/Poker Cards/Card/Single Card/11/JACK SPADES.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sounds/Poker Cards/Poker Cards/Card/Single Card/11/JACK SPADES.mp3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sounds/Poker Cards/Poker Cards/Card/Single Card/12/QUEEN CLUBS.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sounds/Poker Cards/Poker Cards/Card/Single Card/12/QUEEN CLUBS.mp3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sounds/Poker Cards/Poker Cards/Card/Single Card/12/QUEEN DIAMONDS.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sounds/Poker Cards/Poker Cards/Card/Single Card/12/QUEEN DIAMONDS.mp3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sounds/Poker Cards/Poker Cards/Card/Single Card/12/QUEEN HEARTS.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sounds/Poker Cards/Poker Cards/Card/Single Card/12/QUEEN HEARTS.mp3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sounds/Poker Cards/Poker Cards/Card/Single Card/12/QUEEN SPADES.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sounds/Poker Cards/Poker Cards/Card/Single Card/12/QUEEN SPADES.mp3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sounds/Poker Cards/Poker Cards/Card/Single Card/13/KING CLUBS.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sounds/Poker Cards/Poker Cards/Card/Single Card/13/KING CLUBS.mp3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sounds/Poker Cards/Poker Cards/Card/Single Card/13/KING DIAMONDS.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sounds/Poker Cards/Poker Cards/Card/Single Card/13/KING DIAMONDS.mp3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sounds/Poker Cards/Poker Cards/Card/Single Card/13/KING HEARTS.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sounds/Poker Cards/Poker Cards/Card/Single Card/13/KING HEARTS.mp3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sounds/Poker Cards/Poker Cards/Card/Single Card/13/KING SPADES.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sounds/Poker Cards/Poker Cards/Card/Single Card/13/KING SPADES.mp3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sounds/Poker Cards/Poker Cards/Card/Single Card/14/ACE CLUBS.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sounds/Poker Cards/Poker Cards/Card/Single Card/14/ACE CLUBS.mp3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sounds/Poker Cards/Poker Cards/Card/Single Card/14/ACE DIAMONDS.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sounds/Poker Cards/Poker Cards/Card/Single Card/14/ACE DIAMONDS.mp3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sounds/Poker Cards/Poker Cards/Card/Single Card/14/ACE KING.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sounds/Poker Cards/Poker Cards/Card/Single Card/14/ACE KING.mp3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sounds/Poker Cards/Poker Cards/Card/Single Card/14/ACE SPADES.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sounds/Poker Cards/Poker Cards/Card/Single Card/14/ACE SPADES.mp3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sounds/Poker Cards/Poker Cards/Card/Single Card/2/TWO CLUBS.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sounds/Poker Cards/Poker Cards/Card/Single Card/2/TWO CLUBS.mp3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sounds/Poker Cards/Poker Cards/Card/Single Card/2/TWO DIAMONDS.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sounds/Poker Cards/Poker Cards/Card/Single Card/2/TWO DIAMONDS.mp3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sounds/Poker Cards/Poker Cards/Card/Single Card/2/TWO HEARTS.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sounds/Poker Cards/Poker Cards/Card/Single Card/2/TWO HEARTS.mp3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sounds/Poker Cards/Poker Cards/Card/Single Card/2/TWO SPADES.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sounds/Poker Cards/Poker Cards/Card/Single Card/2/TWO SPADES.mp3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sounds/Poker Cards/Poker Cards/Card/Single Card/3/THREE CLUBS.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sounds/Poker Cards/Poker Cards/Card/Single Card/3/THREE CLUBS.mp3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sounds/Poker Cards/Poker Cards/Card/Single Card/3/THREE DIAMONDS.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sounds/Poker Cards/Poker Cards/Card/Single Card/3/THREE DIAMONDS.mp3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sounds/Poker Cards/Poker Cards/Card/Single Card/3/THREE HEARTS.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sounds/Poker Cards/Poker Cards/Card/Single Card/3/THREE HEARTS.mp3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sounds/Poker Cards/Poker Cards/Card/Single Card/3/THREE SPADES.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sounds/Poker Cards/Poker Cards/Card/Single Card/3/THREE SPADES.mp3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sounds/Poker Cards/Poker Cards/Card/Single Card/4/FOUR CLUBS.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sounds/Poker Cards/Poker Cards/Card/Single Card/4/FOUR CLUBS.mp3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sounds/Poker Cards/Poker Cards/Card/Single Card/4/FOUR DIAMONDS.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sounds/Poker Cards/Poker Cards/Card/Single Card/4/FOUR DIAMONDS.mp3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sounds/Poker Cards/Poker Cards/Card/Single Card/4/FOUR HEARTS.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sounds/Poker Cards/Poker Cards/Card/Single Card/4/FOUR HEARTS.mp3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sounds/Poker Cards/Poker Cards/Card/Single Card/4/FOUR SPADES.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sounds/Poker Cards/Poker Cards/Card/Single Card/4/FOUR SPADES.mp3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sounds/Poker Cards/Poker Cards/Card/Single Card/5/FIVE CLUBS.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sounds/Poker Cards/Poker Cards/Card/Single Card/5/FIVE CLUBS.mp3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sounds/Poker Cards/Poker Cards/Card/Single Card/5/FIVE DIAMONDS.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sounds/Poker Cards/Poker Cards/Card/Single Card/5/FIVE DIAMONDS.mp3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sounds/Poker Cards/Poker Cards/Card/Single Card/5/FIVE HEARTS.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sounds/Poker Cards/Poker Cards/Card/Single Card/5/FIVE HEARTS.mp3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sounds/Poker Cards/Poker Cards/Card/Single Card/5/FIVE SPADES.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sounds/Poker Cards/Poker Cards/Card/Single Card/5/FIVE SPADES.mp3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sounds/Poker Cards/Poker Cards/Card/Single Card/6/SIX CLUBS.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sounds/Poker Cards/Poker Cards/Card/Single Card/6/SIX CLUBS.mp3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sounds/Poker Cards/Poker Cards/Card/Single Card/6/SIX DIAMONDS.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sounds/Poker Cards/Poker Cards/Card/Single Card/6/SIX DIAMONDS.mp3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sounds/Poker Cards/Poker Cards/Card/Single Card/6/SIX HEARTS.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sounds/Poker Cards/Poker Cards/Card/Single Card/6/SIX HEARTS.mp3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sounds/Poker Cards/Poker Cards/Card/Single Card/6/SIX SPADES.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sounds/Poker Cards/Poker Cards/Card/Single Card/6/SIX SPADES.mp3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sounds/Poker Cards/Poker Cards/Card/Single Card/7/SEVEN CLUBS.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sounds/Poker Cards/Poker Cards/Card/Single Card/7/SEVEN CLUBS.mp3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sounds/Poker Cards/Poker Cards/Card/Single Card/7/SEVEN DIAMONDS.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sounds/Poker Cards/Poker Cards/Card/Single Card/7/SEVEN DIAMONDS.mp3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sounds/Poker Cards/Poker Cards/Card/Single Card/7/SEVEN HEARTS.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sounds/Poker Cards/Poker Cards/Card/Single Card/7/SEVEN HEARTS.mp3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sounds/Poker Cards/Poker Cards/Card/Single Card/7/SEVEN SPADES.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sounds/Poker Cards/Poker Cards/Card/Single Card/7/SEVEN SPADES.mp3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sounds/Poker Cards/Poker Cards/Card/Single Card/8/EIGHT CLUBS.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sounds/Poker Cards/Poker Cards/Card/Single Card/8/EIGHT CLUBS.mp3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sounds/Poker Cards/Poker Cards/Card/Single Card/8/EIGHT DIAMONDS.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sounds/Poker Cards/Poker Cards/Card/Single Card/8/EIGHT DIAMONDS.mp3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sounds/Poker Cards/Poker Cards/Card/Single Card/8/EIGHT HEARTS.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sounds/Poker Cards/Poker Cards/Card/Single Card/8/EIGHT HEARTS.mp3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sounds/Poker Cards/Poker Cards/Card/Single Card/8/EIGHT SPADES.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sounds/Poker Cards/Poker Cards/Card/Single Card/8/EIGHT SPADES.mp3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sounds/Poker Cards/Poker Cards/Card/Single Card/9/NINE CLUBS.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sounds/Poker Cards/Poker Cards/Card/Single Card/9/NINE CLUBS.mp3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sounds/Poker Cards/Poker Cards/Card/Single Card/9/NINE DIAMONDS.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sounds/Poker Cards/Poker Cards/Card/Single Card/9/NINE DIAMONDS.mp3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sounds/Poker Cards/Poker Cards/Card/Single Card/9/NINE HEARTS.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sounds/Poker Cards/Poker Cards/Card/Single Card/9/NINE HEARTS.mp3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sounds/Poker Cards/Poker Cards/Card/Single Card/9/NINE SPADES.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sounds/Poker Cards/Poker Cards/Card/Single Card/9/NINE SPADES.mp3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sounds/Poker Cards/Poker Cards/Pocket, Suited/Pocket Jacks.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sounds/Poker Cards/Poker Cards/Pocket, Suited/Pocket Jacks.mp3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sounds/Poker Cards/Poker Cards/Pocket, Suited/Pocket TEns.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sounds/Poker Cards/Poker Cards/Pocket, Suited/Pocket TEns.mp3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sounds/Poker Cards/Poker Cards/Pocket, Suited/Suited.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sounds/Poker Cards/Poker Cards/Pocket, Suited/Suited.mp3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sounds/Winning Hands/Flush Ace High.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sounds/Winning Hands/Flush Ace High.mp3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sounds/Winning Hands/Flush Special.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sounds/Winning Hands/Flush Special.mp3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sounds/Winning Hands/Flush X High.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sounds/Winning Hands/Flush X High.mp3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sounds/Winning Hands/Full House Aces Full Of Jacks.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sounds/Winning Hands/Full House Aces Full Of Jacks.mp3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sounds/Winning Hands/Full House Full Of.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sounds/Winning Hands/Full House Full Of.mp3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sounds/Winning Hands/Full House Jacks Full Of Tens.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sounds/Winning Hands/Full House Jacks Full Of Tens.mp3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sounds/Winning Hands/Full House.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sounds/Winning Hands/Full House.mp3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sounds/Winning Hands/High Card Nine.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sounds/Winning Hands/High Card Nine.mp3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sounds/Winning Hands/High Card.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sounds/Winning Hands/High Card.mp3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sounds/Winning Hands/High.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sounds/Winning Hands/High.mp3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sounds/Winning Hands/ONE PAIR.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sounds/Winning Hands/ONE PAIR.mp3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sounds/Winning Hands/Quads Def.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sounds/Winning Hands/Quads Def.mp3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sounds/Winning Hands/Royal Flush.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sounds/Winning Hands/Royal Flush.mp3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sounds/Winning Hands/Seven-Deuce.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sounds/Winning Hands/Seven-Deuce.mp3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sounds/Winning Hands/Straight Def.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sounds/Winning Hands/Straight Def.mp3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sounds/Winning Hands/Straight Flush.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sounds/Winning Hands/Straight Flush.mp3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sounds/Winning Hands/Straight X High.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sounds/Winning Hands/Straight X High.mp3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sounds/Winning Hands/Straight to the Eight.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sounds/Winning Hands/Straight to the Eight.mp3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sounds/Winning Hands/The Royal Flush.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sounds/Winning Hands/The Royal Flush.mp3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sounds/Winning Hands/Three Of a Kind def.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sounds/Winning Hands/Three Of a Kind def.mp3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sounds/Winning Hands/Three Of a Kind.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sounds/Winning Hands/Three Of a Kind.mp3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sounds/Winning Hands/Two Pair.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sounds/Winning Hands/Two Pair.mp3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sounds/Winning Hands/Winning Hands/Flush Ace High.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sounds/Winning Hands/Winning Hands/Flush Ace High.mp3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sounds/Winning Hands/Winning Hands/Flush Special.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sounds/Winning Hands/Winning Hands/Flush Special.mp3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sounds/Winning Hands/Winning Hands/Flush X High.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sounds/Winning Hands/Winning Hands/Flush X High.mp3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sounds/Winning Hands/Winning Hands/Full House Aces Full Of Jacks.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sounds/Winning Hands/Winning Hands/Full House Aces Full Of Jacks.mp3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sounds/Winning Hands/Winning Hands/Full House Full Of.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sounds/Winning Hands/Winning Hands/Full House Full Of.mp3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sounds/Winning Hands/Winning Hands/Full House Jacks Full Of Tens.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sounds/Winning Hands/Winning Hands/Full House Jacks Full Of Tens.mp3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sounds/Winning Hands/Winning Hands/Full House.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sounds/Winning Hands/Winning Hands/Full House.mp3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sounds/Winning Hands/Winning Hands/High Card Nine.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sounds/Winning Hands/Winning Hands/High Card Nine.mp3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sounds/Winning Hands/Winning Hands/High Card.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sounds/Winning Hands/Winning Hands/High Card.mp3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sounds/Winning Hands/Winning Hands/High.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sounds/Winning Hands/Winning Hands/High.mp3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sounds/Winning Hands/Winning Hands/ONE PAIR.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sounds/Winning Hands/Winning Hands/ONE PAIR.mp3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sounds/Winning Hands/Winning Hands/Quads Def.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sounds/Winning Hands/Winning Hands/Quads Def.mp3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sounds/Winning Hands/Winning Hands/Royal Flush.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sounds/Winning Hands/Winning Hands/Royal Flush.mp3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sounds/Winning Hands/Winning Hands/Seven-Deuce.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sounds/Winning Hands/Winning Hands/Seven-Deuce.mp3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sounds/Winning Hands/Winning Hands/Straight Def.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sounds/Winning Hands/Winning Hands/Straight Def.mp3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sounds/Winning Hands/Winning Hands/Straight Flush.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sounds/Winning Hands/Winning Hands/Straight Flush.mp3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sounds/Winning Hands/Winning Hands/Straight X High.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sounds/Winning Hands/Winning Hands/Straight X High.mp3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sounds/Winning Hands/Winning Hands/Straight to the Eight.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sounds/Winning Hands/Winning Hands/Straight to the Eight.mp3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sounds/Winning Hands/Winning Hands/The Royal Flush.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sounds/Winning Hands/Winning Hands/The Royal Flush.mp3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sounds/Winning Hands/Winning Hands/Three Of a Kind def.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sounds/Winning Hands/Winning Hands/Three Of a Kind def.mp3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sounds/Winning Hands/Winning Hands/Three Of a Kind.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sounds/Winning Hands/Winning Hands/Three Of a Kind.mp3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sounds/Winning Hands/Winning Hands/Two Pair.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sounds/Winning Hands/Winning Hands/Two Pair.mp3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sounds/Winning Hands/Winning Hands/full of.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sounds/Winning Hands/Winning Hands/full of.mp3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sounds/Winning Hands/full of.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sounds/Winning Hands/full of.mp3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sounds/music/Casino Royale - Chris Cornell - You Know My Name.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sounds/music/Casino Royale - Chris Cornell - You Know My Name.mp3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sounds/music/Rocket Man - Elton John.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sounds/music/Rocket Man - Elton John.mp3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sounds/music/Tainted Love - Soft Cell.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sounds/music/Tainted Love - Soft Cell.mp3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/game/game_round/game_round.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/game/rounds/poker_round.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/game/game_round/main.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/game/pokerGUI.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/gui/poker_game_ui.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/mediaplayer/SpadeAssistant.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/mediaplayer/SpadeAssistant.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/mediaplayer/mediaplayer.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/mediaplayer/sound_manager.py" afterDir="false" />
-    </list>
+    <list default="true" id="c0babd6b-3393-44b8-be9f-8b13a8d5748d" name="Changes" comment="Folder Restructure" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -448,14 +94,14 @@
       <recent name="$PROJECT_DIR$/images" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/tests/test_analysis" />
       <recent name="$PROJECT_DIR$/src/game/hand_analysis" />
       <recent name="$PROJECT_DIR$/src" />
       <recent name="$PROJECT_DIR$/src/game" />
       <recent name="$PROJECT_DIR$/src/gui" />
-      <recent name="$PROJECT_DIR$/assets" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.main (1)">
+  <component name="RunManager" selected="Python.poker_game_ui">
     <configuration name="SpadeAssistant" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="Spade" />
       <option name="ENV_FILES" value="" />
@@ -494,29 +140,6 @@
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/src/game_round/main.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
-    <configuration name="main (2)" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="Spade" />
-      <option name="ENV_FILES" value="" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/src/hand_analysis" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/src/hand_analysis/main.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -571,13 +194,36 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+    <configuration name="sound_manager" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="Spade" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/src/mediaplayer" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/src/mediaplayer/sound_manager.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.SpadeAssistant" />
         <item itemvalue="Python.poker_game_ui" />
+        <item itemvalue="Python.sound_manager" />
+        <item itemvalue="Python.SpadeAssistant" />
         <item itemvalue="Python.main (3)" />
         <item itemvalue="Python.main (1)" />
-        <item itemvalue="Python.main (2)" />
       </list>
     </recent_temporary>
   </component>
@@ -701,7 +347,15 @@
       <option name="project" value="LOCAL" />
       <updated>1730925694478</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="Folder Restructure">
+      <option name="closed" value="true" />
+      <created>1730928054539</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1730928054539</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -727,7 +381,8 @@
     <MESSAGE value="model_80_.pt" />
     <MESSAGE value="model_200.pt" />
     <MESSAGE value="update pathing" />
-    <option name="LAST_COMMIT_MESSAGE" value="update pathing" />
+    <MESSAGE value="Folder Restructure" />
+    <option name="LAST_COMMIT_MESSAGE" value="Folder Restructure" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -744,9 +399,11 @@
     <SUITE FILE_PATH="coverage/Spade$card.coverage" NAME="card Coverage Results" MODIFIED="1730505070831" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/hand_analysis/resources" />
     <SUITE FILE_PATH="coverage/Spade$hand_rankings.coverage" NAME="hand_rankings Coverage Results" MODIFIED="1730505064430" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/hand_analysis/analysis" />
     <SUITE FILE_PATH="coverage/Spade$main__1_.coverage" NAME="main (1) Coverage Results" MODIFIED="1730903499253" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/game_round" />
+    <SUITE FILE_PATH="coverage/Spade$sound_manager.coverage" NAME="sound_manager Coverage Results" MODIFIED="1730928172049" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/mediaplayer" />
     <SUITE FILE_PATH="coverage/Spade$main__3_.coverage" NAME="main (3) Coverage Results" MODIFIED="1730904775031" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/game/game_round" />
-    <SUITE FILE_PATH="coverage/Spade$SpadeAssistant.coverage" NAME="SpadeAssistant Coverage Results" MODIFIED="1730926108860" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/mediaplayer" />
-    <SUITE FILE_PATH="coverage/Spade$.coverage" NAME=" Coverage Results" MODIFIED="1730665435937" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/hand_analysis/tests" />
+    <SUITE FILE_PATH="coverage/Spade$SpadeAssistant.coverage" NAME="SpadeAssistant Coverage Results" MODIFIED="1730928152179" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/mediaplayer" />
+    <SUITE FILE_PATH="coverage/Spade$.coverage" NAME=" Coverage Results" MODIFIED="1730928093565" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/tests/test_analysis" />
+    <SUITE FILE_PATH="coverage/Spade$poker_game_ui.coverage" NAME="poker_game_ui Coverage Results" MODIFIED="1730928255794" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/game" />
     <SUITE FILE_PATH="coverage/Spade$main__2_.coverage" NAME="main (2) Coverage Results" MODIFIED="1730902609785" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/hand_analysis" />
     <SUITE FILE_PATH="coverage/Spade$utils.coverage" NAME="utils Coverage Results" MODIFIED="1730505094540" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/hand_analysis" />
     <SUITE FILE_PATH="coverage/Spade$mediaplayer.coverage" NAME="mediaplayer Coverage Results" MODIFIED="1730926647257" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/mediaplayer" />
