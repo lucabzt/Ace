@@ -4,21 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c0babd6b-3393-44b8-be9f-8b13a8d5748d" name="Changes" comment="Vids">
-      <change afterPath="$PROJECT_DIR$/images/logo/Spade_ver1.mp4" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/images/poker_desk.png" afterDir="false" />
+    <list default="true" id="c0babd6b-3393-44b8-be9f-8b13a8d5748d" name="Changes" comment="pokerGUI.py advanced">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/Spade_ver2.mp4" beforeDir="false" afterPath="$PROJECT_DIR$/images/logo/Spade_ver2.mp4" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/spade_OG.mp4" beforeDir="false" afterPath="$PROJECT_DIR$/images/logo/spade_OG.mp4" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/spade_assistant_1920x1080.png" beforeDir="false" afterPath="$PROJECT_DIR$/images/logo/spade_assistant_1920x1080.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/spade_empty.png" beforeDir="false" afterPath="$PROJECT_DIR$/images/logo/spade_empty.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/spade_logo_rectangle.png" beforeDir="false" afterPath="$PROJECT_DIR$/images/logo/spade_logo_rectangle.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/spade_logo_squared.png" beforeDir="false" afterPath="$PROJECT_DIR$/images/logo/spade_logo_squared.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/spade_ver1.mp4" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/spade_ver3.mp4" beforeDir="false" afterPath="$PROJECT_DIR$/images/logo/spade_ver3.mp4" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/video-vmake.mp4" beforeDir="false" afterPath="$PROJECT_DIR$/images/logo/video-vmake.mp4" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/game/pokerGUI.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/game/pokerGUI.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/mediaplayer/SpadeAssistant.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/mediaplayer/SpadeAssistant.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -116,7 +105,7 @@
       <recent name="$PROJECT_DIR$/sounds/music" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.SpadeAssistant">
+  <component name="RunManager">
     <configuration name="SpadeAssistant" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="Spade" />
       <option name="ENV_FILES" value="" />
@@ -272,6 +261,7 @@
       <workItem from="1730911710291" duration="55000" />
       <workItem from="1730913201475" duration="5108000" />
       <workItem from="1730919175717" duration="58000" />
+      <workItem from="1730924521073" duration="943000" />
     </task>
     <task id="LOCAL-00001" summary="Markus ist ein Eierlecker">
       <option name="closed" value="true" />
@@ -345,7 +335,15 @@
       <option name="project" value="LOCAL" />
       <updated>1730823360764</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="pokerGUI.py advanced">
+      <option name="closed" value="true" />
+      <created>1730924595170</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1730924595170</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -370,7 +368,8 @@
     <MESSAGE value="Bugfixxing SpadeAssistant.py" />
     <MESSAGE value="model_80_.pt" />
     <MESSAGE value="model_200.pt" />
-    <option name="LAST_COMMIT_MESSAGE" value="model_200.pt" />
+    <MESSAGE value="pokerGUI.py advanced" />
+    <option name="LAST_COMMIT_MESSAGE" value="pokerGUI.py advanced" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -388,7 +387,7 @@
     <SUITE FILE_PATH="coverage/Spade$hand_rankings.coverage" NAME="hand_rankings Coverage Results" MODIFIED="1730505064430" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/hand_analysis/analysis" />
     <SUITE FILE_PATH="coverage/Spade$main__1_.coverage" NAME="main (1) Coverage Results" MODIFIED="1730903499253" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/game_round" />
     <SUITE FILE_PATH="coverage/Spade$main__3_.coverage" NAME="main (3) Coverage Results" MODIFIED="1730904775031" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/game/game_round" />
-    <SUITE FILE_PATH="coverage/Spade$SpadeAssistant.coverage" NAME="SpadeAssistant Coverage Results" MODIFIED="1730917532968" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/mediaplayer" />
+    <SUITE FILE_PATH="coverage/Spade$SpadeAssistant.coverage" NAME="SpadeAssistant Coverage Results" MODIFIED="1730924692580" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/mediaplayer" />
     <SUITE FILE_PATH="coverage/Spade$.coverage" NAME=" Coverage Results" MODIFIED="1730665435937" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/hand_analysis/tests" />
     <SUITE FILE_PATH="coverage/Spade$main__2_.coverage" NAME="main (2) Coverage Results" MODIFIED="1730902609785" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/hand_analysis" />
     <SUITE FILE_PATH="coverage/Spade$utils.coverage" NAME="utils Coverage Results" MODIFIED="1730505094540" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/hand_analysis" />
@@ -397,7 +396,7 @@
     <SUITE FILE_PATH="coverage/Spade$hand_analyzer.coverage" NAME="hand_analyzer Coverage Results" MODIFIED="1730505060990" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/hand_analysis/analysis" />
     <SUITE FILE_PATH="coverage/Spade$main.coverage" NAME="main Coverage Results" MODIFIED="1730505091831" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/hand_analysis" />
     <SUITE FILE_PATH="coverage/Spade$winner_analyzer.coverage" NAME="winner_analyzer Coverage Results" MODIFIED="1730505067106" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/hand_analysis/analysis" />
-    <SUITE FILE_PATH="coverage/Spade$pokerGUI.coverage" NAME="pokerGUI Coverage Results" MODIFIED="1730917492852" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/game" />
+    <SUITE FILE_PATH="coverage/Spade$pokerGUI.coverage" NAME="pokerGUI Coverage Results" MODIFIED="1730924909490" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/game" />
     <SUITE FILE_PATH="coverage/Spade$train.coverage" NAME="train Coverage Results" MODIFIED="1730787554139" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/classifier" />
   </component>
 </project>

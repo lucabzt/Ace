@@ -167,7 +167,7 @@ class VisualGameRound(GameRound):
 
 # Function to run the game loop
 def main():
-    player_names = ['Player 1', 'Player 2', 'Player 3', 'Player 4', 'Player 5', 'Player 6']
+    player_names = ['Jonas', 'Luca', 'Markus', 'Paul', 'Sebastian']
     players = [Player(name) for name in player_names]
     game = VisualGameRound(players, small_blind=10, big_blind=20)
 
