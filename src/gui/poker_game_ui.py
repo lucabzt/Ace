@@ -5,7 +5,7 @@ import pygame
 from src.game.resources.player import Player
 from src.game.rounds.poker_round import GameRound
 
-PATH_TO_SPADE = "/home/lucabozzetti/Code/Spade"
+PATH_TO_SPADE = "/Users/sebastianrogg/PycharmProjects/Spade"
 
 # Initialize Pygame
 pygame.init()
@@ -56,13 +56,14 @@ class poker_game_ui(GameRound):
         elif self.round_step == 8:
             self.showdown()
             self.round_step = -1  # Reset for the next round
+            self.reset_game()
 
         # Update display and increment the step
         self.update_display()
         self.round_step += 1
 
     def load_card_images(self):
-        image_path = os.path.join(PATH_TO_SPADE, "images/card_deck")
+        image_path = os.path.join(PATH_TO_SPADE, "assets/images/card_deck")
         images = {}
         ranks = ['2', '3', '4', '5', '6', '7', '8', '9', '10', 'jack', 'queen', 'king', 'ace']
         suits = ['hearts', 'diamonds', 'clubs', 'spades']
@@ -82,7 +83,7 @@ class poker_game_ui(GameRound):
 
     def load_background_image(self):
         try:
-            bg_image = pygame.image.load(os.path.join(PATH_TO_SPADE, "images/PokerTable.png"))
+            bg_image = pygame.image.load(os.path.join(PATH_TO_SPADE, "assets/images/PokerTable.png"))
             return pygame.transform.scale(bg_image, (SCREEN_WIDTH, SCREEN_HEIGHT))
         except pygame.error:
             print("Background image not found.")
@@ -139,10 +140,10 @@ class poker_game_ui(GameRound):
     def display_player_info(self):
         positions = [
             (50, SCREEN_HEIGHT - 350),  # Player 1
-            (SCREEN_WIDTH - 220, SCREEN_HEIGHT - 350),  # Player 2
-            (50, 50),  # Player 3
+            (50, 50),  # Player 2
+            (SCREEN_WIDTH // 2 - 100, 20),  # Player 3 - Center top
             (SCREEN_WIDTH - 290, 50),  # Player 4
-            (SCREEN_WIDTH // 2 - 100, 20),  # Player 5 - Center top
+            (SCREEN_WIDTH - 220, SCREEN_HEIGHT - 350),  # Player 5
             (SCREEN_WIDTH // 2 - 100, SCREEN_HEIGHT - 200)  # Player 6 - Center bottom
         ]
 
@@ -156,7 +157,7 @@ class poker_game_ui(GameRound):
 
             # Render player name and chips in the chosen color
             player_text = FONT.render(f"{player.name}: {self.bets[player.name]} Chips", True, text_color)
-            screen.blit(player_text, (x, y + 140))  # Adjusted for the larger card size
+            screen.blit(player_text, (x, y + 140))
 
     def update_display(self):
         if self.background_image:
@@ -173,7 +174,7 @@ class poker_game_ui(GameRound):
 
 # Function to run the game loop
 def main():
-    player_names = ['Jonas', 'Luca', 'Markus', 'Paul', 'Sebastian']
+    player_names = ['Jonas', 'Markus', 'Luca', 'Matthi', 'Sebastian', 'Paul']
     players = [Player(name) for name in player_names]
     game = poker_game_ui(players, small_blind=10, big_blind=20)
 
