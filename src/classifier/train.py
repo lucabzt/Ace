@@ -6,8 +6,7 @@ Skript for training the SpadeClassifier model on the playing_card_dataset.
 import torch
 from dataset import PlayingCardDataset
 from torch.utils.data import DataLoader
-import SpadeClassifier
-from mapping import cards
+from src.classifier.model import spade_classifier
 import matplotlib.pyplot as plt
 import os
 
@@ -33,8 +32,8 @@ train_load, test_load = DataLoader(train_set, batch_size=BATCH_SIZE, shuffle=Tru
 
 
 # LOAD MODEL
-model = SpadeClassifier.SpadeClassifier(53).to(device)
-model.load_state_dict(torch.load("models/model_99.pt", weights_only=True))
+model = spade_classifier.SpadeClassifier(53).to(device)
+model.load_state_dict(torch.load("pretrained_models/model_99.pt", weights_only=True))
 
 
 # TRAINING PARAMS
@@ -123,12 +122,12 @@ for epoch in range(epochs):
     torch.cuda.empty_cache()  # Empty memory cache of GPU
 
     # Save plot and model to file
-    os.mkdir(f'models/model_{epoch}')
+    os.mkdir(f'pretrained_models/model_{epoch}')
     plt.plot(train_loss, label="Training loss")
     plt.plot(test_loss, label="Test Loss")
     plt.legend()
-    plt.savefig(f".models/model_{epoch}/plot.png")
-    torch.save(model.state_dict(), f"./models/model_{epoch}/model.pt")
+    plt.savefig(f".pretrained_models/model_{epoch}/plot.png")
+    torch.save(model.state_dict(), f"pretrained_models/model_{epoch}/model.pt")
 
-torch.save(model.state_dict(), f"./models/model_{test_loss[-1]:.4f}_.pt")
+torch.save(model.state_dict(), f"pretrained_models/model_{test_loss[-1]:.4f}_.pt")
 
