@@ -6,7 +6,7 @@ Skript for training the SpadeClassifier model on the playing_card_dataset.
 import torch
 from dataset import PlayingCardDataset
 from torch.utils.data import DataLoader
-from model.spade_classifier import SpadeClassifier
+from src.classifier.model.spadeClassifier import SpadeClassifier
 import matplotlib.pyplot as plt
 import os
 
@@ -21,6 +21,8 @@ print(f"MODEL RUNNING ON DEVICE: {device}")
 
 
 # SAVE GPU FROM SETTING ON FIRE
+
+
 torch.cuda.set_per_process_memory_fraction(0.8, device=0)
 os.environ["PYTORCH_CUDA_ALLOC_CONF"] = "expandable_segments:True"
 

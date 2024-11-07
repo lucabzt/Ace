@@ -1,5 +1,5 @@
 """
-spade_classifier.py
+spadeClassifier.py
 Uses a simplified ResNet architecture to classify playing cards.
 It has 42 layers and uses BatchNorm2d as normalization layer, ReLU as activation function.
 The output of the model is a probability distribution over the 53 possible playing cards.
@@ -7,8 +7,8 @@ The output of the model is a probability distribution over the 53 possible playi
 
 import torch.nn as nn
 from torch import Tensor
-from block import Block
-from head import Head
+from src.classifier.model.block import Block
+from src.classifier.model.head import Head
 
 
 class SpadeClassifier(nn.Module):
