@@ -12,7 +12,7 @@ from src.classifier.model.head import Head
 
 
 class SpadeClassifier(nn.Module):
-    def __init__(self, num_classes: int) -> None:
+    def __init__(self) -> None:
         super().__init__()
         features = [64, 64, 128, 256, 512]
         num_layers = [3 for _ in range(4)]

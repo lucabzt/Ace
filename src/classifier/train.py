@@ -22,9 +22,9 @@ print(f"MODEL RUNNING ON DEVICE: {device}")
 
 # SAVE GPU FROM SETTING ON FIRE
 
-
-torch.cuda.set_per_process_memory_fraction(0.8, device=0)
-os.environ["PYTORCH_CUDA_ALLOC_CONF"] = "expandable_segments:True"
+if device != 'cpu':
+    torch.cuda.set_per_process_memory_fraction(0.8, device=0)
+    os.environ["PYTORCH_CUDA_ALLOC_CONF"] = "expandable_segments:True"
 
 
 # DATASET, train/test split, create dataloaders
@@ -34,8 +34,8 @@ train_load, test_load = DataLoader(train_set, batch_size=BATCH_SIZE, shuffle=Tru
 
 
 # LOAD MODEL
-model = SpadeClassifier(53).to(device)
-model.load_state_dict(torch.load("pretrained_models/model_99.pt", weights_only=True))
+model = SpadeClassifier().to(device)
+# model.load_state_dict(torch.load("pretrained_models/model_99.pt", weights_only=True))
 
 
 # TRAINING PARAMS
