@@ -23,7 +23,7 @@ class SpadeAssistant:
 
         # Load the video and initialize OpenCV
         base_path = Path(__file__).resolve().parent.parent.parent  # Go up three directories from mediaplayer
-        self.video_path = base_path / "assets/images/logo/spade_ver3.mp4"
+        self.video_path = base_path / "assets/images/logo/spade_OG.mp4"
         self.video_capture = cv2.VideoCapture(str(self.video_path))  # Ensure the path is a string for OpenCV
 
         # Get screen dimensions
