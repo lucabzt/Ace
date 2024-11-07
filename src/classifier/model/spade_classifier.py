@@ -7,7 +7,7 @@ The output of the model is a probability distribution over the 53 possible playi
 
 import torch.nn as nn
 from torch import Tensor
-from basic_block import Block
+from block import Block
 from head import Head
 
 

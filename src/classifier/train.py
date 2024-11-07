@@ -6,7 +6,7 @@ Skript for training the SpadeClassifier model on the playing_card_dataset.
 import torch
 from dataset import PlayingCardDataset
 from torch.utils.data import DataLoader
-from src.classifier.model import spade_classifier
+from model.spade_classifier import SpadeClassifier
 import matplotlib.pyplot as plt
 import os
 
@@ -32,7 +32,7 @@ train_load, test_load = DataLoader(train_set, batch_size=BATCH_SIZE, shuffle=Tru
 
 
 # LOAD MODEL
-model = spade_classifier.SpadeClassifier(53).to(device)
+model = SpadeClassifier(53).to(device)
 model.load_state_dict(torch.load("pretrained_models/model_99.pt", weights_only=True))
 
 
