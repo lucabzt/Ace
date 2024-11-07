@@ -19,6 +19,7 @@ class Head (nn.Module):
 
     def forward(self, x) -> Tensor:
         x = self.avgpool(x)
+        x = x.view(x.size(0), -1)
         x = self.fc(x)
         x = torch.softmax(x, dim=1)
         return x
