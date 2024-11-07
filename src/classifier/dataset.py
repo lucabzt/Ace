@@ -14,9 +14,12 @@ from mapping import cards
 
 class PlayingCardDataset(Dataset):
     def __init__(self, images_path, labels_path):
-        # Define transformations to convert Images to PyTorch Tensors
         transform = transforms.Compose([
             transforms.Resize((640, 480)),
+            transforms.RandomHorizontalFlip(p=0.5),
+            transforms.RandomVerticalFlip(p=0.5),
+            transforms.RandomRotation(degrees=10),
+            transforms.ColorJitter(brightness=0.1, contrast=0.1),
             transforms.ToTensor()
         ])
 

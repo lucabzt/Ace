@@ -1,0 +1,16 @@
+version: '3.8'
+
+services:
+  app:
+    build: .
+    container_name: Spade  # Optional: name the container
+    environment:
+      - ENVIRONMENT=production  # Set environment variables if needed
+    ports:
+      - "8000:8000"  # Forward port 8000 on the host to port 8000 in the container
+    volumes:
+      - my_persistent_data:/app/logs  # Mounts the named volume to /app/data in the container
+
+volumes:
+  my_persistent_data:
+    driver: local  # Default driver; stores data on the host filesystem
