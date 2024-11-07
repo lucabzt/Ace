@@ -56,7 +56,7 @@ class GameRound:
                 print(f"{player.name} erhält Karte: {card}")
 
     def betting_round(self, round_name):
-        """Executes a betting round. Players must match the highest bet or fold if a raise occurs."""
+        """Executes a betting round. Players must match the highest bet or fold if a raise occurs, and the raiser does not act again if everyone calls or folds."""
         print(f"\n--- {round_name} ---")
 
         active_players = [player for player in self.players if player.name not in self.folded_players]
@@ -72,12 +72,18 @@ class GameRound:
 
         # Track which players have matched the current bet
         players_in_round = {player.name: False for player in active_players}
+        last_raiser = None
 
         while not all(
                 players_in_round[player.name] for player in active_players if player.name not in self.folded_players):
             for player in player_order:
                 if player.name in self.folded_players:
                     continue  # Skip folded players
+
+                # Skip if this is the player who last raised and everyone else has called or folded
+                if last_raiser == player.name and all(
+                        players_in_round[p.name] for p in active_players if p.name not in self.folded_players):
+                    return  # End betting round
 
                 to_call = self.current_bet - self.bets[player.name]
                 action = self.get_player_action(player, to_call)
@@ -107,7 +113,8 @@ class GameRound:
                         self.current_bet += raise_amount  # Update the highest bet
                         print(f"{player.name} raises by {raise_amount}")
 
-                        # Reset players_in_round since all must now match the new bet or fold
+                        # Update last raiser and reset players_in_round for a new round of calling
+                        last_raiser = player.name
                         players_in_round = {p.name: (p.name in self.folded_players) for p in active_players}
                         players_in_round[player.name] = True  # Player who raised has already matched their own bet
                     else:
@@ -116,6 +123,7 @@ class GameRound:
                 # Break if only one active player remains
                 if len([p for p in active_players if p.name not in self.folded_players]) <= 1:
                     return
+
     def get_player_action(self, player, to_call):
         """Determines the player's action. This is a placeholder for future AI integration."""
         while True:
