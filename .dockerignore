@@ -1,6 +1,6 @@
 # Ignore the assets/images directory
 assets/images/
-src/classifier/models
+src/classifier/models/
 
 # Other common ignores (optional)
 __pycache__

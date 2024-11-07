@@ -12,7 +12,12 @@ device = 'cuda:0' if torch.cuda.is_available() else 'cpu'
 class Classifier:
     def __init__(self, model_path: str):
         self.model = SpadeClassifier().to(device)
-        self.model.load_state_dict(torch.load(os.path.join("pretrained_models", model_path), weights_only=True))
+        # Choose the appropriate device based on CUDA availability
+
+        # Load the model state with appropriate map_location
+        self.model.load_state_dict(
+            torch.load(os.path.join("src/classifier/pretrained_models/", model_path), map_location=device,
+                       weights_only=True))
 
     def predict(self, image) -> list[Card]:
         #Scale Image
