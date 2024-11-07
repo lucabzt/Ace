@@ -38,6 +38,7 @@ class poker_game_ui(GameRound):
     def play_round_with_display(self):
         """Run the poker game one step at a time for visual updates."""
         if self.round_step == 0:
+            self.assign_blinds()
             self.deal_private_cards()
         elif self.round_step == 1:
             self.betting_round("Pre-Flop")
@@ -155,9 +156,13 @@ class poker_game_ui(GameRound):
             is_folded = player.name in self.folded_players
             text_color = RED if is_folded else WHITE
 
-            # Render player name and chips in the chosen color
+            # Render player name and current bet in the chosen color
             player_text = FONT.render(f"{player.name}: {self.bets[player.name]} Chips", True, text_color)
             screen.blit(player_text, (x, y + 140))
+
+            # Render player balance below the bet information
+            balance_text = FONT.render(f"Balance: {player.balance} Chips", True, WHITE)
+            screen.blit(balance_text, (x, y + 170))
 
     def update_display(self):
         if self.background_image:

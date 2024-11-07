@@ -2,9 +2,10 @@ from src.game.hand_analysis.poker_hand_analyzer import PokerHandAnalyzer
 
 
 class Player:
-    def __init__(self, name):
+    def __init__(self, name, balance=1000):
         self.name = name
         self.cards = []  # Player's own cards
+        self.balance = balance  # Player's balance for betting
 
     def receive_card(self, card):
         """Adds a card to the player's hand, limited to 2 cards."""
@@ -35,5 +36,19 @@ class Player:
         """Resets the player's hand and community cards."""
         self.cards = []
 
+    def add_balance(self, amount):
+        """Increases the player's balance by the specified amount."""
+        if amount < 0:
+            raise ValueError("Cannot add a negative amount to balance.")
+        self.balance += amount
+
+    def deduct_balance(self, amount):
+        """Decreases the player's balance by the specified amount."""
+        if amount < 0:
+            raise ValueError("Cannot deduct a negative amount from balance.")
+        if amount > self.balance:
+            raise ValueError("Insufficient balance.")
+        self.balance -= amount
+
     def __str__(self):
-        return f"Player: {self.name}, Cards: {self.show_cards()}"
+        return f"Player: {self.name}, Balance: ${self.balance}, Cards: {self.show_cards()}"

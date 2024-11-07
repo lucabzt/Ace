@@ -5,13 +5,6 @@ from src.game.resources.poker_deck import Deck
 
 class GameRound:
     def __init__(self, players, small_blind, big_blind):
-        """
-        Initialisiert das Spiel mit den angegebenen Spielern und Blinds.
-
-        :param players: Liste von Player-Objekten
-        :param small_blind: Betrag des Small Blinds
-        :param big_blind: Betrag des Big Blinds
-        """
         if len(players) < 2:
             raise ValueError("Mindestens zwei Spieler sind erforderlich.")
         self.players = players
@@ -24,21 +17,38 @@ class GameRound:
         self.current_bet = 0
         self.bets = {player.name: 0 for player in players}
         self.folded_players = set()
+        self.small_blind_index = 0
 
     def assign_blinds(self):
-        """Weist den Small und Big Blind den entsprechenden Spielern zu."""
-        self.small_blind_player = self.players[0]
-        self.big_blind_player = self.players[1]
-        # Setzen der Blinds
-        self.pot += self.small_blind + self.big_blind
-        self.bets[self.small_blind_player.name] += self.small_blind
-        self.bets[self.big_blind_player.name] += self.big_blind
-        self.current_bet = self.big_blind
-        print(f"{self.small_blind_player.name} setzt Small Blind: {self.small_blind}")
-        print(f"{self.big_blind_player.name} setzt Big Blind: {self.big_blind}")
+        """Assigns small and big blinds to players and handles the initial bets."""
+        self.small_blind_player = self.players[self.small_blind_index]
+        self.big_blind_player = self.players[(self.small_blind_index + 1) % len(self.players)]
+
+        # Deduct blinds from player balances
+        if self.small_blind_player.balance >= self.small_blind:
+            self.small_blind_player.balance -= self.small_blind
+            self.bets[self.small_blind_player.name] += self.small_blind
+            self.pot += self.small_blind
+        else:
+            raise ValueError(f"{self.small_blind_player.name} does not have enough chips for the small blind.")
+
+        if self.big_blind_player.balance >= self.big_blind:
+            self.big_blind_player.balance -= self.big_blind
+            self.bets[self.big_blind_player.name] += self.big_blind
+            self.pot += self.big_blind
+            self.current_bet = self.big_blind  # Set the minimum call amount
+        else:
+            raise ValueError(f"{self.big_blind_player.name} does not have enough chips for the big blind.")
+
+        print(f"{self.small_blind_player.name} posts small blind: {self.small_blind}")
+        print(f"{self.big_blind_player.name} posts big blind: {self.big_blind}")
+
+    def rotate_blinds(self):
+        """Rotates blinds to the next players after each round."""
+        self.small_blind_index = (self.small_blind_index + 1) % len(self.players)
 
     def deal_private_cards(self):
-        """Verteilt zwei Karten an jeden Spieler."""
+        """Deals two private cards to each player."""
         for _ in range(2):
             for player in self.players:
                 card = self.deck.deal_card()
@@ -46,53 +56,63 @@ class GameRound:
                 print(f"{player.name} erhält Karte: {card}")
 
     def betting_round(self, round_name):
-        """
-        Führt eine Setzrunde durch.
-
-        :param round_name: Name der Setzrunde (z.B. 'Pre-Flop', 'Flop', etc.)
-        """
+        """Executes a betting round. The pre-flop starts after the big blind; post-flop rounds start with the first active player."""
         print(f"\n--- {round_name} ---")
+
         active_players = [player for player in self.players if player.name not in self.folded_players]
 
-        for player in active_players:
-            active_players = [player for player in self.players if player.name not in self.folded_players]
-            if len(active_players) == 1:
-                continue
-            action = self.get_player_action(player, self.current_bet - self.bets[player.name])
+        # Determine the starting player for the betting round
+        if round_name == 'Pre-Flop':
+            start_index = (self.small_blind_index + 2) % len(
+                self.players)  # Start betting after the big blind in pre-flop
+        else:
+            # For post-flop rounds, start with the first active player in the list
+            start_index = next((i for i, player in enumerate(self.players) if player.name not in self.folded_players),
+                               0)
+
+        player_order = active_players[start_index:] + active_players[:start_index]
+
+        for player in player_order:
+            # Skip player if only one player is left or if they're folded
+            if len([p for p in active_players if p.name not in self.folded_players]) <= 1:
+                break
+
+            to_call = self.current_bet - self.bets[player.name]
+            action = self.get_player_action(player, to_call)
+
             if action == 'fold':
                 self.folded_players.add(player.name)
-                print(f"{player.name} foldet.")
+                print(f"{player.name} folds.")
             elif action == 'call':
-                call_amount = self.current_bet - self.bets[player.name]
-                self.pot += call_amount
-                self.bets[player.name] += call_amount
-                print(f"{player.name} callt: {call_amount}")
+                call_amount = to_call
+                if player.balance >= call_amount:
+                    player.balance -= call_amount
+                    self.bets[player.name] += call_amount
+                    self.pot += call_amount
+                    print(f"{player.name} calls: {call_amount}")
+                else:
+                    raise ValueError(f"{player.name} does not have enough chips to call.")
             elif action.startswith('raise'):
                 _, raise_amount = action.split()
                 raise_amount = int(raise_amount)
-                total_bet = self.current_bet - self.bets[player.name] + raise_amount
-                self.pot += total_bet
-                self.bets[player.name] += total_bet
-                self.current_bet += raise_amount
-                print(f"{player.name} raiset um: {raise_amount}")
-            # Weitere Aktionen wie 'check' können hinzugefügt werden
+                total_bet = to_call + raise_amount
+
+                if player.balance >= total_bet:
+                    player.balance -= total_bet
+                    self.bets[player.name] += total_bet
+                    self.pot += total_bet
+                    self.current_bet += raise_amount
+                    print(f"{player.name} raises by {raise_amount}")
+                else:
+                    raise ValueError(f"{player.name} does not have enough chips to raise.")
 
     def get_player_action(self, player, to_call):
-        """
-        Bestimmt die Aktion eines Spielers. Hier können Sie die Interaktion mit der AI einfügen.
-        Derzeit wird die Aktion zufällig gewählt.
-
-        :param player: Player-Objekt
-        :param to_call: Betrag, den der Spieler callen muss
-        :return: Aktion als String
-        """
-        # Platzhalter für AI-Integration. Hier wird zufällig entschieden.
+        """Determines the player's action. This is a placeholder for future AI integration."""
         while True:
             print(f"\n{player.name}, dein Zug:")
             print(f"Betrag zum Callen: {to_call}")
             action = input("Wähle eine Aktion (fold, call, raise <amount>): ").strip().lower()
 
-            # Validate input format
             if action == "fold":
                 return "fold"
             elif action == "call":
@@ -111,61 +131,51 @@ class GameRound:
                 print("Ungültige Aktion. Bitte gib 'fold', 'call' oder 'raise <Betrag>' ein.")
 
     def deal_community_cards(self, number):
-        """
-        Fügt Gemeinschaftskarten hinzu.
-
-        :param number: Anzahl der zu dealenden Gemeinschaftskarten
-        """
+        """Deals the specified number of community cards."""
         for _ in range(number):
             card = self.deck.deal_card()
             self.community_cards.append(card)
             print(f"Gemeinschaftskarte: {card}")
 
     def showdown(self):
-        """Ermittelt und zeigt die Gewinner an."""
+        """Determines the winner(s) and distributes the pot."""
         print("\n--- Showdown ---")
         active_players = [player for player in self.players if player.name not in self.folded_players]
         if not active_players:
-            print("Alle Spieler haben gefoldet. Pot bleibt unverteilt. WTF")
+            print("Alle Spieler haben gefoldet. Pot bleibt unverteilt.")
             return
-        # Annahme: community_cards sind bereits gesetzt
+
         community = self.community_cards
-        player_hands = []
+        player_hands = [(player, player.get_best_hand(community)) for player in active_players]
 
-        for player in active_players:
-            best_hand = player.get_best_hand(community)
-            player_hands.append(
-                (player.name, best_hand[0], best_hand[1]))  # Store the player's name, hand type, and cards
-
-        # Print each player's best hand
-        for player_name, hand_type, best_hand in player_hands:
-            print(f"{player_name}'s Best Hand: {hand_type} with cards {sorted(best_hand)}")
-
-        # To find winners, you would integrate this with WinnerAnalyzer
-        analyzer = WinnerAnalyzer([(player_name, best_hand) for player_name, _, best_hand in player_hands])
+        analyzer = WinnerAnalyzer([(player.name, best_hand[1]) for player, best_hand in player_hands])
         winners = analyzer.analyze_winners()
-
 
         if len(winners) == 1:
             winner = winners[0]
-            print("")
-            print(f"Gewinner ist {winner[0]} mit {winner[1]}. Pot: {self.pot}")
+            winning_player = next(player for player in self.players if player.name == winner[0])
+            winning_player.add_balance(self.pot)
+            print(f"Gewinner ist {winning_player.name} mit {winner[1]}. Pot: {self.pot}")
         else:
+            split_amount = self.pot // len(winners)
             winner_names = ', '.join([winner[0] for winner in winners])
-            print(f"Es gibt einen Split-Pot zwischen: {winner_names}. Pot: {self.pot}")
+            print(f"Es gibt einen Split-Pot zwischen: {winner_names}. Jeder erhält: {split_amount}")
+            for winner in winners:
+                winning_player = next(player for player in self.players if player.name == winner[0])
+                winning_player.add_balance(split_amount)
 
     def declare_winner_if_only_one_remaining(self):
-        """Überprüft, ob nur noch ein Spieler übrig ist und erklärt diesen als Gewinner."""
+        """Checks if only one player remains and declares them the winner."""
         active_players = [player for player in self.players if player.name not in self.folded_players]
         if len(active_players) == 1:
-            # Wenn nur ein Spieler übrig ist, wird dieser als Gewinner erklärt
             winner = active_players[0]
-            print(f"{winner.name} gewinnt, da alle anderen Spieler gefoldet haben.")
+            winner.add_balance(self.pot)
+            print(f"{winner.name} gewinnt {self.pot}, da alle anderen Spieler gefoldet haben.")
             return True
         return False
 
     def reset_game(self):
-        """Setzt das Spiel für die nächste Runde zurück."""
+        """Resets the game state for the next round and rotates blinds."""
         self.deck = Deck()
         self.deck.shuffle()
         self.community_cards = []
@@ -173,11 +183,14 @@ class GameRound:
         self.current_bet = 0
         self.bets = {player.name: 0 for player in self.players}
         self.folded_players = set()
+
         for player in self.players:
             player.clear_cards()
 
+        self.rotate_blinds()  # Move blinds to the next players
+
     def play_round(self):
-        """Spielt eine vollständige Pokerrunde."""
+        """Plays a complete round of poker."""
         self.assign_blinds()
         self.deal_private_cards()
 
@@ -185,7 +198,7 @@ class GameRound:
         self.betting_round('Pre-Flop')
         if self.declare_winner_if_only_one_remaining():
             self.reset_game()
-            return  # Runde endet, da nur noch ein Spieler übrig ist
+            return
 
         # Flop
         self.deal_community_cards(3)
