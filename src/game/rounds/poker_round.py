@@ -56,56 +56,66 @@ class GameRound:
                 print(f"{player.name} erhält Karte: {card}")
 
     def betting_round(self, round_name):
-        """Executes a betting round. The pre-flop starts after the big blind; post-flop rounds start with the first active player."""
+        """Executes a betting round. Players must match the highest bet or fold if a raise occurs."""
         print(f"\n--- {round_name} ---")
 
         active_players = [player for player in self.players if player.name not in self.folded_players]
 
         # Determine the starting player for the betting round
         if round_name == 'Pre-Flop':
-            start_index = (self.small_blind_index + 2) % len(
-                self.players)  # Start betting after the big blind in pre-flop
+            start_index = (self.small_blind_index + 2) % len(self.players)
         else:
-            # For post-flop rounds, start with the first active player in the list
             start_index = next((i for i, player in enumerate(self.players) if player.name not in self.folded_players),
                                0)
 
         player_order = active_players[start_index:] + active_players[:start_index]
 
-        for player in player_order:
-            # Skip player if only one player is left or if they're folded
-            if len([p for p in active_players if p.name not in self.folded_players]) <= 1:
-                break
+        # Track which players have matched the current bet
+        players_in_round = {player.name: False for player in active_players}
 
-            to_call = self.current_bet - self.bets[player.name]
-            action = self.get_player_action(player, to_call)
+        while not all(
+                players_in_round[player.name] for player in active_players if player.name not in self.folded_players):
+            for player in player_order:
+                if player.name in self.folded_players:
+                    continue  # Skip folded players
 
-            if action == 'fold':
-                self.folded_players.add(player.name)
-                print(f"{player.name} folds.")
-            elif action == 'call':
-                call_amount = to_call
-                if player.balance >= call_amount:
-                    player.balance -= call_amount
-                    self.bets[player.name] += call_amount
-                    self.pot += call_amount
-                    print(f"{player.name} calls: {call_amount}")
-                else:
-                    raise ValueError(f"{player.name} does not have enough chips to call.")
-            elif action.startswith('raise'):
-                _, raise_amount = action.split()
-                raise_amount = int(raise_amount)
-                total_bet = to_call + raise_amount
+                to_call = self.current_bet - self.bets[player.name]
+                action = self.get_player_action(player, to_call)
 
-                if player.balance >= total_bet:
-                    player.balance -= total_bet
-                    self.bets[player.name] += total_bet
-                    self.pot += total_bet
-                    self.current_bet += raise_amount
-                    print(f"{player.name} raises by {raise_amount}")
-                else:
-                    raise ValueError(f"{player.name} does not have enough chips to raise.")
+                if action == 'fold':
+                    self.folded_players.add(player.name)
+                    print(f"{player.name} folds.")
+                elif action == 'call':
+                    call_amount = to_call
+                    if player.balance >= call_amount:
+                        player.balance -= call_amount
+                        self.bets[player.name] += call_amount
+                        self.pot += call_amount
+                        players_in_round[player.name] = True
+                        print(f"{player.name} calls: {call_amount}")
+                    else:
+                        raise ValueError(f"{player.name} does not have enough chips to call.")
+                elif action.startswith('raise'):
+                    _, raise_amount = action.split()
+                    raise_amount = int(raise_amount)
+                    total_bet = to_call + raise_amount
 
+                    if player.balance >= total_bet:
+                        player.balance -= total_bet
+                        self.bets[player.name] += total_bet
+                        self.pot += total_bet
+                        self.current_bet += raise_amount  # Update the highest bet
+                        print(f"{player.name} raises by {raise_amount}")
+
+                        # Reset players_in_round since all must now match the new bet or fold
+                        players_in_round = {p.name: (p.name in self.folded_players) for p in active_players}
+                        players_in_round[player.name] = True  # Player who raised has already matched their own bet
+                    else:
+                        raise ValueError(f"{player.name} does not have enough chips to raise.")
+
+                # Break if only one active player remains
+                if len([p for p in active_players if p.name not in self.folded_players]) <= 1:
+                    return
     def get_player_action(self, player, to_call):
         """Determines the player's action. This is a placeholder for future AI integration."""
         while True:

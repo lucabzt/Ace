@@ -5,7 +5,7 @@ import pygame
 from src.game.resources.player import Player
 from src.game.rounds.poker_round import GameRound
 
-PATH_TO_SPADE = "C:/Users/Markus/Nextcloud/Projekte/Python-Projekte/Spade"
+PATH_TO_SPADE = "/Users/sebastianrogg/PycharmProjects/Spade"
 
 # Initialize Pygame
 pygame.init()
