@@ -7,8 +7,6 @@ import os
 from src.game.resources.card import Card, Suit, Rank
 
 device = 'cuda:0' if torch.cuda.is_available() else 'cpu'
-torch.cuda.set_per_process_memory_fraction(0.8, device=0)
-os.environ["PYTORCH_CUDA_ALLOC_CONF"] = "expandable_segments:True"
 
 
 class Classifier:
