@@ -99,12 +99,13 @@ def play_winners_sound(winners):
         print("0:," , hand_cards)
         print("1:," , attributes)
         print("name:," , name)
-
-        play_full_house((str)(name))
-
+        #what
+        play_full_house(hand_cards)
+        # winning person
+        play_player_name((str)(name))
         play_random_sound("Player Actions/Win")
 
-        pass
+        return
 
         # Play player's name and "wins"
         play_player_name(name)
@@ -133,9 +134,6 @@ def play_winners_sound(winners):
         elif hand_type == "High Card":
             play_generic_hand("High Card", attributes)
 
-
-def play_winner_sound(winner):
-    play_winners_sound([winner])
 
 
 if __name__ == '__main__':
