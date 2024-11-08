@@ -69,6 +69,8 @@ def main():
     for winner in winners:
         print(winner)
 
+    return winners
+
 
 if __name__ == "__main__":
     main()
