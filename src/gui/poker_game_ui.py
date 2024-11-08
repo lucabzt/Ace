@@ -3,7 +3,7 @@ import os
 import pygame
 
 from src.game.resources.player import Player
-from src.game.rounds.poker_round import GameRound
+from src.game.rounds.poker_round import GameRound, display_spade_art, display_new_round
 
 PATH_TO_SPADE = "/Users/sebastianrogg/PycharmProjects/Spade"
 
@@ -34,12 +34,12 @@ class poker_game_ui(GameRound):
         self.card_images = self.load_card_images()
         self.background_image = self.load_background_image()
         self.round_step = 0
-        self.display_spade_art()  # Display spade art on game start
+        display_spade_art()  # Display spade art on game start
 
     def play_round_with_display(self):
         """Run the poker game one step at a time for visual updates."""
         if self.round_step == 0:
-            self.display_new_round()
+            display_new_round()
             self.assign_blinds()
             self.deal_private_cards()
         elif self.round_step == 1:
