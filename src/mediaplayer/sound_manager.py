@@ -99,12 +99,13 @@ def play_winners_sound(winners):
         print("0:," , hand_cards)
         print("1:," , attributes)
         print("name:," , name)
-
-        play_full_house((str)(name))
-
+        #what
+        play_full_house(hand_cards)
+        # winning person
+        play_player_name((str)(name))
         play_random_sound("Player Actions/Win")
 
-        pass
+        return
 
         # Play player's name and "wins"
         play_player_name(name)
@@ -113,29 +114,26 @@ def play_winners_sound(winners):
 
         # Switch-like structure for each hand type
         if hand_type == "Royal Flush":
-            play_hand_type("Royal Flush")
+            play_hand_type("Royal Flush") #No attr needed
         elif hand_type == "Straight Flush":
-            play_generic_hand("Straight Flush", [attributes[0]])
+            play_generic_hand("Straight Flush", [attributes[0]]) #Attr = High of straight
         elif hand_type == "Four of a Kind":
-            play_generic_hand("Four of a Kind", attributes)
+            play_generic_hand("Four of a Kind", attributes[0]) #Attr = rank of quads
         elif hand_type == "Full House":
-            play_full_house(attributes)
+            play_full_house(attributes) #Attr = Trip Card rank, Pair Card rank
         elif hand_type == "Flush":
-            play_generic_hand("Flush", attributes)
+            play_generic_hand("Flush", attributes[0]) #Attr = High of Flush
         elif hand_type == "Straight":
-            play_generic_hand("Straight", [attributes[0]])
+            play_generic_hand("Straight", [attributes[0]]) #Attr = High of straigh
         elif hand_type == "Three of a Kind":
-            play_generic_hand("Three of a Kind", attributes)
+            play_generic_hand("Three of a Kind", attributes[0]) #Attr = Trip Card rank
         elif hand_type == "Two Pair":
-            play_generic_hand("Two Pair", attributes)
+            play_generic_hand("Two Pair", attributes[:2]) #Attr = High Pair, Low Pair rank
         elif hand_type == "One Pair":
-            play_generic_hand("One Pair", attributes)
+            play_generic_hand("One Pair", attributes[0]) #Attr = Pair Card
         elif hand_type == "High Card":
-            play_generic_hand("High Card", attributes)
+            play_generic_hand("High Card", attributes[0]) #High Card
 
-
-def play_winner_sound(winner):
-    play_winners_sound([winner])
 
 
 if __name__ == '__main__':
