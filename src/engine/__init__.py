@@ -1,1 +1,1 @@
-from table import HoldemTable, OmahaTable
+from src.engine.table import Engine
