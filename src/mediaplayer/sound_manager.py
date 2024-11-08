@@ -101,6 +101,9 @@ def play_winners_sound(winners):
         print("name:," , name)
 
         play_full_house((str)(name))
+
+        play_random_sound("Player Actions/Win")
+
         pass
 
         # Play player's name and "wins"
