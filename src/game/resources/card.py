@@ -5,7 +5,7 @@ from enum import Enum
 class Suit(Enum):
     HEARTS = 'HEARTS'
     DIAMONDS = 'DIAMONDS'
-    SPADES = 'SPADES'
+    SPADES = 'SPADE'
     CLUBS = 'CLUBS'
 
 
@@ -26,11 +26,37 @@ class Rank(Enum):
     ACE = 'ACE'
 
 
+suit_mapping = {
+    Suit.HEARTS: "h",
+    Suit.DIAMONDS: "d",
+    Suit.SPADES: "s",
+    Suit.CLUBS: "c",
+}
+
+
+rank_mapping = {
+    Rank.TWO: "2",
+    Rank.THREE: "3",
+    Rank.FOUR: "4",
+    Rank.FIVE: "5",
+    Rank.SIX: "6",
+    Rank.SEVEN: "7",
+    Rank.EIGHT: "8",
+    Rank.NINE: "9",
+    Rank.TEN: "T",
+    Rank.JACK: "J",
+    Rank.QUEEN: "Q",
+    Rank.KING: "K",
+    Rank.ACE: "A",
+}
+
+
 # The Card class, using Suit and Rank enums
 class Card:
     def __init__(self, suit: Suit, rank: Rank):
         self.suit = suit
         self.rank = rank
+        self.abbreviation = rank_mapping[rank] + suit_mapping[suit]
 
     def __repr__(self):
         # Returns a user-friendly representation of the card
