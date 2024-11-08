@@ -1,46 +1,8 @@
+from src.game.game_utils import display_spade_art, display_new_round
 from src.game.hand_analysis.winner_determiner import WinnerAnalyzer
+from src.game.input import get_player_action
 from src.game.resources.player import Player
 from src.game.resources.poker_deck import Deck
-
-
-def display_spade_art():
-    """Displays Spade ASCII art on game startup."""
-    spade_art = """
-                      /$$$$$$  /$$$$$$$   /$$$$$$  /$$$$$$$  /$$$$$$$$
-                     /$$__  $$| $$__  $$ /$$__  $$| $$__  $$| $$_____/
-                    | $$  \__/| $$  \ $$| $$  \ $$| $$  \ $$| $$      
-                    |  $$$$$$ | $$$$$$$/| $$$$$$$$| $$  | $$| $$$$$   
-                     \____  $$| $$____/ | $$__  $$| $$  | $$| $$__/   
-                     /$$  \ $$| $$      | $$  | $$| $$  | $$| $$      
-                    |  $$$$$$/| $$      | $$  | $$| $$$$$$$/| $$$$$$$$
-                     \______/ |__/      |__/  |__/|_______/ |________/
-                                              
-        ---------- # ------------------------------------------------------------------
-        --------- ##= ------------------------------ Exmatrikulation ------------------
-        -------- ##=== ------------------ Luca, Markus, Sebi, Jonas, Paul, Matthi -----
-        ------ ###==#=== --------------------------------------------------------------
-        ---- ####===##==== ------------------------------------------------------------
-        -- #####====###===== ------      "My name is Spade...                     -----
-        - #####=====####===== -----       I am you AI Poker Dealer...             -----
-        - #####=====####===== -----       Prepare to play!"                       -----
-        --- ####=  #  #==== ------- - My little programmer (Markus Huber)         -----
-        --------- ##= -----------------------------------------------------------------
-        ------- ####=== ---------------------------------------------------------------                               
-    
-    """
-    print(spade_art)
-
-
-def display_new_round():
-    new_round = """
-            ♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠  .------..------..------..------..------.
-            ♠                               ♠  |S.--. ||P.--. ||A.--. ||D.--. ||E.--. |
-            ♠           NEW ROUND!          ♠  | :/\: || :/\: || (\/) || :/\: || (\/) |
-            ♠           NEW LUCK!           ♠  | :\/: || (__) || :\/: || (__) || :\/: |
-            ♠                               ♠  | '--'S|| '--'P|| '--'A|| '--'D|| '--'E|
-            ♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠  `------'`------'`------'`------'`------´
-            """
-    print(new_round)
 
 
 class GameRound:
@@ -60,6 +22,48 @@ class GameRound:
         self.small_blind_index = 0
         self.big_blind_player = None
         self.small_blind_player = None
+
+    def modify_game_settings(self):
+        """Allows the user to modify game settings before each round."""
+        print("\n--- MODIFY GAME SETTINGS ---")
+        print("Options: 1) Add player, 2) Remove player, 3) Give balance to player, 4) Change blind sizes, 5) Continue")
+        choice = input("Choose an option (1-5): ")
+
+        if choice == '1':
+            player_name = input("Enter the new player's name: ")
+            if player_name and player_name not in [player.name for player in self.players]:
+                self.players.append(Player(player_name))
+                self.bets[player_name] = 0
+                print(f"Player {player_name} has been added.")
+            else:
+                print("Invalid or duplicate player name.")
+
+        elif choice == '2':
+            player_name = input("Enter the player's name to remove: ")
+            self.players = [player for player in self.players if player.name != player_name]
+            if player_name in self.bets:
+                del self.bets[player_name]
+            print(f"Player {player_name} has been removed.")
+
+        elif choice == '3':
+            player_name = input("Enter the player's name to give balance: ")
+            player = next((p for p in self.players if p.name == player_name), None)
+            if player:
+                amount = int(input(f"Enter the amount to give to {player_name}: "))
+                player.balance += amount
+                print(f"{player_name} now has {player.balance} chips.")
+            else:
+                print("Player not found.")
+
+        elif choice == '4':
+            self.small_blind = int(input("Enter new small blind: "))
+            self.big_blind = int(input("Enter new big blind: "))
+            print(f"Blinds updated. Small Blind: {self.small_blind}, Big Blind: {self.big_blind}")
+
+        elif choice == '5':
+            print("Continuing without changes.")
+        else:
+            print("Invalid choice. No changes made.")
 
     def assign_blinds(self):
         """Assigns small and big blinds to players and handles the initial bets."""
@@ -99,6 +103,14 @@ class GameRound:
                 player.receive_card(card)
                 print(f"{player.name} erhält Karte: {card}")
 
+    def deal_community_cards(self, number):
+        """Deals the specified number of community cards."""
+        print("\n--- DEALING COMMUNITY CARDS ---")
+        for _ in range(number):
+            card = self.deck.deal_card()
+            self.community_cards.append(card)
+            print(f"Gemeinschaftskarte: {card}")
+
     def betting_round(self, round_name):
         """Executes a betting round with players matching, raising, or folding as needed."""
         print(f"\n--- {round_name.upper()} BETTING ---")
@@ -119,7 +131,8 @@ class GameRound:
         last_raiser = None
 
         while not all(
-                players_in_round[player.name] for player in active_players if player.name not in self.folded_players):
+players_in_round[player.name] for player in active_players if player.name not in self.folded_players):
+
             for player in player_order:
                 if player.name in self.folded_players:
                     continue  # Skip folded players
@@ -130,11 +143,18 @@ class GameRound:
                     return  # End betting round
 
                 to_call = self.current_bet - self.bets[player.name]
-                action = self.get_player_action(player, to_call)
+                action = get_player_action(player, to_call)
 
                 if action == 'fold':
                     self.folded_players.add(player.name)
                     print(f"{player.name} folds.")
+                elif action == 'check':
+                    call_amount = to_call
+                    if call_amount == 0:
+                        players_in_round[player.name] = True
+                        print(f"{player.name} checks")
+                    else:
+                        raise ValueError(f"Can't check! {player.name} has to call: {call_amount}/raise/fold!")
                 elif action == 'call':
                     call_amount = to_call
                     if player.balance >= call_amount:
@@ -168,38 +188,6 @@ class GameRound:
                 if len([p for p in active_players if p.name not in self.folded_players]) <= 1:
                     return
 
-    def get_player_action(self, player, to_call):
-        """Determines the player's action. This is a placeholder for future AI integration."""
-        while True:
-            print(f"\n{player.name}, dein Zug:")
-            print(f"Betrag zum Callen: {to_call}")
-            action = input("Wähle eine Aktion (fold, call, raise <amount>): ").strip().lower()
-
-            if action == "fold":
-                return "fold"
-            elif action == "call":
-                return "call"
-            elif action.startswith("raise"):
-                try:
-                    _, raise_amount = action.split()
-                    raise_amount = int(raise_amount)
-                    if raise_amount > 0:
-                        return f"raise {raise_amount}"
-                    else:
-                        print("Der Raise-Betrag muss positiv sein.")
-                except ValueError:
-                    print("Ungültiger Betrag für Raise.")
-            else:
-                print("Ungültige Aktion. Bitte gib 'fold', 'call' oder 'raise <Betrag>' ein.")
-
-    def deal_community_cards(self, number):
-        """Deals the specified number of community cards."""
-        print("\n--- DEALING COMMUNITY CARDS ---")
-        for _ in range(number):
-            card = self.deck.deal_card()
-            self.community_cards.append(card)
-            print(f"Gemeinschaftskarte: {card}")
-
     def showdown(self):
         """Determines the winner(s) and distributes the pot."""
         print("\n--- SHOWDOWN ---")
@@ -220,9 +208,10 @@ class GameRound:
             winning_player.add_balance(self.pot)
             print(f"Gewinner ist {winning_player.name} mit {winner[1]}. Pot: {self.pot}")
         else:
+            winner_info = winners[0]
             split_amount = self.pot // len(winners)
             winner_names = ', '.join([winner[0] for winner in winners])
-            print(f"Es gibt einen Split-Pot zwischen: {winner_names}. Jeder erhält: {split_amount}")
+            print(f"Es gibt einen Split-Pot zwischen: {winner_names} mit {winner_info[0]}. Jeder erhält: {split_amount}")
             for winner in winners:
                 winning_player = next(player for player in self.players if player.name == winner[0])
                 winning_player.add_balance(split_amount)
@@ -253,7 +242,10 @@ class GameRound:
         self.rotate_blinds()  # Move blinds to the next players
 
     def play_round(self):
-        """Plays a complete round of poker."""
+        """Plays a complete round of poker, with option to modify settings before starting."""
+        if input("Would you like to make any changes before starting the round? (yes/no): ").lower() == 'yes':
+            self.modify_game_settings()
+
         display_spade_art()  # Display spade art on game start
         print("\n")
         display_new_round()

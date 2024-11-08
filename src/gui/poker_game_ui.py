@@ -3,7 +3,7 @@ import os
 import pygame
 
 from src.game.resources.player import Player
-from src.game.rounds.poker_round import GameRound, display_spade_art, display_new_round
+from src.game.rounds.game_round import GameRound, display_spade_art, display_new_round
 
 PATH_TO_SPADE = "/Users/sebastianrogg/PycharmProjects/Spade"
 
@@ -39,31 +39,55 @@ class poker_game_ui(GameRound):
     def play_round_with_display(self):
         """Run the poker game one step at a time for visual updates."""
         if self.round_step == 0:
+            if input("Would you like to make any changes before starting the round? (yes/no): ").lower() == 'yes':
+                self.modify_game_settings()
             display_new_round()
+            print("\n")
             self.assign_blinds()
             self.deal_private_cards()
         elif self.round_step == 1:
             self.betting_round("Pre-Flop")
+            if self.declare_winner_if_only_one_remaining():
+                self.prep_next_round()
+
         elif self.round_step == 2:
             self.deal_community_cards(3)  # Deal the Flop
+            if self.declare_winner_if_only_one_remaining():
+                self.prep_next_round()
+
         elif self.round_step == 3:
             self.betting_round("Flop")
+            if self.declare_winner_if_only_one_remaining():
+                self.prep_next_round()
+
         elif self.round_step == 4:
             self.deal_community_cards(1)  # Deal the Turn
+            if self.declare_winner_if_only_one_remaining():
+                self.prep_next_round()
+
         elif self.round_step == 5:
             self.betting_round("Turn")
+            if self.declare_winner_if_only_one_remaining():
+                self.prep_next_round()
+
         elif self.round_step == 6:
             self.deal_community_cards(1)  # Deal the River
+            if self.declare_winner_if_only_one_remaining():
+                self.prep_next_round()
+
         elif self.round_step == 7:
             self.betting_round("River")
         elif self.round_step == 8:
             self.showdown()
-            self.round_step = -1  # Reset for the next round
-            self.reset_game()
+            self.prep_next_round()
 
         # Update display and increment the step
         self.update_display()
         self.round_step += 1
+
+    def prep_next_round(self):
+        self.round_step = -1  # Reset for the next round
+        self.reset_game()
 
     def load_card_images(self):
         image_path = os.path.join(PATH_TO_SPADE, "assets/images/card_deck")
