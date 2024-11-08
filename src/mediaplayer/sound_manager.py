@@ -71,25 +71,15 @@ def play_player_name(name):
 
 # Play the sound for a winning hand type
 def play_hand_type(hand_type):
-    play_random_sound([f"../../assets/sounds/Winning Hands/{hand_type}.mp3"])
 
 
 # Function to handle Full House announcement
 def play_full_house(attributes):
-    play_hand_type("Full House")
-    play_random_sound(get_announcement_path("full of"))
-    play_random_sound(get_card_sound_paths(attributes[0]))
-    play_random_sound(get_announcement_path("and"))
-    play_random_sound(get_card_sound_paths(attributes[1]))
 
 
 # Function to handle a generic hand with attributes
 def play_generic_hand(hand_type, attributes):
-    play_hand_type(hand_type)
-    for i, rank in enumerate(attributes):
-        play_random_sound(get_card_sound_paths(rank))
-        if i < len(attributes) - 1:
-            play_random_sound(get_announcement_path("and"))
+
 
 
 # Main function that plays the winner's sound based on hand type
