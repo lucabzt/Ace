@@ -96,21 +96,6 @@ def play_generic_hand(hand_type, attributes):
 def play_winners_sound(winners):
     for winner in winners:
         name, hand_type, (hand_cards, attributes) = winner
-        print("0:," , hand_cards)
-        print("1:," , attributes)
-        print("name:," , name)
-        #what
-        play_full_house(hand_cards)
-        # winning person
-        play_player_name((str)(name))
-        play_random_sound("Player Actions/Win")
-
-        return
-
-        # Play player's name and "wins"
-        play_player_name(name)
-        return
-        play_random_sound(get_announcement_path("wins"))
 
         # Switch-like structure for each hand type
         if hand_type == "Royal Flush":
@@ -134,7 +119,9 @@ def play_winners_sound(winners):
         elif hand_type == "High Card":
             play_generic_hand("High Card", attributes)
 
-
+        # winning person
+        play_player_name(name)
+        play_random_sound("Player Actions/Win")
 
 if __name__ == '__main__':
     play_winners_sound(src.game.hand_analysis.main.main())
