@@ -215,7 +215,7 @@ class GameRound:
 
 def main():
     # Initialisiere Spieler
-    player_names = ['Alice', 'Bob', 'Charlie', 'Diana']
+    player_names = ['Luca', 'Markus', 'Sebi']
     players = [Player(name) for name in player_names]
 
     # Initialisiere das Spiel
