@@ -1,3 +1,6 @@
+import csv
+from datetime import datetime
+
 from src.game.game_utils import display_spade_art, display_new_round
 from src.game.hand_analysis.winner_determiner import WinnerAnalyzer
 from src.game.input import get_player_action
@@ -22,12 +25,14 @@ class GameRound:
         self.small_blind_index = 0
         self.big_blind_player = None
         self.small_blind_player = None
+        self.round_logs = []  # Logs for each round
+        self.exit_game = False  # Flag to indicate game exit
 
     def modify_game_settings(self):
-        """Allows the user to modify game settings before each round."""
-        print("\n--- MODIFY GAME SETTINGS ---")
-        print("Options: 1) Add player, 2) Remove player, 3) Give balance to player, 4) Change blind sizes, 5) Continue")
-        choice = input("Choose an option (1-5): ")
+        """Allows the user to modify game settings or exit the game."""
+        print("\n--- SETTINGS ---")
+        print("Options: 1) Add player, 2) Remove player, 3) Give balance to player, 4) Change blind sizes, 5) Continue, 6) Exit Game")
+        choice = input("Choose an option (1-6): ")
 
         if choice == '1':
             player_name = input("Enter the new player's name: ")
@@ -62,8 +67,9 @@ class GameRound:
 
         elif choice == '5':
             print("Continuing without changes.")
-        else:
-            print("Invalid choice. No changes made.")
+        elif choice == '6':
+            self.exit_game = True  # Set exit flag
+            print("Exiting the game after this round.")
 
     def assign_blinds(self):
         """Assigns small and big blinds to players and handles the initial bets."""
@@ -245,6 +251,10 @@ players_in_round[player.name] for player in active_players if player.name not in
         """Plays a complete round of poker, with option to modify settings before starting."""
         if input("Would you like to make any changes before starting the round? (yes/no): ").lower() == 'yes':
             self.modify_game_settings()
+            if self.exit_game:
+                self.save_game_log()
+                print("Game exited.")
+                return  # Exit game if user chose to
 
         display_spade_art()  # Display spade art on game start
         print("\n")
@@ -254,6 +264,7 @@ players_in_round[player.name] for player in active_players if player.name not in
 
         # Pre-Flop Betting
         self.betting_round('Pre-Flop')
+        self.log_round('Pre-Flop')  # Log after each round
         if self.declare_winner_if_only_one_remaining():
             self.reset_game()
             return
@@ -261,6 +272,7 @@ players_in_round[player.name] for player in active_players if player.name not in
         # Flop
         self.deal_community_cards(3)
         self.betting_round('Flop')
+        self.log_round('Flop')  # Log after each round
         if self.declare_winner_if_only_one_remaining():
             self.reset_game()
             return
@@ -268,6 +280,7 @@ players_in_round[player.name] for player in active_players if player.name not in
         # Turn
         self.deal_community_cards(1)
         self.betting_round('Turn')
+        self.log_round('Turn')  # Log after each round
         if self.declare_winner_if_only_one_remaining():
             self.reset_game()
             return
@@ -275,6 +288,7 @@ players_in_round[player.name] for player in active_players if player.name not in
         # River
         self.deal_community_cards(1)
         self.betting_round('River')
+        self.log_round('River')  # Log after each round
         if self.declare_winner_if_only_one_remaining():
             self.reset_game()
             return
@@ -283,6 +297,34 @@ players_in_round[player.name] for player in active_players if player.name not in
         self.showdown()
         self.reset_game()
 
+    def log_round(self, round_name):
+        """Logs the current state of the game after each betting round."""
+        log_entry = {
+            'round': round_name,
+            'pot': self.pot,
+            'community_cards': [str(card) for card in self.community_cards],
+            'player_bets': {player.name: self.bets[player.name] for player in self.players},
+            'player_balances': {player.name: player.balance for player in self.players}
+        }
+        self.round_logs.append(log_entry)
+
+    def save_game_log(self):
+        """Saves the game log to a CSV file upon exit."""
+        timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+        filename = f"poker_game_log_{timestamp}.csv"
+        with open(filename, 'w', newline='') as csvfile:
+            fieldnames = ['round', 'pot', 'community_cards', 'player_bets', 'player_balances']
+            writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
+            writer.writeheader()
+            for entry in self.round_logs:
+                writer.writerow({
+                    'round': entry['round'],
+                    'pot': entry['pot'],
+                    'community_cards': ', '.join(entry['community_cards']),
+                    'player_bets': ', '.join([f"{k}: {v}" for k, v in entry['player_bets'].items()]),
+                    'player_balances': ', '.join([f"{k}: {v}" for k, v in entry['player_balances'].items()])
+                })
+        print(f"Game log saved as {filename}.")
 
 def main():
     # Initialisiere Spieler

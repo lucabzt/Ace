@@ -41,42 +41,46 @@ class poker_game_ui(GameRound):
         if self.round_step == 0:
             if input("Would you like to make any changes before starting the round? (yes/no): ").lower() == 'yes':
                 self.modify_game_settings()
+                if self.exit_game:
+                    self.save_game_log()
+                    print("Game exited.")
+                    return  # Exit game if user chose to
+
             display_new_round()
             print("\n")
             self.assign_blinds()
             self.deal_private_cards()
         elif self.round_step == 1:
             self.betting_round("Pre-Flop")
+            self.log_round('Pre-Flop')  # Log after each round
             if self.declare_winner_if_only_one_remaining():
                 self.prep_next_round()
 
         elif self.round_step == 2:
             self.deal_community_cards(3)  # Deal the Flop
-            if self.declare_winner_if_only_one_remaining():
-                self.prep_next_round()
 
         elif self.round_step == 3:
             self.betting_round("Flop")
+            self.log_round('Flop')  # Log after each round
             if self.declare_winner_if_only_one_remaining():
                 self.prep_next_round()
 
         elif self.round_step == 4:
             self.deal_community_cards(1)  # Deal the Turn
-            if self.declare_winner_if_only_one_remaining():
-                self.prep_next_round()
 
         elif self.round_step == 5:
             self.betting_round("Turn")
+            self.log_round('Turn')  # Log after each round
             if self.declare_winner_if_only_one_remaining():
                 self.prep_next_round()
 
         elif self.round_step == 6:
             self.deal_community_cards(1)  # Deal the River
-            if self.declare_winner_if_only_one_remaining():
-                self.prep_next_round()
 
         elif self.round_step == 7:
             self.betting_round("River")
+            self.log_round('River')  # Log after each round
+
         elif self.round_step == 8:
             self.showdown()
             self.prep_next_round()
