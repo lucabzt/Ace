@@ -6,6 +6,7 @@ class Player:
         self.name = name
         self.cards = []  # Player's own cards
         self.balance = balance  # Player's balance for betting
+        self.win_prob = 0.0
 
     def receive_card(self, card):
         """Adds a card to the player's hand, limited to 2 cards."""

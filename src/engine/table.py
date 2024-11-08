@@ -6,10 +6,9 @@ import logging
 
 import numpy as np
 
-from exceptions import *
-from utils import *
-from hand import Hand
-from ranker import *
+from src.engine.utils import *
+from src.engine.hand import Hand
+from src.engine.ranker import *
 
 logger = logging.getLogger()
 logger.setLevel(logging.DEBUG)
@@ -183,14 +182,14 @@ class Table:
             return f"Player {', '.join((winners + 1).astype(str))} ties with a {hand_type_dict[player_hand_type[winners[0]]]}"
 
 
-class HoldemTable(Table):
+class Engine(Table):
 
     def __init__(self, num_players, deck_type='full'):
-        super(HoldemTable, self).__init__(num_players=num_players,
+        super(Engine, self).__init__(num_players=num_players,
                                           hand_limit=2,
                                           deck_type=deck_type)
 
-    def simulate(self, num_scenarios=150000, odds_type="tie_win", final_hand=False):
+    def simulate(self, num_scenarios=75000, odds_type="tie_win", final_hand=False):
 
         start = timeit.default_timer()
         community_cards, undrawn_combos = self.simulation_preparation(num_scenarios)
@@ -208,7 +207,7 @@ class HoldemTable(Table):
             logging.info(f"{min([len(undrawn_combos), num_scenarios]) * 21 * self.num_players} Simulations in {np.round(timeit.default_timer() - start, 2)}s")
             return outcome_dict, final_hand_dict
 
-        logging.info(f"{min([len(undrawn_combos), num_scenarios]) * 21 * self.num_players} Simulations in {np.round(timeit.default_timer() - start, 2)}s")
+        #logging.info(f"{min([len(undrawn_combos), num_scenarios]) * 21 * self.num_players} Simulations in {np.round(timeit.default_timer() - start, 2)}s")
         return outcome_dict
 
     def simulate_calculation(self, community_cards, undrawn_combos):

@@ -1,11 +1,14 @@
 import csv
 from datetime import datetime
 
+import numpy as np
+
 from src.game.utils.game_utils import display_spade_art, display_new_round
 from src.game.hand_analysis.winner_determiner import WinnerAnalyzer
 from src.game.input import get_player_action
 from src.game.resources.player import Player
 from src.game.resources.poker_deck import Deck
+from src.engine.table import Engine
 
 
 class GameRound:
@@ -27,6 +30,7 @@ class GameRound:
         self.small_blind_player = None
         self.round_logs = []  # Logs for each round
         self.exit_game = False  # Flag to indicate game exit
+        self.engine = Engine(num_players=len(players))
 
     def modify_game_settings(self):
         """Allows the user to modify game settings or exit the game."""
@@ -104,9 +108,10 @@ class GameRound:
         """Deals two private cards to each player."""
         print("\n--- DEALING PRIVATE CARDS ---")
         for _ in range(2):
-            for player in self.players:
+            for index, player in enumerate(self.players):
                 card = self.deck.deal_card()
                 player.receive_card(card)
+                self.engine.add_to_hand(index+1, [card.abbreviation])
                 print(f"{player.name} erhält Karte: {card}")
 
     def deal_community_cards(self, number):
@@ -115,6 +120,7 @@ class GameRound:
         for _ in range(number):
             card = self.deck.deal_card()
             self.community_cards.append(card)
+            self.engine.add_to_community([card.abbreviation])
             print(f"Gemeinschaftskarte: {card}")
 
     def betting_round(self, round_name):
@@ -247,6 +253,12 @@ players_in_round[player.name] for player in active_players if player.name not in
 
         self.rotate_blinds()  # Move blinds to the next players
 
+    def add_engine_calculations(self, probs: dict[str, np.float64]):
+        for i in range(len(self.players)):
+            win_prob = probs[f'Player {i+1} Win']
+            self.players[i].win_prob = win_prob
+            print(f"{self.players[i].name} win probability: {self.players[i].win_prob}%")
+
     def play_round(self):
         """Plays a complete round of poker, with option to modify settings before starting."""
         if input("Would you like to make any changes before starting the round? (yes/no): ").lower() == 'yes':
@@ -261,6 +273,9 @@ players_in_round[player.name] for player in active_players if player.name not in
         display_new_round()
         self.assign_blinds()
         self.deal_private_cards()
+        print("---------------")
+        win_probs = self.engine.simulate()
+        self.add_engine_calculations(win_probs)
 
         # Pre-Flop Betting
         self.betting_round('Pre-Flop')
@@ -268,9 +283,15 @@ players_in_round[player.name] for player in active_players if player.name not in
         if self.declare_winner_if_only_one_remaining():
             self.reset_game()
             return
+        print("---------------")
+        win_probs = self.engine.simulate()
+        self.add_engine_calculations(win_probs)
 
         # Flop
         self.deal_community_cards(3)
+        print("---------------")
+        win_probs = self.engine.simulate()
+        self.add_engine_calculations(win_probs)
         self.betting_round('Flop')
         self.log_round('Flop')  # Log after each round
         if self.declare_winner_if_only_one_remaining():
@@ -279,6 +300,9 @@ players_in_round[player.name] for player in active_players if player.name not in
 
         # Turn
         self.deal_community_cards(1)
+        print("---------------")
+        win_probs = self.engine.simulate()
+        self.add_engine_calculations(win_probs)
         self.betting_round('Turn')
         self.log_round('Turn')  # Log after each round
         if self.declare_winner_if_only_one_remaining():
@@ -287,6 +311,7 @@ players_in_round[player.name] for player in active_players if player.name not in
 
         # River
         self.deal_community_cards(1)
+        print("---------------")
         self.betting_round('River')
         self.log_round('River')  # Log after each round
         if self.declare_winner_if_only_one_remaining():
