@@ -1,7 +1,7 @@
 import csv
 from datetime import datetime
 
-from src.game.game_utils import display_spade_art, display_new_round
+from src.game.utils.game_utils import display_spade_art, display_new_round
 from src.game.hand_analysis.winner_determiner import WinnerAnalyzer
 from src.game.input import get_player_action
 from src.game.resources.player import Player

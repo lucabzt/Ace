@@ -1,6 +1,6 @@
 from itertools import combinations
 
-from src.game.game_utils import has_duplicate_cards, get_duplicate_cards, evaluate_hand, tie_breaker
+from src.game.utils.game_utils import has_duplicate_cards, get_duplicate_cards, evaluate_hand, tie_breaker
 
 
 class PokerHandAnalyzer:
