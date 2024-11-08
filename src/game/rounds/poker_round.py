@@ -19,8 +19,47 @@ class GameRound:
         self.folded_players = set()
         self.small_blind_index = 0
 
+    def display_spade_art(self):
+        """Displays Spade ASCII art on game startup."""
+        spade_art = """
+               /$$$$$$  /$$$$$$$   /$$$$$$  /$$$$$$$  /$$$$$$$$
+             /$$__  $$| $$__  $$ /$$__  $$| $$__  $$| $$_____/
+            | $$  \__/| $$  \ $$| $$  \ $$| $$  \ $$| $$      
+            |  $$$$$$ | $$$$$$$/| $$$$$$$$| $$  | $$| $$$$$   
+             \____  $$| $$____/ | $$__  $$| $$  | $$| $$__/   
+             /$$  \ $$| $$      | $$  | $$| $$  | $$| $$      
+            |  $$$$$$/| $$      | $$  | $$| $$$$$$$/| $$$$$$$$
+             \______/ |__/      |__/  |__/|_______/ |________/
+                                                  
+            ---------- # ------------------------------------------------------------------
+            --------- ##= ------------------------------ Exmatrikulation ------------------
+            -------- ##=== ------------------ Luca, Markus, Sebi, Jonas, Paul, Matthi -----
+            ------ ###==#=== --------------------------------------------------------------
+            ---- ####===##==== ------------------------------------------------------------
+            -- #####====###===== ------      "My name is Spade...                     -----
+            - #####=====####===== -----       I am you AI Poker Dealer...             -----
+            - #####=====####===== -----       Prepare to play!"                       -----
+            --- ####=  #  #==== ------- - My little programmer (Markus Huber)         -----
+            --------- ##= -----------------------------------------------------------------
+            ------- ####=== ---------------------------------------------------------------                               
+                                    
+        
+        
+        
+        
+        
+        ♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠  .------..------..------..------..------.
+        ♠                               ♠  |S.--. ||P.--. ||A.--. ||D.--. ||E.--. |
+        ♠   Welcome to Texas Hold'em!   ♠  | :/\: || :/\: || (\/) || :/\: || (\/) |
+        ♠                               ♠  | :\/: || (__) || :\/: || (__) || :\/: |
+        ♠                               ♠  | '--'S|| '--'P|| '--'A|| '--'D|| '--'E|
+        ♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠♠  `------'`------'`------'`------'`------´
+        """
+        print(spade_art)
+
     def assign_blinds(self):
         """Assigns small and big blinds to players and handles the initial bets."""
+        print("\n--- BLINDS ---")
         self.small_blind_player = self.players[self.small_blind_index]
         self.big_blind_player = self.players[(self.small_blind_index + 1) % len(self.players)]
 
@@ -49,6 +88,7 @@ class GameRound:
 
     def deal_private_cards(self):
         """Deals two private cards to each player."""
+        print("\n--- DEALING PRIVATE CARDS ---")
         for _ in range(2):
             for player in self.players:
                 card = self.deck.deal_card()
@@ -56,8 +96,8 @@ class GameRound:
                 print(f"{player.name} erhält Karte: {card}")
 
     def betting_round(self, round_name):
-        """Executes a betting round. Players must match the highest bet or fold if a raise occurs, and the raiser does not act again if everyone calls or folds."""
-        print(f"\n--- {round_name} ---")
+        """Executes a betting round with players matching, raising, or folding as needed."""
+        print(f"\n--- {round_name.upper()} BETTING ---")
 
         active_players = [player for player in self.players if player.name not in self.folded_players]
 
@@ -74,15 +114,13 @@ class GameRound:
         players_in_round = {player.name: False for player in active_players}
         last_raiser = None
 
-        while not all(
-                players_in_round[player.name] for player in active_players if player.name not in self.folded_players):
+        while not all(players_in_round[player.name] for player in active_players if player.name not in self.folded_players):
             for player in player_order:
                 if player.name in self.folded_players:
                     continue  # Skip folded players
 
                 # Skip if this is the player who last raised and everyone else has called or folded
-                if last_raiser == player.name and all(
-                        players_in_round[p.name] for p in active_players if p.name not in self.folded_players):
+                if last_raiser == player.name and all(players_in_round[p.name] for p in active_players if p.name not in self.folded_players):
                     return  # End betting round
 
                 to_call = self.current_bet - self.bets[player.name]
@@ -150,6 +188,7 @@ class GameRound:
 
     def deal_community_cards(self, number):
         """Deals the specified number of community cards."""
+        print("\n--- DEALING COMMUNITY CARDS ---")
         for _ in range(number):
             card = self.deck.deal_card()
             self.community_cards.append(card)
@@ -157,7 +196,7 @@ class GameRound:
 
     def showdown(self):
         """Determines the winner(s) and distributes the pot."""
-        print("\n--- Showdown ---")
+        print("\n--- SHOWDOWN ---")
         active_players = [player for player in self.players if player.name not in self.folded_players]
         if not active_players:
             print("Alle Spieler haben gefoldet. Pot bleibt unverteilt.")
@@ -209,6 +248,8 @@ class GameRound:
 
     def play_round(self):
         """Plays a complete round of poker."""
+        self.display_spade_art()  # Display spade art on game start
+        print("\n--- NEW ROUND ---")
         self.assign_blinds()
         self.deal_private_cards()
 

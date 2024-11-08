@@ -34,10 +34,12 @@ class poker_game_ui(GameRound):
         self.card_images = self.load_card_images()
         self.background_image = self.load_background_image()
         self.round_step = 0
+        self.display_spade_art()  # Display spade art on game start
 
     def play_round_with_display(self):
         """Run the poker game one step at a time for visual updates."""
         if self.round_step == 0:
+            print("\n--- NEW ROUND ---")
             self.assign_blinds()
             self.deal_private_cards()
         elif self.round_step == 1:
