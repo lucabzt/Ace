@@ -39,7 +39,7 @@ class poker_game_ui(GameRound):
     def play_round_with_display(self):
         """Run the poker game one step at a time for visual updates."""
         if self.round_step == 0:
-            print("\n--- NEW ROUND ---")
+            self.display_new_round()
             self.assign_blinds()
             self.deal_private_cards()
         elif self.round_step == 1:
