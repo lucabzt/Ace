@@ -3,9 +3,9 @@ import os
 import pygame
 
 from src.game.resources.player import Player
-from src.game.rounds.poker_round import GameRound
+from src.game.rounds.game_round import GameRound, display_spade_art, display_new_round
 
-PATH_TO_SPADE = "C:/Users/Markus/Nextcloud/Projekte/Python-Projekte/Spade"
+PATH_TO_SPADE = "/Users/sebastianrogg/PycharmProjects/Spade"
 
 # Initialize Pygame
 pygame.init()
@@ -34,33 +34,64 @@ class poker_game_ui(GameRound):
         self.card_images = self.load_card_images()
         self.background_image = self.load_background_image()
         self.round_step = 0
+        display_spade_art()  # Display spade art on game start
 
     def play_round_with_display(self):
         """Run the poker game one step at a time for visual updates."""
         if self.round_step == 0:
+            if input("Would you like to make any changes before starting the round? (yes/no): ").lower() == 'yes':
+                self.modify_game_settings()
+                if self.exit_game:
+                    self.save_game_log()
+                    print("Game exited.")
+                    return  # Exit game if user chose to
+
+            display_new_round()
+            print("\n")
+            self.assign_blinds()
             self.deal_private_cards()
         elif self.round_step == 1:
             self.betting_round("Pre-Flop")
+            self.log_round('Pre-Flop')  # Log after each round
+            if self.declare_winner_if_only_one_remaining():
+                self.prep_next_round()
+
         elif self.round_step == 2:
             self.deal_community_cards(3)  # Deal the Flop
+
         elif self.round_step == 3:
             self.betting_round("Flop")
+            self.log_round('Flop')  # Log after each round
+            if self.declare_winner_if_only_one_remaining():
+                self.prep_next_round()
+
         elif self.round_step == 4:
             self.deal_community_cards(1)  # Deal the Turn
+
         elif self.round_step == 5:
             self.betting_round("Turn")
+            self.log_round('Turn')  # Log after each round
+            if self.declare_winner_if_only_one_remaining():
+                self.prep_next_round()
+
         elif self.round_step == 6:
             self.deal_community_cards(1)  # Deal the River
+
         elif self.round_step == 7:
             self.betting_round("River")
+            self.log_round('River')  # Log after each round
+
         elif self.round_step == 8:
             self.showdown()
-            self.round_step = -1  # Reset for the next round
-            self.reset_game()
+            self.prep_next_round()
 
         # Update display and increment the step
         self.update_display()
         self.round_step += 1
+
+    def prep_next_round(self):
+        self.round_step = -1  # Reset for the next round
+        self.reset_game()
 
     def load_card_images(self):
         image_path = os.path.join(PATH_TO_SPADE, "assets/images/card_deck")
@@ -155,9 +186,13 @@ class poker_game_ui(GameRound):
             is_folded = player.name in self.folded_players
             text_color = RED if is_folded else WHITE
 
-            # Render player name and chips in the chosen color
+            # Render player name and current bet in the chosen color
             player_text = FONT.render(f"{player.name}: {self.bets[player.name]} Chips", True, text_color)
             screen.blit(player_text, (x, y + 140))
+
+            # Render player balance below the bet information
+            balance_text = FONT.render(f"Balance: {player.balance} Chips", True, WHITE)
+            screen.blit(balance_text, (x, y + 170))
 
     def update_display(self):
         if self.background_image:

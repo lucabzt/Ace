@@ -1,0 +1,13 @@
+# Ignore the assets/images directory
+assets/images/
+src/classifier/models/
+
+# Other common ignores (optional)
+__pycache__
+*.pyc
+*.pyo
+*.pyd
+.env
+.DS_Store
+.git/
+.idea/
