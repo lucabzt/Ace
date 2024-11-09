@@ -228,6 +228,7 @@ class poker_game_ui(GameRound):
         pygame.display.flip()
 
 
+
 # Function to run the game loop
 def main():
     player_names = ['Jonas', 'Markus', 'Luca', 'Matthi', 'Sebastian', 'Paul']
