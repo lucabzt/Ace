@@ -261,6 +261,9 @@ players_in_round[player.name] for player in active_players if player.name not in
 
     def play_round(self):
         """Plays a complete round of poker, with option to modify settings before starting."""
+        display_spade_art()  # Display spade art on game start
+        print("\n")
+
         if input("Would you like to make any changes before starting the round? (yes/no): ").lower() == 'yes':
             self.modify_game_settings()
             if self.exit_game:
@@ -268,8 +271,6 @@ players_in_round[player.name] for player in active_players if player.name not in
                 print("Game exited.")
                 return  # Exit game if user chose to
 
-        display_spade_art()  # Display spade art on game start
-        print("\n")
         display_new_round()
         self.assign_blinds()
         self.deal_private_cards()

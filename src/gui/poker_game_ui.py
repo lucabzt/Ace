@@ -50,6 +50,8 @@ class poker_game_ui(GameRound):
             print("\n")
             self.assign_blinds()
             self.deal_private_cards()
+            win_probs = self.engine.simulate()
+            self.add_engine_calculations(win_probs)
         elif self.round_step == 1:
             self.betting_round("Pre-Flop")
             self.log_round('Pre-Flop')  # Log after each round
@@ -58,6 +60,8 @@ class poker_game_ui(GameRound):
 
         elif self.round_step == 2:
             self.deal_community_cards(3)  # Deal the Flop
+            win_probs = self.engine.simulate()
+            self.add_engine_calculations(win_probs)
 
         elif self.round_step == 3:
             self.betting_round("Flop")
@@ -67,6 +71,8 @@ class poker_game_ui(GameRound):
 
         elif self.round_step == 4:
             self.deal_community_cards(1)  # Deal the Turn
+            win_probs = self.engine.simulate()
+            self.add_engine_calculations(win_probs)
 
         elif self.round_step == 5:
             self.betting_round("Turn")
@@ -76,6 +82,8 @@ class poker_game_ui(GameRound):
 
         elif self.round_step == 6:
             self.deal_community_cards(1)  # Deal the River
+            win_probs = self.engine.simulate()
+            self.add_engine_calculations(win_probs)
 
         elif self.round_step == 7:
             self.betting_round("River")
@@ -172,7 +180,7 @@ class poker_game_ui(GameRound):
         positions = [
             (50, SCREEN_HEIGHT - 350),  # Player 1
             (50, 50),  # Player 2
-            (SCREEN_WIDTH // 2 - 100, 20),  # Player 3 - Center top
+            (SCREEN_WIDTH // 2 - 100, 40),  # Player 3 - Center top
             (SCREEN_WIDTH - 290, 50),  # Player 4
             (SCREEN_WIDTH - 220, SCREEN_HEIGHT - 350),  # Player 5
             (SCREEN_WIDTH // 2 - 100, SCREEN_HEIGHT - 200)  # Player 6 - Center bottom
@@ -180,6 +188,11 @@ class poker_game_ui(GameRound):
 
         for i, player in enumerate(self.players):
             x, y = positions[i]
+
+            # Render player win probability above their cards
+            win_prob_text = FONT.render(f"{player.name}: {player.win_prob}%", True, WHITE)
+            screen.blit(win_prob_text, (x, y - 30))
+
             self.display_player_cards(player, x, y)
 
             # Check if player is folded and set text color accordingly
@@ -187,7 +200,7 @@ class poker_game_ui(GameRound):
             text_color = RED if is_folded else WHITE
 
             # Render player name and current bet in the chosen color
-            player_text = FONT.render(f"{player.name}: {self.bets[player.name]} Chips", True, text_color)
+            player_text = FONT.render(f"{self.bets[player.name]} Chips", True, text_color)
             screen.blit(player_text, (x, y + 140))
 
             # Render player balance below the bet information

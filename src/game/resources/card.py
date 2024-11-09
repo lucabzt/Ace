@@ -5,7 +5,7 @@ from enum import Enum
 class Suit(Enum):
     HEARTS = 'HEARTS'
     DIAMONDS = 'DIAMONDS'
-    SPADES = 'SPADE'
+    SPADES = 'SPADES'
     CLUBS = 'CLUBS'
 
 
