@@ -1,11 +1,16 @@
 import os
+import sys
+from pathlib import Path
 
 import pygame
 
 from src.game.resources.player import Player
 from src.game.rounds.game_round import GameRound, display_spade_art, display_new_round
 
-PATH_TO_SPADE = "/Users/sebastianrogg/PycharmProjects/Spade"
+
+# Path setup
+BASE_DIR = base_path = Path(__file__).resolve().parent.parent.parent  # Go up three directories from mediaplayer
+PATH_TO_SPADE = BASE_DIR
 
 # Initialize Pygame
 pygame.init()
