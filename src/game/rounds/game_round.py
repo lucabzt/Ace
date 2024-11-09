@@ -273,7 +273,7 @@ class GameRound:
             engine.add_to_community([card.abbreviation for card in self.community_cards])
         if len(active_players) == 0:
             raise Exception("No active players left.")
-        probs = engine.simulate()
+        probs = engine.simulate(final_hand=river)
 
         # Add probabilities to players
         for i in range(len(active_players)):

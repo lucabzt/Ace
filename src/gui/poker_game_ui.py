@@ -149,7 +149,7 @@ class poker_game_ui(GameRound):
 
     def display_player_cards(self, player, x, y):
         """Displays player cards. If the player has folded, the cards are displayed in grayscale."""
-        is_folded = player.name in self.folded_players
+        is_folded = (player in self.folded_players)
         for i, card in enumerate(player.cards):
             card_key = f"{card.rank.value.lower()}_{card.suit.value.lower()}"
             card_image = self.card_images.get(card_key)
@@ -200,7 +200,7 @@ class poker_game_ui(GameRound):
             self.display_player_cards(player, x, y)
 
             # Check if player is folded and set text color accordingly
-            is_folded = player.name in self.folded_players
+            is_folded = player in self.folded_players
             text_color = RED if is_folded else WHITE
 
             # Render player name and current bet in the chosen color
