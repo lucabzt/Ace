@@ -82,8 +82,6 @@ class poker_game_ui(GameRound):
 
         elif self.round_step == 6:
             self.deal_community_cards(1)  # Deal the River
-            win_probs = self.engine.simulate()
-            self.add_engine_calculations(win_probs)
 
         elif self.round_step == 7:
             self.betting_round("River")
