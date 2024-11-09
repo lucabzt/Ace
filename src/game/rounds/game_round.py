@@ -25,12 +25,12 @@ class GameRound:
         self.current_bet = 0
         self.bets = {player.name: 0 for player in players}
         self.folded_players = set()
+        self.active_players = self.players.copy()
         self.small_blind_index = 0
         self.big_blind_player = None
         self.small_blind_player = None
         self.round_logs = []  # Logs for each round
         self.exit_game = False  # Flag to indicate game exit
-        self.engine = Engine(num_players=len(players))
 
     def modify_game_settings(self):
         """Allows the user to modify game settings or exit the game."""
@@ -112,7 +112,6 @@ class GameRound:
             for index, player in enumerate(self.players):
                 card = self.deck.deal_card()
                 player.receive_card(card)
-                self.engine.add_to_hand(index + 1, [card.abbreviation])
                 print(f"{player.name} erhält Karte: {card}")
 
     def deal_community_cards(self, number):
@@ -121,38 +120,35 @@ class GameRound:
         for _ in range(number):
             card = self.deck.deal_card()
             self.community_cards.append(card)
-            self.engine.add_to_community([card.abbreviation])
             print(f"Gemeinschaftskarte: {card}")
 
     def betting_round(self, round_name):
         """Executes a betting round with players matching, raising, or folding as needed."""
         print(f"\n--- {round_name.upper()} BETTING ---")
 
-        active_players = [player for player in self.players if player.name not in self.folded_players]
-
         # Determine the starting player for the betting round
         if round_name == 'Pre-Flop':
             start_index = (self.small_blind_index + 2) % len(self.players)
         else:
-            start_index = next((i for i, player in enumerate(self.players) if player.name not in self.folded_players),
+            start_index = next((i for i, player in enumerate(self.players) if player not in self.folded_players),
                                0)
 
-        player_order = active_players[start_index:] + active_players[:start_index]
+        player_order = self.active_players[start_index:] + self.active_players[:start_index]
 
         # Track which players have matched the current bet
-        players_in_round = {player.name: False for player in active_players}
+        players_in_round = {player.name: False for player in self.active_players}
         last_raiser = None
 
         while not all(
-                players_in_round[player.name] for player in active_players if player.name not in self.folded_players):
+                players_in_round[player.name] for player in self.active_players if player not in self.folded_players):
 
             for player in player_order:
-                if player.name in self.folded_players:
+                if player in self.folded_players:
                     continue  # Skip folded players
 
                 # Skip if this is the player who last raised and everyone else has called or folded
                 if last_raiser == player.name and all(
-                        players_in_round[p.name] for p in active_players if p.name not in self.folded_players):
+                        players_in_round[p.name] for p in self.active_players if p not in self.folded_players):
                     return  # End betting round
 
                 to_call = self.current_bet - self.bets[player.name]
@@ -161,7 +157,8 @@ class GameRound:
                     action = get_player_action(player, to_call)  # TODO: AI ACTION GETTER
 
                     if action == 'fold':
-                        self.folded_players.add(player.name)
+                        self.folded_players.add(player)
+                        self.active_players.remove(player)
                         print(f"{player.name} folds.")
                         break
                     elif action == 'check':
@@ -199,7 +196,7 @@ class GameRound:
 
                             # Update last raiser and reset players_in_round for a new round of calling
                             last_raiser = player.name
-                            players_in_round = {p.name: (p.name in self.folded_players) for p in active_players}
+                            players_in_round = {p.name: (p in self.folded_players) for p in self.active_players}
                             players_in_round[player.name] = True  # Player who raised has already matched their own bet
                             break
                         else:
@@ -207,19 +204,19 @@ class GameRound:
                             continue
 
                 # Break if only one active player remains
-                if len([p for p in active_players if p.name not in self.folded_players]) <= 1:
+                if len([p for p in self.active_players if p not in self.folded_players]) <= 1:
                     return
 
     def showdown(self):
         """Determines the winner(s) and distributes the pot."""
         print("\n--- SHOWDOWN ---")
-        active_players = [player for player in self.players if player.name not in self.folded_players]
-        if not active_players:
+
+        if not self.active_players:
             print("Alle Spieler haben gefoldet. Pot bleibt unverteilt.")
             return
 
         community = self.community_cards
-        player_hands = [(player, player.get_best_hand(community)) for player in active_players]
+        player_hands = [(player, player.get_best_hand(community)) for player in self.active_players]
 
         analyzer = WinnerAnalyzer([(player.name, best_hand[1]) for player, best_hand in player_hands])
         winners = analyzer.analyze_winners()
@@ -241,9 +238,9 @@ class GameRound:
 
     def declare_winner_if_only_one_remaining(self):
         """Checks if only one player remains and declares them the winner."""
-        active_players = [player for player in self.players if player.name not in self.folded_players]
-        if len(active_players) == 1:
-            winner = active_players[0]
+
+        if len(self.active_players) == 1:
+            winner = self.active_players[0]
             winner.add_balance(self.pot)
             print(f"{winner.name} gewinnt {self.pot}, da alle anderen Spieler gefoldet haben.")
             return True
@@ -258,17 +255,35 @@ class GameRound:
         self.current_bet = 0
         self.bets = {player.name: 0 for player in self.players}
         self.folded_players = set()
+        self.active_players = self.players.copy()
 
         for player in self.players:
             player.clear_cards()
 
         self.rotate_blinds()  # Move blinds to the next players
 
-    def add_engine_calculations(self, probs: dict[str, np.float64]):
-        for i in range(len(self.players)):
+    def calculate_probabilities(self, river=False):
+        engine = Engine(len(self.active_players))
+        active_players = list(self.active_players)
+
+        # Add cards to engine
+        for i in range(len(active_players)):
+            engine.add_to_hand(i+1, [card.abbreviation for card in active_players[i].cards])
+        if len(self.community_cards) > 0:
+            engine.add_to_community([card.abbreviation for card in self.community_cards])
+        if len(active_players) == 0:
+            raise Exception("No active players left.")
+        probs = engine.simulate()
+
+        # Add probabilities to players
+        for i in range(len(active_players)):
             win_prob = probs[f'Player {i + 1} Win']
             self.players[i].win_prob = win_prob
             print(f"{self.players[i].name} win probability: {self.players[i].win_prob}%")
+
+        # Set probabilities of folded players to 0
+        for player in self.folded_players:
+            player.win_prob = 0.0
 
     def play_round(self):
         """Plays a complete round of poker, with option to modify settings before starting."""
@@ -286,8 +301,7 @@ class GameRound:
         self.assign_blinds()
         self.deal_private_cards()
         print("---------------")
-        win_probs = self.engine.simulate()
-        self.add_engine_calculations(win_probs)
+        self.calculate_probabilities()
 
         # Pre-Flop Betting
         self.betting_round('Pre-Flop')
@@ -296,14 +310,12 @@ class GameRound:
             self.reset_game()
             return
         print("---------------")
-        win_probs = self.engine.simulate()
-        self.add_engine_calculations(win_probs)
+        self.calculate_probabilities()
 
         # Flop
         self.deal_community_cards(3)
         print("---------------")
-        win_probs = self.engine.simulate()
-        self.add_engine_calculations(win_probs)
+        self.calculate_probabilities()
         self.betting_round('Flop')
         self.log_round('Flop')
         if self.declare_winner_if_only_one_remaining():
@@ -313,8 +325,7 @@ class GameRound:
         # Turn
         self.deal_community_cards(1)
         print("---------------")
-        win_probs = self.engine.simulate()
-        self.add_engine_calculations(win_probs)
+        self.calculate_probabilities()
         self.betting_round('Turn')
         self.log_round('Turn')
         if self.declare_winner_if_only_one_remaining():
@@ -323,6 +334,7 @@ class GameRound:
 
         # River
         self.deal_community_cards(1)
+        self.calculate_probabilities(river=True)
         print("---------------")
         self.betting_round('River')
         self.log_round('River')
