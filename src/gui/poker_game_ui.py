@@ -87,7 +87,7 @@ class poker_game_ui(GameRound):
 
         elif self.round_step == 6:
             self.deal_community_cards(1)  # Deal the River
-            self.calculate_probabilities(river=True)
+            self.calculate_probabilities(True)
 
         elif self.round_step == 7:
             self.betting_round("River")

@@ -273,7 +273,19 @@ class GameRound:
             engine.add_to_community([card.abbreviation for card in self.community_cards])
         if len(active_players) == 0:
             raise Exception("No active players left.")
-        probs = engine.simulate(final_hand=river)
+        if river:
+            community = self.community_cards
+            player_hands = [(player, player.get_best_hand(community)) for player in self.active_players]
+            analyzer = WinnerAnalyzer([(player.name, best_hand[1]) for player, best_hand in player_hands])
+            winners = [i[0] for i in analyzer.analyze_winners()]
+            for player in self.players:
+                if player.name in winners:
+                    player.win_prob = 100.0
+                else:
+                    player.win_prob = 0.0
+            return
+
+        probs = engine.simulate()
 
         # Add probabilities to players
         for i in range(len(active_players)):
