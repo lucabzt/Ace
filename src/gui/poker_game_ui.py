@@ -7,7 +7,6 @@ import pygame
 from src.game.resources.player import Player
 from src.game.rounds.game_round import GameRound, display_spade_art, display_new_round
 
-
 # Path setup
 BASE_DIR = base_path = Path(__file__).resolve().parent.parent.parent  # Go up three directories from mediaplayer
 PATH_TO_SPADE = BASE_DIR
@@ -38,7 +37,9 @@ class poker_game_ui(GameRound):
         super().__init__(players, small_blind, big_blind)
         self.card_images = self.load_card_images()
         self.background_image = self.load_background_image()
+        self.dealer_button = self.load_dealer_button()
         self.round_step = 0
+        self.button_index = 0
         display_spade_art()  # Display spade art on game start
 
     def play_round_with_display(self):
@@ -104,6 +105,7 @@ class poker_game_ui(GameRound):
     def prep_next_round(self):
         self.round_step = -1  # Reset for the next round
         self.reset_game()
+        self.button_index = (self.button_index + 1) % len(self.players)  # Move the button
 
     def load_card_images(self):
         image_path = os.path.join(PATH_TO_SPADE, "assets/images/card_deck")
@@ -130,6 +132,14 @@ class poker_game_ui(GameRound):
             return pygame.transform.scale(bg_image, (SCREEN_WIDTH, SCREEN_HEIGHT))
         except pygame.error:
             print("Background image not found.")
+            return None
+
+    def load_dealer_button(self):
+        try:
+            button_image = pygame.image.load(os.path.join(PATH_TO_SPADE, "assets/images/DealerButton.png"))
+            return pygame.transform.scale(button_image, (40, 40))  # Adjust size as needed
+        except pygame.error:
+            print("Dealer button image not found.")
             return None
 
     def display_cards(self, cards, x, y):
@@ -162,20 +172,6 @@ class poker_game_ui(GameRound):
                 placeholder_text = FONT.render("?", True, WHITE)
                 screen.blit(placeholder_text, (x + i * 95, y))
 
-    def apply_grayscale(self, image):
-        grayscale_image = pygame.Surface(image.get_size())
-        grayscale_image.blit(image, (0, 0))
-
-        grayscale_image.lock()
-        for x in range(grayscale_image.get_width()):
-            for y in range(grayscale_image.get_height()):
-                red, green, blue, alpha = grayscale_image.get_at((x, y))
-                gray = int(0.3 * red + 0.59 * green + 0.11 * blue)
-                grayscale_image.set_at((x, y), (gray, gray, gray, alpha))
-        grayscale_image.unlock()
-
-        return grayscale_image
-
     def display_pot(self):
         pot_text = FONT.render(f"Pot: {self.pot}", True, WHITE)
         screen.blit(pot_text, (SCREEN_WIDTH // 2 - pot_text.get_width() // 2, SCREEN_HEIGHT - 350))
@@ -193,23 +189,32 @@ class poker_game_ui(GameRound):
         for i, player in enumerate(self.players):
             x, y = positions[i]
 
-            # Render player win probability above their cards
-            win_prob_text = FONT.render(f"{player.name}: {player.win_prob}%", True, WHITE)
-            screen.blit(win_prob_text, (x, y - 30))
+            # Render player name and win probability
+            name_prob_text = FONT.render(f"{player.name}: {player.win_prob}%", True, WHITE)
+            name_prob_rect = name_prob_text.get_rect(centerx=x + 100, top=y - 35)
+            screen.blit(name_prob_text, name_prob_rect)
 
-            self.display_player_cards(player, x, y)
+            # Display cards
+            self.display_player_cards(player, x + 5, y)
 
             # Check if player is folded and set text color accordingly
             is_folded = player in self.folded_players
             text_color = RED if is_folded else WHITE
 
-            # Render player name and current bet in the chosen color
-            player_text = FONT.render(f"{self.bets[player.name]} Chips", True, text_color)
-            screen.blit(player_text, (x, y + 140))
+            # Render current bet
+            bet_text = FONT.render(f"{self.bets[player.name]} Chips", True, text_color)
+            bet_rect = bet_text.get_rect(centerx=x + 100, top=y + 140)
+            screen.blit(bet_text, bet_rect)
 
-            # Render player balance below the bet information
-            balance_text = FONT.render(f"Balance: {player.balance} Chips", True, WHITE)
-            screen.blit(balance_text, (x, y + 170))
+            # Render player balance
+            balance_text = FONT.render(f"Balance: {player.balance}", True, WHITE)
+            balance_rect = balance_text.get_rect(centerx=x + 100, top=y + 170)
+            screen.blit(balance_text, balance_rect)
+
+    def display_dealer_button(self):
+        if self.dealer_button:
+            x, y = self.get_player_position(self.button_index)
+            screen.blit(self.dealer_button, (x + 180, y + 70))  # Adjust position as needed
 
     def update_display(self):
         # Check if there's a background image. If not, set a purple background.
@@ -223,15 +228,40 @@ class poker_game_ui(GameRound):
         self.display_community_cards()
         self.display_pot()
         self.display_player_info()
+        self.display_dealer_button()
 
         # Update the display with all changes
         pygame.display.flip()
 
+    def apply_grayscale(self, image):
+        grayscale_image = pygame.Surface(image.get_size())
+        grayscale_image.blit(image, (0, 0))
+
+        grayscale_image.lock()
+        for x in range(grayscale_image.get_width()):
+            for y in range(grayscale_image.get_height()):
+                red, green, blue, alpha = grayscale_image.get_at((x, y))
+                gray = int(0.3 * red + 0.59 * green + 0.11 * blue)
+                grayscale_image.set_at((x, y), (gray, gray, gray, alpha))
+        grayscale_image.unlock()
+
+        return grayscale_image
+
+    def get_player_position(self, index):
+        positions = [
+            (50, SCREEN_HEIGHT - 350),  # Player 1
+            (50, 50),  # Player 2
+            (SCREEN_WIDTH // 2 - 100, 40),  # Player 3 - Center top
+            (SCREEN_WIDTH - 290, 50),  # Player 4
+            (SCREEN_WIDTH - 220, SCREEN_HEIGHT - 350),  # Player 5
+            (SCREEN_WIDTH // 2 - 100, SCREEN_HEIGHT - 200)  # Player 6 - Center bottom
+        ]
+        return positions[index % len(positions)]
 
 
 # Function to run the game loop
 def main():
-    player_names = ['Jonas', 'Markus', 'Luca', 'Matthi', 'Sebastian', 'Paul']
+    player_names = ['Jonas', 'Sebastian', 'Luca', 'Paul', 'Markus', 'Matthi']
     players = [Player(name) for name in player_names]
     game = poker_game_ui(players, small_blind=10, big_blind=20)
 
@@ -250,4 +280,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
