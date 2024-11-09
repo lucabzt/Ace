@@ -1,14 +1,12 @@
-import csv
-from datetime import datetime
-
 import numpy as np
 
-from src.game.utils.game_utils import display_spade_art, display_new_round
+from src.engine.table import Engine
 from src.game.hand_analysis.winner_determiner import WinnerAnalyzer
 from src.game.input import get_player_action
 from src.game.resources.player import Player
 from src.game.resources.poker_deck import Deck
-from src.engine.table import Engine
+from src.game.utils.game_utils import display_spade_art, display_new_round
+from src.logger import Logger
 
 
 class GameRound:
@@ -28,14 +26,15 @@ class GameRound:
         self.small_blind_index = 0
         self.big_blind_player = None
         self.small_blind_player = None
-        self.round_logs = []  # Logs for each round
         self.exit_game = False  # Flag to indicate game exit
         self.engine = Engine(num_players=len(players))
+        self.logger = Logger()
 
     def modify_game_settings(self):
         """Allows the user to modify game settings or exit the game."""
         print("\n--- SETTINGS ---")
-        print("Options: 1) Add player, 2) Remove player, 3) Give balance to player, 4) Change blind sizes, 5) Continue, 6) Exit Game")
+        print(
+            "Options: 1) Add player, 2) Remove player, 3) Give balance to player, 4) Change blind sizes, 5) Continue, 6) Exit Game")
         choice = input("Choose an option (1-6): ")
 
         if choice == '1':
@@ -111,7 +110,7 @@ class GameRound:
             for index, player in enumerate(self.players):
                 card = self.deck.deal_card()
                 player.receive_card(card)
-                self.engine.add_to_hand(index+1, [card.abbreviation])
+                self.engine.add_to_hand(index + 1, [card.abbreviation])
                 print(f"{player.name} erhält Karte: {card}")
 
     def deal_community_cards(self, number):
@@ -143,7 +142,7 @@ class GameRound:
         last_raiser = None
 
         while not all(
-players_in_round[player.name] for player in active_players if player.name not in self.folded_players):
+                players_in_round[player.name] for player in active_players if player.name not in self.folded_players):
 
             for player in player_order:
                 if player.name in self.folded_players:
@@ -155,46 +154,55 @@ players_in_round[player.name] for player in active_players if player.name not in
                     return  # End betting round
 
                 to_call = self.current_bet - self.bets[player.name]
-                action = get_player_action(player, to_call)
 
-                if action == 'fold':
-                    self.folded_players.add(player.name)
-                    print(f"{player.name} folds.")
-                elif action == 'check':
-                    call_amount = to_call
-                    if call_amount == 0:
-                        players_in_round[player.name] = True
-                        print(f"{player.name} checks")
-                    else:
-                        raise ValueError(f"Can't check! {player.name} has to call: {call_amount}/raise/fold!")
-                elif action == 'call':
-                    call_amount = to_call
-                    if player.balance >= call_amount:
-                        player.balance -= call_amount
-                        self.bets[player.name] += call_amount
-                        self.pot += call_amount
-                        players_in_round[player.name] = True
-                        print(f"{player.name} calls: {call_amount}")
-                    else:
-                        raise ValueError(f"{player.name} does not have enough chips to call.")
-                elif action.startswith('raise'):
-                    _, raise_amount = action.split()
-                    raise_amount = int(raise_amount)
-                    total_bet = to_call + raise_amount
+                while True:
+                    action = get_player_action(player, to_call)  # TODO: AI ACTION GETTER
 
-                    if player.balance >= total_bet:
-                        player.balance -= total_bet
-                        self.bets[player.name] += total_bet
-                        self.pot += total_bet
-                        self.current_bet += raise_amount  # Update the highest bet
-                        print(f"{player.name} raises by {raise_amount}")
+                    if action == 'fold':
+                        self.folded_players.add(player.name)
+                        print(f"{player.name} folds.")
+                        break
+                    elif action == 'check':
+                        call_amount = to_call
+                        if call_amount == 0:
+                            players_in_round[player.name] = True
+                            print(f"{player.name} checks")
+                            break
+                        else:
+                            print(f"Can't check! {player.name} has to call: {call_amount}/raise/fold!")
+                            continue
+                    elif action == 'call':
+                        call_amount = to_call
+                        if player.balance >= call_amount:
+                            player.balance -= call_amount
+                            self.bets[player.name] += call_amount
+                            self.pot += call_amount
+                            players_in_round[player.name] = True
+                            print(f"{player.name} calls: {call_amount}")
+                            break
+                        else:
+                            print(f"{player.name} does not have enough chips to call. Please choose another action.")
+                            continue
+                    elif action.startswith('raise'):
+                        _, raise_amount = action.split()
+                        raise_amount = int(raise_amount)
+                        total_bet = to_call + raise_amount
 
-                        # Update last raiser and reset players_in_round for a new round of calling
-                        last_raiser = player.name
-                        players_in_round = {p.name: (p.name in self.folded_players) for p in active_players}
-                        players_in_round[player.name] = True  # Player who raised has already matched their own bet
-                    else:
-                        raise ValueError(f"{player.name} does not have enough chips to raise.")
+                        if player.balance >= total_bet:
+                            player.balance -= total_bet
+                            self.bets[player.name] += total_bet
+                            self.pot += total_bet
+                            self.current_bet += raise_amount  # Update the highest bet
+                            print(f"{player.name} raises by {raise_amount}")
+
+                            # Update last raiser and reset players_in_round for a new round of calling
+                            last_raiser = player.name
+                            players_in_round = {p.name: (p.name in self.folded_players) for p in active_players}
+                            players_in_round[player.name] = True  # Player who raised has already matched their own bet
+                            break
+                        else:
+                            print(f"{player.name} does not have enough chips to raise. Please choose another action.")
+                            continue
 
                 # Break if only one active player remains
                 if len([p for p in active_players if p.name not in self.folded_players]) <= 1:
@@ -223,7 +231,8 @@ players_in_round[player.name] for player in active_players if player.name not in
             winner_info = winners[0]
             split_amount = self.pot // len(winners)
             winner_names = ', '.join([winner[0] for winner in winners])
-            print(f"Es gibt einen Split-Pot zwischen: {winner_names} mit {winner_info[0]}. Jeder erhält: {split_amount}")
+            print(
+                f"Es gibt einen Split-Pot zwischen: {winner_names} mit {winner_info[0]}. Jeder erhält: {split_amount}")
             for winner in winners:
                 winning_player = next(player for player in self.players if player.name == winner[0])
                 winning_player.add_balance(split_amount)
@@ -255,7 +264,7 @@ players_in_round[player.name] for player in active_players if player.name not in
 
     def add_engine_calculations(self, probs: dict[str, np.float64]):
         for i in range(len(self.players)):
-            win_prob = probs[f'Player {i+1} Win']
+            win_prob = probs[f'Player {i + 1} Win']
             self.players[i].win_prob = win_prob
             print(f"{self.players[i].name} win probability: {self.players[i].win_prob}%")
 
@@ -267,7 +276,7 @@ players_in_round[player.name] for player in active_players if player.name not in
         if input("Would you like to make any changes before starting the round? (yes/no): ").lower() == 'yes':
             self.modify_game_settings()
             if self.exit_game:
-                self.save_game_log()
+                self.logger.save_logs()
                 print("Game exited.")
                 return  # Exit game if user chose to
 
@@ -280,7 +289,8 @@ players_in_round[player.name] for player in active_players if player.name not in
 
         # Pre-Flop Betting
         self.betting_round('Pre-Flop')
-        self.log_round('Pre-Flop')  # Log after each round
+        self.logger.log_round('Pre-Flop', self.pot, self.community_cards, self.bets,
+                              {player.name: player.balance for player in self.players})
         if self.declare_winner_if_only_one_remaining():
             self.reset_game()
             return
@@ -294,7 +304,8 @@ players_in_round[player.name] for player in active_players if player.name not in
         win_probs = self.engine.simulate()
         self.add_engine_calculations(win_probs)
         self.betting_round('Flop')
-        self.log_round('Flop')  # Log after each round
+        self.logger.log_round('Flop', self.pot, self.community_cards, self.bets,
+                              {player.name: player.balance for player in self.players})
         if self.declare_winner_if_only_one_remaining():
             self.reset_game()
             return
@@ -305,7 +316,8 @@ players_in_round[player.name] for player in active_players if player.name not in
         win_probs = self.engine.simulate()
         self.add_engine_calculations(win_probs)
         self.betting_round('Turn')
-        self.log_round('Turn')  # Log after each round
+        self.logger.log_round('Turn', self.pot, self.community_cards, self.bets,
+                              {player.name: player.balance for player in self.players})
         if self.declare_winner_if_only_one_remaining():
             self.reset_game()
             return
@@ -314,7 +326,8 @@ players_in_round[player.name] for player in active_players if player.name not in
         self.deal_community_cards(1)
         print("---------------")
         self.betting_round('River')
-        self.log_round('River')  # Log after each round
+        self.logger.log_round('River', self.pot, self.community_cards, self.bets,
+                              {player.name: player.balance for player in self.players})
         if self.declare_winner_if_only_one_remaining():
             self.reset_game()
             return
@@ -323,34 +336,6 @@ players_in_round[player.name] for player in active_players if player.name not in
         self.showdown()
         self.reset_game()
 
-    def log_round(self, round_name):
-        """Logs the current state of the game after each betting round."""
-        log_entry = {
-            'round': round_name,
-            'pot': self.pot,
-            'community_cards': [str(card) for card in self.community_cards],
-            'player_bets': {player.name: self.bets[player.name] for player in self.players},
-            'player_balances': {player.name: player.balance for player in self.players}
-        }
-        self.round_logs.append(log_entry)
-
-    def save_game_log(self):
-        """Saves the game log to a CSV file upon exit."""
-        timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-        filename = f"poker_game_log_{timestamp}.csv"
-        with open(filename, 'w', newline='') as csvfile:
-            fieldnames = ['round', 'pot', 'community_cards', 'player_bets', 'player_balances']
-            writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
-            writer.writeheader()
-            for entry in self.round_logs:
-                writer.writerow({
-                    'round': entry['round'],
-                    'pot': entry['pot'],
-                    'community_cards': ', '.join(entry['community_cards']),
-                    'player_bets': ', '.join([f"{k}: {v}" for k, v in entry['player_bets'].items()]),
-                    'player_balances': ', '.join([f"{k}: {v}" for k, v in entry['player_balances'].items()])
-                })
-        print(f"Game log saved as {filename}.")
 
 def main():
     # Initialisiere Spieler
