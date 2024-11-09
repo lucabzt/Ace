@@ -266,6 +266,8 @@ def main():
     game = poker_game_ui(players, small_blind=10, big_blind=20)
 
     running = True
+    clock = pygame.time.Clock()  # Control the frame rate
+
     while running:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -273,7 +275,7 @@ def main():
 
         game.play_round_with_display()
         pygame.display.flip()
-        pygame.time.delay(500)
+        clock.tick(60)  # Limit the loop to 60 frames per second
 
     pygame.quit()
 
