@@ -212,15 +212,19 @@ class poker_game_ui(GameRound):
             screen.blit(balance_text, (x, y + 170))
 
     def update_display(self):
+        # Check if there's a background image. If not, set a purple background.
         if self.background_image:
-            screen.fill((112, 4, 52))
-            screen.blit(self.background_image, (0, 0))
+            screen.fill((112, 4, 52))  # Fill with a darker purple
+            screen.blit(self.background_image, (0, 0))  # Draw background image
         else:
-            screen.fill((75, 0, 130))
+            screen.fill((128, 0, 128))  # A medium purple if no image is loaded
 
+        # Draw community cards, pot, and player info
         self.display_community_cards()
         self.display_pot()
         self.display_player_info()
+
+        # Update the display with all changes
         pygame.display.flip()
 
 
