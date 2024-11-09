@@ -6,14 +6,14 @@ Skript for training the SpadeClassifier model on the playing_card_dataset.
 import torch
 from dataset import PlayingCardDataset
 from torch.utils.data import DataLoader
-from src.classifier.model.spadeClassifier import SpadeClassifier
+from model.spadeClassifier import SpadeClassifier
 import matplotlib.pyplot as plt
 import os
 
 
 # PARAMS
 device = 'cuda:0' if torch.cuda.is_available() else 'cpu'
-BATCH_SIZE = 32
+BATCH_SIZE = 16
 DATASET_PATH = "./playing_card_dataset.pt"
 PATH_TO_IMAGES = 'data/Images/Images'
 PATH_TO_LABELS = 'data/annotation.json'
@@ -29,7 +29,7 @@ if device != 'cpu':
 
 # DATASET, train/test split, create dataloaders
 dataset: PlayingCardDataset = PlayingCardDataset(PATH_TO_IMAGES, PATH_TO_LABELS)
-train_set, test_set, _ = torch.utils.data.random_split(dataset, [0.1, 0.1, 0.8])
+train_set, test_set = torch.utils.data.random_split(dataset, [0.8, 0.2])
 train_load, test_load = DataLoader(train_set, batch_size=BATCH_SIZE, shuffle=True), DataLoader(test_set, batch_size=BATCH_SIZE, shuffle=True)
 
 
@@ -39,7 +39,7 @@ model = SpadeClassifier().to(device)
 
 
 # TRAINING PARAMS
-optimizer = torch.optim.SGD(model.parameters(), lr=0.01, momentum=0.5)
+optimizer = torch.optim.SGD(model.parameters(), lr=0.01, momentum=0.9)
 loss_fn = torch.nn.CrossEntropyLoss()
 train_loss = []
 test_loss = []
@@ -119,16 +119,18 @@ def test_one_epoch() -> None:
 
 # TRAINING LOOP
 for epoch in range(epochs):
+    print(f"-- Starting Epoch {epoch}: --")
     train_one_epoch()
     test_one_epoch()
     torch.cuda.empty_cache()  # Empty memory cache of GPU
 
     # Save plot and model to file
-    os.mkdir(f'pretrained_models/model_{epoch}')
+    os.makedirs(f'pretrained_models/model_{epoch}', exist_ok=True)
+    plt.clf()
     plt.plot(train_loss, label="Training loss")
     plt.plot(test_loss, label="Test Loss")
     plt.legend()
-    plt.savefig(f".pretrained_models/model_{epoch}/plot.png")
+    plt.savefig(f"pretrained_models/model_{epoch}/plot.png")
     torch.save(model.state_dict(), f"pretrained_models/model_{epoch}/model.pt")
 
 torch.save(model.state_dict(), f"pretrained_models/model_{test_loss[-1]:.4f}_.pt")

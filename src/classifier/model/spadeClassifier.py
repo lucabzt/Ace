@@ -15,7 +15,7 @@ class SpadeClassifier(nn.Module):
     def __init__(self) -> None:
         super().__init__()
         features = [64, 64, 128, 256, 512]
-        num_layers = [3 for _ in range(4)]
+        num_layers = [4 for _ in range(4)]
         self.conv1 = nn.Conv2d(3, features[0], kernel_size=7, stride=2, padding=3, bias=False)
         self.bn1 = nn.BatchNorm2d(features[0])
         self.relu = nn.ReLU(inplace=True)
