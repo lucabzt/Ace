@@ -26,6 +26,7 @@ class Block(nn.Module):
         self.relu = nn.ReLU(inplace=True)
         self.conv2 = self.conv3x3(out_features, out_features)
         self.bn2 = nn.BatchNorm2d(out_features)
+        self.dropout = nn.Dropout()
         self.identity_matching = self.conv3x3(in_features, out_features, stride=stride)
 
     @staticmethod
@@ -42,6 +43,7 @@ class Block(nn.Module):
 
         x = self.conv2(x)
         x = self.bn2(x)
+        x = self.dropout(x)
 
         # Match shape of identity to output shape
         if x.shape != identity.shape:

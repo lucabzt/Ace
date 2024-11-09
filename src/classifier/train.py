@@ -13,7 +13,7 @@ import os
 
 # PARAMS
 device = 'cuda:0' if torch.cuda.is_available() else 'cpu'
-BATCH_SIZE = 16
+BATCH_SIZE = 32
 DATASET_PATH = "./playing_card_dataset.pt"
 PATH_TO_IMAGES = 'data/Images/Images'
 PATH_TO_LABELS = 'data/annotation.json'
@@ -21,7 +21,6 @@ print(f"MODEL RUNNING ON DEVICE: {device}")
 
 
 # SAVE GPU FROM SETTING ON FIRE
-
 if device != 'cpu':
     torch.cuda.set_per_process_memory_fraction(0.8, device=0)
     os.environ["PYTORCH_CUDA_ALLOC_CONF"] = "expandable_segments:True"
@@ -39,7 +38,7 @@ model = SpadeClassifier().to(device)
 
 
 # TRAINING PARAMS
-optimizer = torch.optim.SGD(model.parameters(), lr=0.01, momentum=0.9)
+optimizer = torch.optim.SGD(model.parameters(), lr=0.01, momentum=0.5)
 loss_fn = torch.nn.CrossEntropyLoss()
 train_loss = []
 test_loss = []
@@ -48,7 +47,7 @@ epochs = 200
 
 # TRAINING CODE
 def train_one_epoch() -> None:
-    torch.cuda.empty_cache()  # TODO save memory
+    torch.cuda.empty_cache()
     running_loss = 0.0
     correct = 0.0
     total = 0.0
