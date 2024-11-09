@@ -1,3 +1,6 @@
+import csv
+from datetime import datetime
+
 import numpy as np
 
 from src.engine.table import Engine
@@ -6,7 +9,6 @@ from src.game.input import get_player_action
 from src.game.resources.player import Player
 from src.game.resources.poker_deck import Deck
 from src.game.utils.game_utils import display_spade_art, display_new_round
-from src.logger import Logger
 
 
 class GameRound:
@@ -26,9 +28,9 @@ class GameRound:
         self.small_blind_index = 0
         self.big_blind_player = None
         self.small_blind_player = None
+        self.round_logs = []  # Logs for each round
         self.exit_game = False  # Flag to indicate game exit
         self.engine = Engine(num_players=len(players))
-        self.logger = Logger()
 
     def modify_game_settings(self):
         """Allows the user to modify game settings or exit the game."""
@@ -276,7 +278,7 @@ class GameRound:
         if input("Would you like to make any changes before starting the round? (yes/no): ").lower() == 'yes':
             self.modify_game_settings()
             if self.exit_game:
-                self.logger.save_logs()
+                self.save_logs()
                 print("Game exited.")
                 return  # Exit game if user chose to
 
@@ -289,8 +291,7 @@ class GameRound:
 
         # Pre-Flop Betting
         self.betting_round('Pre-Flop')
-        self.logger.log_round('Pre-Flop', self.pot, self.community_cards, self.bets,
-                              {player.name: player.balance for player in self.players})
+        self.log_round('Pre-Flop')
         if self.declare_winner_if_only_one_remaining():
             self.reset_game()
             return
@@ -304,8 +305,7 @@ class GameRound:
         win_probs = self.engine.simulate()
         self.add_engine_calculations(win_probs)
         self.betting_round('Flop')
-        self.logger.log_round('Flop', self.pot, self.community_cards, self.bets,
-                              {player.name: player.balance for player in self.players})
+        self.log_round('Flop')
         if self.declare_winner_if_only_one_remaining():
             self.reset_game()
             return
@@ -316,8 +316,7 @@ class GameRound:
         win_probs = self.engine.simulate()
         self.add_engine_calculations(win_probs)
         self.betting_round('Turn')
-        self.logger.log_round('Turn', self.pot, self.community_cards, self.bets,
-                              {player.name: player.balance for player in self.players})
+        self.log_round('Turn')
         if self.declare_winner_if_only_one_remaining():
             self.reset_game()
             return
@@ -326,8 +325,7 @@ class GameRound:
         self.deal_community_cards(1)
         print("---------------")
         self.betting_round('River')
-        self.logger.log_round('River', self.pot, self.community_cards, self.bets,
-                              {player.name: player.balance for player in self.players})
+        self.log_round('River')
         if self.declare_winner_if_only_one_remaining():
             self.reset_game()
             return
@@ -336,6 +334,34 @@ class GameRound:
         self.showdown()
         self.reset_game()
 
+    def log_round(self, round_name):
+        """Logs the current state of the game after each betting round."""
+        log_entry = {
+            'round': round_name,
+            'pot': self.pot,
+            'community_cards': [str(card) for card in self.community_cards],
+            'player_bets': {player.name: self.bets[player.name] for player in self.players},
+            'player_balances': {player.name: player.balance for player in self.players}
+        }
+        self.round_logs.append(log_entry)
+
+    def save_logs(self):
+        """Saves the game log to a CSV file upon exit."""
+        timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+        filename = f"poker_game_log_{timestamp}.csv"
+        with open(filename, 'w', newline='') as csvfile:
+            fieldnames = ['round', 'pot', 'community_cards', 'player_bets', 'player_balances']
+            writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
+            writer.writeheader()
+            for entry in self.round_logs:
+                writer.writerow({
+                    'round': entry['round'],
+                    'pot': entry['pot'],
+                    'community_cards': ', '.join(entry['community_cards']),
+                    'player_bets': ', '.join([f"{k}: {v}" for k, v in entry['player_bets'].items()]),
+                    'player_balances': ', '.join([f"{k}: {v}" for k, v in entry['player_balances'].items()])
+                })
+        print(f"Game log saved as {filename}.")
 
 def main():
     # Initialisiere Spieler

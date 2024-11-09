@@ -42,7 +42,7 @@ class poker_game_ui(GameRound):
             if input("Would you like to make any changes before starting the round? (yes/no): ").lower() == 'yes':
                 self.modify_game_settings()
                 if self.exit_game:
-                    self.logger.save_logs()
+                    self.save_logs()
                     print("Game exited.")
                     return  # Exit game if user chose to
 
@@ -54,7 +54,7 @@ class poker_game_ui(GameRound):
             self.add_engine_calculations(win_probs)
         elif self.round_step == 1:
             self.betting_round("Pre-Flop")
-            self.logger.log_round('Pre-Flop')  # Log after each round
+            self.log_round('Pre-Flop')  # Log after each round
             if self.declare_winner_if_only_one_remaining():
                 self.prep_next_round()
 
@@ -65,7 +65,7 @@ class poker_game_ui(GameRound):
 
         elif self.round_step == 3:
             self.betting_round("Flop")
-            self.logger.log_round('Flop')  # Log after each round
+            self.log_round('Flop')  # Log after each round
             if self.declare_winner_if_only_one_remaining():
                 self.prep_next_round()
 
@@ -76,16 +76,18 @@ class poker_game_ui(GameRound):
 
         elif self.round_step == 5:
             self.betting_round("Turn")
-            self.logger.log_round('Turn')  # Log after each round
+            self.log_round('Turn')  # Log after each round
             if self.declare_winner_if_only_one_remaining():
                 self.prep_next_round()
 
         elif self.round_step == 6:
             self.deal_community_cards(1)  # Deal the River
+            win_probs = self.engine.simulate(final_hand=True)
+            self.add_engine_calculations(win_probs)
 
         elif self.round_step == 7:
             self.betting_round("River")
-            self.logger.log_round('River')  # Log after each round
+            self.log_round('River')  # Log after each round
 
         elif self.round_step == 8:
             self.showdown()
@@ -99,8 +101,7 @@ class poker_game_ui(GameRound):
         self.round_step = -1  # Reset for the next round
         self.reset_game()
 
-    @staticmethod
-    def load_card_images():
+    def load_card_images(self):
         image_path = os.path.join(PATH_TO_SPADE, "assets/images/card_deck")
         images = {}
         ranks = ['2', '3', '4', '5', '6', '7', '8', '9', '10', 'jack', 'queen', 'king', 'ace']
@@ -119,8 +120,7 @@ class poker_game_ui(GameRound):
                     print(f"Image {full_path} not found.")
         return images
 
-    @staticmethod
-    def load_background_image():
+    def load_background_image(self):
         try:
             bg_image = pygame.image.load(os.path.join(PATH_TO_SPADE, "assets/images/PokerTable.png"))
             return pygame.transform.scale(bg_image, (SCREEN_WIDTH, SCREEN_HEIGHT))
@@ -158,8 +158,7 @@ class poker_game_ui(GameRound):
                 placeholder_text = FONT.render("?", True, WHITE)
                 screen.blit(placeholder_text, (x + i * 95, y))
 
-    @staticmethod
-    def apply_grayscale(image):
+    def apply_grayscale(self, image):
         grayscale_image = pygame.Surface(image.get_size())
         grayscale_image.blit(image, (0, 0))
 
