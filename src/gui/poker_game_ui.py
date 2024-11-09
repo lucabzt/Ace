@@ -16,7 +16,7 @@ PATH_TO_SPADE = BASE_DIR
 pygame.init()
 
 # Define screen dimensions
-SCREEN_WIDTH = 1200
+SCREEN_WIDTH = 1400
 SCREEN_HEIGHT = 800
 
 # Color definitions
@@ -55,8 +55,8 @@ class poker_game_ui(GameRound):
             print("\n")
             self.assign_blinds()
             self.deal_private_cards()
-            win_probs = self.engine.simulate()
-            self.add_engine_calculations(win_probs)
+
+            self.calculate_probabilities()
         elif self.round_step == 1:
             self.betting_round("Pre-Flop")
             self.log_round('Pre-Flop')  # Log after each round
@@ -65,8 +65,8 @@ class poker_game_ui(GameRound):
 
         elif self.round_step == 2:
             self.deal_community_cards(3)  # Deal the Flop
-            win_probs = self.engine.simulate()
-            self.add_engine_calculations(win_probs)
+
+            self.calculate_probabilities()
 
         elif self.round_step == 3:
             self.betting_round("Flop")
@@ -76,8 +76,8 @@ class poker_game_ui(GameRound):
 
         elif self.round_step == 4:
             self.deal_community_cards(1)  # Deal the Turn
-            win_probs = self.engine.simulate()
-            self.add_engine_calculations(win_probs)
+
+            self.calculate_probabilities()
 
         elif self.round_step == 5:
             self.betting_round("Turn")
@@ -87,8 +87,7 @@ class poker_game_ui(GameRound):
 
         elif self.round_step == 6:
             self.deal_community_cards(1)  # Deal the River
-            win_probs = self.engine.simulate(final_hand=True)
-            self.add_engine_calculations(win_probs)
+            self.calculate_probabilities(river=True)
 
         elif self.round_step == 7:
             self.betting_round("River")
