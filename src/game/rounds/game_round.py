@@ -5,7 +5,7 @@ import numpy as np
 
 from src.engine.table import Engine
 from src.game.hand_analysis.winner_determiner import WinnerAnalyzer
-from src.game.input import get_player_action
+from src.game.input import get_player_action, modify_game_settings
 from src.game.resources.player import Player
 from src.game.resources.poker_deck import Deck
 from src.game.utils.game_utils import display_spade_art, display_new_round
@@ -31,50 +31,6 @@ class GameRound:
         self.small_blind_player = None
         self.round_logs = []  # Logs for each round
         self.exit_game = False  # Flag to indicate game exit
-
-    def modify_game_settings(self):
-        """Allows the user to modify game settings or exit the game."""
-        print("\n--- SETTINGS ---")
-        print(
-            "Options: 1) Add player, 2) Remove player, 3) Give balance to player, 4) Change blind sizes, 5) Continue, 6) Exit Game")
-        choice = input("Choose an option (1-6): ")
-
-        if choice == '1':
-            player_name = input("Enter the new player's name: ")
-            if player_name and player_name not in [player.name for player in self.players]:
-                self.players.append(Player(player_name))
-                self.bets[player_name] = 0
-                print(f"Player {player_name} has been added.")
-            else:
-                print("Invalid or duplicate player name.")
-
-        elif choice == '2':
-            player_name = input("Enter the player's name to remove: ")
-            self.players = [player for player in self.players if player.name != player_name]
-            if player_name in self.bets:
-                del self.bets[player_name]
-            print(f"Player {player_name} has been removed.")
-
-        elif choice == '3':
-            player_name = input("Enter the player's name to give balance: ")
-            player = next((p for p in self.players if p.name == player_name), None)
-            if player:
-                amount = int(input(f"Enter the amount to give to {player_name}: "))
-                player.balance += amount
-                print(f"{player_name} now has {player.balance} chips.")
-            else:
-                print("Player not found.")
-
-        elif choice == '4':
-            self.small_blind = int(input("Enter new small blind: "))
-            self.big_blind = int(input("Enter new big blind: "))
-            print(f"Blinds updated. Small Blind: {self.small_blind}, Big Blind: {self.big_blind}")
-
-        elif choice == '5':
-            print("Continuing without changes.")
-        elif choice == '6':
-            self.exit_game = True  # Set exit flag
-            print("Exiting the game after this round.")
 
     def assign_blinds(self):
         """Assigns small and big blinds to players and handles the initial bets."""
@@ -303,7 +259,7 @@ class GameRound:
         print("\n")
 
         if input("Would you like to make any changes before starting the round? (yes/no): ").lower() == 'yes':
-            self.modify_game_settings()
+            modify_game_settings(self)  # Use the input module's method
             if self.exit_game:
                 self.save_logs()
                 print("Game exited.")

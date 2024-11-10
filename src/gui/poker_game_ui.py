@@ -1,9 +1,10 @@
 import os
-import sys
+
 from pathlib import Path
 
 import pygame
 
+from src.game.input import modify_game_settings
 from src.game.resources.player import Player
 from src.game.rounds.game_round import GameRound, display_spade_art, display_new_round
 
@@ -46,17 +47,16 @@ class poker_game_ui(GameRound):
         """Run the poker game one step at a time for visual updates."""
         if self.round_step == 0:
             if input("Would you like to make any changes before starting the round? (yes/no): ").lower() == 'yes':
-                self.modify_game_settings()
+                modify_game_settings(self)  # Use the input module's method
                 if self.exit_game:
                     self.save_logs()
                     print("Game exited.")
                     return  # Exit game if user chose to
 
             display_new_round()
-            print("\n")
             self.assign_blinds()
             self.deal_private_cards()
-
+            print("---------------")
             self.calculate_probabilities()
         elif self.round_step == 1:
             self.betting_round("Pre-Flop")
