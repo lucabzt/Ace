@@ -33,7 +33,7 @@ def main():
     deck = create_deck()
 
     # Create player instances, including Markus and Luca
-    players = [Player("Kyle"), Player("Sebastian"), Player("Jonas"), Player("Paul"), Player("Markus"), Player("Luca")]
+    players = [Player("Huber"), Player("Rogg"), Player("Hoerter"), Player("Vorderbrügge"), Player("Huber"), Player("Bozzetti"), Player("Simon"), Player("Maier")]
 
     # Players receive their cards
     for player in players:
