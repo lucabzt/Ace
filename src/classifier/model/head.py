@@ -14,10 +14,12 @@ from torch import Tensor
 class Head (nn.Module):
     def __init__ (self, in_features) -> None:
         super().__init__()
+        self.dropout = nn.Dropout()
         self.avgpool = nn.AdaptiveAvgPool2d((1, 1))
         self.fc = nn.Linear(in_features, 53)
 
     def forward(self, x) -> Tensor:
+        x = self.dropout(x)
         x = self.avgpool(x)
         x = x.view(x.size(0), -1)
         x = self.fc(x)
