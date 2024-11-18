@@ -1,11 +1,4 @@
 # import required module
-import threading
-import time
-
-from playsound3 import playsound
-import os
-import random
-
 import src.game.hand_analysis.main
 from src.game.resources.card import Card
 
@@ -14,12 +7,16 @@ import time
 import os
 import random
 from playsound3 import playsound
-
+from time import sleep
 import src.game.hand_analysis.main
-
+import mutagen
+from mutagen.mp3 import MP3
 
 def play_winner_sound(winner):
     play_winners_sound([winner])
+
+
+start_time = time.time()
 
 
 # Helper function to play a random sound file from a list
@@ -35,7 +32,15 @@ def play_random_sound(file_path):
             # Select a random file from the list
             random_file = random.choice(files)
             # Play the selected file
-            playsound(os.path.join(folder_path, random_file))
+            file = os.path.join(folder_path, random_file)
+            audio = MP3(file)
+            audio_info = audio.info
+            length = int(audio_info.length)
+
+            print(time.time() - start_time, "play sound..:", file)
+            playsound(file, block=False)
+            sleep(max((float)(length) * 0.985, (float)(length) - 0.014))
+
         else:
             print(f"No valid audio files found in the folder {folder_path}.")
     except Exception as e:
@@ -173,3 +178,4 @@ def play_winners_sound(winners):
 
 if __name__ == '__main__':
     play_winners_sound(src.game.hand_analysis.main.main())
+    time.sleep(1)
