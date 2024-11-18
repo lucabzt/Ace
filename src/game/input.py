@@ -47,6 +47,7 @@ def modify_game_settings(game_round):
             game_round.players.append(new_player)
             game_round.bets[player_name] = 0
             print(f"Player {player_name} has been added.")
+            game_round.reset_game()
         else:
             print("Invalid or duplicate player name.")
 
@@ -55,6 +56,7 @@ def modify_game_settings(game_round):
         game_round.players = [player for player in game_round.players if player.name != player_name]
         if player_name in game_round.bets:
             del game_round.bets[player_name]
+        game_round.reset_game()
         print(f"Player {player_name} has been removed.")
 
     elif choice == '3':
@@ -64,12 +66,14 @@ def modify_game_settings(game_round):
             amount = int(input(f"Enter the amount to give to {player_name}: "))
             player.balance += amount
             print(f"{player_name} now has {player.balance} chips.")
+            game_round.reset_game()
         else:
             print("Player not found.")
 
     elif choice == '4':
         game_round.small_blind = int(input("Enter new small blind: "))
         game_round.big_blind = int(input("Enter new big blind: "))
+        game_round.reset_game()
         print(f"Blinds updated. Small Blind: {game_round.small_blind}, Big Blind: {game_round.big_blind}")
 
     elif choice == '5':
