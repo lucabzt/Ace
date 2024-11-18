@@ -37,9 +37,9 @@ def play_random_sound(file_path):
             audio_info = audio.info
             length = (float)(audio_info.length)
 
-            print(time.time() - start_time, "play sound..:", file, "time: " + str(length) + " sleep: ", max((float)(length) * 0.88, (float)(length) - 0.2) )
+            #print(time.time() - start_time, "play sound..:", file, "time: " + str(length) + " sleep: ", max((float)(length) * 0.88, (float)(length) - 0.2) )
             playsound(file, block=False)
-            sleep(max((float)(length) * 0.985, (float)(length) - 0.014))
+            sleep(max((float)(length) * 0.975, (float)(length) - 0.114))
 
         else:
             print(f"No valid audio files found in the folder {folder_path}.")
