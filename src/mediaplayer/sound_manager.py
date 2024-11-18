@@ -35,9 +35,9 @@ def play_random_sound(file_path):
             file = os.path.join(folder_path, random_file)
             audio = MP3(file)
             audio_info = audio.info
-            length = int(audio_info.length)
+            length = (float)(audio_info.length)
 
-            print(time.time() - start_time, "play sound..:", file)
+            print(time.time() - start_time, "play sound..:", file, "time: " + str(length) + " sleep: ", max((float)(length) * 0.88, (float)(length) - 0.2) )
             playsound(file, block=False)
             sleep(max((float)(length) * 0.985, (float)(length) - 0.014))
 
