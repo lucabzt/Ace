@@ -173,7 +173,7 @@ def play_winners_sound(winners):
 
         # Winning player
         play_player_name(name)
-        play_random_sound("Player Actions/Win")
+        play_random_sound("Player Actions/win")
 
 
 if __name__ == '__main__':

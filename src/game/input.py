@@ -26,9 +26,9 @@ def get_player_action(player, to_call):
                     play_player_action(player, "raise")
                     return f"raise {raise_amount}"
                 else:
-                    print("Der Raise-Betrag muss positiv sein.")
+                    print("Der raise-Betrag muss positiv sein.")
             except ValueError:
-                print("Ungültiger Betrag für Raise.")
+                print("Ungültiger Betrag für raise.")
         else:
             print("Ungültige Aktion. Bitte gib 'check', 'call', 'fold' oder 'raise <Betrag>' ein.")
 
