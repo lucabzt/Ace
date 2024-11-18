@@ -3,12 +3,13 @@ from datetime import datetime
 
 import numpy as np
 
-from src.engine.table import Engine
 from src.game.hand_analysis.winner_determiner import WinnerAnalyzer
 from src.game.input import get_player_action
 from src.game.resources.player import Player
 from src.game.resources.poker_deck import Deck
 from src.game.utils.game_utils import display_spade_art, display_new_round
+from src.engine import parallel_holdem_calc
+from src.engine import holdem_calc
 
 
 class GameRound:
@@ -51,6 +52,7 @@ class GameRound:
         elif choice == '2':
             player_name = input("Enter the player's name to remove: ")
             self.players = [player for player in self.players if player.name != player_name]
+            self.reset_game()
             if player_name in self.bets:
                 del self.bets[player_name]
             print(f"Player {player_name} has been removed.")
@@ -157,6 +159,7 @@ class GameRound:
                     action = get_player_action(player, to_call)  # TODO: AI ACTION GETTER
 
                     if action == 'fold':
+                        player.win_prob = 0.
                         self.folded_players.add(player)
                         self.active_players.remove(player)
                         print(f"{player.name} folds.")
@@ -263,39 +266,16 @@ class GameRound:
         self.rotate_blinds()  # Move blinds to the next players
 
     def calculate_probabilities(self, river=False):
-        engine = Engine(len(self.active_players))
-        active_players = list(self.active_players)
+        community_cards = [c.abbreviation for c in self.community_cards]
+        player_cards = []
 
-        # Add cards to engine
-        for i in range(len(active_players)):
-            engine.add_to_hand(i+1, [card.abbreviation for card in active_players[i].cards])
-        if len(self.community_cards) > 0:
-            engine.add_to_community([card.abbreviation for card in self.community_cards])
-        if len(active_players) == 0:
-            raise Exception("No active players left.")
-        if river:
-            community = self.community_cards
-            player_hands = [(player, player.get_best_hand(community)) for player in self.active_players]
-            analyzer = WinnerAnalyzer([(player.name, best_hand[1]) for player, best_hand in player_hands])
-            winners = [i[0] for i in analyzer.analyze_winners()]
-            for player in self.players:
-                if player.name in winners:
-                    player.win_prob = 100.0
-                else:
-                    player.win_prob = 0.0
-            return
+        for player in self.active_players:
+            player_cards.extend([c.abbreviation for c in player.cards])
 
-        probs = engine.simulate()
+        probs = parallel_holdem_calc.calculate(community_cards, False, 10e3, None, player_cards, False)
 
-        # Add probabilities to players
-        for i in range(len(active_players)):
-            win_prob = probs[f'Player {i + 1} Win']
-            self.players[i].win_prob = win_prob
-            print(f"{self.players[i].name} win probability: {self.players[i].win_prob}%")
-
-        # Set probabilities of folded players to 0
-        for player in self.folded_players:
-            player.win_prob = 0.0
+        for i in range(len(self.active_players)):
+            self.active_players[i].win_prob = probs[i+1] * 100
 
     def play_round(self):
         """Plays a complete round of poker, with option to modify settings before starting."""

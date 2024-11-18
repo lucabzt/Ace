@@ -190,7 +190,7 @@ class poker_game_ui(GameRound):
             x, y = positions[i]
 
             # Render player name and win probability
-            name_prob_text = FONT.render(f"{player.name}: {player.win_prob}%", True, WHITE)
+            name_prob_text = FONT.render(f"{player.name}: {player.win_prob:.2f}%", True, WHITE)
             name_prob_rect = name_prob_text.get_rect(centerx=x + 100, top=y - 35)
             screen.blit(name_prob_text, name_prob_rect)
 
