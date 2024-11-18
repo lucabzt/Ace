@@ -32,52 +32,69 @@ class GameRound:
         self.round_logs = []  # Logs for each round
         self.exit_game = False  # Flag to indicate game exit
 
-    def assign_blinds(self):
-        """Assigns small and big blinds to players and handles the initial bets."""
-        print("\n--- BLINDS ---")
-        self.small_blind_player = self.players[self.small_blind_index]
-        self.big_blind_player = self.players[(self.small_blind_index + 1) % len(self.players)]
+    # main function. One entire game round
+    def play_round(self):
+        """Plays a complete round of poker, with option to modify settings before starting."""
+        display_spade_art()  # Display spade art on game start
+        print("\n")
 
-        # Deduct blinds from player balances
-        if self.small_blind_player.balance >= self.small_blind:
-            self.small_blind_player.balance -= self.small_blind
-            self.bets[self.small_blind_player.name] += self.small_blind
-            self.pot += self.small_blind
-        else:
-            raise ValueError(f"{self.small_blind_player.name} does not have enough chips for the small blind.")
+        if input("Would you like to make any changes before starting the round? (yes/no): ").lower() == 'yes':
+            modify_game_settings(self)  # Use the input module's method
+            if self.exit_game:
+                self.save_logs()
+                print("Game exited.")
+                return  # Exit game if user chose to
 
-        if self.big_blind_player.balance >= self.big_blind:
-            self.big_blind_player.balance -= self.big_blind
-            self.bets[self.big_blind_player.name] += self.big_blind
-            self.pot += self.big_blind
-            self.current_bet = self.big_blind  # Set the minimum call amount
-        else:
-            raise ValueError(f"{self.big_blind_player.name} does not have enough chips for the big blind.")
+        display_new_round()
+        self.assign_blinds()
+        self.deal_private_cards()
+        print("---------------")
+        self.calculate_probabilities()
 
-        print(f"{self.small_blind_player.name} posts small blind: {self.small_blind}")
-        print(f"{self.big_blind_player.name} posts big blind: {self.big_blind}")
+        # Pre-Flop Betting
+        self.betting_round('Pre-Flop')
+        self.log_round('Pre-Flop')
+        if self.declare_winner_if_only_one_remaining():
+            self.reset_game()
+            return
+        print("---------------")
+        self.calculate_probabilities()
 
-    def rotate_blinds(self):
-        """Rotates blinds to the next players after each round."""
-        self.small_blind_index = (self.small_blind_index + 1) % len(self.players)
+        # Flop
+        self.deal_community_cards(3)
+        print("---------------")
+        self.calculate_probabilities()
+        self.betting_round('Flop')
+        self.log_round('Flop')
+        if self.declare_winner_if_only_one_remaining():
+            self.reset_game()
+            return
 
-    def deal_private_cards(self):
-        """Deals two private cards to each player."""
-        print("\n--- DEALING PRIVATE CARDS ---")
-        for _ in range(2):
-            for index, player in enumerate(self.players):
-                card = self.deck.deal_card()
-                player.receive_card(card)
-                print(f"{player.name} erhält Karte: {card}")
+        # Turn
+        self.deal_community_cards(1)
+        print("---------------")
+        self.calculate_probabilities()
+        self.betting_round('Turn')
+        self.log_round('Turn')
+        if self.declare_winner_if_only_one_remaining():
+            self.reset_game()
+            return
 
-    def deal_community_cards(self, number):
-        """Deals the specified number of community cards."""
-        print("\n--- DEALING COMMUNITY CARDS ---")
-        for _ in range(number):
-            card = self.deck.deal_card()
-            self.community_cards.append(card)
-            print(f"Gemeinschaftskarte: {card}")
+        # River
+        self.deal_community_cards(1)
+        self.calculate_probabilities(river=True)
+        print("---------------")
+        self.betting_round('River')
+        self.log_round('River')
+        if self.declare_winner_if_only_one_remaining():
+            self.reset_game()
+            return
 
+        # Showdown if more than one player remains
+        self.showdown()
+        self.reset_game()
+
+    # one betting round
     def betting_round(self, round_name):
         """Executes a betting round with players matching, raising, or folding as needed."""
         print(f"\n--- {round_name.upper()} BETTING ---")
@@ -163,6 +180,52 @@ class GameRound:
                 if len([p for p in self.active_players if p not in self.folded_players]) <= 1:
                     return
 
+    def assign_blinds(self):
+        """Assigns small and big blinds to players and handles the initial bets."""
+        print("\n--- BLINDS ---")
+        self.small_blind_player = self.players[self.small_blind_index]
+        self.big_blind_player = self.players[(self.small_blind_index + 1) % len(self.players)]
+
+        # Deduct blinds from player balances
+        if self.small_blind_player.balance >= self.small_blind:
+            self.small_blind_player.balance -= self.small_blind
+            self.bets[self.small_blind_player.name] += self.small_blind
+            self.pot += self.small_blind
+        else:
+            raise ValueError(f"{self.small_blind_player.name} does not have enough chips for the small blind.")
+
+        if self.big_blind_player.balance >= self.big_blind:
+            self.big_blind_player.balance -= self.big_blind
+            self.bets[self.big_blind_player.name] += self.big_blind
+            self.pot += self.big_blind
+            self.current_bet = self.big_blind  # Set the minimum call amount
+        else:
+            raise ValueError(f"{self.big_blind_player.name} does not have enough chips for the big blind.")
+
+        print(f"{self.small_blind_player.name} posts small blind: {self.small_blind}")
+        print(f"{self.big_blind_player.name} posts big blind: {self.big_blind}")
+
+    def rotate_blinds(self):
+        """Rotates blinds to the next players after each round."""
+        self.small_blind_index = (self.small_blind_index + 1) % len(self.players)
+
+    def deal_private_cards(self):
+        """Deals two private cards to each player."""
+        print("\n--- DEALING PRIVATE CARDS ---")
+        for _ in range(2):
+            for index, player in enumerate(self.players):
+                card = self.deck.deal_card()
+                player.receive_card(card)
+                print(f"{player.name} erhält Karte: {card}")
+
+    def deal_community_cards(self, number):
+        """Deals the specified number of community cards."""
+        print("\n--- DEALING COMMUNITY CARDS ---")
+        for _ in range(number):
+            card = self.deck.deal_card()
+            self.community_cards.append(card)
+            print(f"Gemeinschaftskarte: {card}")
+
     def showdown(self):
         """Determines the winner(s) and distributes the pot."""
         print("\n--- SHOWDOWN ---")
@@ -187,7 +250,7 @@ class GameRound:
             split_amount = self.pot // len(winners)
             winner_names = ', '.join([winner[0] for winner in winners])
             print(
-                f"Es gibt einen Split-Pot zwischen: {winner_names} mit {winner_info[0]}. Jeder erhält: {split_amount}")
+                f"Es gibt einen Split-Pot zwischen: {winner_names}. Jeder erhält: {split_amount}")
             for winner in winners:
                 winning_player = next(player for player in self.players if player.name == winner[0])
                 winning_player.add_balance(split_amount)
@@ -224,7 +287,7 @@ class GameRound:
 
         # Add cards to engine
         for i in range(len(active_players)):
-            engine.add_to_hand(i+1, [card.abbreviation for card in active_players[i].cards])
+            engine.add_to_hand(i + 1, [card.abbreviation for card in active_players[i].cards])
         if len(self.community_cards) > 0:
             engine.add_to_community([card.abbreviation for card in self.community_cards])
         if len(active_players) == 0:
@@ -253,66 +316,7 @@ class GameRound:
         for player in self.folded_players:
             player.win_prob = 0.0
 
-    def play_round(self):
-        """Plays a complete round of poker, with option to modify settings before starting."""
-        display_spade_art()  # Display spade art on game start
-        print("\n")
 
-        if input("Would you like to make any changes before starting the round? (yes/no): ").lower() == 'yes':
-            modify_game_settings(self)  # Use the input module's method
-            if self.exit_game:
-                self.save_logs()
-                print("Game exited.")
-                return  # Exit game if user chose to
-
-        display_new_round()
-        self.assign_blinds()
-        self.deal_private_cards()
-        print("---------------")
-        self.calculate_probabilities()
-
-        # Pre-Flop Betting
-        self.betting_round('Pre-Flop')
-        self.log_round('Pre-Flop')
-        if self.declare_winner_if_only_one_remaining():
-            self.reset_game()
-            return
-        print("---------------")
-        self.calculate_probabilities()
-
-        # Flop
-        self.deal_community_cards(3)
-        print("---------------")
-        self.calculate_probabilities()
-        self.betting_round('Flop')
-        self.log_round('Flop')
-        if self.declare_winner_if_only_one_remaining():
-            self.reset_game()
-            return
-
-        # Turn
-        self.deal_community_cards(1)
-        print("---------------")
-        self.calculate_probabilities()
-        self.betting_round('Turn')
-        self.log_round('Turn')
-        if self.declare_winner_if_only_one_remaining():
-            self.reset_game()
-            return
-
-        # River
-        self.deal_community_cards(1)
-        self.calculate_probabilities(river=True)
-        print("---------------")
-        self.betting_round('River')
-        self.log_round('River')
-        if self.declare_winner_if_only_one_remaining():
-            self.reset_game()
-            return
-
-        # Showdown if more than one player remains
-        self.showdown()
-        self.reset_game()
 
     def log_round(self, round_name):
         """Logs the current state of the game after each betting round."""
@@ -342,6 +346,7 @@ class GameRound:
                     'player_balances': ', '.join([f"{k}: {v}" for k, v in entry['player_balances'].items()])
                 })
         print(f"Game log saved as {filename}.")
+
 
 def main():
     # Initialisiere Spieler

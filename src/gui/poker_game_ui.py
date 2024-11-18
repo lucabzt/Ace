@@ -40,7 +40,7 @@ class poker_game_ui(GameRound):
         self.background_image = self.load_background_image()
         self.dealer_button = self.load_dealer_button()
         self.round_step = 0
-        self.button_index = 0
+        self.button_index = -1
         display_spade_art()  # Display spade art on game start
 
     def play_round_with_display(self):
