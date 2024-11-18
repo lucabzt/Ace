@@ -72,7 +72,7 @@ class SpadeAssistant:
             self.canvas.image = img  # Keep a reference to avoid garbage collection
 
             # Schedule the next frame, adjust the delay based on the video frame rate
-            self.canvas.after(33, self.play_video)  # Call this function again after ~33 ms (~30 FPS)
+            self.canvas.after(33, self.play_video)  # call this function again after ~33 ms (~30 FPS)
         else:
             # Video has ended; reset to the first frame and continue playing
             self.video_capture.set(cv2.CAP_PROP_POS_FRAMES, 0)  # Loop video

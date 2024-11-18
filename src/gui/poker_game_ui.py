@@ -1,9 +1,10 @@
 import os
-import sys
+
 from pathlib import Path
 
 import pygame
 
+from src.game.input import modify_game_settings
 from src.game.resources.player import Player
 from src.game.rounds.game_round import GameRound, display_spade_art, display_new_round
 
@@ -39,24 +40,23 @@ class poker_game_ui(GameRound):
         self.background_image = self.load_background_image()
         self.dealer_button = self.load_dealer_button()
         self.round_step = 0
-        self.button_index = 0
+        self.button_index = -1
         display_spade_art()  # Display spade art on game start
 
     def play_round_with_display(self):
         """Run the poker game one step at a time for visual updates."""
         if self.round_step == 0:
             if input("Would you like to make any changes before starting the round? (yes/no): ").lower() == 'yes':
-                self.modify_game_settings()
+                modify_game_settings(self)  # Use the input module's method
                 if self.exit_game:
                     self.save_logs()
                     print("Game exited.")
                     return  # Exit game if user chose to
 
             display_new_round()
-            print("\n")
             self.assign_blinds()
             self.deal_private_cards()
-
+            print("---------------")
             self.calculate_probabilities()
         elif self.round_step == 1:
             self.betting_round("Pre-Flop")
@@ -118,12 +118,15 @@ class poker_game_ui(GameRound):
                 image_name = f"{rank}_of_{suit}.png"
                 full_path = os.path.join(image_path, image_name)
                 try:
-                    # Load and resize the image to 90x131
+                    # Load the image at its original resolution
                     card_image = pygame.image.load(full_path)
-                    card_image = pygame.transform.scale(card_image, (90, 131))
-                    images[f"{rank}_{suit}"] = card_image
+
+                    # Resize the image to 90x131
+                    resized_image = pygame.transform.smoothscale(card_image, (90, 131))
+                    images[f"{rank}_{suit}"] = resized_image
                 except pygame.error:
                     print(f"Image {full_path} not found.")
+
         return images
 
     def load_background_image(self):
@@ -261,7 +264,7 @@ class poker_game_ui(GameRound):
 
 # Function to run the game loop
 def main():
-    player_names = ['Jonas', 'Sebastian', 'Luca', 'Paul', 'Markus', 'Matthi']
+    player_names = ['Hoerter', 'Rogg', 'Bozzetti', 'Vorderbruegge', 'Huber', 'Meierlohr']
     players = [Player(name) for name in player_names]
     game = poker_game_ui(players, small_blind=10, big_blind=20)
 

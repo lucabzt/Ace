@@ -15,7 +15,7 @@ from mapping import cards
 class PlayingCardDataset(Dataset):
     def __init__(self, images_path, labels_path):
         transform = transforms.Compose([
-            transforms.Resize((640, 480)),
+            transforms.Resize((320, 240)),
             transforms.RandomHorizontalFlip(p=0.5),
             transforms.RandomVerticalFlip(p=0.5),
             transforms.RandomRotation(degrees=10),
