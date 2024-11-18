@@ -118,12 +118,15 @@ class poker_game_ui(GameRound):
                 image_name = f"{rank}_of_{suit}.png"
                 full_path = os.path.join(image_path, image_name)
                 try:
-                    # Load and resize the image to 90x131
+                    # Load the image at its original resolution
                     card_image = pygame.image.load(full_path)
-                    card_image = pygame.transform.scale(card_image, (90, 131))
-                    images[f"{rank}_{suit}"] = card_image
+
+                    # Resize the image to 90x131
+                    resized_image = pygame.transform.smoothscale(card_image, (90, 131))
+                    images[f"{rank}_{suit}"] = resized_image
                 except pygame.error:
                     print(f"Image {full_path} not found.")
+
         return images
 
     def load_background_image(self):
@@ -261,7 +264,7 @@ class poker_game_ui(GameRound):
 
 # Function to run the game loop
 def main():
-    player_names = ['Jonas', 'Sebastian', 'Luca', 'Paul', 'Markus', 'Matthi']
+    player_names = ['Hoerter', 'Rogg', 'Bozzetti', 'Vorderbruegge', 'Huber', 'Meierlohr']
     players = [Player(name) for name in player_names]
     game = poker_game_ui(players, small_blind=10, big_blind=20)
 

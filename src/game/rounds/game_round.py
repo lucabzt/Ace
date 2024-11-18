@@ -9,6 +9,7 @@ from src.game.input import get_player_action, modify_game_settings
 from src.game.resources.player import Player
 from src.game.resources.poker_deck import Deck
 from src.game.utils.game_utils import display_spade_art, display_new_round
+from src.mediaplayer.sound_manager import play_community_card_sound
 
 
 class GameRound:
@@ -98,6 +99,9 @@ class GameRound:
     def betting_round(self, round_name):
         """Executes a betting round with players matching, raising, or folding as needed."""
         print(f"\n--- {round_name.upper()} BETTING ---")
+
+        #Dealer voice line
+        play_community_card_sound(round_name)
 
         # Determine the starting player for the betting round
         if round_name == 'Pre-Flop':

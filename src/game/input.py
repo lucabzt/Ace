@@ -1,4 +1,5 @@
 from src.game.resources.player import Player
+from src.mediaplayer.sound_manager import play_player_action
 
 
 def get_player_action(player, to_call):
@@ -9,16 +10,20 @@ def get_player_action(player, to_call):
         action = input("Wähle eine Aktion (check, call, fold, raise <amount>): ").strip().lower()
 
         if action == "fold":
+            play_player_action(player, "fold")
             return "fold"
         elif action == "check":
+            play_player_action(player, "check")
             return "check"
         elif action == "call":
+            play_player_action(player, "call")
             return "call"
         elif action.startswith("raise"):
             try:
                 _, raise_amount = action.split()
                 raise_amount = int(raise_amount)
                 if raise_amount > 0:
+                    play_player_action(player, "raise")
                     return f"raise {raise_amount}"
                 else:
                     print("Der Raise-Betrag muss positiv sein.")
