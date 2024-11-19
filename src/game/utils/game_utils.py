@@ -45,6 +45,7 @@ def display_new_round():
             """
     print(new_round)
 
+
 def translate_winner_hands(winners):
     # Mapping integer values to poker hands
     best_hand_dict = {

@@ -1,15 +1,12 @@
 import csv
-import time
 from datetime import datetime
 
-import numpy as np
-
+from src.engine import parallel_holdem_calc
 from src.game.hand_analysis.winner_determiner import WinnerAnalyzer
 from src.game.input import get_player_action, modify_game_settings
 from src.game.resources.player import Player
 from src.game.resources.poker_deck import Deck
 from src.game.utils.game_utils import display_spade_art, display_new_round
-from src.engine import parallel_holdem_calc, holdem_calc
 from src.mediaplayer.sound_manager import play_community_card_sound
 
 
@@ -34,7 +31,7 @@ class GameRound:
         self.round_logs = []  # Logs for each round
         self.exit_game = False  # Flag to indicate game exit
 
-    # main function. One entire game round
+    # main function. One entire game round without display
     def play_round(self):
         """Plays a complete round of poker, with option to modify settings before starting."""
         display_spade_art()  # Display spade art on game start

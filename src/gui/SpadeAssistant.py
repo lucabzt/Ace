@@ -158,8 +158,8 @@ def main():
     # Set audio files with corrected paths
     base_path = Path(__file__).resolve().parent.parent.parent  # Go up three directories from mediaplayer
     app.set_audio_files([
-        base_path / "assets/sounds/Phrases/Spade_Initiation.mp3",
-        base_path / "assets/sounds/Phrases/Spade_Initiation.mp3",
+        base_path / "assets/sounds/Dealer Voice Lines/Phrases/Spade_Initiation.mp3",
+        base_path / "assets/sounds/Dealer Voice Lines/Phrases/Spade_Initiation.mp3",
         base_path / "assets/sounds/LUSTIG/Eierlecker Epic.mp3",
     ])
 

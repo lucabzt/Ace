@@ -1,12 +1,11 @@
-import os
-
 from pathlib import Path
 
 import pygame
 
 from src.game.input import modify_game_settings
 from src.game.resources.player import Player
-from src.game.rounds.game_round import GameRound, display_new_round
+from src.game.game_round import GameRound, display_new_round
+from src.gui.gui_loader import load_card_images, load_background_image, load_dealer_button, apply_grayscale
 
 # Path setup
 BASE_DIR = base_path = Path(__file__).resolve().parent.parent.parent  # Go up three directories from mediaplayer
@@ -33,12 +32,24 @@ pygame.display.set_caption("Poker Game")
 FONT = pygame.font.Font(None, 32)  # Slightly smaller font for more players
 
 
+def get_player_position(index):
+    positions = [
+        (50, SCREEN_HEIGHT - 350),  # Player 1
+        (50, 50),  # Player 2
+        (SCREEN_WIDTH // 2 - 100, 40),  # Player 3 - Center top
+        (SCREEN_WIDTH - 290, 50),  # Player 4
+        (SCREEN_WIDTH - 220, SCREEN_HEIGHT - 350),  # Player 5
+        (SCREEN_WIDTH // 2 - 100, SCREEN_HEIGHT - 200)  # Player 6 - Center bottom
+    ]
+    return positions[index % len(positions)]
+
+
 class poker_game_ui(GameRound):
     def __init__(self, players, small_blind, big_blind):
         super().__init__(players, small_blind, big_blind)
-        self.card_images = self.load_card_images()
-        self.background_image = self.load_background_image()
-        self.dealer_button = self.load_dealer_button()
+        self.card_images = load_card_images()
+        self.background_image = load_background_image()
+        self.dealer_button = load_dealer_button()
         self.round_step = 0
         self.button_index = -1
 
@@ -106,44 +117,6 @@ class poker_game_ui(GameRound):
         self.reset_game()
         self.button_index = (self.button_index + 1) % len(self.players)  # Move the button
 
-    def load_card_images(self):
-        image_path = os.path.join(PATH_TO_SPADE, "assets/images/card_deck")
-        images = {}
-        ranks = ['2', '3', '4', '5', '6', '7', '8', '9', '10', 'jack', 'queen', 'king', 'ace']
-        suits = ['hearts', 'diamonds', 'clubs', 'spades']
-
-        for rank in ranks:
-            for suit in suits:
-                image_name = f"{rank}_of_{suit}.png"
-                full_path = os.path.join(image_path, image_name)
-                try:
-                    # Load the image at its original resolution
-                    card_image = pygame.image.load(full_path)
-
-                    # Resize the image to 90x131
-                    resized_image = pygame.transform.smoothscale(card_image, (90, 131))
-                    images[f"{rank}_{suit}"] = resized_image
-                except pygame.error:
-                    print(f"Image {full_path} not found.")
-
-        return images
-
-    def load_background_image(self):
-        try:
-            bg_image = pygame.image.load(os.path.join(PATH_TO_SPADE, "assets/images/PokerTable.png"))
-            return pygame.transform.scale(bg_image, (SCREEN_WIDTH, SCREEN_HEIGHT))
-        except pygame.error:
-            print("Background image not found.")
-            return None
-
-    def load_dealer_button(self):
-        try:
-            button_image = pygame.image.load(os.path.join(PATH_TO_SPADE, "assets/images/DealerButton.png"))
-            return pygame.transform.scale(button_image, (40, 40))  # Adjust size as needed
-        except pygame.error:
-            print("Dealer button image not found.")
-            return None
-
     def display_cards(self, cards, x, y):
         for i, card in enumerate(cards):
             card_key = f"{card.rank.value.lower()}_{card.suit.value.lower()}"
@@ -168,7 +141,7 @@ class poker_game_ui(GameRound):
             if card_image:
                 # Apply grayscale effect if player has folded
                 if is_folded:
-                    card_image = self.apply_grayscale(card_image)
+                    card_image = apply_grayscale(card_image)
                 screen.blit(card_image, (x + i * 95, y))  # Increased space for larger cards
             else:
                 placeholder_text = FONT.render("?", True, WHITE)
@@ -215,7 +188,7 @@ class poker_game_ui(GameRound):
 
     def display_dealer_button(self):
         if self.dealer_button:
-            x, y = self.get_player_position(self.button_index)
+            x, y = get_player_position(self.button_index)
             screen.blit(self.dealer_button, (x + 180, y + 70))  # Adjust position as needed
 
     def update_display(self):
@@ -234,31 +207,6 @@ class poker_game_ui(GameRound):
 
         # Update the display with all changes
         pygame.display.flip()
-
-    def apply_grayscale(self, image):
-        grayscale_image = pygame.Surface(image.get_size())
-        grayscale_image.blit(image, (0, 0))
-
-        grayscale_image.lock()
-        for x in range(grayscale_image.get_width()):
-            for y in range(grayscale_image.get_height()):
-                red, green, blue, alpha = grayscale_image.get_at((x, y))
-                gray = int(0.3 * red + 0.59 * green + 0.11 * blue)
-                grayscale_image.set_at((x, y), (gray, gray, gray, alpha))
-        grayscale_image.unlock()
-
-        return grayscale_image
-
-    def get_player_position(self, index):
-        positions = [
-            (50, SCREEN_HEIGHT - 350),  # Player 1
-            (50, 50),  # Player 2
-            (SCREEN_WIDTH // 2 - 100, 40),  # Player 3 - Center top
-            (SCREEN_WIDTH - 290, 50),  # Player 4
-            (SCREEN_WIDTH - 220, SCREEN_HEIGHT - 350),  # Player 5
-            (SCREEN_WIDTH // 2 - 100, SCREEN_HEIGHT - 200)  # Player 6 - Center bottom
-        ]
-        return positions[index % len(positions)]
 
 
 # Function to run the game loop
