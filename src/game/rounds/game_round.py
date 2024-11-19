@@ -1,4 +1,5 @@
 import csv
+import time
 from datetime import datetime
 
 import numpy as np
@@ -8,7 +9,7 @@ from src.game.input import get_player_action, modify_game_settings
 from src.game.resources.player import Player
 from src.game.resources.poker_deck import Deck
 from src.game.utils.game_utils import display_spade_art, display_new_round
-from src.engine import parallel_holdem_calc
+from src.engine import parallel_holdem_calc, holdem_calc
 from src.mediaplayer.sound_manager import play_community_card_sound
 
 
@@ -295,14 +296,16 @@ class GameRound:
         for player in self.active_players:
             player_cards.extend([c.abbreviation for c in player.cards])
 
-        # Use engine to calculate probs
+        # Use engine to calculate probs: SCHULDIG: DESHALB KACKE MIT TERMINAL OUTPUT
+        # Can use parallel to be faster
         probs = parallel_holdem_calc.calculate(community_cards, False, 10e3, None, player_cards, False)
+
+        # probs = holdem_calc.calculate(community_cards, False, 10e3, None, player_cards, False)
 
         # Update probs in player objects
         for i in range(len(self.active_players)):
-            self.active_players[i].win_prob = probs[i+1] * 100
-
-
+            self.active_players[i].win_prob = probs[i + 1] * 100
+            # pass
 
     def log_round(self, round_name):
         """Logs the current state of the game after each betting round."""

@@ -6,7 +6,7 @@ import pygame
 
 from src.game.input import modify_game_settings
 from src.game.resources.player import Player
-from src.game.rounds.game_round import GameRound, display_spade_art, display_new_round
+from src.game.rounds.game_round import GameRound, display_new_round
 
 # Path setup
 BASE_DIR = base_path = Path(__file__).resolve().parent.parent.parent  # Go up three directories from mediaplayer
@@ -41,7 +41,6 @@ class poker_game_ui(GameRound):
         self.dealer_button = self.load_dealer_button()
         self.round_step = 0
         self.button_index = -1
-        display_spade_art()  # Display spade art on game start
 
     def play_round_with_display(self):
         """Run the poker game one step at a time for visual updates."""
@@ -278,7 +277,7 @@ def main():
 
         game.play_round_with_display()
         pygame.display.flip()
-        clock.tick(60)  # Limit the loop to 60 frames per second
+        clock.tick(1)
 
     pygame.quit()
 

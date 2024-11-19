@@ -12,6 +12,7 @@ import src.game.hand_analysis.main
 import mutagen
 from mutagen.mp3 import MP3
 
+
 def play_winner_sound(winner):
     play_winners_sound([winner])
 
@@ -48,6 +49,8 @@ def play_random_sound(file_path):
 
 
 def play_community_card_sound(round_name):
+    if round_name == "Pre-Flop":
+        return
     play_random_sound(f"Dealer Voice Lines/Community Cards/{round_name}")
 
 
