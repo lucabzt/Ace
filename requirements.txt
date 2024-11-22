@@ -6,3 +6,6 @@ playsound3
 pillow
 torch
 audioread
+mutagen
+joblib
+scipy
