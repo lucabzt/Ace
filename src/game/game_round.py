@@ -1,7 +1,7 @@
 import csv
 from datetime import datetime
 
-from src.engine import parallel_holdem_calc
+from src.engine import parallel_holdem_calc, holdem_calc
 from src.game.hand_analysis.winner_determiner import WinnerAnalyzer
 from src.game.input import get_player_action, modify_game_settings
 from src.game.resources.player import Player
@@ -295,9 +295,9 @@ class GameRound:
 
         # Use engine to calculate probs: SCHULDIG: DESHALB KACKE MIT TERMINAL OUTPUT
         # Can use parallel to be faster
-        probs = parallel_holdem_calc.calculate(community_cards, False, 10e3, None, player_cards, False)
+        # probs = parallel_holdem_calc.calculate(community_cards, False, 10e3, None, player_cards, False)
 
-        # probs = holdem_calc.calculate(community_cards, False, 10e3, None, player_cards, False)
+        probs = holdem_calc.calculate(community_cards, False, 10e3, None, player_cards, False)
 
         # Update probs in player objects
         for i in range(len(self.active_players)):
