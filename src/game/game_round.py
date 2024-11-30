@@ -1,7 +1,7 @@
 import csv
 from datetime import datetime
 
-from src.engine import holdem_calc, parallel_holdem_calc
+from src.engine import holdem_calc
 from src.game.betting_round import BettingRound
 from src.game.hand_analysis.winner_determiner import WinnerAnalyzer
 from src.game.input import modify_game_settings
@@ -249,6 +249,7 @@ class GameRound:
 
     def update_display(self):
         pass
+
 
 def main():
     # Initialisiere Spieler

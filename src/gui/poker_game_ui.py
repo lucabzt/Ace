@@ -3,10 +3,9 @@ from pathlib import Path
 import pygame
 
 from src.game.betting_round import BettingRound
+from src.game.game_round import GameRound, display_new_round
 from src.game.input import modify_game_settings
 from src.game.resources.player import Player
-from src.game.game_round import GameRound, display_new_round
-from src.game.utils.game_utils import display_spade_art
 from src.gui.gui_loader import load_card_images, load_background_image, load_dealer_button, apply_grayscale
 
 # Path setup
