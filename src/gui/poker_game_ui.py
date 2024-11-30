@@ -158,17 +158,9 @@ class poker_game_ui(GameRound):
         screen.blit(pot_text, (SCREEN_WIDTH // 2 - pot_text.get_width() // 2, SCREEN_HEIGHT - 350))
 
     def display_player_info(self):
-        positions = [
-            (50, SCREEN_HEIGHT - 350),  # Player 1
-            (50, 50),  # Player 2
-            (SCREEN_WIDTH // 2 - 100, 40),  # Player 3 - Center top
-            (SCREEN_WIDTH - 290, 50),  # Player 4
-            (SCREEN_WIDTH - 220, SCREEN_HEIGHT - 350),  # Player 5
-            (SCREEN_WIDTH // 2 - 100, SCREEN_HEIGHT - 200)  # Player 6 - Center bottom
-        ]
 
         for i, player in enumerate(self.players):
-            x, y = positions[i]
+            x, y = get_player_position(i)
 
             # Render player name and win probability
             name_prob_text = FONT.render(f"{player.name}: {player.win_prob:.2f}%", True, WHITE)
