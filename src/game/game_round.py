@@ -27,6 +27,7 @@ class GameRound:
         self.folded_players = set()
         self.active_players = self.players.copy()
         self.small_blind_index = 0
+        self.dealer_index = 0
         self.big_blind_player = None
         self.small_blind_player = None
         self.round_logs = []  # Logs for each round
@@ -34,7 +35,6 @@ class GameRound:
 
     def play_round(self):
         """Plays a complete round of poker, with option to modify settings before starting."""
-
         if input("Would you like to make any changes before starting the round? (yes/no): ").lower() == 'yes':
             modify_game_settings(self)  # Use the input module's method
             if self.exit_game:
@@ -43,17 +43,14 @@ class GameRound:
                 return  # Exit game if user chose to
 
         display_new_round()
-
         self.assign_blinds()
         self.deal_private_cards()
-
         betting_round = BettingRound(self.players, self.pot, self.current_bet, self.small_blind_index,
                                      self.folded_players, self.active_players, self.bets)
-        self.calculate_probabilities()
-        print("---------------")
 
+        print("---------------")
         # Pre-Flop Betting
-        if self.play_betting_round(betting_round,'Pre-Flop', False):
+        if self.play_betting_round(betting_round, 'Pre-Flop', False):
             self.reset_game()
             return
 
@@ -89,7 +86,7 @@ class GameRound:
         # Reset for next game
         self.reset_game()
 
-    def play_betting_round(self,betting_round, current_round, river):
+    def play_betting_round(self, betting_round, current_round, river):
         self.calculate_probabilities(river)
         betting_round.execute(current_round)
         self.log_round(current_round)
@@ -103,6 +100,7 @@ class GameRound:
         print("\n--- BLINDS ---")
         self.small_blind_player = self.players[self.small_blind_index]
         self.big_blind_player = self.players[(self.small_blind_index + 1) % len(self.players)]
+        self.dealer_index = (self.small_blind_index - 1) % len(self.players)
 
         # Deduct blinds from player balances
         if self.small_blind_player.balance >= self.small_blind:
@@ -122,10 +120,12 @@ class GameRound:
 
         print(f"{self.small_blind_player.name} posts small blind: {self.small_blind}")
         print(f"{self.big_blind_player.name} posts big blind: {self.big_blind}")
+        print(f"The dealer is {self.players[self.dealer_index].name}")
 
     def rotate_blinds(self):
-        """Rotates blinds to the next players after each round."""
+        """Rotates blinds and dealer to the next players after each round."""
         self.small_blind_index = (self.small_blind_index + 1) % len(self.players)
+        self.dealer_index = (self.dealer_index - 1) % len(self.players)  # Rotate dealer to the next player
 
     def deal_private_cards(self):
         """Deals two private cards to each player."""
@@ -175,7 +175,6 @@ class GameRound:
 
     def declare_winner_if_only_one_remaining(self):
         """Checks if only one player remains and declares them the winner."""
-
         if len(self.active_players) == 1:
             winner = self.active_players[0]
             winner.add_balance(self.pot)
@@ -197,7 +196,7 @@ class GameRound:
         for player in self.players:
             player.clear_cards()
 
-        self.rotate_blinds()  # Move blinds to the next players
+        self.rotate_blinds()  # Move blinds and dealer to the next players
 
     def calculate_probabilities(self, river=False):
         # Create abbreviations for community and player cards

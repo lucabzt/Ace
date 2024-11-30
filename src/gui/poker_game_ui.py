@@ -53,7 +53,6 @@ class poker_game_ui(GameRound):
         self.background_image = load_background_image()
         self.dealer_button = load_dealer_button()
         self.round_step = 0
-        self.button_index = -1
 
     def play_round_with_display(self):
         """Plays a complete round of poker, with option to modify settings before starting."""
@@ -122,7 +121,6 @@ class poker_game_ui(GameRound):
     def prep_next_round(self):
         self.round_step = -1  # Reset for the next round
         self.reset_game()
-        self.button_index = (self.button_index + 1) % len(self.players)  # Move the button
 
     def display_cards(self, cards, x, y):
         for i, card in enumerate(cards):
@@ -195,7 +193,7 @@ class poker_game_ui(GameRound):
 
     def display_dealer_button(self):
         if self.dealer_button:
-            x, y = get_player_position(self.button_index)
+            x, y = get_player_position(self.dealer_index)
             screen.blit(self.dealer_button, (x + 180, y + 70))  # Adjust position as needed
 
     def update_display(self):
