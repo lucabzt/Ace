@@ -2,9 +2,11 @@ from pathlib import Path
 
 import pygame
 
+from src.game.betting_round import BettingRound
 from src.game.input import modify_game_settings
 from src.game.resources.player import Player
 from src.game.game_round import GameRound, display_new_round
+from src.game.utils.game_utils import display_spade_art
 from src.gui.gui_loader import load_card_images, load_background_image, load_dealer_button, apply_grayscale
 
 # Path setup
@@ -46,6 +48,7 @@ def get_player_position(index):
 
 class poker_game_ui(GameRound):
     def __init__(self, players, small_blind, big_blind):
+        display_spade_art()  # Display spade art on game start
         super().__init__(players, small_blind, big_blind)
         self.card_images = load_card_images()
         self.background_image = load_background_image()
@@ -54,7 +57,12 @@ class poker_game_ui(GameRound):
         self.button_index = -1
 
     def play_round_with_display(self):
+        """Plays a complete round of poker, with option to modify settings before starting."""
         """Run the poker game one step at a time for visual updates."""
+
+        betting_round = BettingRound(self.players, self.pot, self.current_bet, self.small_blind_index,
+                                     self.folded_players, self.active_players, self.bets)
+
         if self.round_step == 0:
             if input("Would you like to make any changes before starting the round? (yes/no): ").lower() == 'yes':
                 modify_game_settings(self)  # Use the input module's method
@@ -69,7 +77,7 @@ class poker_game_ui(GameRound):
             print("---------------")
             self.calculate_probabilities()
         elif self.round_step == 1:
-            self.betting_round("Pre-Flop")
+            betting_round.execute('Pre-Flop')
             self.log_round('Pre-Flop')  # Log after each round
             if self.declare_winner_if_only_one_remaining():
                 self.prep_next_round()
@@ -80,7 +88,7 @@ class poker_game_ui(GameRound):
             self.calculate_probabilities()
 
         elif self.round_step == 3:
-            self.betting_round("Flop")
+            betting_round.execute("Flop")
             self.log_round('Flop')  # Log after each round
             if self.declare_winner_if_only_one_remaining():
                 self.prep_next_round()
@@ -91,7 +99,7 @@ class poker_game_ui(GameRound):
             self.calculate_probabilities()
 
         elif self.round_step == 5:
-            self.betting_round("Turn")
+            betting_round.execute("Turn")
             self.log_round('Turn')  # Log after each round
             if self.declare_winner_if_only_one_remaining():
                 self.prep_next_round()
@@ -101,7 +109,7 @@ class poker_game_ui(GameRound):
             self.calculate_probabilities(True)
 
         elif self.round_step == 7:
-            self.betting_round("River")
+            betting_round.execute("River")
             self.log_round('River')  # Log after each round
 
         elif self.round_step == 8:

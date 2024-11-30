@@ -1,5 +1,5 @@
 # import required module
-import src.game.hand_analysis.main
+import src.game.hand_analysis.main_hand_analysis
 from src.game.resources.card import Card
 
 import threading
@@ -8,7 +8,7 @@ import os
 import random
 from playsound3 import playsound
 from time import sleep
-import src.game.hand_analysis.main
+import src.game.hand_analysis.main_hand_analysis
 import mutagen
 from mutagen.mp3 import MP3
 
@@ -180,5 +180,5 @@ def play_winners_sound(winners):
 
 
 if __name__ == '__main__':
-    play_winners_sound(src.game.hand_analysis.main.main())
+    play_winners_sound(src.game.hand_analysis.main_hand_analysis.main())
     time.sleep(1)
