@@ -3,7 +3,8 @@ from src.mediaplayer.sound_manager import play_community_card_sound
 
 
 class BettingRound:
-    def __init__(self, players, pot, current_bet, small_blind_index, folded_players, active_players, bets):
+    def __init__(self, players, pot, current_bet, small_blind_index, folded_players, active_players, bets,
+                 update_display):
         self.players = players
         self.pot = pot
         self.current_bet = current_bet
@@ -13,6 +14,7 @@ class BettingRound:
         self.bets = bets
         self.last_raiser = None  # Keeps track of the last player to raise
         self.players_in_round = {player.name: False for player in self.active_players}
+        self.update_display = update_display  # Store the reference to the update_display method
 
     def execute(self, round_name):
         """Executes a betting round with players matching, raising, or folding as needed."""
@@ -55,12 +57,14 @@ class BettingRound:
                         self.folded_players.add(player)
                         self.active_players.remove(player)
                         print(f"{player.name} folds.")
+                        self.update_display()  # Update display after fold
                         break
                     elif action == 'check':
                         call_amount = to_call
                         if call_amount == 0:
                             players_in_round[player.name] = True
                             print(f"{player.name} checks")
+                            self.update_display()  # Update display after check
                             break
                         else:
                             print(f"Can't check! {player.name} has to call: {call_amount}/raise/fold!")
@@ -73,6 +77,7 @@ class BettingRound:
                             self.pot += call_amount
                             players_in_round[player.name] = True
                             print(f"{player.name} calls: {call_amount}")
+                            self.update_display()  # Update display after call
                             break
                         else:
                             print(f"{player.name} does not have enough chips to call. Please choose another action.")
@@ -93,6 +98,7 @@ class BettingRound:
                             last_raiser = player.name
                             players_in_round = {p.name: (p in self.folded_players) for p in self.active_players}
                             players_in_round[player.name] = True  # Player who raised has already matched their own bet
+                            self.update_display()  # Update display after raise
                             break
                         else:
                             print(f"{player.name} does not have enough chips to raise. Please choose another action.")

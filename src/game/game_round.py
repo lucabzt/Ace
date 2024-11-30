@@ -46,7 +46,7 @@ class GameRound:
         self.assign_blinds()
         self.deal_private_cards()
         betting_round = BettingRound(self.players, self.pot, self.current_bet, self.small_blind_index,
-                                     self.folded_players, self.active_players, self.bets)
+                                     self.folded_players, self.active_players, self.bets, self.update_display)
 
         print("---------------")
         # Pre-Flop Betting
@@ -209,9 +209,9 @@ class GameRound:
 
         # Use engine to calculate probs: SCHULDIG: DESHALB KACKE MIT TERMINAL OUTPUT
         # Can use parallel to be faster
-        probs = parallel_holdem_calc.calculate(community_cards, False, 10e3, None, player_cards, False)
+        # probs = parallel_holdem_calc.calculate(community_cards, False, 10e3, None, player_cards, False)
 
-        # probs = holdem_calc.calculate(community_cards, False, 10e3, None, player_cards, False)
+        probs = holdem_calc.calculate(community_cards, False, 10e3, None, player_cards, False)
 
         # Update probs in player objects
         for i in range(len(self.active_players)):
@@ -247,6 +247,8 @@ class GameRound:
                 })
         print(f"Game log saved as {filename}.")
 
+    def update_display(self):
+        pass
 
 def main():
     # Initialisiere Spieler

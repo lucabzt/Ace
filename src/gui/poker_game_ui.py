@@ -58,8 +58,10 @@ class poker_game_ui(GameRound):
         """Plays a complete round of poker, with option to modify settings before starting."""
         """Run the poker game one step at a time for visual updates."""
 
-        betting_round = BettingRound(self.players, self.pot, self.current_bet, self.small_blind_index,
-                                     self.folded_players, self.active_players, self.bets)
+        betting_round = BettingRound(
+            self.players, self.pot, self.current_bet, self.small_blind_index,
+            self.folded_players, self.active_players, self.bets, self.update_display
+        )
 
         if self.round_step == 0:
             if input("Would you like to make any changes before starting the round? (yes/no): ").lower() == 'yes':
@@ -73,42 +75,30 @@ class poker_game_ui(GameRound):
             self.assign_blinds()
             self.deal_private_cards()
             print("---------------")
-            self.calculate_probabilities()
         elif self.round_step == 1:
-            betting_round.execute('Pre-Flop')
-            self.log_round('Pre-Flop')  # Log after each round
-            if self.declare_winner_if_only_one_remaining():
+            if self.play_betting_round(betting_round, 'Pre-Flop', False):
                 self.prep_next_round()
 
         elif self.round_step == 2:
             self.deal_community_cards(3)  # Deal the Flop
 
-            self.calculate_probabilities()
-
         elif self.round_step == 3:
-            betting_round.execute("Flop")
-            self.log_round('Flop')  # Log after each round
-            if self.declare_winner_if_only_one_remaining():
+            if self.play_betting_round(betting_round, 'Flop', False):
                 self.prep_next_round()
 
         elif self.round_step == 4:
             self.deal_community_cards(1)  # Deal the Turn
 
-            self.calculate_probabilities()
-
         elif self.round_step == 5:
-            betting_round.execute("Turn")
-            self.log_round('Turn')  # Log after each round
-            if self.declare_winner_if_only_one_remaining():
+            if self.play_betting_round(betting_round, 'Turn', False):
                 self.prep_next_round()
 
         elif self.round_step == 6:
             self.deal_community_cards(1)  # Deal the River
-            self.calculate_probabilities(True)
 
         elif self.round_step == 7:
-            betting_round.execute("River")
-            self.log_round('River')  # Log after each round
+            if self.play_betting_round(betting_round, 'River', True):
+                self.prep_next_round()
 
         elif self.round_step == 8:
             self.showdown()
@@ -121,6 +111,17 @@ class poker_game_ui(GameRound):
     def prep_next_round(self):
         self.round_step = -1  # Reset for the next round
         self.reset_game()
+
+    def play_betting_round(self, betting_round, current_round, river):
+        self.calculate_probabilities(river)
+        self.update_display()
+        betting_round.execute(current_round)
+        self.update_display()
+        self.log_round(current_round)
+        print("---------------")
+        if self.declare_winner_if_only_one_remaining():
+            return True
+        return False
 
     def display_cards(self, cards, x, y):
         for i, card in enumerate(cards):
