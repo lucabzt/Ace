@@ -1,6 +1,6 @@
 import random
 
-from src.game.resources.card import Card, Suit, Rank
+from src.game_logic.resources.card import Card, Suit, Rank
 
 
 class Deck:

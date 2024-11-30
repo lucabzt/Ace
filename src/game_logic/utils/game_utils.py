@@ -1,13 +1,13 @@
 from collections import Counter
 
-from src.game.hand_analysis.poker_hand_rankings import rank_value, high_card, is_one_pair, is_two_pair, \
+from src.game_logic.hand_analysis.poker_hand_rankings import rank_value, high_card, is_one_pair, is_two_pair, \
     is_three_of_a_kind, \
     is_full_house, is_four_of_a_kind, is_straight, is_flush
-from src.game.resources.card import Rank
+from src.game_logic.resources.card import Rank
 
 
 def display_spade_art():
-    """Displays Spade ASCII art on game startup."""
+    """Displays Spade ASCII art on game_logic startup."""
     spade_art = """
                       /$$$$$$  /$$$$$$$   /$$$$$$  /$$$$$$$  /$$$$$$$$
                      /$$__  $$| $$__  $$ /$$__  $$| $$__  $$| $$_____/

@@ -1,4 +1,4 @@
-from src.game.input import get_player_action
+from src.game_logic.game.input import get_player_action
 from src.mediaplayer.sound_manager import play_community_card_sound
 
 

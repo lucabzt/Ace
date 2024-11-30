@@ -2,17 +2,17 @@ import csv
 from datetime import datetime
 
 from src.engine import holdem_calc
-from src.game.betting_round import BettingRound
-from src.game.hand_analysis.winner_determiner import WinnerAnalyzer
-from src.game.input import modify_game_settings
-from src.game.resources.player import Player
-from src.game.resources.poker_deck import Deck
-from src.game.utils.game_utils import display_spade_art, display_new_round
+from src.game_logic.game.betting_round import BettingRound
+from src.game_logic.hand_analysis.winner_determiner import WinnerAnalyzer
+from src.game_logic.game.input import modify_game_settings
+from src.game_logic.resources.player import Player
+from src.game_logic.resources.poker_deck import Deck
+from src.game_logic.utils.game_utils import display_spade_art, display_new_round
 
 
 class GameRound:
     def __init__(self, players, small_blind, big_blind):
-        display_spade_art()  # Display spade art on game start
+        display_spade_art()  # Display spade art on game_logic start
         if len(players) < 2:
             raise ValueError("Mindestens zwei Spieler sind erforderlich.")
         self.players = players
@@ -31,7 +31,7 @@ class GameRound:
         self.big_blind_player = None
         self.small_blind_player = None
         self.round_logs = []  # Logs for each round
-        self.exit_game = False  # Flag to indicate game exit
+        self.exit_game = False  # Flag to indicate game_logic exit
 
     def play_round(self):
         """Plays a complete round of poker, with option to modify settings before starting."""
@@ -40,7 +40,7 @@ class GameRound:
             if self.exit_game:
                 self.save_logs()
                 print("Game exited.")
-                return  # Exit game if user chose to
+                return  # Exit game_logic if user chose to
 
         display_new_round()
         self.assign_blinds()
@@ -83,7 +83,7 @@ class GameRound:
         # Showdown if more than one player remains
         self.showdown()
 
-        # Reset for next game
+        # Reset for next game_logic
         self.reset_game()
 
     def play_betting_round(self, betting_round, current_round, river):
@@ -183,7 +183,7 @@ class GameRound:
         return False
 
     def reset_game(self):
-        """Resets the game state for the next round and rotates blinds."""
+        """Resets the game_logic state for the next round and rotates blinds."""
         self.deck = Deck()
         self.deck.shuffle()
         self.community_cards = []
@@ -219,7 +219,7 @@ class GameRound:
             # pass
 
     def log_round(self, round_name):
-        """Logs the current state of the game after each betting round."""
+        """Logs the current state of the game_logic after each betting round."""
         log_entry = {
             'round': round_name,
             'pot': self.pot,
@@ -230,7 +230,7 @@ class GameRound:
         self.round_logs.append(log_entry)
 
     def save_logs(self):
-        """Saves the game log to a CSV file upon exit."""
+        """Saves the game_logic log to a CSV file upon exit."""
         timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
         filename = f"poker_game_log_{timestamp}.csv"
         with open(filename, 'w', newline='') as csvfile:

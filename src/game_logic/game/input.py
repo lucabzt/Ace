@@ -1,4 +1,4 @@
-from src.game.resources.player import Player
+from src.game_logic.resources.player import Player
 from src.mediaplayer.sound_manager import play_player_action
 
 
@@ -34,7 +34,7 @@ def get_player_action(player, to_call):
 
 
 def modify_game_settings(game_round):
-    """Allows the user to modify game settings or exit the game."""
+    """Allows the user to modify game_logic settings or exit the game_logic."""
     print("\n--- SETTINGS ---")
     print(
         "Options: 1) Add player, 2) Remove player, 3) Give balance to player, 4) Change blind sizes, 5) Continue, 6) Exit Game")
@@ -80,4 +80,4 @@ def modify_game_settings(game_round):
         print("Continuing without changes.")
     elif choice == '6':
         game_round.exit_game = True  # Set exit flag
-        print("Exiting the game after this round.")
+        print("Exiting the game_logic after this round.")
