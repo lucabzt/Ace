@@ -12,6 +12,7 @@ from src.game.utils.game_utils import display_spade_art, display_new_round
 
 class GameRound:
     def __init__(self, players, small_blind, big_blind):
+        display_spade_art()  # Display spade art on game start
         if len(players) < 2:
             raise ValueError("Mindestens zwei Spieler sind erforderlich.")
         self.players = players
@@ -33,11 +34,6 @@ class GameRound:
 
     def play_round(self):
         """Plays a complete round of poker, with option to modify settings before starting."""
-        display_spade_art()  # Display spade art on game start
-        print("\n")
-
-        betting_round = BettingRound(self.players, self.pot, self.current_bet, self.small_blind_index,
-                                     self.folded_players, self.active_players, self.bets)
 
         if input("Would you like to make any changes before starting the round? (yes/no): ").lower() == 'yes':
             modify_game_settings(self)  # Use the input module's method
@@ -47,53 +43,60 @@ class GameRound:
                 return  # Exit game if user chose to
 
         display_new_round()
+
         self.assign_blinds()
         self.deal_private_cards()
-        print("---------------")
+
+        betting_round = BettingRound(self.players, self.pot, self.current_bet, self.small_blind_index,
+                                     self.folded_players, self.active_players, self.bets)
         self.calculate_probabilities()
+        print("---------------")
 
         # Pre-Flop Betting
-        betting_round.execute('Pre-Flop')
-        self.log_round('Pre-Flop')
-        if self.declare_winner_if_only_one_remaining():
+        if self.play_betting_round(betting_round,'Pre-Flop', False):
             self.reset_game()
             return
-        print("---------------")
-        self.calculate_probabilities()
 
-        # Flop
+        # Deal Flop
         self.deal_community_cards(3)
         print("---------------")
-        self.calculate_probabilities()
-        betting_round.execute('Flop')
-        self.log_round('Flop')
-        if self.declare_winner_if_only_one_remaining():
+
+        # Flop Betting
+        if self.play_betting_round(betting_round, 'Flop', False):
             self.reset_game()
             return
 
         # Turn
         self.deal_community_cards(1)
         print("---------------")
-        self.calculate_probabilities()
-        betting_round.execute('Turn')
-        self.log_round('Turn')
-        if self.declare_winner_if_only_one_remaining():
+
+        # Turn Betting
+        if self.play_betting_round(betting_round, 'Turn', False):
             self.reset_game()
             return
 
         # River
         self.deal_community_cards(1)
-        self.calculate_probabilities(river=True)
-        print("---------------")
-        betting_round.execute('River')
-        self.log_round('River')
-        if self.declare_winner_if_only_one_remaining():
+
+        # River Betting
+        if self.play_betting_round(betting_round, 'River', True):
             self.reset_game()
             return
 
         # Showdown if more than one player remains
         self.showdown()
+
+        # Reset for next game
         self.reset_game()
+
+    def play_betting_round(self,betting_round, current_round, river):
+        self.calculate_probabilities(river)
+        betting_round.execute(current_round)
+        self.log_round(current_round)
+        print("---------------")
+        if self.declare_winner_if_only_one_remaining():
+            return True
+        return False
 
     def assign_blinds(self):
         """Assigns small and big blinds to players and handles the initial bets."""
@@ -165,7 +168,7 @@ class GameRound:
             split_amount = self.pot // len(winners)
             winner_names = ', '.join([winner[0] for winner in winners])
             print(
-                f"Es gibt einen Split-Pot zwischen: {winner_names}. Jeder erhält: {split_amount}")
+                f"Es gibt einen Split-Pot zwischen: {winner_names} mit {winner_info[1]}. Jeder erhält: {split_amount}")
             for winner in winners:
                 winning_player = next(player for player in self.players if player.name == winner[0])
                 winning_player.add_balance(split_amount)

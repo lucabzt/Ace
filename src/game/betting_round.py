@@ -25,20 +25,24 @@ class BettingRound:
         if round_name == 'Pre-Flop':
             start_index = (self.small_blind_index + 2) % len(self.players)
         else:
-            start_index = next((i for i, player in enumerate(self.players) if player not in self.folded_players),
-                               0)
+            start_index = self.small_blind_index
 
         player_order = self.active_players[start_index:] + self.active_players[:start_index]
 
-        while not all(self.players_in_round[player.name] for player in self.active_players if player not in self.folded_players):
+        # Track which players have matched the current bet
+        players_in_round = {player.name: False for player in self.active_players}
+        last_raiser = None
+
+        while not all(
+                players_in_round[player.name] for player in self.active_players if player not in self.folded_players):
 
             for player in player_order:
                 if player in self.folded_players:
                     continue  # Skip folded players
 
                 # Skip if this is the player who last raised and everyone else has called or folded
-                if self.last_raiser == player.name and all(
-                        self.players_in_round[p.name] for p in self.active_players if p not in self.folded_players):
+                if last_raiser == player.name and all(
+                        players_in_round[p.name] for p in self.active_players if p not in self.folded_players):
                     return  # End betting round
 
                 to_call = self.current_bet - self.bets[player.name]
@@ -55,7 +59,7 @@ class BettingRound:
                     elif action == 'check':
                         call_amount = to_call
                         if call_amount == 0:
-                            self.players_in_round[player.name] = True
+                            players_in_round[player.name] = True
                             print(f"{player.name} checks")
                             break
                         else:
@@ -67,7 +71,7 @@ class BettingRound:
                             player.balance -= call_amount
                             self.bets[player.name] += call_amount
                             self.pot += call_amount
-                            self.players_in_round[player.name] = True
+                            players_in_round[player.name] = True
                             print(f"{player.name} calls: {call_amount}")
                             break
                         else:
@@ -86,9 +90,9 @@ class BettingRound:
                             print(f"{player.name} raises by {raise_amount}")
 
                             # Update last raiser and reset players_in_round for a new round of calling
-                            self.last_raiser = player.name
-                            self.players_in_round = {p.name: (p in self.folded_players) for p in self.active_players}
-                            self.players_in_round[player.name] = True  # Player who raised has already matched their own bet
+                            last_raiser = player.name
+                            players_in_round = {p.name: (p in self.folded_players) for p in self.active_players}
+                            players_in_round[player.name] = True  # Player who raised has already matched their own bet
                             break
                         else:
                             print(f"{player.name} does not have enough chips to raise. Please choose another action.")

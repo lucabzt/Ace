@@ -48,7 +48,6 @@ def get_player_position(index):
 
 class poker_game_ui(GameRound):
     def __init__(self, players, small_blind, big_blind):
-        display_spade_art()  # Display spade art on game start
         super().__init__(players, small_blind, big_blind)
         self.card_images = load_card_images()
         self.background_image = load_background_image()
