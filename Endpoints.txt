@@ -1,0 +1,18 @@
+self.name = name
+self.cards = []  # Player's own cards
+self.balance = balance  # Player's balance for betting
+self.win_prob = 0.0
+
+Alle Spieler, Alle Spieler Attribute
+
+
+self.players = players
+self.community_cards = []
+self.small_blind = small_blind
+self.big_blind = big_blind
+self.pot = 0
+self.current_bet = 0
+self.bets = {player.name: 0 for player in players}
+self.folded_players = set()
+self.active_players = self.players.copy()
+self.dealer_index = 0
