@@ -1,8 +1,12 @@
 from flask import Flask, jsonify
+from flask_cors import CORS
 
 app = Flask(__name__)
 
-# Example data (replace with real logic/data)
+# Enable CORS for all routes
+CORS(app)
+
+# Example data
 players_data = [
     {"id": 1, "name": "Player 1", "chips": 1000},
     {"id": 2, "name": "Player 2", "chips": 1000},
@@ -14,30 +18,29 @@ players_data = [
 community_cards_data = [
     {"rank": "5", "suit": "hearts", "faceUp": True},
     {"rank": "7", "suit": "diamonds", "faceUp": True},
-    {"rank": "Q", "suit": "spades", "faceUp": True},
-    {"rank": "K", "suit": "clubs", "faceUp": True},
-    {"rank": "A", "suit": "hearts", "faceUp": True},
+    {"rank": "10", "suit": "spades", "faceUp": True},
+    {"rank": "8", "suit": "clubs", "faceUp": True},
+    {"rank": "JACK", "suit": "hearts", "faceUp": True},
 ]
 
-dealer_index = 2  # Player 3 is the dealer (0-indexed)
-pot = 500  # Example pot amount
+dealer_index = 2
+pot = 500
 
-# API Endpoints
-@app.route('/api/players', methods=['GET'])
+@app.route('/players', methods=['GET'])
 def get_players():
     return jsonify(players_data)
 
-@app.route('/api/community-cards', methods=['GET'])
+@app.route('/community-cards', methods=['GET'])
 def get_community_cards():
     return jsonify(community_cards_data)
 
-@app.route('/api/dealer', methods=['GET'])
+@app.route('/dealer', methods=['GET'])
 def get_dealer():
     return jsonify({"dealerIndex": dealer_index})
 
-@app.route('/api/pot', methods=['GET'])
+@app.route('/pot', methods=['GET'])
 def get_pot():
     return jsonify({"pot": pot})
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=True, host='127.0.0.1', port=5000)
