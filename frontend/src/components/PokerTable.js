@@ -25,12 +25,12 @@ const PokerTable = ({ pokerTableBackground, pot, children }) => (
     <div
       style={{
         position: "absolute",
-        top: "58%", // Adjust the positioning for the pot text
+        top: "55%", // Adjust the positioning for the pot text
         left: "50%",
         transform: "translateX(-50%)",
         color: "white",
         fontWeight: "bold",
-        fontSize: "2vw",  // Responsive font size based on viewport width
+        fontSize: "1.5vw",  // Responsive font size based on viewport width
       }}
     >
       {/* Pot Text */}
