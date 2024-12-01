@@ -6,15 +6,16 @@ import { loadCardImage } from "../../utils/cardUtils";
 import { players } from "../../data/playersData";
 
 const PokerGameUI = () => {
-  const dealerIndex = 2;
   const pokerTableBackground = "PokerTable100.png";
   const [playerPositions, setPlayerPositions] = useState(getPlayerPositions(players.length));
   const [pot, setPot] = useState(null);
   const [communityCards, setCommunityCards] = useState([]); // State for community cards
+  const [dealerIndex, setDealerIndex] = useState(null); // State for dealer index
 
-  // Fetch pot value
-  const fetchPot = () => {
-    fetch("http://127.0.0.1:5000/pot") // Directly call Flask API
+  // Polling logic for pot, community cards, and dealer
+  const pollGameData = () => {
+    // Fetch pot value
+    fetch("http://127.0.0.1:5000/pot")
       .then((res) => {
         if (!res.ok) {
           throw new Error("Failed to fetch pot value");
@@ -22,17 +23,15 @@ const PokerGameUI = () => {
         return res.json();
       })
       .then((data) => {
-        setPot(data.pot);
-        console.log("Pot value updated:", data.pot);
+        if (data.pot !== pot) {
+          setPot(data.pot); // Update pot only if it changes
+          console.log("Pot value updated:", data.pot);
+        }
       })
-      .catch((error) => {
-        console.error("Error fetching pot value:", error);
-      });
-  };
+      .catch((error) => console.error("Error fetching pot value:", error));
 
-  // Fetch community cards
-  const fetchCommunityCards = () => {
-    fetch("http://127.0.0.1:5000/community-cards") // Call Flask API for community cards
+    // Fetch community cards
+    fetch("http://127.0.0.1:5000/community-cards")
       .then((res) => {
         if (!res.ok) {
           throw new Error("Failed to fetch community cards");
@@ -40,22 +39,37 @@ const PokerGameUI = () => {
         return res.json();
       })
       .then((data) => {
-        setCommunityCards(data); // Update state with fetched community cards
-        console.log("Community cards updated:", data);
+        // Compare fetched cards with current state before updating
+        if (JSON.stringify(data) !== JSON.stringify(communityCards)) {
+          setCommunityCards(data);
+          console.log("Community cards updated:", data);
+        }
       })
-      .catch((error) => {
-        console.error("Error fetching community cards:", error);
-      });
+      .catch((error) => console.error("Error fetching community cards:", error));
+
+    // Fetch dealer index
+    fetch("http://127.0.0.1:5000/dealer")
+      .then((res) => {
+        if (!res.ok) {
+          throw new Error("Failed to fetch dealer index");
+        }
+        return res.json();
+      })
+      .then((data) => {
+        if (data.dealerIndex !== dealerIndex) {
+          setDealerIndex(data.dealerIndex); // Update dealer index only if it changes
+          console.log("Dealer index updated:", data.dealerIndex);
+        }
+      })
+      .catch((error) => console.error("Error fetching dealer index:", error));
   };
 
-  // Fetch pot and community cards on component mount
+  // Poll data on component mount and at regular intervals
   useEffect(() => {
-    fetchPot(); // Fetch pot
-    fetchCommunityCards(); // Fetch community cards
-
-    const interval = setInterval(fetchPot, 3000); // Poll pot every 3 seconds
-    return () => clearInterval(interval); // Cleanup interval on unmount
-  }, []);
+    pollGameData(); // Initial fetch
+    const interval = setInterval(pollGameData, 3000); // Poll every 3 seconds
+    return () => clearInterval(interval); // Cleanup on unmount
+  }, [pot, communityCards, dealerIndex]); // Dependencies ensure changes are reflected dynamically
 
   // Handle window resize for player positions
   useEffect(() => {
@@ -70,7 +84,7 @@ const PokerGameUI = () => {
     <PokerTable pokerTableBackground={pokerTableBackground} pot={pot !== null ? pot : "Loading..."}>
       {players.map((player, index) => {
         const position = playerPositions[index];
-        const isDealer = index === dealerIndex;
+        const isDealer = index === dealerIndex; // Mark the current dealer
         return (
           <Player key={index} player={player} position={position} isDealer={isDealer} />
         );

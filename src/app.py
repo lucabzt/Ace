@@ -1,5 +1,7 @@
 from flask import Flask, jsonify
 from flask_cors import CORS
+import threading
+import time
 
 app = Flask(__name__)
 
@@ -15,16 +17,32 @@ players_data = [
     {"id": 5, "name": "Player 5", "chips": 1000},
 ]
 
+# Initial community cards
 community_cards_data = [
     {"rank": "5", "suit": "hearts", "faceUp": True},
     {"rank": "7", "suit": "diamonds", "faceUp": True},
     {"rank": "10", "suit": "spades", "faceUp": True},
-    {"rank": "8", "suit": "clubs", "faceUp": True},
+    {"rank": "ACE", "suit": "clubs", "faceUp": True},
     {"rank": "JACK", "suit": "hearts", "faceUp": True},
 ]
 
-dealer_index = 2
-pot = 500
+dealer_index = 2  # Start with Player 3 as the dealer
+pot = 700
+
+# Periodic updates
+def periodic_update():
+    global dealer_index, community_cards_data
+    while True:
+        time.sleep(1)  # Wait 1 second between updates
+
+        # Rotate dealer
+        dealer_index = (dealer_index + 1) % len(players_data)
+
+        # Rotate community cards
+        community_cards_data = community_cards_data[1:] + [community_cards_data[0]]
+
+# Start the periodic updates in a separate thread
+threading.Thread(target=periodic_update, daemon=True).start()
 
 @app.route('/players', methods=['GET'])
 def get_players():
