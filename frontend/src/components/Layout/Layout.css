@@ -1,50 +1,87 @@
-/* src/components/Layout/Layout.css */
 .layout-container {
   display: flex;
   min-height: 100vh;
-  flex-direction: row; /* Flex direction is row by default */
+  background-color: #1e1e1e; /* Dark grey background */
+  color: #ffffff; /* White text */
 }
 
 .poker-ui-container {
-  margin-left: 20%; /* Left panel takes 1/5 width, so right side takes 4/5 */
-  width: 80%; /* Increase the size of the Poker UI */
+  margin-left: 20%;
+  width: 80%;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: flex-start;
-  padding: 20px;
+  justify-content: space-between;
+  padding: 10px;
   box-sizing: border-box;
+  position: relative;
 }
 
-.bottom-panel {
-  width: 100%;
-  height: 16.5%; /* Reduced height of the panel to half of previous size */
-  padding: 20px;
-  background-color: #e0e0e0;
+/* Buttons at the bottom of the game UI */
+.action-buttons {
+  position: absolute;
+  bottom: 5%; /* Positioned just above the bottom */
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+
+.action-button {
+  background-color: royalblue;
+  color: #ffffff;
+  border: none;
   border-radius: 8px;
-  margin-top: 20px;
-  text-align: center;
-  box-sizing: border-box;
+  padding: 15px 25px; /* Bigger button size */
+  font-size: 16px; /* Larger text */
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
-/* Optional media query for responsive adjustments */
+.action-button:hover {
+  background-color: #4169e1;
+  transform: scale(1.05);
+}
+
+/* Raise slider */
+.raise-slider {
+  position: absolute;
+  bottom: 12%; /* Positioned above the buttons */
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #2a2a2a; /* Darker grey for contrast */
+  padding: 20px;
+  border-radius: 10px;
+  text-align: center;
+  z-index: 1000;
+}
+
+.raise-slider input {
+  width: 100%;
+  margin: 10px 0;
+}
+
+.raise-slider p {
+  color: #ffffff;
+  margin: 0;
+  font-size: 16px;
+}
+
+/* Responsive adjustments */
 @media (max-width: 768px) {
-  .layout-container {
-    flex-direction: column; /* Stacks the panels on smaller screens */
+  .action-buttons {
+    flex-direction: column;
+    gap: 10px;
+    bottom: 8%; /* Adjusted for smaller screens */
   }
 
-  .poker-ui-container {
-    margin-left: 0;
-    width: 100%;
+  .action-button {
+    font-size: 14px;
+    padding: 10px 20px;
   }
 
-  .bottom-panel {
-    width: 100%;
-    margin-top: 20px;
-  }
-
-  .slide-panel {
-    width: 100%;
-    height: auto;
+  .raise-slider {
+    width: 90%; /* Make slider fit smaller screens */
   }
 }

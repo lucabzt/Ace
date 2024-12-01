@@ -1,8 +1,8 @@
-/* src/App.css */
 .App {
   font-family: Arial, sans-serif;
-  background-color: #f5f5f5;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  background-color: #1e1e1e; /* Dark grey for global background */
+  color: #ffffff; /* White text for global readability */
 }

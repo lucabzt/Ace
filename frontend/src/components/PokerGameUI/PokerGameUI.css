@@ -1,2 +1,25 @@
-/* src/components/PokerGameUI/PokerGameUI.css */
-/* You can add custom styling for PokerGameUI, if needed */
+.poker-table-container {
+  position: relative;
+  width: 100%;
+  height: 60vh; /* Reduced height to fit everything */
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: #1e1e1e; /* Match overall theme */
+}
+
+.community-cards-container {
+  position: absolute;
+  top: 35%; /* Adjusted for smaller table */
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  gap: 1vw;
+}
+
+.community-card {
+  width: 5vw;
+  height: auto;
+}
