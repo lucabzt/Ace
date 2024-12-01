@@ -30,7 +30,7 @@ def load_card_images():
 def load_background_image():
     from src.gui.poker_game_ui import PATH_TO_SPADE, SCREEN_WIDTH, SCREEN_HEIGHT
     try:
-        bg_image = pygame.image.load(os.path.join(PATH_TO_SPADE, "assets/images/PokerTable.png"))
+        bg_image = pygame.image.load(os.path.join(PATH_TO_SPADE, "assets/images/PokerTable4.png"))
         return pygame.transform.scale(bg_image, (SCREEN_WIDTH, SCREEN_HEIGHT))
     except pygame.error:
         print("Background image not found.")
