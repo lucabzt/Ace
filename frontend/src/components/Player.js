@@ -10,7 +10,7 @@ const Player = ({ player, position, isDealer }) => {
         top: position.y,
         color: player.folded ? "red" : "white",
         textAlign: "center",
-        width: "150px",
+        width: "15vw",  // Responsive width for player profile
         transform: "translate(-50%, -50%)",
       }}
     >
@@ -20,14 +20,14 @@ const Player = ({ player, position, isDealer }) => {
           style={{
             position: "absolute",
             top: "50%",
-            right: "-30px",
+            right: "2vw", // Adjust position
             transform: "translate(50%, -50%)",
-            width: "30px",
-            height: "30px",
+            width: "3vw",  // Scaled dealer button size
+            height: "3vw",
             backgroundColor: "#FFD700",
             color: "black",
             borderRadius: "50%",
-            fontSize: "14px",
+            fontSize: "1.5vw", // Scaled font size for "D"
             fontWeight: "bold",
             display: "flex",
             alignItems: "center",
@@ -39,21 +39,25 @@ const Player = ({ player, position, isDealer }) => {
           D
         </div>
       )}
+
+      {/* Player Cards */}
       <div
         style={{
           position: "absolute",
-          left: "60%", // Position cards near the player's profile
+          left: "50%", // Keep the cards centered for better positioning
           top: "0%",
           transform: "translate(-50%, -50%)",
           display: "flex",
           zIndex: 1,
-          marginTop: "-15px", // Move closer vertically
+          marginTop: "-1vw", // Adjust margin for responsive layout
         }}
       >
         {player.cards.map((card, idx) => (
           <Card key={idx} card={{ ...card, idx }} playerFolded={player.folded} />
         ))}
       </div>
+
+      {/* Player Information */}
       <div
         style={{
           position: "relative",
@@ -62,24 +66,24 @@ const Player = ({ player, position, isDealer }) => {
       >
         <div
           style={{
-            padding: "15px",
+            padding: "0.5vw",  // Reduced padding for more proportional layout
             backgroundColor: "#1c2a1e",
-            borderRadius: "10px",
+            borderRadius: "1vw",  // Scaled border radius
             boxShadow: "0 4px 8px rgba(0, 0, 0, 0.2)",
             color: player.folded ? "red" : "white",
             textAlign: "center",
-            width: "150px",
+            width: "10vw",  // Reduced width to make the text box smaller
             margin: "0 auto",
             zIndex: 2,
           }}
         >
-          <h3 style={{ margin: "5px 0", fontSize: "18px" }}>
+          <h3 style={{ margin: "0.5vw 0", fontSize: "1.2vw" }}> {/* Reduced font size */}
             {player.name}: {player.probWin}
           </h3>
-          <p style={{ margin: "5px 0", fontSize: "16px" }}>
+          <p style={{ margin: "0.5vw 0", fontSize: "1vw" }}> {/* Reduced font size */}
             Bet: ${player.bet}
           </p>
-          <p style={{ margin: "5px 0", fontSize: "16px" }}>
+          <p style={{ margin: "0.5vw 0", fontSize: "1vw" }}> {/* Reduced font size */}
             Balance: ${player.balance}
           </p>
         </div>

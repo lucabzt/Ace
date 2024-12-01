@@ -1,8 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Player from "./Player";
 import PokerTable from "./PokerTable";
 import { getPlayerPositions } from "../utils/positionUtils";
-import { loadCardImage } from "../utils/cardUtils"; // Importing the missing function
+import { loadCardImage } from "../utils/cardUtils";
 
 const PokerGameUI = () => {
   const [players, setPlayers] = useState([
@@ -72,6 +72,28 @@ const PokerGameUI = () => {
         { rank: "8", suit: "clubs", faceUp: true },
       ],
     },
+    {
+      name: "Player 4",
+      probWin: "60%",
+      balance: 1100,
+      bet: 60,
+      folded: false,
+      cards: [
+        { rank: "9", suit: "hearts", faceUp: true },
+        { rank: "king", suit: "diamonds", faceUp: true },
+      ],
+    },
+    {
+      name: "Bot 4",
+      probWin: "45%",
+      balance: 950,
+      bet: 50,
+      folded: false,
+      cards: [
+        { rank: "jack", suit: "hearts", faceUp: true },
+        { rank: "queen", suit: "clubs", faceUp: true },
+      ],
+    },
   ]);
 
   const communityCards = [
@@ -84,9 +106,19 @@ const PokerGameUI = () => {
 
   const pot = 500;
   const dealerIndex = 2; // First player is the dealer
-  const pokerTableBackground = "PokerTable4.png"; // Path to table image
+  const pokerTableBackground = "PokerTable100.png"; // Path to table image
 
-  const playerPositions = getPlayerPositions(players.length);
+  const [playerPositions, setPlayerPositions] = useState(getPlayerPositions(players.length));
+
+  // Recalculate player positions on window resize
+  useEffect(() => {
+    const handleResize = () => {
+      setPlayerPositions(getPlayerPositions(players.length));
+    };
+
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, [players.length]);
 
   return (
     <PokerTable pokerTableBackground={pokerTableBackground} pot={pot}>
@@ -103,6 +135,7 @@ const PokerGameUI = () => {
         );
       })}
 
+      {/* Community Cards */}
       <div
         style={{
           position: "absolute",
@@ -110,7 +143,7 @@ const PokerGameUI = () => {
           left: "50%",
           transform: "translate(-50%, -50%)",
           display: "flex",
-          gap: "15px",
+          gap: "1vw",  // Responsive gap between community cards
         }}
       >
         {communityCards.map((card, index) => (
@@ -119,7 +152,7 @@ const PokerGameUI = () => {
             src={loadCardImage(card.rank, card.suit, card.faceUp)}
             alt={`${card.rank} of ${card.suit}`}
             style={{
-              width: "100px",
+              width: "7vw",  // Responsive size for community cards
               height: "auto",
             }}
           />
