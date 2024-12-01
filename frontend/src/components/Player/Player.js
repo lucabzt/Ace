@@ -1,5 +1,5 @@
 import React from "react";
-import Card from "./Card";
+import Card from "../Card";
 
 const Player = ({ player, position, isDealer }) => {
   return (
@@ -10,7 +10,7 @@ const Player = ({ player, position, isDealer }) => {
         top: position.y,
         color: player.folded ? "red" : "white",
         textAlign: "center",
-        width: "15vw",  // Responsive width for player profile
+        width: "15vw",  // Reduced width for the player profile
         transform: "translate(-50%, -50%)",
       }}
     >
@@ -22,12 +22,12 @@ const Player = ({ player, position, isDealer }) => {
             top: "50%",
             right: "2vw", // Adjust position
             transform: "translate(50%, -50%)",
-            width: "3vw",  // Scaled dealer button size
-            height: "3vw",
+            width: "2.5vw",  // Scaled dealer button size
+            height: "2.5vw",
             backgroundColor: "#FFD700",
             color: "black",
             borderRadius: "50%",
-            fontSize: "1.5vw", // Scaled font size for "D"
+            fontSize: "1.2vw", // Scaled font size for "D"
             fontWeight: "bold",
             display: "flex",
             alignItems: "center",
@@ -66,7 +66,7 @@ const Player = ({ player, position, isDealer }) => {
       >
         <div
           style={{
-            padding: "0.5vw",  // Reduced padding for more proportional layout
+            padding: "0.4vw",  // Reduced padding for more proportional layout
             backgroundColor: "#1c2a1e",
             borderRadius: "1vw",  // Scaled border radius
             boxShadow: "0 4px 8px rgba(0, 0, 0, 0.2)",
@@ -77,13 +77,13 @@ const Player = ({ player, position, isDealer }) => {
             zIndex: 2,
           }}
         >
-          <h3 style={{ margin: "0.5vw 0", fontSize: "1.2vw" }}> {/* Reduced font size */}
+          <h3 style={{ margin: "0.4vw 0", fontSize: "1vw" }}> {/* Reduced font size */}
             {player.name}: {player.probWin}
           </h3>
-          <p style={{ margin: "0.5vw 0", fontSize: "1vw" }}> {/* Reduced font size */}
+          <p style={{ margin: "0.4vw 0", fontSize: "0.9vw" }}> {/* Reduced font size */}
             Bet: ${player.bet}
           </p>
-          <p style={{ margin: "0.5vw 0", fontSize: "1vw" }}> {/* Reduced font size */}
+          <p style={{ margin: "0.4vw 0", fontSize: "0.9vw" }}> {/* Reduced font size */}
             Balance: ${player.balance}
           </p>
         </div>

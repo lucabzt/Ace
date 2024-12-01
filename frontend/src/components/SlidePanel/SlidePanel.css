@@ -1,0 +1,26 @@
+/* src/components/SlidePanel/SlidePanel.css */
+.slide-panel {
+  width: 20%; /* Left panel now takes 1/5 of the screen width */
+  background-color: #f4f4f4;
+  padding: 20px;
+  box-sizing: border-box;
+  height: 100vh; /* Full height of the screen */
+  position: fixed; /* Keeps the panel fixed on the left */
+  top: 0;
+  left: 0;
+  z-index: 1000;
+}
+
+/* Add some style for the slide content */
+.slide-panel h2 {
+  margin: 0;
+  padding: 0;
+}
+
+/* Media query for small screens */
+@media (max-width: 768px) {
+  .slide-panel {
+    width: 100%;
+    height: auto;
+  }
+}

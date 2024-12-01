@@ -1,0 +1,50 @@
+/* src/components/Layout/Layout.css */
+.layout-container {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: row; /* Flex direction is row by default */
+}
+
+.poker-ui-container {
+  margin-left: 20%; /* Left panel takes 1/5 width, so right side takes 4/5 */
+  width: 80%; /* Increase the size of the Poker UI */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.bottom-panel {
+  width: 100%;
+  height: 16.5%; /* Reduced height of the panel to half of previous size */
+  padding: 20px;
+  background-color: #e0e0e0;
+  border-radius: 8px;
+  margin-top: 20px;
+  text-align: center;
+  box-sizing: border-box;
+}
+
+/* Optional media query for responsive adjustments */
+@media (max-width: 768px) {
+  .layout-container {
+    flex-direction: column; /* Stacks the panels on smaller screens */
+  }
+
+  .poker-ui-container {
+    margin-left: 0;
+    width: 100%;
+  }
+
+  .bottom-panel {
+    width: 100%;
+    margin-top: 20px;
+  }
+
+  .slide-panel {
+    width: 100%;
+    height: auto;
+  }
+}

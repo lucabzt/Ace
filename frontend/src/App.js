@@ -1,11 +1,12 @@
+// src/App.js
 import React from "react";
-import PokerGameUI from "./components/PokerGameUI";  // Import your UI component
+import Layout from "./components/Layout/Layout";
+import './App.css'; // Global styles
 
-// App.js - Main App Component
 const App = () => {
   return (
-    <div>
-      <PokerGameUI />
+    <div className="App">
+      <Layout />
     </div>
   );
 };
