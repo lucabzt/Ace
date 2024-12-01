@@ -1,24 +1,19 @@
-// src/components/Card.js
-import React from 'react';
+import React from "react";
+import { loadCardImage } from "../utils/cardUtils";
 
-const Card = ({ card, x, y, isFolded }) => {
-  const cardImages = require('../utils/loadCardImages').default();
-  const cardKey = `${card.rank}_${card.suit}`;
-  const image = cardImages[cardKey];
-
-  return (
-    <div
-      style={{
-        position: 'absolute',
-        left: x,
-        top: y,
-        transform: isFolded ? 'grayscale(100%)' : 'none',
-        transition: 'all 0.2s ease',
-      }}
-    >
-      <img src={image} alt={`${card.rank} of ${card.suit}`} width={90} height={131} />
-    </div>
-  );
-};
+const Card = ({ card, playerFolded }) => (
+  <img
+    src={loadCardImage(card.rank, card.suit, card.faceUp)}
+    alt={`${card.rank} of ${card.suit}`}
+    style={{
+      width: "100px",
+      height: "auto",
+      transform: `rotate(${card.idx === 0 ? -5 : 5}deg)`,
+      boxShadow: "0 2px 4px rgba(0, 0, 0, 0.3)",
+      filter: playerFolded ? "grayscale(100%)" : "none",
+      marginLeft: card.idx !== 0 ? "-10px" : "0", // Apply negative margin to overlap
+    }}
+  />
+);
 
 export default Card;
