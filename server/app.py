@@ -56,7 +56,7 @@ players_data = [
         ],
     },
     {
-        "name": "Dr. Wagner",
+        "name": "Dr. Oetker",
         "probWin": "85%",
         "balance": 300,
         "bet": 150,
@@ -67,7 +67,29 @@ players_data = [
         ],
     },
     {
-        "name": "Mr. Schmidt",
+        "name": "Mr. Kemper",
+        "probWin": "55%",
+        "balance": 200,
+        "bet": 50,
+        "folded": False,
+        "cards": [
+            {"rank": "jack", "suit": "diamonds", "faceUp": True},
+            {"rank": "10", "suit": "hearts", "faceUp": True},
+        ],
+    },
+    {
+        "name": "Ms. Gantert",
+        "probWin": "55%",
+        "balance": 200,
+        "bet": 50,
+        "folded": False,
+        "cards": [
+            {"rank": "jack", "suit": "diamonds", "faceUp": True},
+            {"rank": "10", "suit": "hearts", "faceUp": True},
+        ],
+    },
+    {
+        "name": "OG KEMPER",
         "probWin": "55%",
         "balance": 200,
         "bet": 50,

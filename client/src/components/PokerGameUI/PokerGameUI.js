@@ -53,7 +53,7 @@ const PokerGameUI = () => {
     const interval = setInterval(() => {
       fetchPlayers(); // Update players
       pollGameData(); // Update other game data
-    }, 3000);
+    }, 500);
     return () => clearInterval(interval); // Cleanup on unmount
   }, []);
 
