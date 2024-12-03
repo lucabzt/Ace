@@ -1,8 +1,8 @@
-*/classifier/data/
+src/server/classifier/data/
 venv/
 .venv/
-*/classifier/.idea
-*/classifier/__pycache__
+src/server/classifier/.idea
+src/server/classifier/__pycache__
 
 .idea
 */__pycache__/*
