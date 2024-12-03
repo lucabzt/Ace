@@ -1,7 +1,7 @@
 from src.classifier.classifier import Classifier
 from src.gui.SpadeAssistant import SpadeAssistant
-from src.game.game_round import GameRound
-from src.game.hand_analysis.poker_hand_analyzer import PokerHandAnalyzer
+from src.game_logic.game.game_round import GameRound
+from src.game_logic.hand_analysis.poker_hand_analyzer import PokerHandAnalyzer
 
 
 class Spade:

@@ -2,10 +2,10 @@ from pathlib import Path
 
 import pygame
 
-from src.game.betting_round import BettingRound
-from src.game.game_round import GameRound, display_new_round
-from src.game.input import modify_game_settings
-from src.game.resources.player import Player
+from src.game_logic.game.betting_round import BettingRound
+from src.game_logic.game.game_round import GameRound, display_new_round
+from src.game_logic.game.input import modify_game_settings
+from src.game_logic.resources.player import Player
 from src.gui.gui_loader import load_card_images, load_background_image, load_dealer_button, apply_grayscale
 
 # Path setup
@@ -55,7 +55,7 @@ class poker_game_ui(GameRound):
 
     def play_round_with_display(self):
         """Plays a complete round of poker, with option to modify settings before starting."""
-        """Run the poker game one step at a time for visual updates."""
+        """Run the poker game_logic one step at a time for visual updates."""
 
         betting_round = BettingRound(
             self.players, self.pot, self.current_bet, self.small_blind_index,
@@ -68,7 +68,7 @@ class poker_game_ui(GameRound):
                 if self.exit_game:
                     self.save_logs()
                     print("Game exited.")
-                    return  # Exit game if user chose to
+                    return  # Exit game_logic if user chose to
 
             display_new_round()
             self.assign_blinds()
@@ -206,7 +206,7 @@ class poker_game_ui(GameRound):
         pygame.display.flip()
 
 
-# Function to run the game loop
+# Function to run the game_logic loop
 def main():
     player_names = ['Hoerter', 'Rogg', 'Bozzetti', 'Vorderbruegge', 'Huber', 'Meierlohr']
     players = [Player(name) for name in player_names]
