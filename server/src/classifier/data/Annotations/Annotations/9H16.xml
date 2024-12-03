@@ -1,0 +1,26 @@
+<annotation>
+	<folder>9H</folder>
+	<filename>9H16.jpg</filename>
+	<path>G:\Playing Card Dataset\Images\9H\9H16.jpg</path>
+	<source>
+		<database>Unknown</database>
+	</source>
+	<size>
+		<width>4608</width>
+		<height>3456</height>
+		<depth>3</depth>
+	</size>
+	<segmented>0</segmented>
+	<object>
+		<name>9H</name>
+		<pose>Unspecified</pose>
+		<truncated>0</truncated>
+		<difficult>0</difficult>
+		<bndbox>
+			<xmin>2080</xmin>
+			<ymin>2820</ymin>
+			<xmax>2643</xmax>
+			<ymax>3028</ymax>
+		</bndbox>
+	</object>
+</annotation>

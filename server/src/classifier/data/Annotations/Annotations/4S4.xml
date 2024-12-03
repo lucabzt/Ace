@@ -1,0 +1,26 @@
+<annotation>
+	<folder>4S</folder>
+	<filename>4S4.jpg</filename>
+	<path>G:\Playing Card Dataset\Images\4S\4S4.jpg</path>
+	<source>
+		<database>Unknown</database>
+	</source>
+	<size>
+		<width>4608</width>
+		<height>3456</height>
+		<depth>3</depth>
+	</size>
+	<segmented>0</segmented>
+	<object>
+		<name>4S</name>
+		<pose>Unspecified</pose>
+		<truncated>0</truncated>
+		<difficult>0</difficult>
+		<bndbox>
+			<xmin>1357</xmin>
+			<ymin>2024</ymin>
+			<xmax>1713</xmax>
+			<ymax>2250</ymax>
+		</bndbox>
+	</object>
+</annotation>

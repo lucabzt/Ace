@@ -1,0 +1,26 @@
+<annotation>
+	<folder>7H</folder>
+	<filename>7H44.jpg</filename>
+	<path>G:\Playing Card Dataset\Images\7H\7H44.jpg</path>
+	<source>
+		<database>Unknown</database>
+	</source>
+	<size>
+		<width>4608</width>
+		<height>3456</height>
+		<depth>3</depth>
+	</size>
+	<segmented>0</segmented>
+	<object>
+		<name>7H</name>
+		<pose>Unspecified</pose>
+		<truncated>0</truncated>
+		<difficult>0</difficult>
+		<bndbox>
+			<xmin>1702</xmin>
+			<ymin>2583</ymin>
+			<xmax>2372</xmax>
+			<ymax>2787</ymax>
+		</bndbox>
+	</object>
+</annotation>

@@ -1,0 +1,26 @@
+<annotation>
+	<folder>4D</folder>
+	<filename>4D15.jpg</filename>
+	<path>G:\Playing Card Dataset\Images\4D\4D15.jpg</path>
+	<source>
+		<database>Unknown</database>
+	</source>
+	<size>
+		<width>4608</width>
+		<height>3456</height>
+		<depth>3</depth>
+	</size>
+	<segmented>0</segmented>
+	<object>
+		<name>4D</name>
+		<pose>Unspecified</pose>
+		<truncated>0</truncated>
+		<difficult>0</difficult>
+		<bndbox>
+			<xmin>1450</xmin>
+			<ymin>2046</ymin>
+			<xmax>2150</xmax>
+			<ymax>2353</ymax>
+		</bndbox>
+	</object>
+</annotation>

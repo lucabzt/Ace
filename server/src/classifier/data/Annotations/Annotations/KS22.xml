@@ -1,0 +1,26 @@
+<annotation>
+	<folder>KS</folder>
+	<filename>KS22.jpg</filename>
+	<path>G:\Playing Card Dataset\Images\KS\KS22.jpg</path>
+	<source>
+		<database>Unknown</database>
+	</source>
+	<size>
+		<width>4608</width>
+		<height>3456</height>
+		<depth>3</depth>
+	</size>
+	<segmented>0</segmented>
+	<object>
+		<name>KS</name>
+		<pose>Unspecified</pose>
+		<truncated>0</truncated>
+		<difficult>0</difficult>
+		<bndbox>
+			<xmin>2217</xmin>
+			<ymin>1520</ymin>
+			<xmax>2305</xmax>
+			<ymax>1772</ymax>
+		</bndbox>
+	</object>
+</annotation>

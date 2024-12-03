@@ -1,7 +1,0 @@
-torch
-numpy
-matplotlib
-opencv-python
-torchvision
-pycocotools
-jupyter

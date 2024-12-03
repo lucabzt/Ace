@@ -1,0 +1,26 @@
+<annotation>
+	<folder>6H</folder>
+	<filename>6H2.jpg</filename>
+	<path>G:\Playing Card Dataset\Images\6H\6H2.jpg</path>
+	<source>
+		<database>Unknown</database>
+	</source>
+	<size>
+		<width>4608</width>
+		<height>3456</height>
+		<depth>3</depth>
+	</size>
+	<segmented>0</segmented>
+	<object>
+		<name>6H</name>
+		<pose>Unspecified</pose>
+		<truncated>0</truncated>
+		<difficult>0</difficult>
+		<bndbox>
+			<xmin>2746</xmin>
+			<ymin>2109</ymin>
+			<xmax>3087</xmax>
+			<ymax>2313</ymax>
+		</bndbox>
+	</object>
+</annotation>

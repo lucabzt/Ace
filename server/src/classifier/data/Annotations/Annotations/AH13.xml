@@ -1,0 +1,26 @@
+<annotation>
+	<folder>AH</folder>
+	<filename>AH13.jpg</filename>
+	<path>G:\Playing Card Dataset\Images\AH\AH13.jpg</path>
+	<source>
+		<database>Unknown</database>
+	</source>
+	<size>
+		<width>4608</width>
+		<height>3456</height>
+		<depth>3</depth>
+	</size>
+	<segmented>0</segmented>
+	<object>
+		<name>AH</name>
+		<pose>Unspecified</pose>
+		<truncated>0</truncated>
+		<difficult>0</difficult>
+		<bndbox>
+			<xmin>2083</xmin>
+			<ymin>942</ymin>
+			<xmax>2880</xmax>
+			<ymax>1135</ymax>
+		</bndbox>
+	</object>
+</annotation>

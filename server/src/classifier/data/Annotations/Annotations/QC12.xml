@@ -1,0 +1,26 @@
+<annotation>
+	<folder>QC</folder>
+	<filename>QC12.jpg</filename>
+	<path>G:\Playing Card Dataset\Images\QC\QC12.jpg</path>
+	<source>
+		<database>Unknown</database>
+	</source>
+	<size>
+		<width>4608</width>
+		<height>3456</height>
+		<depth>3</depth>
+	</size>
+	<segmented>0</segmented>
+	<object>
+		<name>QC</name>
+		<pose>Unspecified</pose>
+		<truncated>0</truncated>
+		<difficult>0</difficult>
+		<bndbox>
+			<xmin>452</xmin>
+			<ymin>1142</ymin>
+			<xmax>926</xmax>
+			<ymax>1620</ymax>
+		</bndbox>
+	</object>
+</annotation>

@@ -1,0 +1,26 @@
+<annotation>
+	<folder>KD</folder>
+	<filename>KD39.jpg</filename>
+	<path>G:\Playing Card Dataset\Images\KD\KD39.jpg</path>
+	<source>
+		<database>Unknown</database>
+	</source>
+	<size>
+		<width>4608</width>
+		<height>3456</height>
+		<depth>3</depth>
+	</size>
+	<segmented>0</segmented>
+	<object>
+		<name>KD</name>
+		<pose>Unspecified</pose>
+		<truncated>0</truncated>
+		<difficult>0</difficult>
+		<bndbox>
+			<xmin>3143</xmin>
+			<ymin>1353</ymin>
+			<xmax>3539</xmax>
+			<ymax>1594</ymax>
+		</bndbox>
+	</object>
+</annotation>
