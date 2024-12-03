@@ -1,0 +1,26 @@
+<annotation>
+	<folder>JD</folder>
+	<filename>JD38.jpg</filename>
+	<path>G:\Playing Card Dataset\Images\JD\JD38.jpg</path>
+	<source>
+		<database>Unknown</database>
+	</source>
+	<size>
+		<width>4608</width>
+		<height>3456</height>
+		<depth>3</depth>
+	</size>
+	<segmented>0</segmented>
+	<object>
+		<name>JD</name>
+		<pose>Unspecified</pose>
+		<truncated>0</truncated>
+		<difficult>0</difficult>
+		<bndbox>
+			<xmin>1783</xmin>
+			<ymin>883</ymin>
+			<xmax>1968</xmax>
+			<ymax>1413</ymax>
+		</bndbox>
+	</object>
+</annotation>

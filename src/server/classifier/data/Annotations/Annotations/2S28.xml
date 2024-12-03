@@ -1,0 +1,26 @@
+<annotation>
+	<folder>2S</folder>
+	<filename>2S28.jpg</filename>
+	<path>G:\Playing Card Dataset\Images\2S\2S28.jpg</path>
+	<source>
+		<database>Unknown</database>
+	</source>
+	<size>
+		<width>4608</width>
+		<height>3456</height>
+		<depth>3</depth>
+	</size>
+	<segmented>0</segmented>
+	<object>
+		<name>2S</name>
+		<pose>Unspecified</pose>
+		<truncated>0</truncated>
+		<difficult>0</difficult>
+		<bndbox>
+			<xmin>1743</xmin>
+			<ymin>2379</ymin>
+			<xmax>2320</xmax>
+			<ymax>3168</ymax>
+		</bndbox>
+	</object>
+</annotation>

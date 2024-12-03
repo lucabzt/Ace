@@ -1,0 +1,26 @@
+<annotation>
+	<folder>JC</folder>
+	<filename>JC0.jpg</filename>
+	<path>G:\Playing Card Dataset\Images\JC\JC0.jpg</path>
+	<source>
+		<database>Unknown</database>
+	</source>
+	<size>
+		<width>4608</width>
+		<height>3456</height>
+		<depth>3</depth>
+	</size>
+	<segmented>0</segmented>
+	<object>
+		<name>JC</name>
+		<pose>Unspecified</pose>
+		<truncated>0</truncated>
+		<difficult>0</difficult>
+		<bndbox>
+			<xmin>1631</xmin>
+			<ymin>909</ymin>
+			<xmax>1805</xmax>
+			<ymax>1409</ymax>
+		</bndbox>
+	</object>
+</annotation>

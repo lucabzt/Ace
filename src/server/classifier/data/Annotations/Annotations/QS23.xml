@@ -1,0 +1,26 @@
+<annotation>
+	<folder>QS</folder>
+	<filename>QS23.jpg</filename>
+	<path>G:\Playing Card Dataset\Images\QS\QS23.jpg</path>
+	<source>
+		<database>Unknown</database>
+	</source>
+	<size>
+		<width>4608</width>
+		<height>3456</height>
+		<depth>3</depth>
+	</size>
+	<segmented>0</segmented>
+	<object>
+		<name>QS</name>
+		<pose>Unspecified</pose>
+		<truncated>0</truncated>
+		<difficult>0</difficult>
+		<bndbox>
+			<xmin>1165</xmin>
+			<ymin>1653</ymin>
+			<xmax>1565</xmax>
+			<ymax>2002</ymax>
+		</bndbox>
+	</object>
+</annotation>

@@ -1,0 +1,26 @@
+<annotation>
+	<folder>5S</folder>
+	<filename>5S25.jpg</filename>
+	<path>G:\Playing Card Dataset\Images\5S\5S25.jpg</path>
+	<source>
+		<database>Unknown</database>
+	</source>
+	<size>
+		<width>4608</width>
+		<height>3456</height>
+		<depth>3</depth>
+	</size>
+	<segmented>0</segmented>
+	<object>
+		<name>5S</name>
+		<pose>Unspecified</pose>
+		<truncated>0</truncated>
+		<difficult>0</difficult>
+		<bndbox>
+			<xmin>2791</xmin>
+			<ymin>2657</ymin>
+			<xmax>3461</xmax>
+			<ymax>2853</ymax>
+		</bndbox>
+	</object>
+</annotation>

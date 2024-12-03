@@ -1,0 +1,26 @@
+<annotation>
+	<folder>3H</folder>
+	<filename>3H4.jpg</filename>
+	<path>G:\Playing Card Dataset\Images\3H\3H4.jpg</path>
+	<source>
+		<database>Unknown</database>
+	</source>
+	<size>
+		<width>4608</width>
+		<height>3456</height>
+		<depth>3</depth>
+	</size>
+	<segmented>0</segmented>
+	<object>
+		<name>3H</name>
+		<pose>Unspecified</pose>
+		<truncated>0</truncated>
+		<difficult>0</difficult>
+		<bndbox>
+			<xmin>2517</xmin>
+			<ymin>1376</ymin>
+			<xmax>3102</xmax>
+			<ymax>1646</ymax>
+		</bndbox>
+	</object>
+</annotation>

@@ -1,0 +1,26 @@
+<annotation>
+	<folder>6S</folder>
+	<filename>6S31.jpg</filename>
+	<path>G:\Playing Card Dataset\Images\6S\6S31.jpg</path>
+	<source>
+		<database>Unknown</database>
+	</source>
+	<size>
+		<width>4608</width>
+		<height>3456</height>
+		<depth>3</depth>
+	</size>
+	<segmented>0</segmented>
+	<object>
+		<name>6S</name>
+		<pose>Unspecified</pose>
+		<truncated>0</truncated>
+		<difficult>0</difficult>
+		<bndbox>
+			<xmin>2454</xmin>
+			<ymin>976</ymin>
+			<xmax>2739</xmax>
+			<ymax>1394</ymax>
+		</bndbox>
+	</object>
+</annotation>

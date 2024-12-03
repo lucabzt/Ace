@@ -1,0 +1,26 @@
+<annotation>
+	<folder>QH</folder>
+	<filename>QH23.jpg</filename>
+	<path>G:\Playing Card Dataset\Images\QH\QH23.jpg</path>
+	<source>
+		<database>Unknown</database>
+	</source>
+	<size>
+		<width>4608</width>
+		<height>3456</height>
+		<depth>3</depth>
+	</size>
+	<segmented>0</segmented>
+	<object>
+		<name>QH</name>
+		<pose>Unspecified</pose>
+		<truncated>0</truncated>
+		<difficult>0</difficult>
+		<bndbox>
+			<xmin>772</xmin>
+			<ymin>2320</ymin>
+			<xmax>1224</xmax>
+			<ymax>2476</ymax>
+		</bndbox>
+	</object>
+</annotation>

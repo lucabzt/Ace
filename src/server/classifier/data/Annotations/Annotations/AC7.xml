@@ -1,0 +1,26 @@
+<annotation>
+	<folder>AC</folder>
+	<filename>AC7.jpg</filename>
+	<path>G:\Playing Card Dataset\Images\AC\AC7.jpg</path>
+	<source>
+		<database>Unknown</database>
+	</source>
+	<size>
+		<width>4608</width>
+		<height>3456</height>
+		<depth>3</depth>
+	</size>
+	<segmented>0</segmented>
+	<object>
+		<name>AC</name>
+		<pose>Unspecified</pose>
+		<truncated>0</truncated>
+		<difficult>0</difficult>
+		<bndbox>
+			<xmin>3583</xmin>
+			<ymin>1765</ymin>
+			<xmax>4376</xmax>
+			<ymax>1968</ymax>
+		</bndbox>
+	</object>
+</annotation>
