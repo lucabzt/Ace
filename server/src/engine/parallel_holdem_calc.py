@@ -1,7 +1,7 @@
 import multiprocessing
 import time
-from src.engine import holdem_argparser
-from src.engine import holdem_functions
+from server.src.engine import holdem_argparser
+from server.src.engine import holdem_functions
 
 
 def main():

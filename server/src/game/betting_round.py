@@ -1,5 +1,5 @@
-from src.game.input import get_player_action
-from src.mediaplayer.sound_manager import play_community_card_sound
+from server.src.game.input import get_player_action
+from server.src.mediaplayer.sound_manager import play_community_card_sound
 
 
 class BettingRound:

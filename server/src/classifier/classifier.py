@@ -1,10 +1,10 @@
 # IMPORTS
 import torch
-from src.classifier.model.spadeClassifier import SpadeClassifier
+from server.src.classifier.model.spadeClassifier import SpadeClassifier
 import matplotlib.pyplot as plt
 import os
 
-from src.game.resources.card import Card, Suit, Rank
+from server.src.game.resources.card import Card, Suit, Rank
 
 device = 'cuda:0' if torch.cuda.is_available() else 'cpu'
 

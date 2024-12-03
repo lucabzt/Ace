@@ -1,6 +1,6 @@
 from collections import Counter
 
-from src.game.resources.card import Rank
+from server.src.game.resources.card import Rank
 
 
 # Helper function to determine the number of different ranks in a hand

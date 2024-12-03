@@ -1,13 +1,13 @@
 import csv
 from datetime import datetime
 
-from src.engine import holdem_calc
-from src.game.betting_round import BettingRound
-from src.game.hand_analysis.winner_determiner import WinnerAnalyzer
-from src.game.input import modify_game_settings
-from src.game.resources.player import Player
-from src.game.resources.poker_deck import Deck
-from src.game.utils.game_utils import display_spade_art, display_new_round
+from server.src.engine import holdem_calc
+from server.src.game.betting_round import BettingRound
+from server.src.game.hand_analysis.winner_determiner import WinnerAnalyzer
+from server.src.game.input import modify_game_settings
+from server.src.game.resources.player import Player
+from server.src.game.resources.poker_deck import Deck
+from server.src.game.utils.game_utils import display_spade_art, display_new_round
 
 
 class GameRound:

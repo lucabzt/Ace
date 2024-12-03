@@ -1,9 +1,9 @@
 from collections import Counter
 
-from src.game.hand_analysis.poker_hand_rankings import rank_value, high_card, is_one_pair, is_two_pair, \
+from server.src.game.hand_analysis.poker_hand_rankings import rank_value, high_card, is_one_pair, is_two_pair, \
     is_three_of_a_kind, \
     is_full_house, is_four_of_a_kind, is_straight, is_flush
-from src.game.resources.card import Rank
+from server.src.game.resources.card import Rank
 
 
 def display_spade_art():

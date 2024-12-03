@@ -4,7 +4,7 @@ import pygame
 
 
 def load_card_images():
-    from src.gui.poker_game_ui import PATH_TO_SPADE, SCREEN_WIDTH, SCREEN_HEIGHT
+    from server.src.gui.poker_game_ui import PATH_TO_SPADE, SCREEN_WIDTH, SCREEN_HEIGHT
     image_path = os.path.join(PATH_TO_SPADE, "assets/images/card_deck")
     images = {}
     ranks = ['2', '3', '4', '5', '6', '7', '8', '9', '10', 'jack', 'queen', 'king', 'ace']
@@ -28,7 +28,7 @@ def load_card_images():
 
 
 def load_background_image():
-    from src.gui.poker_game_ui import PATH_TO_SPADE, SCREEN_WIDTH, SCREEN_HEIGHT
+    from server.src.gui.poker_game_ui import PATH_TO_SPADE, SCREEN_WIDTH, SCREEN_HEIGHT
     try:
         bg_image = pygame.image.load(os.path.join(PATH_TO_SPADE, "assets/images/PokerTable4.png"))
         return pygame.transform.scale(bg_image, (SCREEN_WIDTH, SCREEN_HEIGHT))
@@ -38,7 +38,7 @@ def load_background_image():
 
 
 def load_dealer_button():
-    from src.gui.poker_game_ui import PATH_TO_SPADE, SCREEN_WIDTH, SCREEN_HEIGHT
+    from server.src.gui.poker_game_ui import PATH_TO_SPADE, SCREEN_WIDTH, SCREEN_HEIGHT
     try:
         button_image = pygame.image.load(os.path.join(PATH_TO_SPADE, "assets/images/DealerButton.png"))
         return pygame.transform.scale(button_image, (40, 40))  # Adjust size as needed

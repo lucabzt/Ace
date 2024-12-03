@@ -1,5 +1,5 @@
-from src.game.resources.player import Player
-from src.mediaplayer.sound_manager import play_player_action
+from server.src.game.resources.player import Player
+from server.src.mediaplayer.sound_manager import play_player_action
 
 
 def get_player_action(player, to_call):

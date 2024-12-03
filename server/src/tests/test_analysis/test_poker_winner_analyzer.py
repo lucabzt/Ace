@@ -1,8 +1,8 @@
 import unittest
 
-from src.game_logic.hand_analysis.winner_determiner import WinnerAnalyzer
-from src.game_logic.resources.card import Card, Suit, Rank
-from src.game_logic.resources.player import Player
+from server.src.game.hand_analysis.winner_determiner import WinnerAnalyzer
+from server.src.game.resources.card import Card, Suit, Rank
+from server.src.game.resources.player import Player
 
 
 class TestWinnerAnalyzer(unittest.TestCase):

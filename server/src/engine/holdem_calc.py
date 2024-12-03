@@ -1,6 +1,6 @@
 import time
-from src.engine import holdem_functions
-from src.engine import holdem_argparser
+from server.src.engine import holdem_functions
+from server.src.engine import holdem_argparser
 
 
 def main():

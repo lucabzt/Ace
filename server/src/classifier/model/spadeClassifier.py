@@ -7,8 +7,8 @@ The output of the model is a probability distribution over the 53 possible playi
 
 import torch.nn as nn
 from torch import Tensor
-from src.classifier.model.block import Block
-from src.classifier.model.head import Head
+from server.src.classifier.model.block import Block
+from server.src.classifier.model.head import Head
 
 
 class SpadeClassifier(nn.Module):

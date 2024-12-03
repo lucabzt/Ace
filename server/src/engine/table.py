@@ -6,9 +6,9 @@ import logging
 
 import numpy as np
 
-from src.engine.utils import *
-from src.engine.hand import Hand
-from src.engine.ranker import *
+from server.src.engine.utils import *
+from server.src.engine.hand import Hand
+from server.src.engine.ranker import *
 
 logger = logging.getLogger()
 logger.setLevel(logging.DEBUG)

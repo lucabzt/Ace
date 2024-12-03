@@ -2,11 +2,12 @@ from pathlib import Path
 
 import pygame
 
-from src.game_logic.game.betting_round import BettingRound
-from src.game_logic.game.game_round import GameRound, display_new_round
-from src.game_logic.game.input import modify_game_settings
-from src.game_logic.resources.player import Player
-from src.gui.gui_loader import load_card_images, load_background_image, load_dealer_button, apply_grayscale
+from server.src.game.betting_round import BettingRound
+from server.src.game.game_round import GameRound
+from server.src.game.utils.game_utils import display_new_round
+from server.src.game.input import modify_game_settings
+from server.src.game.resources.player import Player
+from server.src.gui.gui_loader import load_card_images, load_background_image, load_dealer_button, apply_grayscale
 
 # Path setup
 BASE_DIR = base_path = Path(__file__).resolve().parent.parent.parent  # Go up three directories from mediaplayer
