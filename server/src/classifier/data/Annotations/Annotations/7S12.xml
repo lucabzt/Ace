@@ -1,0 +1,26 @@
+<annotation>
+	<folder>7S</folder>
+	<filename>7S12.jpg</filename>
+	<path>G:\Playing Card Dataset\Images\7S\7S12.jpg</path>
+	<source>
+		<database>Unknown</database>
+	</source>
+	<size>
+		<width>4608</width>
+		<height>3456</height>
+		<depth>3</depth>
+	</size>
+	<segmented>0</segmented>
+	<object>
+		<name>7S</name>
+		<pose>Unspecified</pose>
+		<truncated>0</truncated>
+		<difficult>0</difficult>
+		<bndbox>
+			<xmin>1420</xmin>
+			<ymin>1120</ymin>
+			<xmax>1602</xmax>
+			<ymax>1502</ymax>
+		</bndbox>
+	</object>
+</annotation>

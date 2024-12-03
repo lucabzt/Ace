@@ -1,0 +1,26 @@
+<annotation>
+	<folder>2C</folder>
+	<filename>2C5.jpg</filename>
+	<path>G:\Playing Card Dataset\Images\2C\2C5.jpg</path>
+	<source>
+		<database>Unknown</database>
+	</source>
+	<size>
+		<width>4608</width>
+		<height>3456</height>
+		<depth>3</depth>
+	</size>
+	<segmented>0</segmented>
+	<object>
+		<name>2C</name>
+		<pose>Unspecified</pose>
+		<truncated>0</truncated>
+		<difficult>0</difficult>
+		<bndbox>
+			<xmin>446</xmin>
+			<ymin>1465</ymin>
+			<xmax>820</xmax>
+			<ymax>1765</ymax>
+		</bndbox>
+	</object>
+</annotation>

@@ -1,0 +1,26 @@
+<annotation>
+	<folder>JS</folder>
+	<filename>JS20.jpg</filename>
+	<path>G:\Playing Card Dataset\Images\JS\JS20.jpg</path>
+	<source>
+		<database>Unknown</database>
+	</source>
+	<size>
+		<width>4608</width>
+		<height>3456</height>
+		<depth>3</depth>
+	</size>
+	<segmented>0</segmented>
+	<object>
+		<name>JS</name>
+		<pose>Unspecified</pose>
+		<truncated>0</truncated>
+		<difficult>0</difficult>
+		<bndbox>
+			<xmin>1576</xmin>
+			<ymin>1950</ymin>
+			<xmax>1831</xmax>
+			<ymax>2187</ymax>
+		</bndbox>
+	</object>
+</annotation>

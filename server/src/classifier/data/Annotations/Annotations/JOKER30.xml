@@ -1,0 +1,26 @@
+<annotation>
+	<folder>JOKER</folder>
+	<filename>JOKER30.jpg</filename>
+	<path>G:\Playing Card Dataset\Images\JOKER\JOKER30.jpg</path>
+	<source>
+		<database>Unknown</database>
+	</source>
+	<size>
+		<width>4608</width>
+		<height>3456</height>
+		<depth>3</depth>
+	</size>
+	<segmented>0</segmented>
+	<object>
+		<name>JOKER</name>
+		<pose>Unspecified</pose>
+		<truncated>0</truncated>
+		<difficult>0</difficult>
+		<bndbox>
+			<xmin>2513</xmin>
+			<ymin>1005</ymin>
+			<xmax>2817</xmax>
+			<ymax>1298</ymax>
+		</bndbox>
+	</object>
+</annotation>

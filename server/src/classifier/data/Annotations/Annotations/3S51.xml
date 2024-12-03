@@ -1,0 +1,38 @@
+<annotation>
+	<folder>3S</folder>
+	<filename>3S51.jpg</filename>
+	<path>G:\Playing Card Dataset\Images\3S\3S51.jpg</path>
+	<source>
+		<database>Unknown</database>
+	</source>
+	<size>
+		<width>4608</width>
+		<height>3456</height>
+		<depth>3</depth>
+	</size>
+	<segmented>0</segmented>
+	<object>
+		<name>3S</name>
+		<pose>Unspecified</pose>
+		<truncated>0</truncated>
+		<difficult>0</difficult>
+		<bndbox>
+			<xmin>3280</xmin>
+			<ymin>2079</ymin>
+			<xmax>3846</xmax>
+			<ymax>2446</ymax>
+		</bndbox>
+	</object>
+	<object>
+		<name>3S</name>
+		<pose>Unspecified</pose>
+		<truncated>0</truncated>
+		<difficult>0</difficult>
+		<bndbox>
+			<xmin>868</xmin>
+			<ymin>2028</ymin>
+			<xmax>1450</xmax>
+			<ymax>2424</ymax>
+		</bndbox>
+	</object>
+</annotation>

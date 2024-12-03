@@ -1,0 +1,26 @@
+<annotation>
+	<folder>AD</folder>
+	<filename>AD3.jpg</filename>
+	<path>G:\Playing Card Dataset\Images\AD\AD3.jpg</path>
+	<source>
+		<database>Unknown</database>
+	</source>
+	<size>
+		<width>4608</width>
+		<height>3456</height>
+		<depth>3</depth>
+	</size>
+	<segmented>0</segmented>
+	<object>
+		<name>AD</name>
+		<pose>Unspecified</pose>
+		<truncated>0</truncated>
+		<difficult>0</difficult>
+		<bndbox>
+			<xmin>1831</xmin>
+			<ymin>1113</ymin>
+			<xmax>2102</xmax>
+			<ymax>1476</ymax>
+		</bndbox>
+	</object>
+</annotation>

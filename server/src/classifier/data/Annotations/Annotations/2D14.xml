@@ -1,0 +1,26 @@
+<annotation>
+	<folder>2D</folder>
+	<filename>2D14.jpg</filename>
+	<path>G:\Playing Card Dataset\Images\2D\2D14.jpg</path>
+	<source>
+		<database>Unknown</database>
+	</source>
+	<size>
+		<width>4608</width>
+		<height>3456</height>
+		<depth>3</depth>
+	</size>
+	<segmented>0</segmented>
+	<object>
+		<name>2D</name>
+		<pose>Unspecified</pose>
+		<truncated>0</truncated>
+		<difficult>0</difficult>
+		<bndbox>
+			<xmin>1746</xmin>
+			<ymin>2383</ymin>
+			<xmax>1887</xmax>
+			<ymax>2665</ymax>
+		</bndbox>
+	</object>
+</annotation>

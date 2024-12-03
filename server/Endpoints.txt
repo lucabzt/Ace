@@ -1,0 +1,28 @@
+
+
+Alle Spieler, Alle Spieler Attribute GET #Pro Betting Round
+    self.name = name
+    self.cards = []  # Player's own cards
+    self.balance = balance  # Player's balance for betting
+    self.win_prob = 0.0
+
+self.community_cards = []  GET Immer wenn neue community card gezogen wird
+5 Community cards #Face Up = Karte, Down = Rückseite
+communityCards = [
+  { rank: "10", suit: "spades", faceUp: true },
+  { rank: "9", suit: "clubs", faceUp: true },
+  { rank: "8", suit: "hearts", faceUp: true },
+  { rank: "7", suit: "diamonds", faceUp: true },
+  { rank: "6", suit: "spades", faceUp: true },
+];
+
+
+#Pro Spieler in betting round
+self.pot = 0
+self.bets = {player.name: 0 for player in players} #Maybe als Attribut von Player
+self.folded_players = set()
+self.active_players = self.players.copy()
+
+
+#Immer am anfang einer Runde
+self.dealer_index = 0

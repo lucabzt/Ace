@@ -1,0 +1,26 @@
+<annotation>
+	<folder>QD</folder>
+	<filename>QD12.jpg</filename>
+	<path>G:\Playing Card Dataset\Images\QD\QD12.jpg</path>
+	<source>
+		<database>Unknown</database>
+	</source>
+	<size>
+		<width>4608</width>
+		<height>3456</height>
+		<depth>3</depth>
+	</size>
+	<segmented>0</segmented>
+	<object>
+		<name>QD</name>
+		<pose>Unspecified</pose>
+		<truncated>0</truncated>
+		<difficult>0</difficult>
+		<bndbox>
+			<xmin>1426</xmin>
+			<ymin>1742</ymin>
+			<xmax>1696</xmax>
+			<ymax>1946</ymax>
+		</bndbox>
+	</object>
+</annotation>

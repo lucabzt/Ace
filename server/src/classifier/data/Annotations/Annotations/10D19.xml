@@ -1,0 +1,26 @@
+<annotation>
+	<folder>10D</folder>
+	<filename>10D19.jpg</filename>
+	<path>G:\Playing Card Dataset\Images\10D\10D19.jpg</path>
+	<source>
+		<database>Unknown</database>
+	</source>
+	<size>
+		<width>4608</width>
+		<height>3456</height>
+		<depth>3</depth>
+	</size>
+	<segmented>0</segmented>
+	<object>
+		<name>10D</name>
+		<pose>Unspecified</pose>
+		<truncated>0</truncated>
+		<difficult>0</difficult>
+		<bndbox>
+			<xmin>3180</xmin>
+			<ymin>1546</ymin>
+			<xmax>3572</xmax>
+			<ymax>1909</ymax>
+		</bndbox>
+	</object>
+</annotation>

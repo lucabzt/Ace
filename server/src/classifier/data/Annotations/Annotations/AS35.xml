@@ -1,0 +1,26 @@
+<annotation>
+	<folder>AS</folder>
+	<filename>AS35.jpg</filename>
+	<path>G:\Playing Card Dataset\Images\AS\AS35.jpg</path>
+	<source>
+		<database>Unknown</database>
+	</source>
+	<size>
+		<width>4608</width>
+		<height>3456</height>
+		<depth>3</depth>
+	</size>
+	<segmented>0</segmented>
+	<object>
+		<name>AS</name>
+		<pose>Unspecified</pose>
+		<truncated>0</truncated>
+		<difficult>0</difficult>
+		<bndbox>
+			<xmin>354</xmin>
+			<ymin>1268</ymin>
+			<xmax>854</xmax>
+			<ymax>1461</ymax>
+		</bndbox>
+	</object>
+</annotation>
