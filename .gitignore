@@ -1,7 +1,7 @@
-research/classifier/data/
+src/classifier/data/
 venv/
-research/classifier/.idea
-research/classifier/__pycache__
+src/classifier/.idea
+src/classifier/__pycache__
 .idea
 */__pycache__/*
 */.idea/*
