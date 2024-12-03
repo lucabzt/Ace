@@ -6,7 +6,7 @@ import { loadCardImage } from "../../utils/cardUtils";
 import { players } from "../../data/playersData";
 
 const PokerGameUI = () => {
-  const pokerTableBackground = "PokerTable100.png";
+  const pokerTableBackground = "images/poker_table/PokerTable100.png";
   const [playerPositions, setPlayerPositions] = useState(getPlayerPositions(players.length));
   const [pot, setPot] = useState(null);
   const [communityCards, setCommunityCards] = useState([]); // State for community cards
