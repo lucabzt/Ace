@@ -1,16 +1,13 @@
-# import required module
-import server.src.game.hand_analysis.main_hand_analysis
-from server.src.game.resources.card import Card
-
+import os
 import threading
 import time
-import os
 import random
 from playsound3 import playsound
-from time import sleep
-import server.src.game.hand_analysis.main_hand_analysis
-import mutagen
 from mutagen.mp3 import MP3
+from time import sleep
+
+# Get the base directory of the project
+BASE_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), "../../../"))
 
 
 def play_winner_sound(winner):
@@ -23,7 +20,9 @@ start_time = time.time()
 # Helper function to play a random sound file from a list
 def play_random_sound(file_path):
     try:
-        folder_path = os.path.join("../../assets/sounds/", file_path)
+        # Construct the full path dynamically
+        folder_path = os.path.join(BASE_DIR, "server/assets/sounds", file_path)
+
         # MacOS will extrawurst wegen .DS_Store file
         files = [
             f for f in os.listdir(folder_path)
@@ -32,15 +31,14 @@ def play_random_sound(file_path):
         if files:
             # Select a random file from the list
             random_file = random.choice(files)
-            # Play the selected file
             file = os.path.join(folder_path, random_file)
             audio = MP3(file)
             audio_info = audio.info
-            length = (float)(audio_info.length)
+            length = float(audio_info.length)
 
-            #print(time.time() - start_time, "play sound..:", file, "time: " + str(length) + " sleep: ", max((float)(length) * 0.88, (float)(length) - 0.2) )
+            # Play the selected file
             playsound(file, block=False)
-            sleep(max((float)(length) * 0.975, (float)(length) - 0.114))
+            sleep(max(length * 0.975, length - 0.114))
 
         else:
             print(f"No valid audio files found in the folder {folder_path}.")
@@ -63,7 +61,7 @@ def play_player_action(player, action):
 def play_all_sounds(file_path) -> threading.Thread:
     def play_sound():
         try:
-            folder_path = os.path.join("../../assets/sounds/", file_path)
+            folder_path = os.path.join(BASE_DIR, "server/assets/sounds", file_path)
             files = [f for f in os.listdir(folder_path) if os.path.isfile(os.path.join(folder_path, f))]
             for file in files:
                 playsound(os.path.join(folder_path, file))
@@ -78,13 +76,13 @@ def play_all_sounds(file_path) -> threading.Thread:
 
 # Function to construct the sound paths for a card rank
 def get_card_sound_paths(rank):
-    rank_path = f"../../assets/sounds/Poker Cards/Card/Plural/{rank}"
+    rank_path = os.path.join(BASE_DIR, f"server/assets/sounds/Poker Cards/Card/Plural/{rank}")
     return [os.path.join(rank_path, f"{rank}{i}.mp3") for i in range(1, 5)]
 
 
 # Function to construct paths for specific phrases
 def get_announcement_path(phrase):
-    base_path = "../../assets/sounds"
+    base_path = os.path.join(BASE_DIR, "server/assets/sounds")
     paths = {
         "wins": [os.path.join(base_path, "Player Actions", "wins.mp3")],
         "full of": [os.path.join(base_path, "Winning Hands", "full of.mp3")],
@@ -113,8 +111,8 @@ def play_full_house(attributes):
 def play_rank_high(attribute):
     card = attribute
     rank = str(card.rank).replace("Rank.", "")
-    playsound(f"../../assets/sounds/Poker Cards/Card/Card Number/{rank}.mp3")
-    playsound(f"../../assets/sounds/Poker Cards/High/High1.mp3")
+    playsound(os.path.join(BASE_DIR, f"server/assets/sounds/Poker Cards/Card/Card Number/{rank}.mp3"))
+    playsound(os.path.join(BASE_DIR, f"server/assets/sounds/Poker Cards/High/High1.mp3"))
 
 
 def play_card_plural(attribute):
@@ -128,9 +126,9 @@ def play_generic_hand(hand_type, attributes):
     # Generic means attributes only one attribute
     play_hand_type(hand_type)
 
-    if (hand_type == "Straight" or hand_type == "Flush"):
+    if hand_type in ("Straight", "Flush"):
         play_rank_high(attributes)
-    elif hand_type == "Three of a Kind" or hand_type == "Four of a Kind":
+    elif hand_type in ("Three of a Kind", "Four of a Kind"):
         play_card_plural(attributes)
 
 
@@ -180,5 +178,7 @@ def play_winners_sound(winners):
 
 
 if __name__ == '__main__':
-    play_winners_sound(src.game.hand_analysis.main_hand_analysis.main())
+    import server.src.game.hand_analysis.main_hand_analysis
+
+    play_winners_sound(server.src.game.hand_analysis.main_hand_analysis.main())
     time.sleep(1)

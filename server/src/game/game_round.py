@@ -13,7 +13,6 @@ from server.src.game.utils.game_utils import display_spade_art, display_new_roun
 
 class GameRound:
     def __init__(self, players, small_blind, big_blind):
-        display_spade_art()  # Display spade art on game start
         if len(players) < 2:
             raise ValueError("Mindestens zwei Spieler sind erforderlich.")
         self.players = players
@@ -213,6 +212,7 @@ class GameRound:
         # Use engine to calculate probs: SCHULDIG: DESHALB KACKE MIT TERMINAL OUTPUT
         # Can use parallel to be faster
         probs = parallel_holdem_calc.calculate(community_cards, False, 10e3, None, player_cards, False)
+
 
         # probs = holdem_calc.calculate(community_cards, False, 10e3, None, player_cards, False)
 

@@ -7,6 +7,8 @@ from flask_cors import CORS
 import threading
 import time
 import random
+
+from server.src.game.utils.game_utils import display_spade_art
 from src.game.game_round import GameRound  # Import your game logic
 from src.game.resources.player import Player
 
@@ -16,8 +18,8 @@ app = Flask(__name__)
 CORS(app)
 
 # Initialize the game state
-player_names = ['Mr. Vorderbrügge', 'Mr. Huber', 'Mr. Bozzetti', 'Mr. Meierlohr', 'Dr. Oetker', 'Mr. Kemper',
-                'Ms. Gantert', 'OG KEMPER']
+player_names = ['Bozzetti', 'Huber', 'Rogg', 'Meierlohr', 'Hoerter', 'Simon',
+                'Vorderbrügge', 'Maier']
 players = [Player(name) for name in player_names]
 game = GameRound(players, small_blind=10, big_blind=20)
 
@@ -57,6 +59,11 @@ def get_community_cards():
         {"rank": card.rank.value, "suit": card.suit.value, "faceUp": True}
         for card in game.community_cards
     ]
+
+    # Add placeholder cards if there are less than 5 cards
+    while len(community_cards) < 5:
+        community_cards.append({"rank": None, "suit": None, "faceUp": False})
+
     return jsonify(community_cards)
 
 
@@ -153,4 +160,5 @@ log.setLevel(logging.ERROR)
 
 # Run the Flask app
 if __name__ == '__main__':
+    display_spade_art()  # Display spade art on game start
     app.run(debug=False, host='127.0.0.1', port=5000)
