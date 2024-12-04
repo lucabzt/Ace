@@ -4,7 +4,8 @@ from server.src.mediaplayer.sound_manager import play_community_card_sound
 
 class BettingRound:
     def __init__(self, players, pot, current_bet, small_blind_index, folded_players, active_players, bets,
-                 update_display):
+                 update_display, GameRound):
+        self.GameRound = GameRound
         self.players = players
         self.pot = pot
         self.current_bet = current_bet
@@ -75,6 +76,7 @@ class BettingRound:
                             player.balance -= call_amount
                             self.bets[player.name] += call_amount
                             self.pot += call_amount
+                            self.GameRound.set_pot(self.pot)
                             players_in_round[player.name] = True
                             print(f"{player.name} calls: {call_amount}")
                             self.update_display()  # Update display after call
@@ -91,6 +93,7 @@ class BettingRound:
                             player.balance -= total_bet
                             self.bets[player.name] += total_bet
                             self.pot += total_bet
+                            self.GameRound.set_pot(self.pot)
                             self.current_bet += raise_amount  # Update the highest bet
                             print(f"{player.name} raises by {raise_amount}")
 

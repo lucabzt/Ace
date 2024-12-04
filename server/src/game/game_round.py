@@ -1,7 +1,8 @@
 import csv
+import time
 from datetime import datetime
 
-from server.src.engine import holdem_calc
+from server.src.engine import holdem_calc, parallel_holdem_calc
 from server.src.game.betting_round import BettingRound
 from server.src.game.hand_analysis.winner_determiner import WinnerAnalyzer
 from server.src.game.input import modify_game_settings
@@ -46,7 +47,7 @@ class GameRound:
         self.assign_blinds()
         self.deal_private_cards()
         betting_round = BettingRound(self.players, self.pot, self.current_bet, self.small_blind_index,
-                                     self.folded_players, self.active_players, self.bets, self.update_display)
+                                     self.folded_players, self.active_players, self.bets, self.update_display, self)
 
         print("---------------")
         # Pre-Flop Betting
@@ -84,7 +85,9 @@ class GameRound:
         self.showdown()
 
         # Reset for next game
-        self.reset_game()
+
+        if input("continue?").lower() == 'yes':
+            self.reset_game()
 
     def play_betting_round(self, betting_round, current_round, river):
         self.calculate_probabilities(river)
@@ -209,9 +212,9 @@ class GameRound:
 
         # Use engine to calculate probs: SCHULDIG: DESHALB KACKE MIT TERMINAL OUTPUT
         # Can use parallel to be faster
-        # probs = parallel_holdem_calc.calculate(community_cards, False, 10e3, None, player_cards, False)
+        probs = parallel_holdem_calc.calculate(community_cards, False, 10e3, None, player_cards, False)
 
-        probs = holdem_calc.calculate(community_cards, False, 10e3, None, player_cards, False)
+        # probs = holdem_calc.calculate(community_cards, False, 10e3, None, player_cards, False)
 
         # Update probs in player objects
         for i in range(len(self.active_players)):
@@ -249,6 +252,9 @@ class GameRound:
 
     def update_display(self):
         pass
+
+    def set_pot(self, val):
+        self.pot = val
 
 
 def main():

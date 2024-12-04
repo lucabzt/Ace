@@ -1,169 +1,156 @@
-from flask import Flask, jsonify
+import logging
+import os
+import sys
+
+from flask import Flask, jsonify, request
 from flask_cors import CORS
 import threading
 import time
 import random
+from src.game.game_round import GameRound  # Import your game logic
+from src.game.resources.player import Player
 
 app = Flask(__name__)
 
 # Enable CORS for all routes
 CORS(app)
 
-# Example data
-players_data = [
-    {
-        "name": "Mr. Vorderbrügge",
-        "probWin": "30%",
-        "balance": 150,
-        "bet": 20,
-        "folded": False,
-        "cards": [
-            {"rank": "queen", "suit": "spades", "faceUp": True},
-            {"rank": "jack", "suit": "hearts", "faceUp": True},
-        ],
-    },
-    {
-        "name": "Mr. Huber",
-        "probWin": "75%",
-        "balance": 250,
-        "bet": 100,
-        "folded": True,
-        "cards": [
-            {"rank": "10", "suit": "diamonds", "faceUp": False},
-            {"rank": "9", "suit": "clubs", "faceUp": False},
-        ],
-    },
-    {
-        "name": "Mr. Bozzetti",
-        "probWin": "50%",
-        "balance": 50,
-        "bet": 50,
-        "folded": False,
-        "cards": [
-            {"rank": "ace", "suit": "clubs", "faceUp": True},
-            {"rank": "king", "suit": "diamonds", "faceUp": True},
-        ],
-    },
-    {
-        "name": "Mr. Meierlohr",
-        "probWin": "60%",
-        "balance": 120,
-        "bet": 70,
-        "folded": False,
-        "cards": [
-            {"rank": "8", "suit": "hearts", "faceUp": True},
-            {"rank": "8", "suit": "spades", "faceUp": True},
-        ],
-    },
-    {
-        "name": "Dr. Oetker",
-        "probWin": "85%",
-        "balance": 300,
-        "bet": 150,
-        "folded": False,
-        "cards": [
-            {"rank": "2", "suit": "clubs", "faceUp": True},
-            {"rank": "3", "suit": "clubs", "faceUp": True},
-        ],
-    },
-    {
-        "name": "Mr. Kemper",
-        "probWin": "55%",
-        "balance": 200,
-        "bet": 50,
-        "folded": False,
-        "cards": [
-            {"rank": "jack", "suit": "diamonds", "faceUp": True},
-            {"rank": "10", "suit": "hearts", "faceUp": True},
-        ],
-    },
-    {
-        "name": "Ms. Gantert",
-        "probWin": "55%",
-        "balance": 200,
-        "bet": 50,
-        "folded": False,
-        "cards": [
-            {"rank": "jack", "suit": "diamonds", "faceUp": True},
-            {"rank": "10", "suit": "hearts", "faceUp": True},
-        ],
-    },
-    {
-        "name": "OG KEMPER",
-        "probWin": "55%",
-        "balance": 200,
-        "bet": 50,
-        "folded": False,
-        "cards": [
-            {"rank": "jack", "suit": "diamonds", "faceUp": True},
-            {"rank": "10", "suit": "hearts", "faceUp": True},
-        ],
-    },
-]
-
-# Initial community cards
-community_cards_data = [
-    {"rank": "5", "suit": "hearts", "faceUp": True},
-    {"rank": "7", "suit": "diamonds", "faceUp": True},
-    {"rank": "10", "suit": "spades", "faceUp": True},
-    {"rank": "ACE", "suit": "clubs", "faceUp": True},
-    {"rank": "JACK", "suit": "hearts", "faceUp": True},
-]
-
-dealer_index = 2  # Start with Player 3 as the dealer
-pot = 700
+# Initialize the game state
+player_names = ['Mr. Vorderbrügge', 'Mr. Huber', 'Mr. Bozzetti', 'Mr. Meierlohr', 'Dr. Oetker', 'Mr. Kemper',
+                'Ms. Gantert', 'OG KEMPER']
+players = [Player(name) for name in player_names]
+game = GameRound(players, small_blind=10, big_blind=20)
 
 
-# Helper function to generate a random card
-def generate_random_card():
-    ranks = ["2", "3", "4", "5", "6", "7", "8", "9", "10", "jack", "queen", "king", "ace"]
-    suits = ["hearts", "diamonds", "clubs", "spades"]
-    return {"rank": random.choice(ranks), "suit": random.choice(suits),
-            "faceUp": random.choice([True, True, True, False])}
-
-
-# Periodic updates
-def periodic_update():
-    global dealer_index, community_cards_data
+# Start the game loop in a separate thread
+def game_loop():
     while True:
-        time.sleep(1)  # Wait 1 second between updates
-
-        # Rotate dealer
-        dealer_index = (dealer_index + 1) % len(players_data)
-
-        # Rotate community cards
-        community_cards_data = community_cards_data[1:] + [community_cards_data[0]]
-
-        # Randomly update player data
-        for player in players_data:
-            if random.random() < 0.5:  # 50% chance to update a player's data
-                player["cards"] = [generate_random_card(), generate_random_card()]
-                player["folded"] = random.choice([True, False, False, False])
+        time.sleep(5)  # Delay for the game state update loop
+        game.play_round()
 
 
-# Start the periodic updates in a separate thread
-threading.Thread(target=periodic_update, daemon=True).start()
+threading.Thread(target=game_loop, daemon=True).start()
 
 
+# Endpoints
 @app.route('/players', methods=['GET'])
 def get_players():
-    return jsonify(players_data)
+    """Get current state of players."""
+    player_data = [
+        {
+            "name": player.name,
+            "balance": player.balance,
+            "bet": game.bets.get(player.name),
+            "cards": [{"rank": card.rank.value, "suit": card.suit.value, "faceUp": True} for card in player.cards],
+            "winProb": f"{player.win_prob:.2f}%",
+            "folded": player in game.folded_players,
+        }
+        for player in players
+    ]
+    return jsonify(player_data)
 
 
 @app.route('/community-cards', methods=['GET'])
 def get_community_cards():
-    return jsonify(community_cards_data)
+    """Get current community cards."""
+    community_cards = [
+        {"rank": card.rank.value, "suit": card.suit.value, "faceUp": True}
+        for card in game.community_cards
+    ]
+    return jsonify(community_cards)
 
 
 @app.route('/dealer', methods=['GET'])
 def get_dealer():
-    return jsonify({"dealerIndex": dealer_index})
+    """Get the current dealer's index."""
+    return jsonify({"dealerIndex": game.dealer_index})
 
 
 @app.route('/pot', methods=['GET'])
 def get_pot():
-    return jsonify({"pot": pot})
+    """Get the current pot value."""
+    return jsonify({"pot": game.pot})
 
 
+# New Endpoints
+@app.route('/place-bet', methods=['POST'])
+def place_bet():
+    """Allow a player to place a bet."""
+    data = request.json
+    player_name = data.get("playerName")
+    amount = data.get("amount")
+
+    player = next((p for p in players if p.name == player_name), None)
+    if not player:
+        return jsonify({"error": "Player not found"}), 404
+
+    try:
+        game.current_bet = max(game.current_bet, amount)  # Update current bet
+        player.balance -= amount
+        game.pot += amount
+        game.bets[player.name] += amount
+        return jsonify({"message": f"{player.name} placed a bet of {amount}", "pot": game.pot})
+    except Exception as e:
+        return jsonify({"error": str(e)}), 400
+
+
+@app.route('/fold', methods=['POST'])
+def fold():
+    """Mark a player as folded."""
+    data = request.json
+    player_name = data.get("playerName")
+
+    player = next((p for p in players if p.name == player_name), None)
+    if not player:
+        return jsonify({"error": "Player not found"}), 404
+
+    game.folded_players.add(player)
+    return jsonify({"message": f"{player.name} has folded."})
+
+
+@app.route('/next-round', methods=['POST'])
+def next_round():
+    """Proceed to the next round."""
+    try:
+        game.play_round()
+        return jsonify({"message": "Next round started"})
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+
+
+@app.route('/reset-game', methods=['POST'])
+def reset_game():
+    """Reset the game to the initial state."""
+    game.reset_game()
+    return jsonify({"message": "Game has been reset"})
+
+
+@app.route('/get-game-state', methods=['GET'])
+def get_game_state():
+    """Get the full game state."""
+    state = {
+        "players": [
+            {
+                "name": player.name,
+                "balance": player.balance,
+                "folded": player in game.folded_players,
+                "cards": [{"rank": card.rank.value, "suit": card.suit.value} for card in player.cards],
+                "winProb": f"{player.win_prob:.2f}%"
+            }
+            for player in players
+        ],
+        "communityCards": [
+            {"rank": card.rank.value, "suit": card.suit.value} for card in game.community_cards
+        ],
+        "pot": game.pot,
+        "dealerIndex": game.dealer_index,
+        "currentBet": game.current_bet,
+    }
+    return jsonify(state)
+
+log = logging.getLogger('werkzeug')
+log.setLevel(logging.ERROR)
+
+# Run the Flask app
 if __name__ == '__main__':
-    app.run(debug=True, host='127.0.0.1', port=5000)
+    app.run(debug=False, host='127.0.0.1', port=5000)
