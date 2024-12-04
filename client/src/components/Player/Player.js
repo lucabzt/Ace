@@ -78,7 +78,7 @@ const Player = ({ player, position, isDealer }) => {
           }}
         >
           <h3 style={{ margin: "0.4vw 0", fontSize: "1vw" }}> {/* Reduced font size */}
-            {player.name}: {player.probWin}
+            {player.name}: {player.probWin}%
           </h3>
           <p style={{ margin: "0.4vw 0", fontSize: "0.9vw" }}> {/* Reduced font size */}
             Bet: ${player.bet}

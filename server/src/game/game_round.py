@@ -213,6 +213,7 @@ class GameRound:
         # Can use parallel to be faster
         probs = parallel_holdem_calc.calculate(community_cards, False, 10e3, None, player_cards, False)
 
+        print(probs)
 
         # probs = holdem_calc.calculate(community_cards, False, 10e3, None, player_cards, False)
 

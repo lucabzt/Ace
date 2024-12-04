@@ -44,7 +44,7 @@ def get_players():
             "balance": player.balance,
             "bet": game.bets.get(player.name),
             "cards": [{"rank": card.rank.value, "suit": card.suit.value, "faceUp": True} for card in player.cards],
-            "winProb": f"{player.win_prob:.2f}%",
+            "probWin": round(player.win_prob, 2),
             "folded": player in game.folded_players,
         }
         for player in players
