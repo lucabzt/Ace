@@ -85,8 +85,7 @@ class GameRound:
 
         # Reset for next game
 
-        if input("continue?").lower() == 'yes':
-            self.reset_game()
+        self.reset_game()
 
     def play_betting_round(self, betting_round, current_round, river):
         self.calculate_probabilities(river)
