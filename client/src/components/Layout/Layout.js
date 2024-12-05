@@ -14,6 +14,8 @@ const Layout = () => {
   const [layoutWidth, setLayoutWidth] = useState(23); // Initial width percentage for layout-container
   const [isDragging, setIsDragging] = useState(false);
 
+  const [refreshtoken, setrefreshtoken] = useState(null);
+  const [expridedata, setexpridedata] = useState(null);
 
   const handleRaiseClick = () => {
     setShowRaiseSlider((prev) => !prev);
@@ -30,11 +32,28 @@ const Layout = () => {
   useEffect(() => {
     // Extract access token from the URL hash
     const hash = window.location.hash;
-    const accessToken = hash
+    const refresh_token = hash
+      .substring(1)
+      .split("&")
+      .find((param) => param.startsWith("refresh_token"))
+      ?.split("=")[1];
+      setrefreshtoken(refresh_token);
+
+      const accessToken = hash
       .substring(1)
       .split("&")
       .find((param) => param.startsWith("access_token"))
       ?.split("=")[1];
+
+      const expires_at = hash
+      .substring(1)
+      .split("&")
+      .find((param) => param.startsWith("expires_at"))
+      ?.split("=")[1];
+      setexpridedata(expires_at);
+
+
+
 
     if (accessToken) {
       console.log("Access Token Found:", accessToken);
@@ -98,7 +117,7 @@ const Layout = () => {
       {/* Left Panel (Spotify) */}
       <div  className="left-panel"  style={{ width: `${layoutWidth}%` }} >
       {token ? (
-          <SpotifyPlayer token={token} />
+          <SpotifyPlayer token={token} expiresAt={expridedata} refreshToken={refreshtoken}/>
         ) : (
           <SpotifyLogin onLoginSuccess={(newToken) => setToken(newToken)} />
         )}

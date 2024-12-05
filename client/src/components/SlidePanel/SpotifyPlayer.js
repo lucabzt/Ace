@@ -3,12 +3,57 @@ import React, { useEffect, useState, useRef } from "react";
 import "./SpotifyPlayer.css"
 
 
-const SpotifyPlayer = ({ token }) => {
+const SpotifyPlayer = ({ token, refreshToken, expiresAt }) => {
   //const [player, setPlayer] = useState(null);
   const [currentTrack, setCurrentTrack] = useState(null);
   const [isPlaying, setIsPlaying] = useState(false);
   const [trackDuration, setTrackDuration] = useState(0); // Track duration in milliseconds
   const player = useRef(null);
+  const [currentToken, setCurrentToken] = useState(token);
+  const [expirationTime, setExpirationTime] = useState(expiresAt);
+
+  const refreshAccessToken = async () => {
+    try {
+      const response = await fetch(
+        `/refresh_token?refresh_token=${refreshToken}`
+      );
+      if (response.ok) {
+        const data = await response.json();
+        const newToken = data.access_token;
+        const newExpiresIn = data.expires_in; // Seconds
+
+        // Update token and expiration time
+        setCurrentToken(newToken);
+        setExpirationTime(Date.now() + newExpiresIn * 1000); // Convert to ms
+      } else {
+        console.error("Failed to refresh token:", response.statusText);
+      }
+    } catch (err) {
+      console.error("Error refreshing token:", err);
+    }
+  };
+
+  useEffect(() => {
+    // Check token expiration periodically
+    const interval = setInterval(() => {
+      if (Date.now() >= expirationTime - 60000) {
+        // Refresh token 1 minute before it expires
+        refreshAccessToken();
+      }
+    }, 5000); // Check every 5 seconds
+
+    return () => clearInterval(interval);
+  }, [expirationTime]);
+
+  // Pass updated token to Spotify Web Playback SDK
+  useEffect(() => {
+    if (currentToken) {
+      console.log("Updated token for SDK:", currentToken);
+    }
+  }, [currentToken]);
+
+  
+
 
   const [trackProgress, setTrackProgress] = useState(0); // Current progress in milliseconds
   useEffect(() => {

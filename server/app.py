@@ -245,11 +245,13 @@ def callback():
     tokens = response.json()
     access_token = tokens.get("access_token")
     refresh_token = tokens.get("refresh_token")
-    
+    expires_in = tokens.get("expires_in")  # Time in seconds
+    expiration_timestamp = int(time.time()) + expires_in
+
     #print("Got tokens: (status code)" + response.status_code + " -> token: " + access_token)
 
     # Redirect to React app with tokens
-    return redirect(f"https://127.0.0.1:3000/#access_token={access_token}&refresh_token={refresh_token}")
+    return redirect(f"https://127.0.0.1:3000/#access_token={access_token}&refresh_token={refresh_token}&expires_at={expiration_timestamp}")
 
 
 @app.route('/refresh_token', methods=['GET'])
