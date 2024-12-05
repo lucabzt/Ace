@@ -165,3 +165,4 @@ log.setLevel(logging.ERROR)
 if __name__ == '__main__':
     display_spade_art()  # Display spade art on game start
     app.run(debug=False, host='127.0.0.1', port=5000)
+
