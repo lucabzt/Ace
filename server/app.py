@@ -4,15 +4,43 @@ import sys
 
 from flask import Flask, jsonify, request
 from flask_cors import CORS
+from flask import Flask, render_template
 import threading
 import time
 import random
+
+from flask import Flask, redirect, request, jsonify
+import requests
+import base64
+import os
+from flask import Flask, redirect, request, session
+
+
 
 from server.src.game.utils.game_utils import display_spade_art
 from src.game.game_round import GameRound  # Import your game logic
 from src.game.resources.player import Player
 
+import random
+import string
+import urllib.parse
+
+
+def generate_random_string(length):
+    """Generate a random string for the state parameter."""
+    return ''.join(random.choices(string.ascii_letters + string.digits, k=length))
+
+
 app = Flask(__name__)
+app.secret_key = 'a_random_secret_key_12345'  # Required for session handling (optional)
+
+CLIENT_ID = "258c86af6a9e45ac8fac5185cceff480"
+CLIENT_SECRET = "e5c969b18de0458a95552515897cd7fc"
+
+REDIRECT_URI = f"http://127.0.0.1:5000/callback"
+
+SPOTIFY_AUTH_URL = "https://accounts.spotify.com/authorize"
+SPOTIFY_TOKEN_URL = "https://accounts.spotify.com/api/token"
 
 # Enable CORS for all routes
 CORS(app)
@@ -24,14 +52,13 @@ players = [Player(name) for name in player_names]
 game = GameRound(players, small_blind=10, big_blind=20)
 
 
-# Start the game loop in a separate thread
-def game_loop():
-    while True:
-        time.sleep(5)  # Delay for the game state update loop
-        game.play_round()
+@app.route('/', methods=['GET'])
+def get_home():
+    return render_template("index.html")
 
-
-threading.Thread(target=game_loop, daemon=True).start()
+@app.route('/index.html', methods=['GET'])
+def get_index():
+    return render_template("index.html")
 
 
 # Endpoints
@@ -155,10 +182,123 @@ def get_game_state():
     }
     return jsonify(state)
 
+
+@app.route('/login')
+def login():
+    """Redirect the user to Spotify's authorization endpoint."""
+    state = generate_random_string(16)  # Generate a random state string
+    session['state'] = state  # Save state to session for validation later
+
+    scope = "user-read-private user-read-email user-read-playback-state user-modify-playback-state user-read-currently-playing app-remote-control streaming playlist-read-private playlist-read-collaborative playlist-modify-private playlist-modify-public "  # Permissions your app requests
+    #scope = "user-read-private user-read-email streaming user-modify-playback-state"
+        
+    # Construct the Spotify authorization URL
+    query_params = {
+        "response_type": "code",
+        "client_id": CLIENT_ID,
+        "scope": scope,
+        "redirect_uri": REDIRECT_URI,
+        "state": state
+    }
+
+    auth_url = f"https://accounts.spotify.com/authorize?{urllib.parse.urlencode(query_params)}"
+    print("Redirect to authoreize...")
+    return redirect(auth_url)  # Redirect to Spotify's login page
+
+
+@app.route('/callback')
+def callback():
+    """Handle the Spotify authorization callback."""
+
+    code = request.args.get('code')
+    if not code:
+        return jsonify({"error": "Authorization failed"}), 400
+
+    print("Got callback: " + code)
+
+    # Exchange authorization code for an access token
+    auth_header = base64.b64encode(f"{CLIENT_ID}:{CLIENT_SECRET}".encode()).decode()
+    response = requests.post(
+        SPOTIFY_TOKEN_URL,
+        data={
+            "grant_type": "authorization_code",
+            "code": code,
+            "redirect_uri": REDIRECT_URI,
+        },
+        headers={
+            "Authorization": f"Basic {auth_header}",
+            "Content-Type": "application/x-www-form-urlencoded",
+        },
+    )
+
+    if response.status_code != 200:
+        return jsonify({"error": "Failed to fetch access token"}), response.status_code
+    
+
+
+    tokens = response.json()
+    access_token = tokens.get("access_token")
+    refresh_token = tokens.get("refresh_token")
+    
+    #print("Got tokens: (status code)" + response.status_code + " -> token: " + access_token)
+
+    # Redirect to React app with tokens
+    return redirect(f"https://127.0.0.1:3000/#access_token={access_token}&refresh_token={refresh_token}")
+
+
+@app.route('/refresh_token', methods=['GET'])
+def refresh_token():
+    """Handle token refresh."""
+    refresh_token = request.args.get('refresh_token')
+    if not refresh_token:
+        return jsonify({"error": "Missing refresh token"}), 400
+
+    auth_header = base64.b64encode(f"{CLIENT_ID}:{CLIENT_SECRET}".encode()).decode()
+    response = requests.post(
+        SPOTIFY_TOKEN_URL,
+        data={
+            "grant_type": "refresh_token",
+            "refresh_token": refresh_token,
+        },
+        headers={
+            "Authorization": f"Basic {auth_header}",
+            "Content-Type": "application/x-www-form-urlencoded",
+        },
+    )
+
+    if response.status_code != 200:
+        return jsonify({"error": "Failed to refresh token"}), response.status_code
+
+    return jsonify(response.json())
+
+
+def game_loop():
+    try:
+        while True:
+            time.sleep(5)  # Delay for the game state update loop
+            game.play_round()
+    except KeyboardInterrupt:
+        print("Stopping Game...")
+        func = request.environ.get('werkzeug.server.shutdown')
+        if func is None:
+            print('Not running with the Werkzeug Server')
+        func()
+        return 0
+
+
 log = logging.getLogger('werkzeug')
 log.setLevel(logging.ERROR)
 
 # Run the Flask app
 if __name__ == '__main__':
+    threading.Thread(target=game_loop, daemon=True).start()
     display_spade_art()  # Display spade art on game start
-    app.run(debug=False, host='127.0.0.1', port=5000)
+    try:
+        app.run(debug=True, host='127.0.0.1', port=5000
+                #, ssl_context=('cert.pem', 'key.pem')
+        )
+    except KeyboardInterrupt:
+        print("Stopping Server...")
+    exit()
+    
+    

@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Software Spade - Your Ultimate Poker Assistant">
+    <title>Software Spade - Poker Assistant</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #121212;
+            color: #f0f0f0;
+            line-height: 1.6;
+        }
+        header {
+            background-color: #1c1c1c;
+            padding: 20px 0;
+            text-align: center;
+        }
+        header h1 {
+            margin: 0;
+            font-size: 2.5rem;
+            color: #FFD700;
+        }
+        header p {
+            margin: 5px 0 0;
+            font-size: 1.2rem;
+        }
+        .container {
+            max-width: 1000px;
+            margin: 20px auto;
+            padding: 20px;
+        }
+        .features {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            gap: 20px;
+        }
+        .feature-card {
+            background-color: #1e1e1e;
+            padding: 15px;
+            border-radius: 8px;
+            flex: 1 1 300px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease;
+        }
+        .feature-card:hover {
+            transform: scale(1.05);
+        }
+        .feature-card h3 {
+            margin-top: 0;
+            color: #FFD700;
+        }
+        .cta {
+            text-align: center;
+            margin: 30px 0;
+        }
+        .cta button {
+            background-color: #FFD700;
+            color: #121212;
+            padding: 10px 20px;
+            font-size: 1rem;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .cta button:hover {
+            background-color: #ffcc00;
+        }
+        footer {
+            text-align: center;
+            padding: 10px 0;
+            background-color: #1c1c1c;
+        }
+        footer p {
+            margin: 0;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Software Spade</h1>
+        <p>Your Ultimate Poker Assistant</p>
+    </header>
+    <div class="container">
+        <section class="introduction">
+            <p>Welcome to Software Spade, the ultimate companion for mastering the art of poker. Enhance your strategies, track your progress, and make smarter decisions at the table.</p>
+        </section>
+        <section class="features">
+            <div class="feature-card">
+                <h3>Real-Time Insights</h3>
+                <p>Analyze your odds and make data-driven decisions in real-time for every move you make.</p>
+            </div>
+            <div class="feature-card">
+                <h3>Comprehensive Analytics</h3>
+                <p>Track your performance and review detailed analytics to improve your game over time.</p>
+            </div>
+            <div class="feature-card">
+                <h3>AI-Powered Assistance</h3>
+                <p>Leverage cutting-edge AI to simulate scenarios and refine your strategies.</p>
+            </div>
+        </section>
+        <section class="cta">
+            <p>Start winning more hands with Software Spade!</p>
+            <button onclick="window.location.href='http://localhost:3000';">Go to App</button>
+        </section>
+    </div>
+    <footer>
+        <p>&copy; 2024 Software Spade. All Rights Reserved.</p>
+    </footer>
+</body>
+</html>

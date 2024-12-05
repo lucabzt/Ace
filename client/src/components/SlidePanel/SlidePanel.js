@@ -1,101 +1,112 @@
-import React, { useEffect, useState } from "react";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 import './SlidePanel.css';
 
 const SlidePanel = () => {
-  const [player, setPlayer] = useState(null); // Spotify Player instance
-  const [currentTrack, setCurrentTrack] = useState(null); // Currently playing track
-  const [isPlaying, setIsPlaying] = useState(false); // Playback state
-  const [deviceId, setDeviceId] = useState(null); // Spotify device ID
+  const [token, setToken] = useState(null);
+  const [currentTrack, setCurrentTrack] = useState(null);
+  const [isPlaying, setIsPlaying] = useState(false);
+  const [deviceId, setDeviceId] = useState(null);
 
-  // Retrieve the Spotify token (make sure it's saved after OAuth authentication)
-  const token = localStorage.getItem("spotifyToken");
+  const PLAYLIST_URI = "spotify:playlist:3GuG2wiCsxXEbc1hfFP3xn"; // Hardcoded playlist URI
 
   useEffect(() => {
-    if (!token) {
-      console.error("Spotify token not found. Please authenticate.");
-      return;
+    // Extract token from URL hash
+    const hash = window.location.hash;
+    const tokenFromHash = hash
+      .substring(1)
+      .split("&")
+      .find((elem) => elem.startsWith("access_token"))
+      ?.split("=")[1];
+    if (tokenFromHash) {
+      setToken(tokenFromHash);
+      localStorage.setItem("spotifyToken", tokenFromHash);
+      window.location.hash = ""; // Clear token from URL
     }
+  }, []);
 
-    // Load Spotify Web Playback SDK
-    const script = document.createElement("script");
-    script.src = "https://sdk.scdn.co/spotify-player.js";
-    script.async = true;
-    document.body.appendChild(script);
+  useEffect(() => {
+    if (token) {
+      const script = document.createElement("script");
+      script.src = "https://sdk.scdn.co/spotify-player.js";
+      script.async = true;
+      document.body.appendChild(script);
 
-    window.onSpotifyWebPlaybackSDKReady = () => {
-      const spotifyPlayer = new window.Spotify.Player({
-        name: "Poker App Spotify Player",
-        getOAuthToken: (cb) => cb(token),
-      });
+      window.onSpotifyWebPlaybackSDKReady = () => {
+        const player = new window.Spotify.Player({
+          name: "React Spotify Player",
+          getOAuthToken: (cb) => cb(token),
+        });
 
-      // Set up event listeners
-      spotifyPlayer.addListener("ready", ({ device_id }) => {
-        console.log("Player is ready with device ID", device_id);
-        setDeviceId(device_id);
-      });
+        player.addListener("ready", ({ device_id }) => {
+          setDeviceId(device_id);
+        });
 
-      spotifyPlayer.addListener("not_ready", ({ device_id }) => {
-        console.error("Device ID has gone offline", device_id);
-      });
+        player.addListener("player_state_changed", (state) => {
+          if (state) {
+            setCurrentTrack(state.track_window.current_track);
+            setIsPlaying(!state.paused);
+          }
+        });
 
-      spotifyPlayer.addListener("player_state_changed", (state) => {
-        if (!state) return;
-        setCurrentTrack(state.track_window.current_track);
-        setIsPlaying(!state.paused);
-      });
-
-      // Connect the player
-      spotifyPlayer.connect();
-      setPlayer(spotifyPlayer);
-    };
-
-    return () => {
-      document.body.removeChild(script); // Clean up script on unmount
-    };
+        player.connect();
+      };
+    }
   }, [token]);
 
-  // Play the default playlist
-  const play = () => {
-    fetch(`https://api.spotify.com/v1/me/player/play?device_id=${deviceId}`, {
-      method: "PUT",
-      headers: {
-        Authorization: `Bearer ${token}`,
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        context_uri: "spotify:playlist:3GuG2wiCsxXEbc1hfFP3xn", // Default playlist URI from the provided link
-      }),
-    })
-      .then((response) => {
-        if (!response.ok) {
-          console.error("Failed to play track", response.statusText);
+  const playPlaylist = () => {
+    if (!deviceId) {
+      console.error("Device not ready");
+      return;
+    }
+    axios
+      .put(
+        `https://api.spotify.com/v1/me/player/play?device_id=${deviceId}`,
+        {
+          context_uri: PLAYLIST_URI,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+          },
         }
-      })
-      .catch((error) => console.error("Error playing track", error));
+      )
+      .catch((error) => console.error("Error playing playlist:", error));
   };
 
-  // Toggle playback between play and pause
   const togglePlay = () => {
-    if (player) {
-      player.togglePlay().catch((error) => console.error("Error toggling play:", error));
-    }
+    if (!token || !deviceId) return;
+
+    axios
+      .put(
+        `https://api.spotify.com/v1/me/player/${isPlaying ? "pause" : "play"}`,
+        {},
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      )
+      .then(() => setIsPlaying(!isPlaying))
+      .catch((error) => console.error("Error toggling play:", error));
   };
 
   return (
     <div className="slide-panel">
       <h2>Spotify Player</h2>
-      {currentTrack ? (
+      {!token ? (
+        <p>Please log in using Spotify to use the player.</p>
+      ) : currentTrack ? (
         <div>
-          <p>Now Playing: <strong>{currentTrack.name}</strong></p>
-          <p>Artist: {currentTrack.artists.map(artist => artist.name).join(", ")}</p>
-          <button className="spotify-button" onClick={togglePlay}>
-            {isPlaying ? "Pause" : "Play"}
-          </button>
+          <p>Now Playing: {currentTrack.name}</p>
+          <p>Artist: {currentTrack.artists.map((artist) => artist.name).join(", ")}</p>
+          <button onClick={togglePlay}>{isPlaying ? "Pause" : "Play"}</button>
         </div>
       ) : (
         <p>Loading player...</p>
       )}
-      <button className="spotify-button" onClick={play}>
+      <button onClick={playPlaylist} disabled={!deviceId}>
         Play Default Playlist
       </button>
     </div>

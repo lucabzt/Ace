@@ -4,6 +4,13 @@ import PokerTable from "../PokerTable";
 import { getPlayerPositions } from "../../utils/positionUtils";
 import { loadCardImage } from "../../utils/cardUtils";
 
+
+const PROTOCOL="http";
+const HOST_URL="127.0.0.1";
+const HOST_PORT="5000";
+const URI=`${PROTOCOL}://${HOST_URL}:${HOST_PORT}`
+
+
 const PokerGameUI = () => {
   const pokerTableBackground = "images/poker_table/PokerTable100.png";
   const [players, setPlayers] = useState([]); // State for players
@@ -14,7 +21,7 @@ const PokerGameUI = () => {
 
   // Fetch player data
   const fetchPlayers = () => {
-    fetch("http://127.0.0.1:5000/players")
+    fetch(`${URI}/players`)
       .then((res) => {
         if (!res.ok) {
           throw new Error("Failed to fetch players data");
@@ -31,17 +38,17 @@ const PokerGameUI = () => {
 
   // Polling logic for other game data
   const pollGameData = () => {
-    fetch("http://127.0.0.1:5000/pot")
+    fetch(`${URI}/pot`)
       .then((res) => res.json())
       .then((data) => setPot(data.pot))
       .catch((error) => console.error("Error fetching pot value:", error));
 
-    fetch("http://127.0.0.1:5000/community-cards")
+    fetch(`${URI}/community-cards`)
       .then((res) => res.json())
       .then((data) => setCommunityCards(data))
       .catch((error) => console.error("Error fetching community cards:", error));
 
-    fetch("http://127.0.0.1:5000/dealer")
+    fetch(`${URI}/dealer`)
       .then((res) => res.json())
       .then((data) => setDealerIndex(data.dealerIndex))
       .catch((error) => console.error("Error fetching dealer index:", error));

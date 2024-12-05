@@ -1,7 +1,9 @@
 import React from "react";
+import "./PokerTable.css"
+
 
 const PokerTable = ({ pokerTableBackground, pot, children }) => (
-  <div
+  <div className="table"
     style={{
       position: "relative",
       width: "100%",
