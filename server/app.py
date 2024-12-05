@@ -20,6 +20,7 @@ from flask import Flask, redirect, request, session
 from server.src.game.utils.game_utils import display_spade_art
 from src.game.game_round import GameRound  # Import your game logic
 from src.game.resources.player import Player
+from src.game import input
 
 import random
 import string
@@ -32,6 +33,7 @@ def generate_random_string(length):
 
 
 app = Flask(__name__)
+
 app.secret_key = 'a_random_secret_key_12345'  # Required for session handling (optional)
 
 CLIENT_ID = "258c86af6a9e45ac8fac5185cceff480"
@@ -41,6 +43,9 @@ REDIRECT_URI = f"http://127.0.0.1:5000/callback"
 
 SPOTIFY_AUTH_URL = "https://accounts.spotify.com/authorize"
 SPOTIFY_TOKEN_URL = "https://accounts.spotify.com/api/token"
+
+
+app.register_blueprint(input.input_blueprint, url_prefix='/')
 
 # Enable CORS for all routes
 CORS(app)
@@ -183,6 +188,7 @@ def get_game_state():
     return jsonify(state)
 
 
+
 @app.route('/login')
 def login():
     """Redirect the user to Spotify's authorization endpoint."""
@@ -293,12 +299,4 @@ log.setLevel(logging.ERROR)
 if __name__ == '__main__':
     threading.Thread(target=game_loop, daemon=True).start()
     display_spade_art()  # Display spade art on game start
-    try:
-        app.run(debug=True, host='127.0.0.1', port=5000
-                #, ssl_context=('cert.pem', 'key.pem')
-        )
-    except KeyboardInterrupt:
-        print("Stopping Server...")
-    exit()
-    
-    
+    app.run(debug=False, host='127.0.0.1', port=5000)

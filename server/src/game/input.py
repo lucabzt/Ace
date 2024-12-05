@@ -1,7 +1,11 @@
+from flask import Flask, Blueprint, request, jsonify
+
 from server.src.game.resources.player import Player
 from server.src.mediaplayer.sound_manager import play_player_action
 
+input_blueprint = Blueprint('input', __name__)
 
+@input_blueprint.route('/input', methods=['POST'])
 def get_player_action(player, to_call):
     """Determines the player's action. This is a placeholder for future AI integration."""
     while True:

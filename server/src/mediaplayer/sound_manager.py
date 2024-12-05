@@ -49,7 +49,7 @@ def play_random_sound(file_path):
 def play_community_card_sound(round_name):
     if round_name == "Pre-Flop":
         return
-    play_random_sound(f"Dealer Voice Lines/Community Cards/{round_name}")
+    play_random_sound(f"Dealer_Lines/Community Cards/{round_name}")
 
 
 def play_player_action(player, action):
@@ -104,8 +104,9 @@ def play_hand_type(hand_type):
 # Function to handle Full House announcement
 def play_full_house(attributes):
     trip_rank, pair_rank = attributes
-    play_random_sound(f"Winning Hands/fullHouse.mp3")
-    play_random_sound(f"Poker Cards/Card/Plural/{pair_rank}/1.mp3")  # Adjust path for pair rank
+    play_random_sound(f"Winning Hands/fullHouse")
+    rank = str(pair_rank).replace("Rank.", "")
+    play_random_sound(f"Poker Cards/Card/Plural/{rank}/")  # Adjust path for pair rank
 
 
 def play_rank_high(attribute):
@@ -137,15 +138,16 @@ def play_one_pair(attributes):
     pair_rank = attributes[0]  # The rank of the pair (e.g., <Rank.TWO: '2'>)
 
     # Play "Pair of" sound from the Winning Hands folder
-    play_random_sound("Winning Hands/2_OnePair")
+    play_random_sound("Winning Hands/OnePair")
 
     # Play the plural sound for the rank of the pair (e.g., Two)
-    play_random_sound(f"Poker Cards/Card/Plural/{pair_rank}/1.mp3")  # Adjust the path to point to the rank's sound file
+    rank = str(pair_rank).replace("Rank.", "")
+    play_random_sound(f"Poker Cards/Card/Plural/{rank}")  # Adjust the path to point to the rank's sound file
 
 
 # Main function that plays the winner's sound based on hand type
 def play_winners_sound(winners):
-    play_random_sound(f"Dealer Voice Lines/Showdown")
+    play_random_sound(f"Dealer_Lines/Showdown")
 
     for winner in winners:
         name, hand_type, (hand_cards, attributes) = winner
