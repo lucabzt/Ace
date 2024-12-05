@@ -11,8 +11,10 @@ import random
 from server.src.game.utils.game_utils import display_spade_art
 from src.game.game_round import GameRound  # Import your game logic
 from src.game.resources.player import Player
+from src.game import input
 
 app = Flask(__name__)
+app.register_blueprint(input.input_blueprint, url_prefix='/')
 
 # Enable CORS for all routes
 CORS(app)
