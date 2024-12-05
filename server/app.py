@@ -155,6 +155,7 @@ def get_game_state():
     }
     return jsonify(state)
 
+
 log = logging.getLogger('werkzeug')
 log.setLevel(logging.ERROR)
 
