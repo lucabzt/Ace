@@ -7,9 +7,28 @@ const Layout = () => {
   const [showRaiseSlider, setShowRaiseSlider] = useState(false);
   const [raiseAmount, setRaiseAmount] = useState(0);
 
+  async function sendAction (action) {
+    const response = await fetch('http://127.0.0.1:5000/player-action', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ action: action })
+    });
+  }
+
   const handleRaiseClick = () => {
     setShowRaiseSlider((prev) => !prev);
+    if (!showRaiseSlider){
+      sendAction("raise " + raiseAmount)
+    }
   };
+
+  const handleCheckClick = () => {
+    sendAction("check")
+  }
+
+  const handleFoldClick = () => {
+    sendAction("fold")
+  }
 
   const handleSliderChange = (event) => {
     setRaiseAmount(event.target.value);
@@ -27,8 +46,8 @@ const Layout = () => {
         {/* Bottom Buttons */}
         <div className="action-buttons">
           <button className="action-button" onClick={handleRaiseClick}>Raise</button>
-          <button className="action-button">Check</button>
-          <button className="action-button">Fold</button>
+          <button className="action-button" onClick={handleCheckClick}>Check</button>
+          <button className="action-button" onClick={handleFoldClick}>Fold</button>
         </div>
 
         {/* Raise Slider */}

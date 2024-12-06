@@ -12,7 +12,7 @@ from server.src.game.utils.game_utils import display_spade_art, display_new_roun
 
 
 class GameRound:
-    def __init__(self, players, small_blind, big_blind):
+    def __init__(self, players, small_blind, big_blind, shared_resources):
         if len(players) < 2:
             raise ValueError("Mindestens zwei Spieler sind erforderlich.")
         self.players = players
@@ -32,6 +32,7 @@ class GameRound:
         self.small_blind_player = None
         self.round_logs = []  # Logs for each round
         self.exit_game = False  # Flag to indicate game exit
+        self.shared_resources = shared_resources
 
     def play_round(self):
         """Plays a complete round of poker, with option to modify settings before starting."""
@@ -46,7 +47,8 @@ class GameRound:
         self.assign_blinds()
         self.deal_private_cards()
         betting_round = BettingRound(self.players, self.pot, self.current_bet, self.small_blind_index,
-                                     self.folded_players, self.active_players, self.bets, self.update_display, self)
+                                     self.folded_players, self.active_players, self.bets,
+                                     self.update_display, self, self.shared_resources)
 
         print("---------------")
         # Pre-Flop Betting
