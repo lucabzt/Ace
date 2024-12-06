@@ -7,7 +7,7 @@ const PokerTable = ({ pokerTableBackground, pot, children }) => (
     style={{
       position: "relative",
       width: "100%",
-      height: "100vh",
+      height: "97vh",
       backgroundColor: "#2C5530",
       overflow: "hidden",
     }}
