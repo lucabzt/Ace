@@ -21,6 +21,7 @@ from server.src.game.utils.game_utils import display_spade_art
 from src.game.game_round import GameRound  # Import your game logic
 from src.game.resources.player import Player
 from src.game import input
+from src.game.shared import SharedResources
 
 import random
 import string
@@ -44,9 +45,6 @@ REDIRECT_URI = f"http://127.0.0.1:5000/callback"
 SPOTIFY_AUTH_URL = "https://accounts.spotify.com/authorize"
 SPOTIFY_TOKEN_URL = "https://accounts.spotify.com/api/token"
 
-
-app.register_blueprint(input.input_blueprint, url_prefix='/')
-
 # Enable CORS for all routes
 CORS(app)
 
@@ -54,7 +52,8 @@ CORS(app)
 player_names = ['Bozzetti', 'Huber', 'Rogg', 'Meierlohr', 'Hoerter', 'Simon',
                 'Vorderbrügge', 'Maier']
 players = [Player(name) for name in player_names]
-game = GameRound(players, small_blind=10, big_blind=20)
+shared_resources = SharedResources()
+game = GameRound(players, small_blind=10, big_blind=20, shared_resources=shared_resources)
 
 
 @app.route('/', methods=['GET'])
@@ -186,6 +185,18 @@ def get_game_state():
         "currentBet": game.current_bet,
     }
     return jsonify(state)
+
+@app.route('/player-action', methods=['POST'])
+def update_player_action():
+    data = request.json
+    action = data.get("action")
+
+    if not action:
+        return jsonify({"status": "error", "message": "Missing action."}), 400
+
+    shared_resources.player_action_queue.put(action)
+    print(f"Action added to queue: {action}")
+    return jsonify({"status": "ok"}), 200
 
 
 

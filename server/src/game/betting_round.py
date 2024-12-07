@@ -4,7 +4,7 @@ from server.src.mediaplayer.sound_manager import play_community_card_sound
 
 class BettingRound:
     def __init__(self, players, pot, current_bet, small_blind_index, folded_players, active_players, bets,
-                 update_display, GameRound):
+                 update_display, GameRound, shared_resources):
         self.GameRound = GameRound
         self.players = players
         self.pot = pot
@@ -16,6 +16,7 @@ class BettingRound:
         self.last_raiser = None  # Keeps track of the last player to raise
         self.players_in_round = {player.name: False for player in self.active_players}
         self.update_display = update_display  # Store the reference to the update_display method
+        self.shared_resources = shared_resources
 
     def execute(self, round_name):
         """Executes a betting round with players matching, raising, or folding as needed."""
@@ -51,7 +52,7 @@ class BettingRound:
                 to_call = self.current_bet - self.bets[player.name]
 
                 while True:
-                    action = get_player_action(player, to_call)  # TODO: AI ACTION GETTER
+                    action = get_player_action(player, self.shared_resources.player_action_queue)  # TODO: AI ACTION GETTER
 
                     if action == 'fold':
                         player.win_prob = 0.

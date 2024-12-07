@@ -1,40 +1,28 @@
-from flask import Flask, Blueprint, request, jsonify
-
 from server.src.game.resources.player import Player
 from server.src.mediaplayer.sound_manager import play_player_action
 
-input_blueprint = Blueprint('input', __name__)
 
-@input_blueprint.route('/input', methods=['POST'])
-def get_player_action(player, to_call):
+def get_player_action(player, player_action_queue):
     """Determines the player's action. This is a placeholder for future AI integration."""
-    while True:
-        print(f"\n{player.name}, dein Zug:")
-        print(f"Betrag zum Callen: {to_call}")
-        action = input("Wähle eine Aktion (check, call, fold, raise <amount>): ").strip().lower()
+    action = player_action_queue.get()
+    print(f"{player} {action}")
 
-        if action == "fold":
-            play_player_action(player, "fold")
-            return "fold"
-        elif action == "check":
-            play_player_action(player, "check")
-            return "check"
-        elif action == "call":
-            play_player_action(player, "call")
-            return "call"
-        elif action.startswith("raise"):
-            try:
-                _, raise_amount = action.split()
-                raise_amount = int(raise_amount)
-                if raise_amount > 0:
-                    play_player_action(player, "raise")
-                    return f"raise {raise_amount}"
-                else:
-                    print("Der Raise-Betrag muss positiv sein.")
-            except ValueError:
-                print("Ungültiger Betrag für Raise.")
-        else:
-            print("Ungültige Aktion. Bitte gib 'check', 'call', 'fold' oder 'raise <Betrag>' ein.")
+    if action == "fold":
+        play_player_action(player, "fold")
+        return "fold"
+    elif action == "check":
+        play_player_action(player, "check")
+        return "check"
+    elif action == "call":
+        play_player_action(player, "call")
+        return "call"
+    elif action.startswith("raise"):
+        _, raise_amount = action.split()
+        raise_amount = int(raise_amount)
+        play_player_action(player, "raise")
+        return action
+    else:
+        print("Action Invalid.")
 
 
 def modify_game_settings(game_round):
