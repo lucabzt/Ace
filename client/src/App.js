@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Layout from "./components/Layout/Layout";
 import LoadingSpinner from "./components/LoadingSpinner/LoadingSpinner";
-import './App.css';
+import "./App.css";
 
 const App = () => {
   const [loading, setLoading] = useState(true);
@@ -13,11 +13,7 @@ const App = () => {
     }, 2000);
   }, []);
 
-  return (
-    <div className="App">
-      {loading ? <LoadingSpinner /> : <Layout />}
-    </div>
-  );
+  return <div className="App">{loading ? <LoadingSpinner /> : <Layout />}</div>;
 };
 
 export default App;

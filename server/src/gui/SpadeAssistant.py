@@ -100,7 +100,7 @@ class SpadeAssistant:
             pygame.mixer.music.load(audio_path)  # Load audio file
             pygame.mixer.music.play()  # Play audio
             self.audio_playing = True  # Mark audio as playing
-
+            
             # Start playing the video loop only if it's not already playing
             if not hasattr(self, 'video_started') or not self.video_started:
                 self.video_started = True

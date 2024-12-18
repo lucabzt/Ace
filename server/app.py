@@ -1,31 +1,21 @@
+import base64
 import logging
-import os
-import sys
-
-from flask import Flask, jsonify, request
-from flask_cors import CORS
-from flask import Flask, render_template
+import random
+import string
 import threading
 import time
-import random
+import urllib.parse
 
-from flask import Flask, redirect, request, jsonify
 import requests
-import base64
-import os
 from flask import Flask, redirect, request, session
-
-
+from flask import jsonify
+from flask import render_template
+from flask_cors import CORS
 
 from server.src.game.utils.game_utils import display_spade_art
 from src.game.game_round import GameRound  # Import your game logic
 from src.game.resources.player import Player
-from src.game import input
 from src.game.shared import SharedResources
-
-import random
-import string
-import urllib.parse
 
 
 def generate_random_string(length):
@@ -50,7 +40,7 @@ CORS(app)
 
 # Initialize the game state
 player_names = ['Bozzetti', 'Huber', 'Rogg', 'Meierlohr', 'Hoerter', 'Simon',
-                'Vorderbrügge', 'Maier']
+                'Vorderbruegge', 'Maier']
 players = [Player(name) for name in player_names]
 shared_resources = SharedResources()
 game = GameRound(players, small_blind=10, big_blind=20, shared_resources=shared_resources)

@@ -1,10 +1,9 @@
 import axios from "axios";
 
-
-const PROTOCOL="http";
-const HOST_URL="127.0.0.1";
-const HOST_PORT="5000";
-const URI=`${PROTOCOL}://${HOST_URL}:${HOST_PORT}`
+const PROTOCOL = "http";
+const HOST_URL = "127.0.0.1";
+const HOST_PORT = "5000";
+const URI = `${PROTOCOL}://${HOST_URL}:${HOST_PORT}`;
 
 // Function to fetch players data
 export const fetchPlayersData = async () => {
@@ -12,7 +11,7 @@ export const fetchPlayersData = async () => {
     const response = await axios.get(`${URI}/api/players`);
     return response.data;
   } catch (error) {
-    console.error('Error fetching players data:', error);
+    console.error("Error fetching players data:", error);
     throw error; // Propagate the error to handle it in the calling component
   }
 };
@@ -23,7 +22,7 @@ export const fetchCommunityCardsData = async () => {
     const response = await axios.get(`${URI}/api/community-cards`);
     return response.data;
   } catch (error) {
-    console.error('Error fetching community cards data:', error);
+    console.error("Error fetching community cards data:", error);
     throw error; // Propagate the error to handle it in the calling component
   }
 };
@@ -34,7 +33,7 @@ export const fetchDealerIndex = async () => {
     const response = await axios.get(`${URI}/api/dealer`);
     return response.data.dealerIndex;
   } catch (error) {
-    console.error('Error fetching dealer index:', error);
+    console.error("Error fetching dealer index:", error);
     throw error;
   }
 };
@@ -45,9 +44,7 @@ export const fetchPot = async () => {
     const response = await axios.get(`${URI}/api/pot`);
     return response.data.pot;
   } catch (error) {
-    console.error('Error fetching pot:', error);
+    console.error("Error fetching pot:", error);
     throw error;
   }
 };
-
-
