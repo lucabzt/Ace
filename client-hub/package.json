@@ -1,10 +1,10 @@
 {
 	"name": "spade-ui",
-  "options": {
+	"version": "3.0.0",
+	"options": {
     "allowedHosts": ["localhost", ".localhost"],
     "proxy": "https://localhost:5000/"
   },
-	"version": "3.0.0",
 	"private": true,
 	"author": "eixfachZabii",
 	"license": "",
@@ -18,6 +18,16 @@
 		"url": "SPADE"
 	},
 	"dependencies": {
+		"@testing-library/jest-dom": "^5.17.0",
+    	"@testing-library/react": "^13.4.0",
+    	"@testing-library/user-event": "^13.5.0",
+    	"axios": "^1.7.8",
+    	"react": "^18.3.1",
+    	"react-dom": "^18.3.1",
+    	"react-router-dom": "^7.0.1",
+    	"react-scripts": "^5.0.1",
+    	"web-vitals": "^2.1.4",
+    	"react-spotify-web-playback-sdk" : "^3.0.2",
 		"@emotion/cache": "11.4.0",
 		"@emotion/react": "^11.9.3",
 		"@emotion/styled": "^11.9.3",
@@ -32,18 +42,14 @@
 		"images": "^3.2.4",
 		"install": "^0.13.0",
 		"prop-types": "15.7.2",
-		"react": "^18.2.0",
 		"react-apexcharts": "^1.3.9",
 		"react-countup": "5.2.0",
-		"react-dom": "^18.2.0",
 		"react-flatpickr": "3.10.7",
 		"react-github-btn": "1.2.1",
 		"react-icons": "^4.3.1",
-		"react-router-dom": "5.2.0",
 		"stylis": "4.0.10",
 		"stylis-plugin-rtl": "2.1.0",
 		"uuid": "8.3.2",
-		"web-vitals": "1.0.1"
 	},
 	"devDependencies": {
 		"@testing-library/jest-dom": "5.11.4",
