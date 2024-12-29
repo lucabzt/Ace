@@ -1,0 +1,19 @@
+.poker-table-container {
+  width: 100%; /* Anpassungen anpassen */
+  height: 100%; /* Container fängt Vollbild */
+  margin: 0 auto;
+  border: 3px solid #ffcc00;
+  border-radius: 15px;
+  overflow: hidden;
+  transition: all 0.3s ease-in-out;
+}
+
+.community-card {
+  width: 6vw; /* Größere Karte */
+  max-width: 120px;
+  transition: transform 0.3s ease; /* Animation wenn Hover */
+}
+
+.community-card:hover {
+  transform: scale(1.1); /* Hineinzoomen */
+}
