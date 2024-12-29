@@ -1,0 +1,148 @@
+.layout-container {
+  display: flex;
+  min-height: 100vh;
+  background-color: #1e1e1e; /* Dark grey background */
+  color: #ffffff; /* White text */
+}
+
+.poker-ui-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px;
+  box-sizing: border-box;
+  position: relative;
+}
+
+/* Buttons at the bottom of the game UI */
+.action-buttons {
+  position: absolute;
+  bottom: 5%; /* Positioned just above the bottom */
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+
+.action-button {
+  background-color: royalblue;
+  color: #ffffff;
+  border: none;
+  border-radius: 8px;
+  padding: 15px 25px; /* Bigger button size */
+  font-size: 16px; /* Larger text */
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.action-button:hover {
+  background-color: #4169e1;
+  transform: scale(1.05);
+}
+
+/* Raise slider */
+.raise-slider {
+  position: absolute;
+  bottom: 12%; /* Positioned above the buttons */
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #2a2a2a; /* Darker grey for contrast */
+  padding: 20px;
+  border-radius: 10px;
+  text-align: center;
+  z-index: 1000;
+}
+
+.raise-slider input {
+  width: 100%;
+  margin: 10px 0;
+}
+
+.raise-slider p {
+  color: #ffffff;
+  margin: 0;
+  font-size: 16px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .action-buttons {
+    flex-direction: column;
+    gap: 10px;
+    bottom: 8%; /* Adjusted for smaller screens */
+  }
+
+  .action-button {
+    font-size: 14px;
+    padding: 10px 20px;
+  }
+
+  .raise-slider {
+    width: 90%; /* Make slider fit smaller screens */
+  }
+}
+
+
+.logout-button {
+  position: fixed;
+  bottom: 10px;
+  left: 10px;
+  padding: 5px 10px;
+  background-color: #ff4d4d;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+  transition: background-color 0.3s ease;
+}
+
+.logout-button:hover {
+  background-color: #ff1a1a;
+}
+
+
+.main-container {
+  display: flex;
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+}
+
+.left-panel {
+  overflow: auto;
+  transition: width 0.2s ease;
+}
+
+.right-panel {
+  overflow: auto;
+  transition: width 0.2s ease;
+}
+
+.slicer {
+  width: 3px;
+  height: 80%;
+  margin-top: auto;
+  margin-bottom: auto;
+
+  background-color: #2c2c2c;
+  cursor: ew-resize;
+  z-index: 10;
+  position: relative;
+}
+
+
+.logout-button {
+  margin-top: 100px;
+  padding: 8px 16px;
+  background-color: #ff4d4d;
+  color: white;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+  font-size: 16px;
+}

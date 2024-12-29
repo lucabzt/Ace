@@ -12,7 +12,7 @@ from flask import jsonify
 from flask import render_template
 from flask_cors import CORS
 
-from server.src.game.utils.game_utils import display_spade_art
+from src.game.utils.game_utils import display_spade_art
 from src.game.game_round import GameRound  # Import your game logic
 from src.game.resources.player import Player
 from src.game.shared import SharedResources
