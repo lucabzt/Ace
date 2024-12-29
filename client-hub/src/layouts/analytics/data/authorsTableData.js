@@ -5,15 +5,20 @@ import VuiTypography from "../../../components/VuiTypography";
 import VuiAvatar from "../../../components/VuiAvatar";
 import VuiBadge from "../../../components/VuiBadge";
 
-// Images
-import avatar1 from "../../../assets/images/avatar1.png";
-import avatar2 from "../../../assets/images/avatar2.png";
-import avatar3 from "../../../assets/images/avatar3.png";
-import avatar4 from "../../../assets/images/avatar4.png";
-import avatar5 from "../../../assets/images/avatar5.png";
-import avatar6 from "../../../assets/images/avatar6.png";
+// Importiere die lineChartDataDashboard-Daten
+import { lineChartDataDashboard } from "./lineChartData";
 
-function Author({ image, name, email }) {
+// Images
+import Jonas from "../../../assets/images/players/Jonas.jpeg";
+import JuraJonas from "../../../assets/images/players/JuraJonas.png";
+import Luca from "../../../assets/images/players/Luca.jpeg";
+import Markus from "../../../assets/images/players/Markus.jpeg";
+import Sebastian from "../../../assets/images/players/Sebastian2.jpeg";
+import Paul from "../../../assets/images/players/Paul.jpeg";
+import Matthi from "../../../assets/images/players/Matthi.jpeg";
+import Eliah from "../../../assets/images/players/Eliah.png";
+
+function Player({ image, name, username }) {
   return (
     <VuiBox display="flex" alignItems="center" px={1} py={0.5}>
       <VuiBox mr={2}>
@@ -24,7 +29,7 @@ function Author({ image, name, email }) {
           {name}
         </VuiTypography>
         <VuiTypography variant="caption" color="text">
-          {email}
+          {username}
         </VuiTypography>
       </VuiBox>
     </VuiBox>
@@ -47,9 +52,18 @@ function DaysPlayed({ value }) {
   );
 }
 
+// Hilfsfunktion zur Synchronisierung der PnL-Werte
+function getLatestPnL(playerName) {
+  const chartData = lineChartDataDashboard.find((entry) => entry.name === playerName);
+  if (chartData) {
+    return chartData.data.slice(-1)[0]; // Der letzte Datenpunkt aus dem `data`-Array
+  }
+  return 0; // Standardwert, falls kein Spieler gefunden wird
+}
+
 export default {
   columns: [
-    { name: "author", align: "left" },
+    { name: "player", align: "left" },
     { name: "pnl", align: "left" },
     { name: "status", align: "center" },
     { name: "daysPlayed", align: "center" },
@@ -58,8 +72,8 @@ export default {
 
   rows: [
     {
-      author: <Author image={avatar4} name="Sebastian Rogg" email="sebastian@simmmple.com" />,
-      pnl: <PnL value={1500} />,
+      player: <Player image={Sebastian} name="Sebastian" username="eixfachZabii" />,
+      pnl: <PnL value={getLatestPnL("Sebastian")} />,
       status: (
         <VuiBadge
           variant="standard"
@@ -83,8 +97,8 @@ export default {
       ),
     },
     {
-      author: <Author image={avatar2} name="Luca Bozzetti" email="luca@simmmple.com" />,
-      pnl: <PnL value={-300} />,
+      player: <Player image={Luca} name="Luca" username="BozzeBot" />,
+      pnl: <PnL value={getLatestPnL("Luca")} />,
       status: (
         <VuiBadge
           variant="standard"
@@ -107,8 +121,8 @@ export default {
       ),
     },
     {
-      author: <Author image={avatar3} name="Kyle Kreuter" email="kyle@simmmple.com" />,
-      pnl: <PnL value={750} />,
+      player: <Player image={JuraJonas} name="Jura Jonas" username="LMU" />,
+      pnl: <PnL value={getLatestPnL("Jura Jonas")} />,
       status: (
         <VuiBadge
           variant="standard"
@@ -132,8 +146,8 @@ export default {
       ),
     },
     {
-      author: <Author image={avatar1} name="Paul Vorderbrügge" email="paul@simmmple.com" />,
-      pnl: <PnL value={1000} />,
+      player: <Player image={Paul} name="Paul" username="Ospuker" />,
+      pnl: <PnL value={getLatestPnL("Paul")} />,
       status: (
         <VuiBadge
           variant="standard"
@@ -157,8 +171,33 @@ export default {
       ),
     },
     {
-      author: <Author image={avatar5} name="Markus Huber" email="markus@simmmple.com" />,
-      pnl: <PnL value={-500} />,
+      player: <Player image={Eliah} name="Eliah" username="Dr. BWL" />,
+      pnl: <PnL value={getLatestPnL("Eliah")} />, // Synchronisierter "PnL"-Wert
+      status: (
+        <VuiBadge
+          variant="standard"
+          badgeContent="Online"
+          color="success"
+          size="xs"
+          container
+          sx={({ palette: { white, success }, borders: { borderRadius, borderWidth } }) => ({
+            background: success.main,
+            border: `${borderWidth[1]} solid ${success.main}`,
+            borderRadius: borderRadius.md,
+            color: white.main,
+          })}
+        />
+      ),
+      daysPlayed: <DaysPlayed value={50} />, // Dummy-Wert für Tage gespielt
+      action: (
+        <VuiTypography component="a" href="#" variant="caption" color="text" fontWeight="medium">
+          Edit
+        </VuiTypography>
+      ),
+    },
+    {
+      player: <Player image={Markus} name="Markus" username="Pussymagnet" />,
+      pnl: <PnL value={getLatestPnL("Markus")} />,
       status: (
         <VuiBadge
           variant="standard"
@@ -181,8 +220,8 @@ export default {
       ),
     },
     {
-      author: <Author image={avatar6} name="Jonas Hörter" email="jonas@simmmple.com" />,
-      pnl: <PnL value={300} />,
+      player: <Player image={Jonas} name="Jonas" username="Faszinierend" />,
+      pnl: <PnL value={getLatestPnL("Jonas")} />,
       status: (
         <VuiBadge
           variant="standard"
@@ -205,8 +244,8 @@ export default {
       ),
     },
     {
-      author: <Author image={avatar3} name="Matthias Meierlohr" email="matthias@simmmple.com" />,
-      pnl: <PnL value={2000} />,
+      player: <Player image={Matthi} name="Matthi" username="Unroastbar" />,
+      pnl: <PnL value={getLatestPnL("Matthi")} />,
       status: (
         <VuiBadge
           variant="standard"

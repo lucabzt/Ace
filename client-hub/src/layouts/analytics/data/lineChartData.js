@@ -1,7 +1,7 @@
 export const lineChartDataDashboard = [
   {
     name: "Jura Jonas",
-    data: [0.00, 0.00, 0.00, 0.00, 10.70, 10.70, 10.70, 10.70, 10.70],
+    data: [0.00, 0.00, 0.00, 0.00, 10.70, 10.70, 10.70, 10.70, 10.7],
   },
   {
     name: "Sebastian",
