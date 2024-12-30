@@ -302,4 +302,6 @@ log.setLevel(logging.ERROR)
 if __name__ == '__main__':
     threading.Thread(target=game_loop, daemon=True).start()
     display_spade_art()  # Display spade art on game start
-    app.run(debug=False, host='127.0.0.1', port=5000, ssl_context=('./server/cert.pem', './server/key.pem'))
+    app.run(debug=False, host='127.0.0.1', port=5000
+            #, ssl_context=('./server/cert.pem', './server/key.pem')
+            )
