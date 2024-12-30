@@ -5,7 +5,7 @@ import PokerGameUI from "./components/PokerGameUI/PokerGameUI";
 function PokerGameBox() {
   const [isFullscreen, setIsFullscreen] = useState(false); // Fullscreen State
   const [showRaiseSlider, setShowRaiseSlider] = useState(false); // Raise Slider State
-  const [raiseAmount, setRaiseAmount] = useState(0); // Raise Amount
+  const [raiseAmount, setRaiseAmount] = useState(10); // Raise Amount
   const isSmallScreen = useMediaQuery("(max-width: 960px)"); // Breakpoint for responsive design
 
   const toggleFullscreen = () => {
@@ -24,9 +24,11 @@ function PokerGameBox() {
   // Button click handlers
   const handleRaiseClick = () => {
     setShowRaiseSlider((prev) => !prev);
-    if (!showRaiseSlider) {
-      sendAction("raise " + raiseAmount);
-    }
+  };
+
+  const handleConfirmRaise = () => {
+    sendAction("raise " + raiseAmount);
+    setShowRaiseSlider(false); // Hide the slider after confirming
   };
 
   const handleCheckClick = () => {
@@ -35,6 +37,10 @@ function PokerGameBox() {
 
   const handleFoldClick = () => {
     sendAction("fold");
+  };
+
+  const handleCallClick = () => {
+    sendAction("call");
   };
 
   // Slider change handler
@@ -116,6 +122,7 @@ function PokerGameBox() {
 
         {/* Bottom Buttons */}
         <div style={{ display: "flex", gap: "20px", marginTop: "20px" }}>
+          {/* Raise Button */}
           <button
             style={{
               backgroundColor: "royalblue",
@@ -128,6 +135,8 @@ function PokerGameBox() {
           >
             Raise
           </button>
+
+          {/* Check Button */}
           <button
             style={{
               backgroundColor: "royalblue",
@@ -140,6 +149,8 @@ function PokerGameBox() {
           >
             Check
           </button>
+
+          {/* Fold Button */}
           <button
             style={{
               backgroundColor: "royalblue",
@@ -151,6 +162,20 @@ function PokerGameBox() {
             onClick={handleFoldClick}
           >
             Fold
+          </button>
+
+          {/* Call Button */}
+          <button
+            style={{
+              backgroundColor: "royalblue",
+              color: "white",
+              border: "none",
+              borderRadius: "8px",
+              padding: "10px 15px",
+            }}
+            onClick={handleCallClick}
+          >
+            Call
           </button>
         </div>
 
@@ -167,8 +192,8 @@ function PokerGameBox() {
           >
             <input
               type="range"
-              min="1"
-              max=""
+              min="10"
+              max="1000"
               step="10"
               value={raiseAmount}
               onChange={handleSliderChange}
@@ -178,6 +203,19 @@ function PokerGameBox() {
               }}
             />
             <p style={{ color: "#fff" }}>Raise Amount: ${raiseAmount}</p>
+            <button
+              onClick={handleConfirmRaise}
+              style={{
+                backgroundColor: "royalblue",
+                color: "white",
+                border: "none",
+                borderRadius: "8px",
+                padding: "10px 15px",
+                marginTop: "10px",
+              }}
+            >
+              OK
+            </button>
           </div>
         )}
       </Card>
