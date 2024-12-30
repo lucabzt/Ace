@@ -2,13 +2,16 @@ import React, { useState } from "react";
 // Import VuiButton für einheitliches Styling
 import VuiButton from "../../../../components/VuiButton";
 
+const serverAddress = process.env.PUBLIC_URL;
+console.log("Server Address:", serverAddress);
+
 function GameButtons() {
   const [showRaiseSlider, setShowRaiseSlider] = useState(false); // Raise Slider State
   const [raiseAmount, setRaiseAmount] = useState(10); // Raise Amount
 
   // API-Anfrage, um Spieleraktionen zu senden
   const sendAction = async (action) => {
-    await fetch("http://127.0.0.1:5000/player-action", {
+    await fetch(`${serverAddress}/player-action`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ action: action }),

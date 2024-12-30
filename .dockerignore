@@ -1,0 +1,32 @@
+# Ignore the assets/images directory
+
+
+# Machine Learning
+server/assets/images/card_deck
+server/assets/images/logo/*.mp4
+server/src/classifier/models/
+
+
+# Node.js
+client/node_modules/
+client/build/
+client-hub/node_modules/
+client-hub/build/
+
+
+# Other common ignores (optional)
+__pycache__
+*.pyc
+*.pyo
+*.pyd
+.env
+.DS_Store
+.git/
+.idea/
+
+
+# Python
+venv/
+.venv/
+server/venv
+server/.venv

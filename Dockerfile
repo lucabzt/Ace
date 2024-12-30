@@ -8,9 +8,8 @@ COPY ./client-hub/package.json ./
 RUN npm install
 
 # Copy the rest of the client code and build the production files
-COPY ./client ./
+COPY ./client-hub/ ./
 RUN npm run build
-
 
 # Start from the official Python base image
 FROM python:3.12-slim
@@ -19,7 +18,7 @@ FROM python:3.12-slim
 WORKDIR /app
 
 # Copy the requirements file into the container at /app
-COPY requirements.txt .
+COPY ./server/requirements.txt .
 
 # Install the dependencies specified in requirements.txt
 RUN pip install --no-cache-dir -r requirements.txt
@@ -30,9 +29,9 @@ ENV PYTHONPATH=/app
 COPY ./server ./
 
 # Copy the client build files into the container at /app/static/client
-COPY --from=client-build /client-app/build ./client/
+COPY --from=client-build /client-app/build ./static/
 
 EXPOSE 5000
 
 # Specify the command to run on container startup
-CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "5000"]
+CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port 443", "--ssl-certfile=./cert.pem", "--ssl-keyfile=key.pem"]
