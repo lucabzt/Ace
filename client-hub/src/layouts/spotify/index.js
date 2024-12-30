@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Card } from "@mui/material";
-import VuiButton from "../../components/VuiButton"; // Importiere den Button
+import VuiButton from "../../components/VuiButton";
 import VuiBox from "../../components/VuiBox";
 import VuiTypography from "../../components/VuiTypography";
 import DashboardLayout from "../../examples/LayoutContainers/DashboardLayout";
@@ -15,7 +15,7 @@ function Spotify() {
     setIsFullscreen(!isFullscreen); // Umschalten des Fullscreen-Modus
   };
 
-  // Box für Fullscreen-Logik
+  // CSS-Stile für Fullscreen
   const fullscreenStyles = isFullscreen
     ? {
         position: "fixed",
@@ -32,23 +32,37 @@ function Spotify() {
       }
     : {};
 
+  // Card-Styling für beide Zustände
+  const cardStyles = isFullscreen
+    ? {
+        width: "95%",
+        height: "95%",
+        backgroundColor: "rgba(255, 255, 255, 0.1)",
+        borderRadius: "20px",
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        position: "relative",
+        boxShadow: "0 8px 20px rgba(255, 255, 255, 0.4)",
+      }
+    : {
+        width: "100%",
+        maxWidth: "1250px",
+        minHeight: "600px",
+        backgroundColor: "rgba(255, 255, 255, 0.1)",
+        borderRadius: "20px",
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        position: "relative",
+      };
+
   return (
     <div style={{ width: "100vw", height: "100vh", overflow: "hidden" }}>
       {isFullscreen ? (
+        // Vollbildmodus
         <div style={fullscreenStyles}>
-          <Card
-            sx={{
-              width: "95%",
-              height: "95%",
-              backgroundColor: "rgba(255, 255, 255, 0.1)",
-              borderRadius: "20px",
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-              position: "relative",
-              boxShadow: "0 8px 20px rgba(255, 255, 255, 0.4)",
-            }}
-          >
+          <Card sx={cardStyles}>
             <VuiButton
               onClick={toggleFullscreen}
               variant="contained"
@@ -57,32 +71,22 @@ function Spotify() {
                 fontSize: "1.3rem",
                 padding: "0.4rem 0.8rem",
                 backgroundColor: "#ff5252",
+                position: "absolute",
+                top: "1rem",
+                right: "1rem",
               }}
             >
               Exit Fullscreen
             </VuiButton>
-            <VuiTypography variant="h4" color="white" textAlign="center">
-              <SpotifyComponent />
-            </VuiTypography>
+            <SpotifyComponent />
           </Card>
         </div>
       ) : (
+        // Normales Layout
         <DashboardLayout>
           <DashboardNavbar />
           <VuiBox py={3} display="flex" justifyContent="center" alignItems="center">
-            <Card
-              sx={{
-                width: "100%",
-                maxWidth: "1250px", // Beibehaltung des ursprünglichen Layouts
-                minHeight: "600px",
-                backgroundColor: "rgba(255, 255, 255, 0.1)",
-                borderRadius: "20px",
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-                position: "relative",
-              }}
-            >
+            <Card sx={cardStyles}>
               <VuiButton
                 onClick={toggleFullscreen}
                 variant="contained"
@@ -91,13 +95,14 @@ function Spotify() {
                   fontSize: "1.3rem",
                   padding: "0.4rem 0.8rem",
                   backgroundColor: "royalblue",
+                  position: "absolute",
+                  top: "1rem",
+                  right: "1rem",
                 }}
               >
                 Enter Fullscreen
               </VuiButton>
-              <VuiTypography variant="h4" color="white" textAlign="center">
-                <SpotifyComponent />
-              </VuiTypography>
+              <SpotifyComponent />
             </Card>
           </VuiBox>
           <VuiBox mt="auto">

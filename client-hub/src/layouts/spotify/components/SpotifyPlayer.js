@@ -1,6 +1,8 @@
 import React, { useEffect, useState, useRef } from "react";
 
 import "./SpotifyPlayer.css"
+import {BsPauseFill, BsPlayFill, BsSkipBackwardFill, BsSkipForwardCircleFill, BsSkipForwardFill} from "react-icons/bs";
+import {FiSkipForward} from "react-icons/fi";
 
 
 const SpotifyPlayer = ({ token, refreshToken, expiresAt }) => {
@@ -208,14 +210,24 @@ const SpotifyPlayer = ({ token, refreshToken, expiresAt }) => {
               ></div>
             </div>
             <div>
-              <button className="play-pause-button"    onClick={skipToPrevious}>←</button>
-              <button className="play-pause-button" onClick={togglePlay}> {isPlaying ? "Pause" : "Play"} </button>
-              <button className="play-pause-button"    onClick={skipToNext}>→</button>
+              <button className="play-pause-button" onClick={skipToPrevious}>
+                <BsSkipBackwardFill size="25px" color="inherit"/>
+              </button>
+              <button className="play-pause-button" onClick={togglePlay}>
+                {isPlaying ? (
+                    <BsPauseFill size="25px" color="inherit"/>
+                ) : (
+                    <BsPlayFill size="25px" color="inherit"/>
+                )}
+              </button>
+              <button className="play-pause-button" onClick={skipToNext}>
+                <BsSkipForwardFill size="25px" color="inherit"/>
+              </button>
             </div>
           </div>
         </div>
       ) : (
-        <p>Loading Player...</p>
+          <p>Loading Player...</p>
       )}
     </div>
   );
