@@ -1,9 +1,9 @@
 import React, { useState, useEffect, useRef } from "react";
-import Player from "../Player/Player";
+import Player from "../player/Player";
 import PokerTable from "../PokerTable";
 import { getPlayerPositions } from "../../utils/positionUtils";
 import { loadCardImage } from "../../utils/cardUtils";
-import PokerTableBackground from "../images/poker_table/PokerTable100.png";
+import PokerTableBackground from "../../assets/images/poker_table/PokerTable100.png";
 
 const PROTOCOL = "http";
 const HOST_URL = "127.0.0.1";
