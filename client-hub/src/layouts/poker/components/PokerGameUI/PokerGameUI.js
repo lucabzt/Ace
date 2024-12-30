@@ -6,8 +6,8 @@ import { loadCardImage } from "../../utils/cardUtils";
 import PokerTableBackground from "../../assets/images/poker_table/PokerTable100.png";
 
 
-const serverAddress = "https://localhost:5000";//process.env.BACKEND_URL;
-console.log("Server Address:", serverAddress);
+const serverAddress = process.env.REACT_APP_BACKEND_URL;
+//console.log("Server Address:", serverAddress);
 
 
 const PokerGameUI = () => {
