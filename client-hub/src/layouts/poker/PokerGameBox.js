@@ -1,51 +1,14 @@
 import React, { useState } from "react";
 import { Card, Button, useMediaQuery } from "@mui/material";
 import PokerGameUI from "./components/PokerGameUI/PokerGameUI";
+import GameButtons from "./components/buttons/GameButtons";
 
 function PokerGameBox() {
   const [isFullscreen, setIsFullscreen] = useState(false); // Fullscreen State
-  const [showRaiseSlider, setShowRaiseSlider] = useState(false); // Raise Slider State
-  const [raiseAmount, setRaiseAmount] = useState(10); // Raise Amount
   const isSmallScreen = useMediaQuery("(max-width: 960px)"); // Breakpoint for responsive design
 
   const toggleFullscreen = () => {
     setIsFullscreen(!isFullscreen);
-  };
-
-  // API request to send player action
-  const sendAction = async (action) => {
-    await fetch("http://127.0.0.1:5000/player-action", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ action: action }),
-    });
-  };
-
-  // Button click handlers
-  const handleRaiseClick = () => {
-    setShowRaiseSlider((prev) => !prev);
-  };
-
-  const handleConfirmRaise = () => {
-    sendAction("raise " + raiseAmount);
-    setShowRaiseSlider(false); // Hide the slider after confirming
-  };
-
-  const handleCheckClick = () => {
-    sendAction("check");
-  };
-
-  const handleFoldClick = () => {
-    sendAction("fold");
-  };
-
-  const handleCallClick = () => {
-    sendAction("call");
-  };
-
-  // Slider change handler
-  const handleSliderChange = (event) => {
-    setRaiseAmount(event.target.value);
   };
 
   // Fullscreen styles
@@ -85,7 +48,7 @@ function PokerGameBox() {
           backgroundColor: "rgba(255, 255, 255, 0.1)",
           borderRadius: "20px",
           display: "flex",
-          flexDirection: "column", // Ensure layout stacking for PokerUI + Buttons
+          flexDirection: "column",
           justifyContent: "center",
           alignItems: "center",
           position: "relative",
@@ -95,7 +58,7 @@ function PokerGameBox() {
             : "0 4px 12px rgba(0, 0, 0, 0.3)",
         }}
       >
-        {/* Button für Vollbild */}
+        {/* Fullscreen Button */}
         <Button
           onClick={toggleFullscreen}
           variant="contained"
@@ -105,10 +68,10 @@ function PokerGameBox() {
             right: "10px",
             padding: "10px 20px",
             fontSize: "13px",
-            backgroundColor: isFullscreen ? "#ff5252" : "#00bcd4",
+            backgroundColor: isFullscreen ? "#ff5252" : "royalblue",
             color: "#fff",
             "&:hover": {
-              backgroundColor: isFullscreen ? "#e53935" : "#008c9e",
+              backgroundColor: isFullscreen ? "#e53935" : "royalblue",
             },
             borderRadius: "8px",
             boxShadow: "0 4px 14px rgba(0, 0, 0, 0.3)",
@@ -120,104 +83,8 @@ function PokerGameBox() {
         {/* Poker-UI Rendering */}
         <PokerGameUI isFullscreen={isFullscreen} />
 
-        {/* Bottom Buttons */}
-        <div style={{ display: "flex", gap: "20px", marginTop: "20px" }}>
-          {/* Raise Button */}
-          <button
-            style={{
-              backgroundColor: "royalblue",
-              color: "white",
-              border: "none",
-              borderRadius: "8px",
-              padding: "10px 15px",
-            }}
-            onClick={handleRaiseClick}
-          >
-            Raise
-          </button>
-
-          {/* Check Button */}
-          <button
-            style={{
-              backgroundColor: "royalblue",
-              color: "white",
-              border: "none",
-              borderRadius: "8px",
-              padding: "10px 15px",
-            }}
-            onClick={handleCheckClick}
-          >
-            Check
-          </button>
-
-          {/* Fold Button */}
-          <button
-            style={{
-              backgroundColor: "royalblue",
-              color: "white",
-              border: "none",
-              borderRadius: "8px",
-              padding: "10px 15px",
-            }}
-            onClick={handleFoldClick}
-          >
-            Fold
-          </button>
-
-          {/* Call Button */}
-          <button
-            style={{
-              backgroundColor: "royalblue",
-              color: "white",
-              border: "none",
-              borderRadius: "8px",
-              padding: "10px 15px",
-            }}
-            onClick={handleCallClick}
-          >
-            Call
-          </button>
-        </div>
-
-        {/* Raise Slider */}
-        {showRaiseSlider && (
-          <div
-            style={{
-              marginTop: "20px",
-              backgroundColor: "#2a2a2a",
-              padding: "20px",
-              borderRadius: "10px",
-              textAlign: "center",
-            }}
-          >
-            <input
-              type="range"
-              min="10"
-              max="1000"
-              step="10"
-              value={raiseAmount}
-              onChange={handleSliderChange}
-              style={{
-                width: "100%",
-                margin: "10px 0",
-              }}
-            />
-            <p style={{ color: "#fff" }}>Raise Amount: ${raiseAmount}</p>
-            <button
-              onClick={handleConfirmRaise}
-              style={{
-                backgroundColor: "royalblue",
-                color: "white",
-                border: "none",
-                borderRadius: "8px",
-                padding: "10px 15px",
-                marginTop: "10px",
-              }}
-            >
-              OK
-            </button>
-          </div>
-        )}
+        {/* Game Buttons */}
+        <GameButtons />
       </Card>
     </div>
   );
