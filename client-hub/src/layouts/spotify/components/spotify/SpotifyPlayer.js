@@ -33,6 +33,7 @@ const SpotifyPlayer = ({ token, refreshToken, expiresAt }) => {
     }
   };
 
+  
   useEffect(() => {
     // Check token expiration periodically
     const interval = setInterval(() => {
@@ -51,6 +52,8 @@ const SpotifyPlayer = ({ token, refreshToken, expiresAt }) => {
       console.log("Updated token for SDK:", currentToken);
     }
   }, [currentToken]);
+
+  
 
 
   const [trackProgress, setTrackProgress] = useState(0); // Current progress in milliseconds
