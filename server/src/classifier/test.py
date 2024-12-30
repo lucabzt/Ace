@@ -86,14 +86,14 @@ while cap.isOpened():
     print(json.dumps(result, indent=4) if result else "No result")
 
     # Display processed results on the frame
-    #frame_with_results = display_results(frame, result)
+    frame_with_results = display_results(frame, result)
 
     # Show the frame
-    #cv2.imshow("Playing Card Detection", frame_with_results)
+    cv2.imshow("Playing Card Detection", frame_with_results)
 
     # Break on 'q' key press
-    #if cv2.waitKey(1) & 0xFF == ord('q'):
-        #break
+    if cv2.waitKey(1) & 0xFF == ord('q'):
+        break
 
 # Release resources
 cap.release()

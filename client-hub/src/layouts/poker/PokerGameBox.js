@@ -3,23 +3,56 @@ import { Card, Button, useMediaQuery } from "@mui/material";
 import PokerGameUI from "./components/PokerGameUI/PokerGameUI";
 
 function PokerGameBox() {
-  const [isFullscreen, setIsFullscreen] = useState(false); // State für den Vollbildmodus
-  const isSmallScreen = useMediaQuery("(max-width: 960px)"); // Breakpoint
+  const [isFullscreen, setIsFullscreen] = useState(false); // Fullscreen State
+  const [showRaiseSlider, setShowRaiseSlider] = useState(false); // Raise Slider State
+  const [raiseAmount, setRaiseAmount] = useState(0); // Raise Amount
+  const isSmallScreen = useMediaQuery("(max-width: 960px)"); // Breakpoint for responsive design
 
   const toggleFullscreen = () => {
     setIsFullscreen(!isFullscreen);
   };
 
+  // API request to send player action
+  const sendAction = async (action) => {
+    await fetch("http://127.0.0.1:5000/player-action", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ action: action }),
+    });
+  };
+
+  // Button click handlers
+  const handleRaiseClick = () => {
+    setShowRaiseSlider((prev) => !prev);
+    if (!showRaiseSlider) {
+      sendAction("raise " + raiseAmount);
+    }
+  };
+
+  const handleCheckClick = () => {
+    sendAction("check");
+  };
+
+  const handleFoldClick = () => {
+    sendAction("fold");
+  };
+
+  // Slider change handler
+  const handleSliderChange = (event) => {
+    setRaiseAmount(event.target.value);
+  };
+
+  // Fullscreen styles
   const fullscreenStyles = isFullscreen
     ? {
-        position: "fixed", // Rendering wird auf Bildschirm zentriert
+        position: "fixed",
         top: 0,
         left: 0,
-        width: "100vw", // Full width in viewport
-        height: "100vh", // Full height in viewport
-        backgroundColor: "rgba(0, 0, 0, 0.9)", // Dark background
-        zIndex: 9999, // Ensure it's on the highest z-axis
-        overflow: "hidden", // Prevent scrolling outside the fullscreen element
+        width: "100vw",
+        height: "100vh",
+        backgroundColor: "rgba(0, 0, 0, 0.9)",
+        zIndex: 9999,
+        overflow: "hidden",
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
@@ -30,28 +63,30 @@ function PokerGameBox() {
     <div
       style={{
         ...fullscreenStyles,
-        width: isFullscreen ? "100vw" : "100%", // im Vollbild ganze Breite
+        width: isFullscreen ? "100vw" : "100%",
         height: isFullscreen
-          ? "100vh" /* Max Größe */
+          ? "100vh"
           : isSmallScreen
-          ? "300px" /* für mobile Viewports */
-          : "40vw", /* Standardgröße */
-        transition: "all 0.3s ease", // Weiche Übergänge umschaltend
+          ? "300px"
+          : "40vw",
+        transition: "all 0.3s ease",
       }}
     >
       <Card
         sx={{
-          width: isFullscreen ? "95%" : "100%", // Larger width in fullscreen
-          height: isFullscreen ? "95%" : "100%", // Larger height in fullscreen
-          backgroundColor: "rgba(255, 255, 255, 0.1)", // Transparent card for fullscreen effect
+          width: isFullscreen ? "95%" : "100%",
+          height: isFullscreen ? "95%" : "100%",
+          backgroundColor: "rgba(255, 255, 255, 0.1)",
           borderRadius: "20px",
           display: "flex",
+          flexDirection: "column", // Ensure layout stacking for PokerUI + Buttons
           justifyContent: "center",
           alignItems: "center",
           position: "relative",
+          padding: "20px",
           boxShadow: isFullscreen
             ? "0 8px 20px rgba(255, 255, 255, 0.4)"
-            : "0 4px 12px rgba(0, 0, 0, 0.3)", // Schattierungen
+            : "0 4px 12px rgba(0, 0, 0, 0.3)",
         }}
       >
         {/* Button für Vollbild */}
@@ -64,10 +99,10 @@ function PokerGameBox() {
             right: "10px",
             padding: "10px 20px",
             fontSize: "13px",
-            backgroundColor: isFullscreen ? "#ff5252" : "#00bcd4", // Exit/Enter Farbe
+            backgroundColor: isFullscreen ? "#ff5252" : "#00bcd4",
             color: "#fff",
             "&:hover": {
-              backgroundColor: isFullscreen ? "#e53935" : "#008c9e", // Hover
+              backgroundColor: isFullscreen ? "#e53935" : "#008c9e",
             },
             borderRadius: "8px",
             boxShadow: "0 4px 14px rgba(0, 0, 0, 0.3)",
@@ -75,8 +110,76 @@ function PokerGameBox() {
         >
           {isFullscreen ? "Exit Fullscreen" : "Play Fullscreen"}
         </Button>
+
         {/* Poker-UI Rendering */}
         <PokerGameUI isFullscreen={isFullscreen} />
+
+        {/* Bottom Buttons */}
+        <div style={{ display: "flex", gap: "20px", marginTop: "20px" }}>
+          <button
+            style={{
+              backgroundColor: "royalblue",
+              color: "white",
+              border: "none",
+              borderRadius: "8px",
+              padding: "10px 15px",
+            }}
+            onClick={handleRaiseClick}
+          >
+            Raise
+          </button>
+          <button
+            style={{
+              backgroundColor: "royalblue",
+              color: "white",
+              border: "none",
+              borderRadius: "8px",
+              padding: "10px 15px",
+            }}
+            onClick={handleCheckClick}
+          >
+            Check
+          </button>
+          <button
+            style={{
+              backgroundColor: "royalblue",
+              color: "white",
+              border: "none",
+              borderRadius: "8px",
+              padding: "10px 15px",
+            }}
+            onClick={handleFoldClick}
+          >
+            Fold
+          </button>
+        </div>
+
+        {/* Raise Slider */}
+        {showRaiseSlider && (
+          <div
+            style={{
+              marginTop: "20px",
+              backgroundColor: "#2a2a2a",
+              padding: "20px",
+              borderRadius: "10px",
+              textAlign: "center",
+            }}
+          >
+            <input
+              type="range"
+              min="1"
+              max=""
+              step="10"
+              value={raiseAmount}
+              onChange={handleSliderChange}
+              style={{
+                width: "100%",
+                margin: "10px 0",
+              }}
+            />
+            <p style={{ color: "#fff" }}>Raise Amount: ${raiseAmount}</p>
+          </div>
+        )}
       </Card>
     </div>
   );
