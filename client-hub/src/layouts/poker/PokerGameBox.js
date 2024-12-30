@@ -1,7 +1,8 @@
 import React, { useState } from "react";
-import { Card, Button, useMediaQuery } from "@mui/material";
+import { Card, useMediaQuery } from "@mui/material";
 import PokerGameUI from "./components/PokerGameUI/PokerGameUI";
 import GameButtons from "./components/buttons/GameButtons";
+import VuiButton from "../../components/VuiButton"; // Importiere VuiButton
 
 function PokerGameBox() {
   const [isFullscreen, setIsFullscreen] = useState(false); // Fullscreen State
@@ -59,26 +60,18 @@ function PokerGameBox() {
         }}
       >
         {/* Fullscreen Button */}
-        <Button
+        <VuiButton
           onClick={toggleFullscreen}
           variant="contained"
-          sx={{
-            position: "absolute",
-            top: "10px",
-            right: "10px",
-            padding: "10px 20px",
-            fontSize: "13px",
-            backgroundColor: isFullscreen ? "#ff5252" : "royalblue",
-            color: "#fff",
-            "&:hover": {
-              backgroundColor: isFullscreen ? "#e53935" : "royalblue",
-            },
-            borderRadius: "8px",
-            boxShadow: "0 4px 14px rgba(0, 0, 0, 0.3)",
+          color="info"
+          style={{
+              fontSize: "1.3rem",
+              padding: "0.4rem 0.8rem",
+              backgroundColor: isFullscreen ? "#ff5252" : "royalblue",
           }}
         >
           {isFullscreen ? "Exit Fullscreen" : "Play Fullscreen"}
-        </Button>
+        </VuiButton>
 
         {/* Poker-UI Rendering */}
         <PokerGameUI isFullscreen={isFullscreen} />

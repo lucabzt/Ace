@@ -1,10 +1,12 @@
 import React, { useState } from "react";
+// Import VuiButton für einheitliches Styling
+import VuiButton from "../../../../components/VuiButton";
 
 function GameButtons() {
   const [showRaiseSlider, setShowRaiseSlider] = useState(false); // Raise Slider State
   const [raiseAmount, setRaiseAmount] = useState(10); // Raise Amount
 
-  // API request to send player action
+  // API-Anfrage, um Spieleraktionen zu senden
   const sendAction = async (action) => {
     await fetch("http://127.0.0.1:5000/player-action", {
       method: "POST",
@@ -13,14 +15,14 @@ function GameButtons() {
     });
   };
 
-  // Button click handlers
+  // Button-Click-Handler
   const handleRaiseClick = () => {
     setShowRaiseSlider((prev) => !prev);
   };
 
   const handleConfirmRaise = () => {
     sendAction("raise " + raiseAmount);
-    setShowRaiseSlider(false); // Hide the slider after confirming
+    setShowRaiseSlider(false); // Slider verstecken
   };
 
   const handleCheckClick = () => {
@@ -35,26 +37,29 @@ function GameButtons() {
     sendAction("call");
   };
 
-  // Slider change handler
+  // Slider-Änderungen verarbeiten
   const handleSliderChange = (event) => {
     setRaiseAmount(event.target.value);
   };
 
   return (
-    <div>
-      {/* Conditionally Render Raise Area */}
+    <div style={{ position: "relative" }}>
+      {/* Raise-Area wird bedingt gerendert */}
       {showRaiseSlider && (
         <div
           style={{
             position: "absolute",
-            bottom: "100px", // Adjust this value as needed to position it above the buttons
-            width: "80%",
-            maxWidth: "400px",
-            backgroundColor: "rgba(42, 42, 42, 0.95)",
-            padding: "20px",
-            borderRadius: "10px",
+            bottom: "100%",
+            left: "50%",
+            transform: "translateX(-50%)",
+            width: "100%",
+            maxWidth: "300px", // Reduzierte Breite
+            padding: "10px", // Reduziertes Padding
+            backgroundColor: "#1c2a1e",
+            borderRadius: "0.5rem", // Abgerundete Ecken
+            boxShadow: "0 2px 4px rgba(0, 0, 0, 0.2)", // Leichter Schatten
             textAlign: "center",
-            zIndex: 1000, // Ensure it's above other elements
+            zIndex: 1000,
           }}
         >
           <input
@@ -66,88 +71,73 @@ function GameButtons() {
             onChange={handleSliderChange}
             style={{
               width: "100%",
-              margin: "10px 0",
+              margin: "0.2rem 0", // Weniger Abstand
             }}
           />
-          <p style={{ color: "#fff" }}>Raise Amount: ${raiseAmount}</p>
-          <button
+          <p style={{ color: "#fff", margin: "0.2rem 0", fontSize: "1rem" }}>
+            Raise Amount: ${raiseAmount}
+          </p>
+          <VuiButton
             onClick={handleConfirmRaise}
+            variant="contained"
+            color="info"
             style={{
-              backgroundColor: "royalblue",
-              color: "white",
-              border: "none",
-              borderRadius: "8px",
-              padding: "10px 15px",
-              marginTop: "10px",
-              cursor: "pointer",
+              marginTop: "0.4rem",
+              fontSize: "0.88rem", // Schriftgröße angepasst
+              padding: "0.44rem 0.88rem", // Padding-Anpassung für Skalierung
             }}
           >
             OK
-          </button>
+          </VuiButton>
         </div>
       )}
 
-      {/* Bottom Buttons */}
-      <div style={{ display: "flex", gap: "20px", marginTop: "20px", position: "relative" }}>
-        {/* Raise Button */}
-        <button
-          style={{
-            backgroundColor: "royalblue",
-            color: "white",
-            border: "none",
-            borderRadius: "10px",
-            padding: "10px 15px",
-            cursor: "pointer",
-          }}
+      {/* Bedienelemente-Buttons unten */}
+      <div style={{ display: "flex", gap: "10px", marginTop: "10px" }}>
+        <VuiButton
+          variant="contained"
+          color="info"
           onClick={handleRaiseClick}
+          style={{
+            fontSize: "1.2rem", // Schriftgröße erhöht
+            padding: "0.55rem 1.2rem", // Padding um 10 % erhöht
+          }}
         >
           Raise
-        </button>
-
-        {/* Check Button */}
-        <button
-          style={{
-            backgroundColor: "royalblue",
-            color: "white",
-            border: "none",
-            borderRadius: "8px",
-            padding: "10px 15px",
-            cursor: "pointer",
-          }}
-          onClick={handleCheckClick}
-        >
-          Check
-        </button>
-
-        {/* Fold Button */}
-        <button
-          style={{
-            backgroundColor: "royalblue",
-            color: "white",
-            border: "none",
-            borderRadius: "8px",
-            padding: "10px 15px",
-            cursor: "pointer",
-          }}
-          onClick={handleFoldClick}
-        >
-          Fold
-        </button>
-
-        {/* Call Button */}
-        <button
-          style={{
-            backgroundColor: "royalblue",
-            color: "white",
-            border: "none",
-            borderRadius: "8px",
-            padding: "10px 15px",
-            cursor: "pointer",
-          }}
+        </VuiButton>
+        <VuiButton
+          variant="contained"
+          color="info"
           onClick={handleCallClick}
+          style={{
+            fontSize: "1.2rem",
+            padding: "0.55rem 1.2rem",
+          }}
         >
           Call
-        </button>
+        </VuiButton>
+        <VuiButton
+          variant="contained"
+          color="info"
+          onClick={handleCheckClick}
+          style={{
+            fontSize: "1.2rem",
+            padding: "0.55rem 1.2rem",
+          }}
+        >
+          Check
+        </VuiButton>
+        <VuiButton
+          variant="contained"
+          color="info"
+          onClick={handleFoldClick}
+          style={{
+            fontSize: "1.2rem",
+            padding: "0.55rem 1.2rem",
+          }}
+        >
+          Fold
+        </VuiButton>
       </div>
     </div>
   );
