@@ -1,69 +1,71 @@
-/**/
-
-// @mui material components
-import { Card, Button } from "@mui/material";
-import { useState } from "react";
-
-// Vision UI Dashboard React components
+import React, { useState } from "react";
+import { Card } from "@mui/material";
+import VuiButton from "../../components/VuiButton"; // Importiere den Button
 import VuiBox from "../../components/VuiBox";
 import VuiTypography from "../../components/VuiTypography";
-
-// Vision UI Dashboard React example components
 import DashboardLayout from "../../examples/LayoutContainers/DashboardLayout";
 import DashboardNavbar from "../../examples/Navbars/DashboardNavbar";
 import Footer from "../../examples/Footer";
-
 import SpotifyComponent from "./components/SpotifyComponent";
 
 function Spotify() {
-  const [isFullscreen, setIsFullscreen] = useState(false);
+  const [isFullscreen, setIsFullscreen] = useState(false); // Fullscreen-Zustand
 
   const toggleFullscreen = () => {
-    setIsFullscreen(!isFullscreen);
+    setIsFullscreen(!isFullscreen); // Umschalten des Fullscreen-Modus
   };
+
+  // Box für Fullscreen-Logik
+  const fullscreenStyles = isFullscreen
+    ? {
+        position: "fixed",
+        top: 0,
+        left: 0,
+        width: "100vw",
+        height: "100vh",
+        backgroundColor: "rgba(0, 0, 0, 0.9)", // Dunkler Hintergrund
+        zIndex: 9999,
+        overflow: "hidden",
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+      }
+    : {};
 
   return (
     <div style={{ width: "100vw", height: "100vh", overflow: "hidden" }}>
       {isFullscreen ? (
-        <VuiBox
-          display="flex"
-          justifyContent="center"
-          alignItems="center"
-          sx={{
-            width: "100vw",
-            height: "100vh",
-            backgroundColor: "rgba(0, 0, 0, 0.9)", // Fullscreen dark background
-          }}
-        >
+        <div style={fullscreenStyles}>
           <Card
             sx={{
-              width: "90%",
-              height: "90%",
+              width: "95%",
+              height: "95%",
               backgroundColor: "rgba(255, 255, 255, 0.1)",
               borderRadius: "20px",
               display: "flex",
               justifyContent: "center",
               alignItems: "center",
               position: "relative",
+              boxShadow: "0 8px 20px rgba(255, 255, 255, 0.4)",
             }}
           >
-            <Button
+            <VuiButton
               onClick={toggleFullscreen}
               variant="contained"
-              sx={{
-                position: "absolute",
-                top: "10px",
-                right: "10px",
+              color="info"
+              style={{
+                fontSize: "1.3rem",
+                padding: "0.4rem 0.8rem",
                 backgroundColor: "#ff5252",
               }}
             >
               Exit Fullscreen
-            </Button>
+            </VuiButton>
             <VuiTypography variant="h4" color="white" textAlign="center">
-              <SpotifyComponent/>
+              <SpotifyComponent />
             </VuiTypography>
           </Card>
-        </VuiBox>
+        </div>
       ) : (
         <DashboardLayout>
           <DashboardNavbar />
@@ -71,8 +73,8 @@ function Spotify() {
             <Card
               sx={{
                 width: "100%",
-                maxWidth: "1250px", // Matches Analytics card max-width
-                minHeight: "600px", // Matches Analytics card minHeight
+                maxWidth: "1250px", // Beibehaltung des ursprünglichen Layouts
+                minHeight: "600px",
                 backgroundColor: "rgba(255, 255, 255, 0.1)",
                 borderRadius: "20px",
                 display: "flex",
@@ -81,20 +83,20 @@ function Spotify() {
                 position: "relative",
               }}
             >
-              <Button
+              <VuiButton
                 onClick={toggleFullscreen}
                 variant="contained"
-                sx={{
-                  position: "absolute",
-                  top: "10px",
-                  right: "10px",
-                  backgroundColor: "#00bcd4",
+                color="info"
+                style={{
+                  fontSize: "1.3rem",
+                  padding: "0.4rem 0.8rem",
+                  backgroundColor: "royalblue",
                 }}
               >
                 Enter Fullscreen
-              </Button>
+              </VuiButton>
               <VuiTypography variant="h4" color="white" textAlign="center">
-                <SpotifyComponent/>
+                <SpotifyComponent />
               </VuiTypography>
             </Card>
           </VuiBox>
@@ -108,4 +110,3 @@ function Spotify() {
 }
 
 export default Spotify;
-
