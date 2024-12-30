@@ -50,14 +50,15 @@
 		"web-vitals": "1.0.1"
 	},
 	"devDependencies": {
+		"@babel/plugin-proposal-private-property-in-object": "^7.16.7",
 		"@testing-library/jest-dom": "5.11.4",
 		"@testing-library/react": "11.1.0",
 		"@testing-library/user-event": "12.1.10",
 		"cross-env": "^7.0.3",
-		"eslint": "^9.17.0",
+		"eslint": "^8.0.0",
+		"eslint-config-react-app": "^7.0.1",
 		"react-scripts": "5.0.1",
-		"terser-webpack-plugin": "^5.3.11",
-		"@babel/plugin-proposal-private-property-in-object": "^7.16.7"
+		"terser-webpack-plugin": "^5.3.11"
 	},
 	"scripts": {
 		"start": "react-scripts start",
