@@ -1,9 +1,12 @@
 {
 	"name": "spade-ui",
-  "options": {
-    "allowedHosts": ["localhost", ".localhost"],
-    "proxy": "https://localhost:5000/"
-  },
+	"options": {
+		"allowedHosts": [
+			"localhost",
+			".localhost"
+		],
+		"proxy": "https://localhost:5000/"
+	},
 	"version": "3.0.0",
 	"private": true,
 	"author": "eixfachZabii",
@@ -29,6 +32,7 @@
 		"apexcharts": "^3.30.0",
 		"chroma-js": "2.1.2",
 		"components": "^0.1.0",
+		"fork-ts-checker-webpack-plugin": "^9.0.2",
 		"images": "^3.2.4",
 		"install": "^0.13.0",
 		"prop-types": "15.7.2",
@@ -51,7 +55,8 @@
 		"@testing-library/user-event": "12.1.10",
 		"cross-env": "^7.0.3",
 		"eslint": "^7.11.0",
-		"react-scripts": "5.0.1"
+		"react-scripts": "5.0.1",
+		"terser-webpack-plugin": "^5.3.11"
 	},
 	"scripts": {
 		"start": "react-scripts start",
