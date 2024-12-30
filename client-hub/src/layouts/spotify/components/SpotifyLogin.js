@@ -1,9 +1,13 @@
 import React from "react";
 
+
+const serverAddress = "https://localhost:5000";//process.env.BACKEND_URL;
+console.log("Server Address:", serverAddress);
+
 const SpotifyLogin = ({ onLoginSuccess }) => {
   const loginWithSpotify = () => {
     // Redirect to your Flask server's Spotify authorization endpoint
-    window.location.href = "http://127.0.0.1:5000/login";
+    window.location.href = `${serverAddress}/login`;
   };
 
   const centerStyle = {

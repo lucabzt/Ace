@@ -208,9 +208,9 @@ const SpotifyPlayer = ({ token, refreshToken, expiresAt }) => {
               ></div>
             </div>
             <div>
-              <button className="track-controls"    onClick={skipToPrevious}>Previous</button>
+              <button className="play-pause-button"    onClick={skipToPrevious}>←</button>
               <button className="play-pause-button" onClick={togglePlay}> {isPlaying ? "Pause" : "Play"} </button>
-              <button className="track-controls"    onClick={skipToNext}>Next</button>
+              <button className="play-pause-button"    onClick={skipToNext}>→</button>
             </div>
           </div>
         </div>

@@ -30,7 +30,7 @@ app.secret_key = 'a_random_secret_key_12345'  # Required for session handling (o
 CLIENT_ID = "258c86af6a9e45ac8fac5185cceff480"
 CLIENT_SECRET = "e5c969b18de0458a95552515897cd7fc"
 
-REDIRECT_URI = f"http://127.0.0.1:5000/callback"
+REDIRECT_URI = f"https://localhost:5000/callback"
 
 SPOTIFY_AUTH_URL = "https://accounts.spotify.com/authorize"
 SPOTIFY_TOKEN_URL = "https://accounts.spotify.com/api/token"
@@ -252,7 +252,7 @@ def callback():
     #print("Got tokens: (status code)" + response.status_code + " -> token: " + access_token)
 
     # Redirect to React app with tokens
-    return redirect(f"https://127.0.0.1:3000/#access_token={access_token}&refresh_token={refresh_token}&expires_at={expiration_timestamp}")
+    return redirect(f"https://127.0.0.1:3000/spotify/#access_token={access_token}&refresh_token={refresh_token}&expires_at={expiration_timestamp}")
 
 
 @app.route('/refresh_token', methods=['GET'])
@@ -302,4 +302,4 @@ log.setLevel(logging.ERROR)
 if __name__ == '__main__':
     threading.Thread(target=game_loop, daemon=True).start()
     display_spade_art()  # Display spade art on game start
-    app.run(debug=False, host='127.0.0.1', port=5000)
+    app.run(debug=False, host='127.0.0.1', port=5000, ssl_context=('./server/cert.pem', './server/key.pem'))

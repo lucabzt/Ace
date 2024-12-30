@@ -13,6 +13,8 @@ import DashboardLayout from "../../examples/LayoutContainers/DashboardLayout";
 import DashboardNavbar from "../../examples/Navbars/DashboardNavbar";
 import Footer from "../../examples/Footer";
 
+import SpotifyComponent from "./components/SpotifyComponent";
+
 function Spotify() {
   const [isFullscreen, setIsFullscreen] = useState(false);
 
@@ -58,7 +60,7 @@ function Spotify() {
               Exit Fullscreen
             </Button>
             <VuiTypography variant="h4" color="white" textAlign="center">
-              Spotify Embed Placeholder
+              <SpotifyComponent/>
             </VuiTypography>
           </Card>
         </VuiBox>
@@ -92,7 +94,7 @@ function Spotify() {
                 Enter Fullscreen
               </Button>
               <VuiTypography variant="h4" color="white" textAlign="center">
-                Spotify Embed Placeholder
+                <SpotifyComponent/>
               </VuiTypography>
             </Card>
           </VuiBox>
