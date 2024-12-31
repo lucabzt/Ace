@@ -1,0 +1,14 @@
+/* Ensure the legend text is white */
+.apexcharts-legend-text {
+  color: white !important;
+}
+
+/* Ensure the legend label (name) is white */
+.apexcharts-legend .apexcharts-legend-series text {
+  fill: white !important;
+}
+
+/* Optional: Change the legend markers if needed */
+.apexcharts-legend .apexcharts-legend-marker {
+  border-color: white !important;
+}

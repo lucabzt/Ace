@@ -1,3 +1,4 @@
+// Import necessary libraries and components
 import { Grid, Card } from "@mui/material";
 import { useMediaQuery } from "@mui/material";
 
@@ -11,7 +12,12 @@ import Footer from "../../examples/Footer";
 import WelcomeMark from "./components/WelcomeMark";
 
 // Import Poker Game
-import Poker from "../poker/PokerGameBox"; // Der Pfad zu `Poker.js` hängt von Ihrer Datei-Struktur ab
+import Poker from "../poker/PokerGameBox";
+
+// Data for the Line Chart
+import { lineChartDataDashboard } from "./data/lineChartData";
+import { lineChartOptionsDashboard } from "./data/lineChartOptions";
+import LineChart from "../../examples/Charts/LineCharts/LineChart";
 
 function Dashboard() {
   const isSmallScreen = useMediaQuery("(max-width: 960px)"); // Breakpoint for smaller screens (responsive)
@@ -40,8 +46,8 @@ function Dashboard() {
     <div
       style={{
         width: "100vw",
-        height: "100vh",
-        overflow: isSmallScreen ? "auto" : "hidden", // Allow scrolling only if width < 960px
+        minHeight: "100vh",
+        overflow: "auto",
         display: "flex",
         flexDirection: "column",
       }}
@@ -51,7 +57,7 @@ function Dashboard() {
         <DashboardNavbar />
         <VuiBox py={3} sx={{ flexGrow: 1 }}>
           <VuiBox mb={3}>
-            <Grid container spacing={2}>
+            <Grid container spacing={3}>
               {/* Left Section: Welcome and Spotify */}
               <Grid item xs={12} lg={4} xl={2}>
                 <VuiBox mb={3}>
@@ -75,12 +81,30 @@ function Dashboard() {
                   }}
                 >
                   {/* Poker Game Integration */}
-                  <Poker /> {/* Fügt das Poker-Spiel hinzu */}
+                  <Poker />
                 </VuiBox>
               </Grid>
             </Grid>
           </VuiBox>
+
+          {/* Line Chart Section */}
+          <VuiBox mb={3}>
+            <Card>
+              <VuiBox p={3}>
+                <VuiTypography variant="lg" color="white" fontWeight="bold" mb="5px">
+                  Game Stats
+                </VuiTypography>
+                <VuiBox sx={{ height: "310px" }}>
+                  <LineChart
+                    lineChartData={lineChartDataDashboard}
+                    lineChartOptions={lineChartOptionsDashboard}
+                  />
+                </VuiBox>
+              </VuiBox>
+            </Card>
+          </VuiBox>
         </VuiBox>
+
         {/* Footer */}
         <VuiBox mt="auto">
           <Footer />

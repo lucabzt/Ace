@@ -1,5 +1,3 @@
-/**/
-
 export const lineChartOptionsDashboard = {
   chart: {
     toolbar: {
@@ -7,34 +5,25 @@ export const lineChartOptionsDashboard = {
     },
   },
   tooltip: {
-    theme: "dark",
+    theme: "light",
   },
   dataLabels: {
     enabled: false,
   },
   stroke: {
     curve: "smooth",
+    width: 4, // Increase stroke width to make the lines thicker
   },
-  xaxis: {
-    type: "datetime",
+ xaxis: {
+    type: "numeric",
     categories: [
-      "Jan",
-      "Feb",
-      "Mar",
-      "Apr",
-      "May",
-      "Jun",
-      "Jul",
-      "Aug",
-      "Sep",
-      "Oct",
-      "Nov",
-      "Dec",
+
     ],
     labels: {
       style: {
-        colors: "#c8cfca",
-        fontSize: "10px",
+        colors: "#FFF", // Text color for x-axis labels
+        fontSize: "12px", // Slightly larger font size for better visibility
+        fontWeight: "600", // Set font weight to make text bolder
       },
     },
     axisBorder: {
@@ -47,31 +36,45 @@ export const lineChartOptionsDashboard = {
   yaxis: {
     labels: {
       style: {
-        colors: "#c8cfca",
-        fontSize: "10px",
+        colors: "#c8cfca", // Text color for y-axis labels
+        fontSize: "12px", // Slightly larger font size for better visibility
+        fontWeight: "600", // Set font weight to make text bolder
       },
     },
   },
   legend: {
-    show: false,
+    show: true, // Display legend so names are visible with colors
+    position: "top", // Optional: position the legend at the top of the chart
+    labels: {
+      style: {
+        color: "#FFFFFF", // Ensure that legend text is white
+        fontSize: "16px", // Increase font size for the legend text (e.g., 16px)
+        fontWeight: "600", // Set font weight to make text bolder
+      },
+    },
+    markers: {
+      width: 10, // Optional: change width of legend markers
+      height: 10, // Optional: change height of legend markers
+      strokeWidth: 0, // Optional: remove stroke on legend markers
+    },
   },
   grid: {
-    strokeDashArray: 5,
+    show: true, // Keep grid lines, but no shading
+    strokeDashArray: 0, // Remove dashed grid lines
     borderColor: "#56577A",
   },
   fill: {
-    type: "gradient",
-    gradient: {
-      shade: "dark",
-      type: "vertical",
-      shadeIntensity: 0,
-      gradientToColors: undefined, // optional, if not defined - uses the shades of same color in series
-      inverseColors: true,
-      opacityFrom: 0.8,
-      opacityTo: 0,
-      stops: [],
-    },
-    colors: ["#0075FF", "#2CD9FF"],
+    type: "solid", // Remove gradient fill under the lines
+    opacity: 0, // Set opacity to 0 so there's no fill under the line
   },
-  colors: ["#0075FF", "#2CD9FF"],
+  colors: [
+    "#F39C12", // Color for Jura Jonas
+    "#1ABC9C", // Color for Sebastian
+    "#E74C3C", // Color for Paul
+    "#9B59B6", // Color for Eliah
+    "#2ECC71", // Color for Matthi
+    "#3498DB", // Color for Markus
+    "#F1C40F", // Color for Luca
+    "#8E44AD", // Color for Jonas
+  ],
 };
