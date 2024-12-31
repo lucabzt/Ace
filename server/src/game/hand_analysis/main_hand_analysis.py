@@ -47,7 +47,7 @@ def main():
 
     # Generate community cards
     community_cards = generate_random_community_cards(deck)
-    print("Community Cards:", community_cards)
+    print("community-cards:", community_cards)
     print(" ")
 
     # Get the best hand for each player

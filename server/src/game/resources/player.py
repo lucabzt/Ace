@@ -6,6 +6,7 @@ class Player:
         self.name = name
         self.cards = []  # Player's own cards
         self.balance = balance  # Player's balance for betting
+        self.absolute_investment = balance
         self.win_prob = 0.0
 
     def receive_card(self, card):
@@ -51,5 +52,7 @@ class Player:
             raise ValueError("Insufficient balance.")
         self.balance -= amount
 
+
     def __str__(self):
-        return f"Player: {self.name}, Balance: ${self.balance}, Cards: {self.show_cards()}"
+        return (f"Player: {self.name}, Balance: ${self.balance}, Cards: {self.show_cards()},"
+                f" PNL: ${self.balance - self.absolute_investment}")

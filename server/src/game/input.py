@@ -29,7 +29,7 @@ def modify_game_settings(game_round):
     """Allows the user to modify game settings or exit the game."""
     print("\n--- SETTINGS ---")
     print(
-        "Options: 1) Add player, 2) Remove player, 3) Give balance to player, 4) Change blind sizes, 5) Continue, 6) Exit Game")
+        "Options: 1) Add player, 2) Remove player, 3) Change balance of player, 4) Change blind sizes, 5) Continue, 6) Exit Game")
     choice = input("Choose an option (1-6): ")
 
     if choice == '1':
@@ -52,13 +52,17 @@ def modify_game_settings(game_round):
         print(f"Player {player_name} has been removed.")
 
     elif choice == '3':
-        player_name = input("Enter the player's name to give balance: ")
+        player_name = input("Enter the player's name to change balance: ")
         player = next((p for p in game_round.players if p.name == player_name), None)
         if player:
-            amount = int(input(f"Enter the amount to give to {player_name}: "))
-            player.balance += amount
-            print(f"{player_name} now has {player.balance} chips.")
-            game_round.reset_game()
+            amount = int(input(f"Enter the amount you want to give/deduct to {player_name} (negative to deduct): "))
+            if amount < 0 and abs(amount) > player.balance:
+                print(f"Error: Cannot remove more chips than {player_name} has. Current balance: {player.balance}")
+            else:
+                player.balance += amount
+                player.absolute_investment += amount
+                print(f"{player_name} now has {player.balance} chips.")
+                game_round.reset_game()
         else:
             print("Player not found.")
 

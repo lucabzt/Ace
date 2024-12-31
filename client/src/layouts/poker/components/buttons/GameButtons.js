@@ -2,7 +2,8 @@ import React, { useState } from "react";
 // Import VuiButton für einheitliches Styling
 import VuiButton from "../../../../components/VuiButton";
 
-const serverAddress = process.env.PUBLIC_URL;
+//const serverAddress = process.env.PUBLIC_URL;
+const serverAddress = "https://localhost:5000";
 console.log("Server Address:", serverAddress);
 
 function GameButtons() {

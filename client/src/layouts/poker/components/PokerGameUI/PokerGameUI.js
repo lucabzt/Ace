@@ -6,7 +6,8 @@ import { loadCardImage } from "../../utils/cardUtils";
 import PokerTableBackground from "../../../../assets/images/poker/poker_table/PokerTable100.png";
 
 
-const serverAddress = process.env.PUBLIC_URL;
+//const serverAddress = process.env.PUBLIC_URL;
+const serverAddress = "https://localhost:5000";
 console.log("Server Address:", serverAddress);
 
 

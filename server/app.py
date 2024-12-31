@@ -50,6 +50,7 @@ game = GameRound(players, small_blind=10, big_blind=20, shared_resources=shared_
 def get_home():
     return render_template("index.html")
 
+
 @app.route('/index.html', methods=['GET'])
 def get_index():
     return render_template("index.html")
@@ -63,6 +64,7 @@ def get_players():
         {
             "name": player.name,
             "balance": player.balance,
+            "absoluteInvestment": player.absolute_investment,
             "bet": game.bets.get(player.name),
             "cards": [{"rank": card.rank.value, "suit": card.suit.value, "faceUp": True} for card in player.cards],
             "probWin": round(player.win_prob, 2),
@@ -153,29 +155,6 @@ def reset_game():
     return jsonify({"message": "Game has been reset"})
 
 
-@app.route('/get-game-state', methods=['GET'])
-def get_game_state():
-    """Get the full game state."""
-    state = {
-        "players": [
-            {
-                "name": player.name,
-                "balance": player.balance,
-                "folded": player in game.folded_players,
-                "cards": [{"rank": card.rank.value, "suit": card.suit.value} for card in player.cards],
-                "winProb": f"{player.win_prob:.2f}%"
-            }
-            for player in players
-        ],
-        "communityCards": [
-            {"rank": card.rank.value, "suit": card.suit.value} for card in game.community_cards
-        ],
-        "pot": game.pot,
-        "dealerIndex": game.dealer_index,
-        "currentBet": game.current_bet,
-    }
-    return jsonify(state)
-
 @app.route('/player-action', methods=['POST'])
 def update_player_action():
     data = request.json
@@ -189,7 +168,6 @@ def update_player_action():
     return jsonify({"status": "ok"}), 200
 
 
-
 @app.route('/login')
 def login():
     """Redirect the user to Spotify's authorization endpoint."""
@@ -198,7 +176,7 @@ def login():
 
     scope = "user-read-private user-read-email user-read-playback-state user-modify-playback-state user-read-currently-playing app-remote-control streaming playlist-read-private playlist-read-collaborative playlist-modify-private playlist-modify-public "  # Permissions your app requests
     #scope = "user-read-private user-read-email streaming user-modify-playback-state"
-        
+
     # Construct the Spotify authorization URL
     query_params = {
         "response_type": "code",
@@ -240,8 +218,6 @@ def callback():
 
     if response.status_code != 200:
         return jsonify({"error": "Failed to fetch access token"}), response.status_code
-    
-
 
     tokens = response.json()
     access_token = tokens.get("access_token")
@@ -252,7 +228,8 @@ def callback():
     #print("Got tokens: (status code)" + response.status_code + " -> token: " + access_token)
 
     # Redirect to React app with tokens
-    return redirect(f"https://127.0.0.1:3000/spotify/#access_token={access_token}&refresh_token={refresh_token}&expires_at={expiration_timestamp}")
+    return redirect(
+        f"https://127.0.0.1:3000/spotify/#access_token={access_token}&refresh_token={refresh_token}&expires_at={expiration_timestamp}")
 
 
 @app.route('/refresh_token', methods=['GET'])
@@ -300,7 +277,8 @@ log.setLevel(logging.ERROR)
 
 # Run the Flask app
 if __name__ == '__main__':
-    threading.Thread(target=game_loop, daemon=True, static_url_path='', static_folder='/static/client/').start()
+    threading.Thread(target=game_loop, daemon=True).start()
     display_spade_art()  # Display spade art on game start
-    app.run(debug=False, host='127.0.0.1', port=5000, ssl_context=('./server/cert.pem', './server/key.pem'))
-
+    app.run(debug=False, host='127.0.0.1', port=5000
+            , ssl_context=('./server/cert.pem', './server/key.pem')
+            )

@@ -7,7 +7,7 @@ export const loadCardImage = (rank, suit, faceUp = true) => {
 
   try {
     // Dynamically require the card face image based on rank and suit
-    return require(`../assets/images/card_deck/${rank.toLowerCase()}_of_${suit.toLowerCase()}.png`);
+    return require(`../../../assets/images/poker/card_deck/${rank.toLowerCase()}_of_${suit.toLowerCase()}.png`);
   } catch (error) {
     console.error(`Error loading image for ${rank} of ${suit}:`, error);
     // Optional: Provide a fallback, like the backside image

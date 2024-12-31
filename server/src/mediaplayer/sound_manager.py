@@ -49,13 +49,13 @@ def play_random_sound(file_path):
 def play_community_card_sound(round_name):
     if round_name == "Pre-Flop":
         return
-    play_random_sound(f"Dealer_Lines/Community Cards/{round_name}")
+    play_random_sound(f"dealer-lines/community-cards/{round_name}")
 
 
 def play_player_action(player, action):
     """Actions like checks, calls, raises"""
     play_player_name(player.name)
-    play_random_sound(f"Player Actions/{action}")
+    play_random_sound(f"player-actions/{action}")
 
 
 def play_all_sounds(file_path) -> threading.Thread:
@@ -76,7 +76,7 @@ def play_all_sounds(file_path) -> threading.Thread:
 
 # Function to construct the sound paths for a card rank
 def get_card_sound_paths(rank):
-    rank_path = os.path.join(BASE_DIR, f"server/assets/sounds/Poker Cards/Card/Plural/{rank}")
+    rank_path = os.path.join(BASE_DIR, f"server/assets/sounds/poker-cards/Card/Plural/{rank}")
     return [os.path.join(rank_path, f"{rank}{i}.mp3") for i in range(1, 5)]
 
 
@@ -84,8 +84,8 @@ def get_card_sound_paths(rank):
 def get_announcement_path(phrase):
     base_path = os.path.join(BASE_DIR, "server/assets/sounds")
     paths = {
-        "wins": [os.path.join(base_path, "Player Actions", "wins.mp3")],
-        "full of": [os.path.join(base_path, "Winning Hands", "full of.mp3")],
+        "wins": [os.path.join(base_path, "player-actions", "wins.mp3")],
+        "full of": [os.path.join(base_path, "winning-hands", "full of.mp3")],
         "and": [os.path.join(base_path, "Phrases", "and.mp3")]
     }
     return paths.get(phrase, [])
@@ -93,33 +93,33 @@ def get_announcement_path(phrase):
 
 # Play player name sound
 def play_player_name(name):
-    play_random_sound(f"Players/{name}")
+    play_random_sound(f"players/{name}")
 
 
 # Play the sound for a winning hand type
 def play_hand_type(hand_type):
-    play_random_sound(f"Winning Hands/{hand_type}")
+    play_random_sound(f"winning-hands/{hand_type}")
 
 
 # Function to handle Full House announcement
 def play_full_house(attributes):
     trip_rank, pair_rank = attributes
-    play_random_sound(f"Winning Hands/fullHouse")
+    play_random_sound(f"winning-hands/fullHouse")
     rank = str(pair_rank).replace("Rank.", "")
-    play_random_sound(f"Poker Cards/Card/Plural/{rank}/")  # Adjust path for pair rank
+    play_random_sound(f"poker-cards/Card/Plural/{rank}/")  # Adjust path for pair rank
 
 
 def play_rank_high(attribute):
     card = attribute
     rank = str(card.rank).replace("Rank.", "")
-    playsound(os.path.join(BASE_DIR, f"server/assets/sounds/Poker Cards/Card/Card Number/{rank}.mp3"))
-    playsound(os.path.join(BASE_DIR, f"server/assets/sounds/Poker Cards/High/High1.mp3"))
+    playsound(os.path.join(BASE_DIR, f"server/assets/sounds/poker-cards/Card/Card Number/{rank}.mp3"))
+    playsound(os.path.join(BASE_DIR, f"server/assets/sounds/poker-cards/High/High1.mp3"))
 
 
 def play_card_plural(attribute):
     rank = attribute
     rank = str(rank).replace("Rank.", "")
-    play_random_sound(f"Poker Cards/Card/Plural/{rank}")
+    play_random_sound(f"poker-cards/Card/Plural/{rank}")
 
 
 # Function to handle a generic hand with attributes
@@ -176,7 +176,7 @@ def play_winners_sound(winners):
 
         # Winning player
         play_player_name(name)
-        play_random_sound("Player Actions/win")
+        play_random_sound("player-actions/win")
 
 
 if __name__ == '__main__':

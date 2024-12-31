@@ -150,7 +150,7 @@ class Table:
 
     def view_table(self):
         res_dict = {"Player " + str(player): str(self.player_hands[player]) for player in self.player_hands}
-        res_dict["Community Cards"] = ' '.join(card_arr_to_str(self.community_arr))
+        res_dict["community-cards"] = ' '.join(card_arr_to_str(self.community_arr))
         return res_dict
 
     def view_deck(self):
