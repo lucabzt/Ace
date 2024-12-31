@@ -4,11 +4,11 @@ FROM node:22-slim AS client-build
 WORKDIR /client-app
 
 # Copy the client dependencies and install them
-COPY ./client-hub/package.json ./
+COPY client/package.json ./
 RUN npm install
 
 # Copy the rest of the client code and build the production files
-COPY ./client-hub/ ./
+COPY client/ ./
 RUN npm run build
 
 # Start from the official Python base image

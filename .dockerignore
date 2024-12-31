@@ -10,8 +10,8 @@ server/src/classifier/models/
 # Node.js
 client/node_modules/
 client/build/
-client-hub/node_modules/
-client-hub/build/
+client/node_modules/
+client/build/
 
 
 # Other common ignores (optional)
