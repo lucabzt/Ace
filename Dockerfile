@@ -34,4 +34,4 @@ COPY --from=client-build /client-app/build ./static/
 EXPOSE 5000
 
 # Specify the command to run on container startup
-CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port 443", "--ssl-certfile=./cert.pem", "--ssl-keyfile=key.pem"]
+CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "443", "--ssl-certfile=./cert.pem", "--ssl-keyfile=key.pem"]
