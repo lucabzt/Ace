@@ -25,6 +25,10 @@ export const lineChartOptionsDashboard = {
         fontSize: "12px", // Slightly larger font size for better visibility
         fontWeight: "600", // Set font weight to make text bolder
       },
+      formatter: function (value) {
+        const date = new Date(value);
+        return date.getHours().toString().padStart(2, '0') + ":" + date.getMinutes().toString().padStart(2, '0');
+      },
     },
     axisBorder: {
       show: false,

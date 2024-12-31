@@ -50,7 +50,7 @@ function addDynamicData() {
     if (lineChartDataDashboard[0].data.length >= 100) {
       clearInterval(interval);
     }
-  }, 5000); // Add data every 5 seconds
+  }, 1000); // Add data every 1 seconds
 }
 
 addDynamicData();
