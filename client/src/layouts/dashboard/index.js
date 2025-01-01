@@ -1,4 +1,4 @@
-// Import necessary libraries and components
+import React from "react";
 import { Grid, Card } from "@mui/material";
 import { useMediaQuery } from "@mui/material";
 
@@ -11,7 +11,8 @@ import DashboardNavbar from "../../examples/Navbars/DashboardNavbar";
 import Footer from "../../examples/Footer";
 import WelcomeMark from "./components/WelcomeMark";
 
-// Import Poker Game
+// Import SpotifyBox and Poker Game
+import SpotifyBox from "../spotify/SmallSpotifyBox";
 import Poker from "../poker/PokerGameBox";
 
 // Data for the Line Chart
@@ -21,26 +22,6 @@ import LineChart from "../../examples/Charts/LineCharts/LineChart";
 
 function Dashboard() {
   const isSmallScreen = useMediaQuery("(max-width: 960px)"); // Breakpoint for smaller screens (responsive)
-
-  // Spotify Placeholder: Replace with actual Spotify integration if needed
-  const SpotifyPlaceholder = () => (
-    <Card
-      sx={{
-        width: "100%",
-        height: "210px", // Original Spotify box height
-        backgroundColor: "rgba(30, 215, 96, 0.1)", // Original Spotify box color
-        borderRadius: "20px",
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-        padding: "20px",
-      }}
-    >
-      <VuiTypography variant="h4" color="white" textAlign="center">
-        Spotify Placeholder
-      </VuiTypography>
-    </Card>
-  );
 
   return (
     <div
@@ -57,17 +38,20 @@ function Dashboard() {
         <DashboardNavbar />
         <VuiBox py={3} sx={{ flexGrow: 1 }}>
           <VuiBox mb={3}>
+            {/* Grid Layout */}
             <Grid container spacing={3}>
               {/* Left Section: Welcome and Spotify */}
-              <Grid item xs={12} lg={4} xl={2}>
+                <Grid item xs={12} lg={4} xl={2}>
+                {/* WelcomeMark */}
                 <VuiBox mb={3}>
                   <WelcomeMark />
                 </VuiBox>
-                <SpotifyPlaceholder />
+                {/* SpotifyBox Component */}
+                <SpotifyBox />
               </Grid>
 
               {/* Right Section: Poker Game */}
-              <Grid item xs={12} lg={8} xl={10}>
+                <Grid item xs={12} lg={8} xl={10}>
                 <VuiBox
                   position="relative"
                   sx={{
