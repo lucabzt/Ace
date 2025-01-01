@@ -64,7 +64,7 @@ def get_players():
         {
             "name": player.name,
             "balance": player.balance,
-            "absoluteInvestment": player.absolute_investment,
+            "absInv": player.absolute_investment,
             "bet": game.bets.get(player.name),
             "cards": [{"rank": card.rank.value, "suit": card.suit.value, "faceUp": True} for card in player.cards],
             "probWin": round(player.win_prob, 2),

@@ -30,16 +30,16 @@ const PokerGameUI = () => {
       const playerData = lineChartDataDashboard.find(
         (data) => data.name === player.name
       );
-
       if (!playerData) {
         // Spieler zu den Chart-Daten hinzufügen, falls er nicht existiert
         lineChartDataDashboard.push({
           name: player.name,
-          data: [[currentTime, player.balance]], // Initialdaten mit Balance
+          data: [[currentTime, player.balance - player.absInv]], // Initialdaten mit Balance
         });
       } else {
-        // Spieler-Chart aktualisieren, Balance hinzufügen
-        playerData.data.push([currentTime, player.balance]);
+        // Spieler-Chart aktualisieren, Balance-Differenz hinzufügen
+        //console.log("Skibidi:" + (player.balance - player.absInv) ;
+        playerData.data.push([currentTime, player.balance - player.absInv]);
       }
       console.log("Chart updated at: " + currentTime);
     });
@@ -64,8 +64,9 @@ const PokerGameUI = () => {
       })
       .then((data) => {
         setPlayers(data);
+
         syncCallCount++; // Zähler inkrementieren
-        if (syncCallCount >= 10) {
+        if (syncCallCount >= 60) {
           syncChartDataWithPlayers(data); // Synchronisieren mit den Chart-Daten
           syncCallCount = 0; // Zähler zurücksetzen
         }
