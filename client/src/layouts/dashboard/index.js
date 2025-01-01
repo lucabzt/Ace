@@ -39,7 +39,7 @@ function Dashboard() {
         <VuiBox py={3} sx={{ flexGrow: 1 }}>
           <VuiBox mb={3}>
             {/* Grid Layout */}
-            <Grid container spacing={3}>
+            <Grid container spacing={2}>
               {/* Left Section: Welcome and Spotify */}
                 <Grid item xs={12} lg={4} xl={2}>
                 {/* WelcomeMark */}
@@ -52,18 +52,18 @@ function Dashboard() {
 
               {/* Right Section: Poker Game */}
                 <Grid item xs={12} lg={8} xl={10}>
-                <VuiBox
-                  position="relative"
-                  sx={{
-                    width: "100%",
-                    minHeight: "200px",
-                    height: "auto",
-                    transition: "all 0.3s ease",
-                    display: "flex",
-                    justifyContent: "center",
-                    alignItems: "center",
-                  }}
-                >
+                    <VuiBox
+                      position="relative"
+                      sx={{
+                        width: "100%",
+                        minHeight: "200px",
+                        height: "auto",
+                        transition: "all 0.3s ease",
+                        display: "flex",
+                        justifyContent: "center",
+                        alignItems: "center",
+                      }}
+                    >
                   {/* Poker Game Integration */}
                   <Poker />
                 </VuiBox>

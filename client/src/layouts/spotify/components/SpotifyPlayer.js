@@ -209,7 +209,7 @@ const SpotifyPlayer = ({ token, refreshToken, expiresAt }) => {
                 style={{ width: `${progressPercentage}%` }}
               ></div>
             </div>
-            <div>
+            <div className="button-container"> {/* Neue Klasse hinzugefügt */}
               <button className="play-pause-button" onClick={skipToPrevious}>
                 <BsSkipBackwardFill size="25px" color="inherit"/>
               </button>

@@ -1,13 +1,13 @@
 import React from "react";
 import { Card } from "@mui/material";
-import SpotifyComponent from "./components/SpotifyComponent"; // Importiert Spotify-Komponente
+import SpotifyComponent from "./components/SpotifyComponent"; // Import der Spotify-Komponente
 
 function SmallSpotifyBox() {
   return (
     <div
       style={{
         width: "100%",
-        height: "44.5vh",
+        height: "45vh",
         margin: 0,
         padding: 0,
         display: "flex",
@@ -31,7 +31,6 @@ function SmallSpotifyBox() {
           overflow: "hidden",
         }}
       >
-        {/* Skalierungsstile für Kinderkomponenten */}
         <div
           style={{
             width: "100%",
@@ -43,22 +42,9 @@ function SmallSpotifyBox() {
             transformOrigin: "center",
           }}
         >
-          {/* Rendern der Spotify-Komponente */}
           <SpotifyComponent />
         </div>
       </Card>
-
-      {/* Button-spezifische Stile */}
-      <style>
-        {`
-          button {
-            width: 24px !important; /* Kleinere Breite für die Buttons */
-            height: 24px !important; /* Kleinere Höhe für die Buttons */
-            font-size: 12px !important; /* Kleinere Schriftgröße */
-            padding: 4px !important; /* Kleinere Innenabstände */
-          }
-        `}
-      </style>
     </div>
   );
 }
