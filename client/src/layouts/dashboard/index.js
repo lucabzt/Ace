@@ -92,7 +92,7 @@ function Dashboard() {
             <Card>
               <VuiBox p={3}>
                 <VuiTypography variant="lg" color="white" fontWeight="bold" mb="5px">
-                  Game Stats
+                  Win/Loss Watch
                 </VuiTypography>
                 <VuiBox sx={{ height: "310px" }}>
                   <LineChart
