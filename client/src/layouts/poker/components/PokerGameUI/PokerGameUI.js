@@ -5,11 +5,11 @@ import { getPlayerPositions } from "../../utils/positionUtils";
 import { loadCardImage } from "../../utils/cardUtils";
 import PokerTableBackground from "../../../../assets/images/poker/poker_table/PokerTable100.png";
 
+// Import von lineChartDataDashboard
+import { lineChartDataDashboard } from "../../../dashboard/data/lineChartData";
 
-//const serverAddress = process.env.PUBLIC_URL;
 const serverAddress = "https://localhost:5000";
 console.log("Server Address:", serverAddress);
-
 
 const PokerGameUI = () => {
   const pokerTableBackground = PokerTableBackground;
@@ -18,8 +18,32 @@ const PokerGameUI = () => {
   const [pot, setPot] = useState(null);
   const [communityCards, setCommunityCards] = useState([]);
   const [dealerIndex, setDealerIndex] = useState(null);
-
   const containerRef = useRef(null); // Reference to get container size
+
+  let syncCallCount = 0; // Zähler für Aufrufe von syncChartDataWithPlayers
+
+  // Funktion zum Synchronisieren von Spielern und lineChartDataDashboard + Balance-Pushing
+  const syncChartDataWithPlayers = (players) => {
+    const currentTime = new Date().getTime(); // Aktueller Zeitstempel
+
+    players.forEach((player) => {
+      const playerData = lineChartDataDashboard.find(
+        (data) => data.name === player.name
+      );
+
+      if (!playerData) {
+        // Spieler zu den Chart-Daten hinzufügen, falls er nicht existiert
+        lineChartDataDashboard.push({
+          name: player.name,
+          data: [[currentTime, player.balance]], // Initialdaten mit Balance
+        });
+      } else {
+        // Spieler-Chart aktualisieren, Balance hinzufügen
+        playerData.data.push([currentTime, player.balance]);
+      }
+      console.log("Chart updated at: " + currentTime);
+    });
+  };
 
   // Update player positions based on container size
   const updatePlayerPositions = () => {
@@ -40,6 +64,11 @@ const PokerGameUI = () => {
       })
       .then((data) => {
         setPlayers(data);
+        syncCallCount++; // Zähler inkrementieren
+        if (syncCallCount >= 10) {
+          syncChartDataWithPlayers(data); // Synchronisieren mit den Chart-Daten
+          syncCallCount = 0; // Zähler zurücksetzen
+        }
         updatePlayerPositions(); // Update positions dynamically
         console.log("Players data updated:", data);
       })
@@ -70,7 +99,7 @@ const PokerGameUI = () => {
     const interval = setInterval(() => {
       fetchPlayers(); // Update players
       pollGameData(); // Update other game data
-    }, 500);
+    }, 1000);
     return () => clearInterval(interval); // Cleanup on unmount
   }, []);
 

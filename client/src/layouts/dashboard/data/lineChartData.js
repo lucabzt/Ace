@@ -1,39 +1,39 @@
 export const lineChartDataDashboard = [
   {
-    name: "Jura Jonas",
+    name: "Bozzetti",
     data: [[new Date().getTime(), 0.0]], // Start with a timestamp
   },
   {
-    name: "Sebastian",
+    name: "Simon",
     data: [[new Date().getTime(), 0.0]],
   },
   {
-    name: "Paul",
+    name: "Vorderbruegge",
     data: [[new Date().getTime(), 0.0]],
   },
   {
-    name: "Eliah",
+    name: "Meierlohr",
     data: [[new Date().getTime(), 0.0]],
   },
   {
-    name: "Matthi",
+    name: "Maier",
     data: [[new Date().getTime(), 0.0]],
   },
   {
-    name: "Markus",
+    name: "Huber",
     data: [[new Date().getTime(), 0.0]],
   },
   {
-    name: "Luca",
+    name: "Hoerter",
     data: [[new Date().getTime(), 0.0]],
   },
   {
-    name: "Jonas",
+    name: "Rogg",
     data: [[new Date().getTime(), 0.0]],
   },
 ];
 
-// Add data every 5 seconds instead of every second
+/*
 function addDynamicData() {
   let interval = setInterval(() => {
     const currentTime = new Date().getTime(); // Current timestamp in milliseconds
@@ -54,3 +54,4 @@ function addDynamicData() {
 }
 
 addDynamicData();
+ */
