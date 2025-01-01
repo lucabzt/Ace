@@ -7,7 +7,7 @@ function SmallSpotifyBox() {
     <div
       style={{
         width: "100%",
-        height: "40vh",
+        height: "44.5vh",
         margin: 0,
         padding: 0,
         display: "flex",
@@ -18,11 +18,10 @@ function SmallSpotifyBox() {
     >
       <Card
         sx={{
-          width: "auto",
-          maxWidth: "100%",
+          width: "100%", // Dynamische Breite wie bei WelcomeMark
           height: "100%",
           backgroundColor: "rgba(255, 255, 255, 0.1)",
-          borderRadius: "10px",
+          borderRadius: "12px", // Gleiche Rundung wie bei der WelcomeMark-Komponente
           display: "flex",
           flexDirection: "row",
           justifyContent: "center",
