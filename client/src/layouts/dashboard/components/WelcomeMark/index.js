@@ -10,7 +10,7 @@ const WelcomeMark = () => {
   return (
     <Card sx={() => ({
       height: "100%",
-      py: "20px",
+      py: "90px",
       backgroundImage: `url(${gif})`,
       backgroundSize: "cover",
       backgroundPosition: "50%"

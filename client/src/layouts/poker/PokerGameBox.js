@@ -38,7 +38,7 @@ function PokerGameBox() {
           ? "100vh"
           : isSmallScreen
           ? "300px"
-          : "40vw",
+          : "50vw",
         transition: "all 0.3s ease",
       }}
     >

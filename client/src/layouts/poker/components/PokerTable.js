@@ -9,7 +9,7 @@ const PokerTable = ({ pokerTableBackground, pot, children, isFullscreen }) => (
       margin: "auto", // Zentriert den Container horizontal und vertikal
       width: isFullscreen ? "100%" : "90%", // Vollbild im Fokus
       maxWidth: isFullscreen ? "none" : "1200px", // keine Einschränkung
-      height: isFullscreen ? "100vh" : "70vh", // Bildschirmhöhe
+      height: isFullscreen ? "100vh" : "80vh", // Bildschirmhöhe
       overflow: "auto",
       display: "table",
       justifyContent: "center",
@@ -34,7 +34,7 @@ const PokerTable = ({ pokerTableBackground, pot, children, isFullscreen }) => (
     <div
       style={{
         position: "absolute",
-        bottom: isFullscreen ? "40%" : "23%", // Fokus neu platzieren
+        bottom: isFullscreen ? "20%" : "35%", // Fokus neu platzieren
         left: "50%",
         transform: "translate(-50%, -50%)",
         color: "white",

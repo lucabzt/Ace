@@ -70,7 +70,7 @@ def get_players():
             "probWin": round(player.win_prob, 2),
             "folded": player in game.folded_players,
         }
-        for player in players
+        for player in game.players
     ]
     return jsonify(player_data)
 
