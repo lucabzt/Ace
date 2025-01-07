@@ -59,21 +59,7 @@ function CheatSheetBox() {
             : "0 4px 12px rgba(0, 0, 0, 0.3)",
         }}
       >
-        {/* Fullscreen Button */}
-        <VuiButton
-          onClick={toggleFullscreen}
-          variant="contained"
-          color="info"
-          style={{
-              fontSize: "1.3rem",
-              padding: "0.4rem 0.8rem",
-              backgroundColor: isFullscreen ? "#ff5252" : "royalblue",
-          }}
-        >
-          {isFullscreen ? "Exit Fullscreen" : "Play Fullscreen"}
-        </VuiButton>
-        {/* Cheatsheet-UI Rendering */}
-        <CheatsheetCard isFullscreen={isFullscreen} />
+        <CheatsheetCard/>
       </Card>
     </div>
   );

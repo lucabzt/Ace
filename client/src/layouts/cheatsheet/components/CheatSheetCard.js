@@ -10,23 +10,25 @@ function CheatsheetCard() {
         backgroundSize: "cover",
         backdropFilter: "blur(31px)",
         borderRadius: "16px",
-        overflow: "hidden", // Keine Inhalte außerhalb der Kartenränder
+        overflow: "hidden",
         color: "black",
-        height: "80%", // Feste Kartengröße
-        display: "flex", // Flexbox für Zentrierung
+        height: "80%",
+        display: "flex",
         alignItems: "center",
         justifyContent: "center",
-        padding: "8px", // Abstand innerhalb der Karte
-        boxSizing: "border-box", // Wichtig für Padding
+        padding: "8px",
+        boxSizing: "border-box",
       }}
     >
       <img
         src={CheatsheetImage}
         alt="Cheatsheet Full Image"
         style={{
-          width: "100%", // Größe anpassen, um Rand zu verkleinern
-          height: "100%", // Größe anpassen
-          objectFit: "contain", // Das Bild wird vollständig angezeigt
+          width: "100%",
+          height: "100%",
+          borderRadius: "10px",
+          objectFit: "contain",
+          filter: "contrast(1.2) brightness(0.8) hue-rotate(-1deg)",
         }}
       />
     </Card>
