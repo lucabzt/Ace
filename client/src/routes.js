@@ -26,6 +26,7 @@ import Poker from "./layouts/poker";
 import Billing from "./layouts/billing";
 import Spotify from "./layouts/spotify"
 import Analytics from "./layouts/analytics"
+import Cheatsheet from "./layouts/cheatsheet"
 
 // Vision UI Dashboard React icons
 
@@ -33,6 +34,7 @@ import { BsSpotify, BsSuitSpadeFill } from "react-icons/bs";
 import { BsCreditCardFill } from "react-icons/bs";
 import { IoStatsChart } from "react-icons/io5";
 import { IoHome } from "react-icons/io5";
+import {LuFileSpreadsheet} from "react-icons/lu";
 
 const routes = [
   {
@@ -62,7 +64,16 @@ const routes = [
     component: Spotify,
     noCollapse: true,
   },
-    {
+  {
+    type: "collapse",
+    name: "cheatsheet",
+    key: "cheatsheet",
+    route: "/cheatsheet",
+    icon: <LuFileSpreadsheet size="15px" color="inherit" />,
+    component: Cheatsheet,
+    noCollapse: true,
+  },
+  {
     type: "collapse",
     name: "Analytics",
     key: "analytics",
