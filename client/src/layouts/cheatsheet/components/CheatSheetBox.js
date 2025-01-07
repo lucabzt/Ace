@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Card, useMediaQuery } from "@mui/material";
 
-import PayPalCard from "./PayPalCard";
+import CheatsheetCard from "./CheatSheetCard";
 import VuiButton from "../../../components/VuiButton"; // Importiere VuiButton
 
 function CheatSheetBox() {
@@ -72,8 +72,8 @@ function CheatSheetBox() {
         >
           {isFullscreen ? "Exit Fullscreen" : "Play Fullscreen"}
         </VuiButton>
-        {/* Poker-UI Rendering */}
-        <PayPalCard isFullscreen={isFullscreen} />
+        {/* Cheatsheet-UI Rendering */}
+        <CheatsheetCard isFullscreen={isFullscreen} />
       </Card>
     </div>
   );
