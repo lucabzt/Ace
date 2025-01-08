@@ -14,7 +14,7 @@ def chipBreakdown(bigBlind0, noPlayers, buyIn0):
     no10 = 100
     no25 = 100
     no100 = 50
-    no500 = 100
+    no500 = 500
 
     ### Max possible chips per player###
     no5cPoss = int(no5c / noPlayers)
