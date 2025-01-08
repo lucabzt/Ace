@@ -7,29 +7,31 @@ def chipBreakdown(bigBlind0, noPlayers, buyIn0):
     bigBlind = round(bigBlind0 * 100)
 
     ### No. chips ###
-    no5c = 100
-    no25c = 100
-    no1 = 100
-    no5 = 100
+    no5c = 0
+    no25c = 0
+    no1 = 0
+    no5 = 50
+    no10 = 100
     no25 = 100
-    no100 = 75
-    no500 = 25
+    no100 = 50
+    no500 = 100
 
     ### Max possible chips per player###
     no5cPoss = int(no5c / noPlayers)
     no25cPoss = int(no25c / noPlayers)
     no1Poss = int(no1 / noPlayers)
     no5Poss = int(no5 / noPlayers)
+    no10Poss = int(no10 / noPlayers)  # Add 10€ chip distribution
     no25Poss = int(no25 / noPlayers)
     no100Poss = int(no100 / noPlayers)
     no500Poss = int(no500 / noPlayers)
 
     ### Chip number filter ###
-    chipVal = [5, 25, 100, 500, 2500, 10000, 50000]
-    chipsNo = [0, 0, 0, 0, 0, 0, 0]
-    chipNoPoss = [no5cPoss, no25cPoss, no1Poss, no5Poss, no25Poss, no100Poss, no500Poss]
+    chipVal = [5, 25, 100, 500, 1000, 2500, 10000, 50000]  # Add 10€ chip value
+    chipsNo = [0, 0, 0, 0, 0, 0, 0, 0]
+    chipNoPoss = [no5cPoss, no25cPoss, no1Poss, no5Poss, no25Poss, no100Poss, no500Poss, no10Poss]
     sum = buyIn
-    for i in range(7):
+    for i in range(8):  # Increase range to accommodate the new chip
         if sum > 0:
             if chipVal[i] >= bigBlind / 2:
                 while (sum - chipNoPoss[i] * chipVal[i]) < 0:
@@ -46,7 +48,7 @@ def chipBreakdown(bigBlind0, noPlayers, buyIn0):
 
 
 ### Chip name list ###
-chipName = ["5¢", "25¢", "$1", "$5", "$25", "$100", "$500"]
+chipName = ["5¢", "25¢", "$1", "$5", "$10", "$25", "$100", "$500"]
 
 ### Game info ###
 print("** Poker Chip Breakdown Calculator **")
