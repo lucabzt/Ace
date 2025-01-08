@@ -66,7 +66,7 @@ const routes = [
   },
   {
     type: "collapse",
-    name: "cheatsheet",
+    name: "Cheatsheet",
     key: "cheatsheet",
     route: "/cheatsheet",
     icon: <LuFileSpreadsheet size="15px" color="inherit" />,

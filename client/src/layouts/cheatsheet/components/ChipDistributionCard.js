@@ -2,7 +2,7 @@ import Card from "@mui/material/Card";
 import CheatsheetImage from "assets/images/cheatsheet/hand_ranking.png";
 import background from "assets/images/body-background.png";
 
-function CheatsheetCard() {
+function ChipDistributionCard() {
   return (
       <Card
           sx={{
@@ -12,7 +12,7 @@ function CheatsheetCard() {
               borderRadius: "16px",
               overflow: "hidden",
               color: "black",
-              height: "90%",
+              height: "80%",
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
@@ -20,20 +20,23 @@ function CheatsheetCard() {
               boxSizing: "border-box",
           }}
       >
-          <h3 style={{textAlign: "center", marginBottom: "0px", color: "white"}}>Hand Rankings</h3>
-          <img
-              src={CheatsheetImage}
-              alt="Cheatsheet Full Image"
+          <div
               style={{
-                  width: "100%",
-                  height: "100%",
-                  padding: "3px",
-                  borderRadius: "16px",
-                  filter: "contrast(1.3) brightness(0.9) hue-rotate(5deg) saturate(1)",
+                  textAlign: "center",
+                  color: "white",
+                  fontSize: "1.2rem",
+                  lineHeight: "1.8rem",
+                  fontWeight: "bold",
               }}
-          />
+          >
+              <p>6 Chips à 5</p>
+              <p>12 Chips à 10</p>
+              <p>10 Chips à 25</p>
+              <p>6 Chips à 100</p>
+              <p>Das ergibt pro Spieler genau 1000 Chips</p>
+          </div>
       </Card>
   );
 }
 
-export default CheatsheetCard;
+export default ChipDistributionCard;

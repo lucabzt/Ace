@@ -1,48 +1,45 @@
-import React from "react";
-import { useMediaQuery } from "@mui/material";
+/**/
 
-// Vision UI Dashboard components
+// @mui material components
+import Grid from "@mui/material/Grid";
+
+// Vision UI Dashboard React components
 import VuiBox from "../../components/VuiBox";
+
+// Vision UI Dashboard React components
+import MasterCard from "../../examples/Cards/MasterCard";
+// Vision UI Dashboard React example components
 import DashboardLayout from "../../examples/LayoutContainers/DashboardLayout";
 import DashboardNavbar from "../../examples/Navbars/DashboardNavbar";
 import Footer from "../../examples/Footer";
 
-// Import PokerGameBox
-import CheatsheetPlaceHolder from "../poker/utils/pokerPlaceholder";
-import CheatSheetBox from "./components/CheatSheetBox";
+// Billing page components
+import CheatSheet from "./components/CheatSheetCard";
+import ChipDistributionCard from "./components/ChipDistributionCard";
 
-function CheatSheet() {
-  const isSmallScreen = useMediaQuery("(max-width: 960px)"); // Responsive breakpoint for smaller screens
-
+function Billing() {
   return (
-      <div
-          style={{
-              width: "100vw", // Take full width
-              height: "100vh", // Full height for the entire page
-              overflow: "auto", // Immer das Scrollen erlauben
-              display: "flex",
-              flexDirection: "column",
-          }}
-      >
-          <DashboardLayout>
-              <DashboardNavbar/>
-              <VuiBox
-                  py={3}
-                  display="flex"
-                  justifyContent="center"
-                  alignItems="center"
-                  sx={{width: "100%"}}
-              >
-                  {/* Render PokerGameBox */}
-                  <CheatSheetBox/>
-              </VuiBox>
-              {/* Footer */}
-              <VuiBox mt="auto">
-                  <Footer/>
-              </VuiBox>
-          </DashboardLayout>
-      </div>
+    <DashboardLayout>
+      <DashboardNavbar />
+      <VuiBox mt={4}>
+        <VuiBox mb={1.5}>
+          <Grid container spacing={3}>
+          <Grid item xs={12}>
+            <Grid container spacing={3}>
+              <Grid item xs={12} md={6}>
+                  <CheatSheet />
+              </Grid>
+              <Grid item xs={12} md={6}>
+                <ChipDistributionCard/>
+              </Grid>
+            </Grid>
+          </Grid>
+          </Grid>
+        </VuiBox>
+      </VuiBox>
+      <Footer />
+    </DashboardLayout>
   );
 }
 
-export default CheatSheet;
+export default Billing;
