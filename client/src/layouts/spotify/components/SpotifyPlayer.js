@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useRef } from "react";
 
 import "./SpotifyPlayer.css"
-import {BsPauseFill, BsPlayFill, BsSkipBackwardFill, BsSkipForwardCircleFill, BsSkipForwardFill} from "react-icons/bs";
+import {BsPauseFill, BsPlayFill, BsShuffle, BsSkipBackwardFill, BsSkipForwardCircleFill, BsSkipForwardFill} from "react-icons/bs";
 import {FiSkipForward} from "react-icons/fi";
 
 
@@ -13,6 +13,8 @@ const SpotifyPlayer = ({ token, refreshToken, expiresAt }) => {
   const player = useRef(null);
   const [currentToken, setCurrentToken] = useState(token);
   const [expirationTime, setExpirationTime] = useState(expiresAt);
+  const [deviceID, setDeviceID] = useState(null);
+  const [isShuffle, setShuffleState] = useState(false);
 
 
   useEffect(() => {
@@ -160,11 +162,14 @@ const SpotifyPlayer = ({ token, refreshToken, expiresAt }) => {
         });
         */
         
+
         spotifyPlayer.addListener("ready", ({ device_id }) => {
           console.log("Ready with Device ID:", device_id);
-          setPlaylistContext(device_id, "spotify:playlist:3GuG2wiCsxXEbc1hfFP3xn", spotifyPlayer);
+          //startPlaylistPlayback(device_id, "spotify:playlist:3GuG2wiCsxXEbc1hfFP3xn", spotifyPlayer);
+          setDeviceID(device_id);
         });
       
+
         spotifyPlayer.addListener("player_state_changed", (state) => {
           if (state) {
             const track = state.track_window.current_track;
@@ -177,7 +182,6 @@ const SpotifyPlayer = ({ token, refreshToken, expiresAt }) => {
 
         spotifyPlayer.connect();
 
-        //setPlayer(spotifyPlayer);
         player.current = spotifyPlayer; // Use ref instead of state
       };
       console.log("AB");
@@ -200,10 +204,39 @@ const SpotifyPlayer = ({ token, refreshToken, expiresAt }) => {
     localStorage.removeItem("spotifyAccessToken"); // Remove token from storage
   };
 
+  const setShuffle = () => {
+    setShuffleState(!isShuffle);
+    fetch(`https://api.spotify.com/v1/me/player/shuffle?device_id=${deviceID}`, {
+      method: "PUT",
+      headers: {
+        Authorization: `Bearer ${token}`, // your OAuth token
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        state: isShuffle,  // Set to `true` for shuffle, `false` to turn off shuffle
+      }),
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error(`Failed to set shuffle state: ${response.statusText}`);
+        }
+        console.log(`Shuffle ${isShuffle ? "enabled" : "disabled"}`);
+      })
+      .catch((err) => {
+        console.error("Error setting shuffle:", err);
+      });
+  };
+
+
   const togglePlay = () => {
     if (player) {
-      console.log("Toggle Play");
-      player.current.togglePlay().catch((err) => console.error("Toggle play error:", err));
+      if(currentTrack === null) {
+        console.log("currentTrack is null: ", deviceID);
+        startPlaylistPlayback(deviceID);
+        return
+      } else {
+        player.current.togglePlay().catch((err) => console.error("Toggle play error:", err));
+      }
     }
   };
 
@@ -261,6 +294,9 @@ const SpotifyPlayer = ({ token, refreshToken, expiresAt }) => {
               </button>
               <button className="play-pause-button" onClick={skipToNext}>
                 <BsSkipForwardFill size="25px" color="inherit"/>
+              </button>
+              <button className="play-pause-button" onClick={setShuffle}>
+                <BsShuffle size="25px" color="inherit"/>
               </button>
             </div>
           </div>
