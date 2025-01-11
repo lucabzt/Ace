@@ -22,7 +22,7 @@ function CheatSheetBox() {
         height: "100vh",
         backgroundColor: "rgba(0, 0, 0, 0.9)",
         zIndex: 9999,
-        overflow: "hidden",
+        overflow: "auto",
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
@@ -37,15 +37,15 @@ function CheatSheetBox() {
         height: isFullscreen
           ? "100vh"
           : isSmallScreen
-          ? "300px"
-          : "50vw",
+          ? "100vw"
+          : "100vw",
         transition: "all 0.3s ease",
       }}
     >
       <Card
         sx={{
-          width: isFullscreen ? "95%" : "100%",
-          height: isFullscreen ? "95%" : "100%",
+          width: isFullscreen ? "100%" : "100%",
+          height: isFullscreen ? "100%" : "100%",
           backgroundColor: "rgba(255, 255, 255, 0.1)",
           borderRadius: "20px",
           display: "flex",

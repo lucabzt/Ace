@@ -12,7 +12,7 @@ function CheatsheetCard() {
               borderRadius: "16px",
               overflow: "hidden",
               color: "black",
-              height: "90%",
+              height: "100%",
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
@@ -25,8 +25,8 @@ function CheatsheetCard() {
               src={CheatsheetImage}
               alt="Cheatsheet Full Image"
               style={{
-                  width: "100%",
-                  height: "100%",
+                  width: "95%",
+                  height: "95%",
                   padding: "3px",
                   borderRadius: "16px",
                   filter: "contrast(1.3) brightness(0.9) hue-rotate(5deg) saturate(1)",

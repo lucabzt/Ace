@@ -24,27 +24,32 @@ const PokerGameUI = () => {
 
   // Funktion zum Synchronisieren von Spielern und lineChartDataDashboard + Balance-Pushing
   const syncChartDataWithPlayers = (players) => {
-    const currentTime = new Date().getTime(); // Aktueller Zeitstempel
-
     players.forEach((player) => {
       const playerData = lineChartDataDashboard.find(
         (data) => data.name === player.name
       );
+      let serverPnlData = player.pnl || []; // PnL-Daten des Servers für den Spieler
       if (!playerData) {
         // Spieler zu den Chart-Daten hinzufügen, falls er nicht existiert
         lineChartDataDashboard.push({
           name: player.name,
-          data: [[currentTime, player.balance - player.absInv]], // Initialdaten mit Balance
+          data: serverPnlData, // Alle PnL-Daten vom Server übernehmen
         });
+        console.log(`New player added to chart: ${player.name}`);
       } else {
-        // Spieler-Chart aktualisieren, Balance-Differenz hinzufügen
-        //console.log("Skibidi:" + (player.balance - player.absInv) ;
-        playerData.data.push([currentTime, player.balance - player.absInv]);
+        // Fehlen noch Einträge, die noch nicht hinzugefügt wurden?
+        const existingTimestamps = new Set(playerData.data.map((d) => d[0])); // Zeitstempel im Frontend
+        serverPnlData.forEach(([timestamp, pnl]) => {
+          if (!existingTimestamps.has(timestamp)) {
+            // Nur neue Datenpunkte hinzufügen
+            playerData.data.push([timestamp, pnl]);
+            console.log(`Chart: New data point added for player: ${player.name} | Timestamp: ${timestamp}, PnL: ${pnl}`);
+          }
+        });
       }
-      console.log("Chart updated at: " + currentTime);
+      console.log(`Chart updated for player: ${player.name}`);
     });
   };
-
   // Update player positions based on container size
   const updatePlayerPositions = () => {
     if (containerRef.current) {
@@ -66,12 +71,12 @@ const PokerGameUI = () => {
         setPlayers(data);
 
         syncCallCount++; // Zähler inkrementieren
-        if (syncCallCount >= 60) {
+        if (syncCallCount >= 3) {
           syncChartDataWithPlayers(data); // Synchronisieren mit den Chart-Daten
           syncCallCount = 0; // Zähler zurücksetzen
         }
         updatePlayerPositions(); // Update positions dynamically
-        console.log("Players data updated:", data);
+        //console.log("Players data updated:", data);
       })
       .catch((error) => console.error("Error fetching players data:", error));
   };

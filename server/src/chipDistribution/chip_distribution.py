@@ -1,69 +1,104 @@
-import math
+
+class ChipDistributor:
+    def __init__(self):
+        self.G = 1000
+        self.chip_count = [150, 50, 25, 50, 50, 25]
+        self.chip_value = [5, 10, 25, 100, 500, 1000]
+        self.chip_type_count = 6
+        self.gesW = 0
+        for i in range(self.chip_type_count):
+            self.gesW += self.chip_count[i] * self.chip_value[i]
+
+        self.max_players = self.gesW // self.G
+        self.spielerChipVerteilung = self.recursion()
+
+        if self.spielerChipVerteilung is None:
+            print("Keine \"schöne\" Lösung gefunden")
+
+        for i in range(self.chip_type_count):
+            print(self.spielerChipVerteilung[i] + " Chips mit Wert " + self.chip_value[i])
+
+        print("\nBei max. " + str(self.max_players) + " Spielern")
+
+    def recursion(self):
+        if self.max_players == 0:
+            if self.chip_type_count == 0:
+                return None
+            self.chip_type_count -= 1
+            self.max_players = self.gesW // self.G
+
+        spielerChipVerteilung = [] * self.chip_type_count
+        for i in range(self.chip_type_count):
+            spielerChipVerteilung[i] = self.chip_count[i] / self.max_players
+
+        spielerWert = 0
+
+        for i in range(self.chip_type_count):
+            spielerWert += spielerChipVerteilung[i] * self.chip_value[i]
+
+        if spielerWert == self.G:
+            return spielerChipVerteilung
+        elif spielerWert < self.G:
+            self.max_players -= 1
+            return self.recursion()
+        else:
+            abgebbareChips = [0] * self.chip_value.__len__()
+
+            for i in range(self.spielerChipVerteilung):
+                abgebbareChips[i] = max(spielerChipVerteilung[i] - 1, 0)
+
+            abzuziehendeChips = self.minCoinsWithDistribution(self.chip_value, abgebbareChips, spielerWert - self.G)
+            if abzuziehendeChips is None:
+                self.max_players -= 1
+                return self.recursion()
+
+            for i in range(self.chip_type_count):
+                spielerChipVerteilung[i] -= abzuziehendeChips[i]
+                if spielerChipVerteilung[i] < 0:
+                    print("WTF ChatGPT (1)")
+
+            spielerWert = 0
+            for i in range(self.chip_type_count):
+                spielerWert += spielerChipVerteilung[i] * self.chip_value[i]
+
+            if spielerWert != self.G:
+                print("WTF ChatGPT (2)")
+
+            return spielerChipVerteilung
+
+    def minCoinsWithDistribution(self, coins, maxCounts, target):
+        dp = [0] * (target + 1)
+        for i in range(len(dp)):
+            dp[i] = 99999999
+        dp[0] = 0
+
+        used_coins = [[0] * coins.__len__() for _ in range(target + 1)]
+
+        for i in range(coins.__len__()):
+            coin = coins[i]
+            maxCount = maxCounts[i]
+
+            for j in range(target, -1, -1):
+                for k in range(1, maxCount + 1):
+                    if k * coin <= j:
+                        if dp[j - k * coin] != float('inf'):
+                            new_count = dp[j - k * coin] + k
+                            if new_count < dp[j]:
+                                dp[j] = new_count
+
+                                # Aktualisiere die Münzverteilung
+                                used_coins[j] = used_coins[j - k * coin][:]  # Copy the distribution
+                                used_coins[j][i] += k
+
+        if dp[target] == 99999999:
+            return None
+
+        return used_coins[target]
 
 
-### Chip breakdown function ###
-def chipBreakdown(bigBlind0, noPlayers, buyIn0):
-    buyIn = round(buyIn0 * 100)
-    bigBlind = round(bigBlind0 * 100)
-
-    ### No. chips ###
-    no5c = 0
-    no25c = 0
-    no1 = 0
-    no5 = 50
-    no10 = 100
-    no25 = 100
-    no100 = 50
-    no500 = 500
-
-    ### Max possible chips per player###
-    no5cPoss = int(no5c / noPlayers)
-    no25cPoss = int(no25c / noPlayers)
-    no1Poss = int(no1 / noPlayers)
-    no5Poss = int(no5 / noPlayers)
-    no10Poss = int(no10 / noPlayers)  # Add 10€ chip distribution
-    no25Poss = int(no25 / noPlayers)
-    no100Poss = int(no100 / noPlayers)
-    no500Poss = int(no500 / noPlayers)
-
-    ### Chip number filter ###
-    chipVal = [5, 25, 100, 500, 1000, 2500, 10000, 50000]  # Add 10€ chip value
-    chipsNo = [0, 0, 0, 0, 0, 0, 0, 0]
-    chipNoPoss = [no5cPoss, no25cPoss, no1Poss, no5Poss, no25Poss, no100Poss, no500Poss, no10Poss]
-    sum = buyIn
-    for i in range(8):  # Increase range to accommodate the new chip
-        if sum > 0:
-            if chipVal[i] >= bigBlind / 2:
-                while (sum - chipNoPoss[i] * chipVal[i]) < 0:
-                    chipNoPoss[i] = chipNoPoss[i] - 1
-                chipsNo[i] = chipNoPoss[i]
-
-                if chipVal[i] != 50000 and (sum - chipNoPoss[i] * chipVal[i]) != 0:
-                    while (sum - chipNoPoss[i] * chipVal[i]) % chipVal[i + 1] != 0:
-                        chipNoPoss[i] = chipNoPoss[i] - 1
-                    chipsNo[i] = chipNoPoss[i]
-
-                sum = sum - chipVal[i] * chipsNo[i]
-    return chipsNo
+def main():
+    distributor = ChipDistributor()
 
 
-### Chip name list ###
-chipName = ["5¢", "25¢", "$1", "$5", "$10", "$25", "$100", "$500"]
-
-### Game info ###
-print("** Poker Chip Breakdown Calculator **")
-print()
-noPlayers = eval(input("No. players: "))
-bigBlind = eval(input("Big blind [$]: "))
-print()
-
-### Print chip breakdown ###
-while True:
-    buyIn = eval(input(("Buy in [$]: ")))
-    breakdown = chipBreakdown(bigBlind, noPlayers, buyIn)
-    for i in range(len(breakdown)):
-        if breakdown[i] != 0:
-            print(chipName[i] + ": " + str(breakdown[i]))
-    totalChips = sum(breakdown)
-    print("Total chips: " + str(totalChips))
-    print()
+if __name__ == "__main__":
+    main()
