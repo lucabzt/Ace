@@ -1,14 +1,14 @@
 @keyframes pulse {
   0% {
-    box-shadow: 0 0 15px 3px gold, 0 0 25px 5px orange, 0 0 35px 8px red;
+    box-shadow: 0 0 10px 2px rgba(255, 215, 0, 0.7), 0 0 15px 3px rgba(255, 140, 0, 0.7), 0 0 20px 5px rgba(220, 20, 60, 0.7);
     transform: scale(1);
   }
   50% {
-    box-shadow: 0 0 20px 4px orange, 0 0 30px 7px red, 0 0 40px 10px yellow;
-    transform: scale(1.08);
+    box-shadow: 0 0 15px 3px rgba(255, 200, 50, 0.6), 0 0 20px 4px rgba(255, 120, 30, 0.6), 0 0 25px 6px rgba(200, 30, 70, 0.6);
+    transform: scale(1.05);
   }
   100% {
-    box-shadow: 0 0 15px 3px gold, 0 0 25px 5px orange, 0 0 35px 8px red;
+    box-shadow: 0 0 10px 2px rgba(255, 215, 0, 0.7), 0 0 15px 3px rgba(255, 140, 0, 0.7), 0 0 20px 5px rgba(220, 20, 60, 0.7);
     transform: scale(1);
   }
 }
@@ -18,40 +18,25 @@
     transform: scale(1) rotate(0deg);
   }
   50% {
-    transform: scale(1.08) rotate(180deg);
+    transform: scale(1.05) rotate(90deg);
   }
   100% {
-    transform: scale(1) rotate(360deg);
+    transform: scale(1) rotate(180deg);
   }
 }
 
 .highlight {
   padding: 0.2vw;
-  background-color: rgba(28, 42, 30, 0.97);
+  background-color: rgba(30, 45, 35, 0.97);
   border-radius: 1.5vw;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-  outline: 3px solid transparent;
+  outline: 2.5px solid transparent;
 
   /* Animation Settings */
-  animation: pulse 1s ease-in-out 3s infinite;
+  animation: pulse 1.5s ease-in-out infinite;
 }
 
-/* Add rotation when pulsing for an extended time */
-@keyframes pulseWithRotation {
-  0% {
-    box-shadow: 0 0 15px 3px gold, 0 0 25px 5px orange, 0 0 35px 8px red;
-    transform: scale(1) rotate(0deg);
-  }
-  50% {
-    box-shadow: 0 0 20px 4px orange, 0 0 30px 7px red, 0 0 40px 10px yellow;
-    transform: scale(1.08) rotate(180deg);
-  }
-  100% {
-    box-shadow: 0 0 15px 3px gold, 0 0 25px 5px orange, 0 0 35px 8px red;
-    transform: scale(1) rotate(360deg);
-  }
-}
-
+/* Rotation with pulse for active elements */
 .highlight.active {
-  animation: pulseWithRotation 1s ease-in-out infinite;
+  animation: rotatePulse 1.5s ease-in-out infinite;
 }

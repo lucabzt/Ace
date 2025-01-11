@@ -107,8 +107,27 @@
     display: flex;
     justify-content: center; /* Zentriert die Buttons horizontal */
     margin-top: 10px; /* Fügt Abstand zur Fortschrittsleiste hinzu */
+    flex-wrap: wrap;
+    gap: 10px;
   }
 
   .play-pause-button {
     margin: 0 5px; /* Fügt horizontalen Abstand zwischen den Buttons hinzu */
   }
+
+
+.play-pause-button.is-shuffle-active {
+  position: relative;
+}
+
+.play-pause-button.is-shuffle-active:after {
+  content: "";
+  position: absolute;
+  bottom: 10px; /* Punkt näher am Symbol */
+  left: 50%;
+  transform: translateX(-50%);
+  width: 7px;
+  height: 7px;
+  background-color: currentColor;
+  border-radius: 50%;
+}

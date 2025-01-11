@@ -3,6 +3,8 @@ import React, { useEffect, useState, useRef } from "react";
 import "./SpotifyPlayer.css"
 import {BsPauseFill, BsPlayFill, BsShuffle, BsSkipBackwardFill, BsSkipForwardCircleFill, BsSkipForwardFill} from "react-icons/bs";
 import {FiSkipForward} from "react-icons/fi";
+import {ShuffleOnOutlined} from "@mui/icons-material";
+import {PiShuffleBold} from "react-icons/pi";
 
 
 const SpotifyPlayer = ({ token, refreshToken, expiresAt }) => {
@@ -295,8 +297,10 @@ const SpotifyPlayer = ({ token, refreshToken, expiresAt }) => {
               <button className="play-pause-button" onClick={skipToNext}>
                 <BsSkipForwardFill size="25px" color="inherit"/>
               </button>
-              <button className="play-pause-button" onClick={setShuffle}>
-                <BsShuffle size="25px" color="inherit"/>
+              <button className={`play-pause-button ${isShuffle ? "is-shuffle-active" : ""}`}
+                  onClick={setShuffle}
+              >
+                <PiShuffleBold size="25px" color="inherit"/>
               </button>
             </div>
           </div>
