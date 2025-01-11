@@ -7,6 +7,7 @@ class Player:
         self.cards = []  # Player's own cards
         self.balance = balance  # Player's balance for betting
         self.absolute_investment = balance
+        self.action_pending = False
         self.win_prob = 0.0
 
     def receive_card(self, card):

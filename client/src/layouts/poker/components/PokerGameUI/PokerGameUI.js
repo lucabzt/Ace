@@ -71,7 +71,7 @@ const PokerGameUI = () => {
         setPlayers(data);
 
         syncCallCount++; // Zähler inkrementieren
-        if (syncCallCount >= 3) {
+        if (syncCallCount >= 10) {
           syncChartDataWithPlayers(data); // Synchronisieren mit den Chart-Daten
           syncCallCount = 0; // Zähler zurücksetzen
         }

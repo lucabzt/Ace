@@ -1,0 +1,57 @@
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 15px 3px gold, 0 0 25px 5px orange, 0 0 35px 8px red;
+    transform: scale(1);
+  }
+  50% {
+    box-shadow: 0 0 20px 4px orange, 0 0 30px 7px red, 0 0 40px 10px yellow;
+    transform: scale(1.08);
+  }
+  100% {
+    box-shadow: 0 0 15px 3px gold, 0 0 25px 5px orange, 0 0 35px 8px red;
+    transform: scale(1);
+  }
+}
+
+@keyframes rotatePulse {
+  0% {
+    transform: scale(1) rotate(0deg);
+  }
+  50% {
+    transform: scale(1.08) rotate(180deg);
+  }
+  100% {
+    transform: scale(1) rotate(360deg);
+  }
+}
+
+.highlight {
+  padding: 0.2vw;
+  background-color: rgba(28, 42, 30, 0.97);
+  border-radius: 1.5vw;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  outline: 3px solid transparent;
+
+  /* Animation Settings */
+  animation: pulse 1s ease-in-out 3s infinite;
+}
+
+/* Add rotation when pulsing for an extended time */
+@keyframes pulseWithRotation {
+  0% {
+    box-shadow: 0 0 15px 3px gold, 0 0 25px 5px orange, 0 0 35px 8px red;
+    transform: scale(1) rotate(0deg);
+  }
+  50% {
+    box-shadow: 0 0 20px 4px orange, 0 0 30px 7px red, 0 0 40px 10px yellow;
+    transform: scale(1.08) rotate(180deg);
+  }
+  100% {
+    box-shadow: 0 0 15px 3px gold, 0 0 25px 5px orange, 0 0 35px 8px red;
+    transform: scale(1) rotate(360deg);
+  }
+}
+
+.highlight.active {
+  animation: pulseWithRotation 1s ease-in-out infinite;
+}

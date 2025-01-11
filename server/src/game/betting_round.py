@@ -52,7 +52,9 @@ class BettingRound:
                 to_call = self.current_bet - self.bets[player.name]
 
                 while True:
+                    player.action_pending = True
                     action = get_player_action(player, self.shared_resources.player_action_queue)  # TODO: AI ACTION GETTER
+                    player.action_pending = False
 
                     if action == 'fold':
                         player.win_prob = 0.

@@ -70,6 +70,7 @@ def get_players():
             "cards": [{"rank": card.rank.value, "suit": card.suit.value, "faceUp": True} for card in player.cards],
             "probWin": round(player.win_prob, 2),
             "folded": player in game.folded_players,
+            "actionPending": player.action_pending
         }
         for player in game.players
     ]
