@@ -33,7 +33,7 @@
   outline: 2.5px solid transparent;
 
   /* Animation Settings */
-  animation: pulse 1.5s ease-in-out infinite;
+  animation: pulse 4s ease-in-out infinite;
 }
 
 /* Rotation with pulse for active elements */
