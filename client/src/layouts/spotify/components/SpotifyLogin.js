@@ -1,13 +1,13 @@
 import React from "react";
 import VuiButton from "../../../components/VuiButton";
+import { FaSpotify } from "react-icons/fa"; // Import des Spotify-Icons
 
-
-const serverAddress = "https://localhost:5000";//process.env.BACKEND_URL;
+const serverAddress = "https://localhost:5000"; // Backend-Adresse
 console.log("Server Address:", serverAddress);
 
 const SpotifyLogin = ({ onLoginSuccess }) => {
   const loginWithSpotify = () => {
-    // Redirect to your Flask server's Spotify authorization endpoint
+    // Umleitung zur Spotify-Authentifizierungs-URL des Servers
     window.location.href = `${serverAddress}/login`;
   };
 
@@ -22,17 +22,25 @@ const SpotifyLogin = ({ onLoginSuccess }) => {
     fontSize: "1.3rem",
     padding: "0.5rem 0.8rem",
     backgroundColor: "#1DB954",
+    color: "black",
     border: "none",
     cursor: "pointer",
     borderRadius: "15px",
+    display: "flex",
+    alignItems: "center",
+    gap: "0.5rem",
   };
+
   return (
     <div style={centerStyle}>
       <VuiButton
-          onClick={loginWithSpotify}
-          className="spotify-button"
-          variant="contained"
-          color="info" style={buttonStyle}>
+        onClick={loginWithSpotify}
+        className="spotify-button"
+        variant="contained"
+        color="info"
+        style={buttonStyle}
+      >
+        <FaSpotify size={25} /> {/* Spotify-Icon */}
         Login with Spotify
       </VuiButton>
     </div>
