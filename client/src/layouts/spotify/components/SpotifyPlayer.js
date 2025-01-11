@@ -14,29 +14,29 @@ const SpotifyPlayer = ({ token, refreshToken, expiresAt }) => {
   const [currentToken, setCurrentToken] = useState(token);
   const [expirationTime, setExpirationTime] = useState(expiresAt);
 
-  const refreshAccessToken = async () => {
-    try {
-      const response = await fetch(
-        `/refresh_token?refresh_token=${refreshToken}`
-      );
-      if (response.ok) {
-        const data = await response.json();
-        const newToken = data.access_token;
-        const newExpiresIn = data.expires_in; // Seconds
 
-        // Update token and expiration time
-        setCurrentToken(newToken);
-        setExpirationTime(Date.now() + newExpiresIn * 1000); // Convert to ms
-      } else {
-        console.error("Failed to refresh token:", response.statusText);
-      }
-    } catch (err) {
-      console.error("Error refreshing token:", err);
-    }
-  };
-
-  
   useEffect(() => {
+    const refreshAccessToken = async () => {
+      try {
+        const response = await fetch(
+          `/refresh_token?refresh_token=${refreshToken}`
+        );
+        if (response.ok) {
+          const data = await response.json();
+          const newToken = data.access_token;
+          const newExpiresIn = data.expires_in; // Seconds
+  
+          // Update token and expiration time
+          setCurrentToken(newToken);
+          setExpirationTime(Date.now() + newExpiresIn * 1000); // Convert to ms
+        } else {
+          console.error("Failed to refresh token:", response.statusText);
+        }
+      } catch (err) {
+        console.error("Error refreshing token:", err);
+      }
+    };
+  
     // Check token expiration periodically
     const interval = setInterval(() => {
       if (Date.now() >= expirationTime - 60000) {
@@ -46,7 +46,7 @@ const SpotifyPlayer = ({ token, refreshToken, expiresAt }) => {
     }, 5000); // Check every 5 seconds
 
     return () => clearInterval(interval);
-  }, [expirationTime]);
+  }, [expirationTime, refreshToken]);
 
   // Pass updated token to Spotify Web Playback SDK
   useEffect(() => {
@@ -113,7 +113,7 @@ const SpotifyPlayer = ({ token, refreshToken, expiresAt }) => {
       });
   };
 
-  const setPlaylistContext = (deviceId, playlistUri) => {
+  const setPlaylistContext = (deviceId, playlistUri, spotifyPlayer) => {
     fetch(`https://api.spotify.com/v1/me/player`, {
       method: "PUT",
       headers: {
@@ -121,7 +121,7 @@ const SpotifyPlayer = ({ token, refreshToken, expiresAt }) => {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        device_id: deviceId,
+        device_ids: [deviceId],
         context_uri: playlistUri, // Playlist URI
       }),
     })
@@ -129,7 +129,7 @@ const SpotifyPlayer = ({ token, refreshToken, expiresAt }) => {
         if (!response.ok) {
           throw new Error(`Failed to set playlist context: ${response.statusText}`);
         }
-        console.log("Playlist context set successfully!");
+        console.log("Playlist context set successfully!");         
       })
       .catch((err) => {
         console.error("Error setting playlist context:", err);
@@ -159,12 +159,12 @@ const SpotifyPlayer = ({ token, refreshToken, expiresAt }) => {
           startPlaylistPlayback(device_id);
         });
         */
-
+        
         spotifyPlayer.addListener("ready", ({ device_id }) => {
           console.log("Ready with Device ID:", device_id);
-          setPlaylistContext(device_id, "spotify:playlist:3GuG2wiCsxXEbc1hfFP3xn");
+          setPlaylistContext(device_id, "spotify:playlist:3GuG2wiCsxXEbc1hfFP3xn", spotifyPlayer);
         });
-
+      
         spotifyPlayer.addListener("player_state_changed", (state) => {
           if (state) {
             const track = state.track_window.current_track;
@@ -176,6 +176,7 @@ const SpotifyPlayer = ({ token, refreshToken, expiresAt }) => {
         });
 
         spotifyPlayer.connect();
+
         //setPlayer(spotifyPlayer);
         player.current = spotifyPlayer; // Use ref instead of state
       };
@@ -201,6 +202,7 @@ const SpotifyPlayer = ({ token, refreshToken, expiresAt }) => {
 
   const togglePlay = () => {
     if (player) {
+      console.log("Toggle Play");
       player.current.togglePlay().catch((err) => console.error("Toggle play error:", err));
     }
   };
@@ -217,16 +219,26 @@ const SpotifyPlayer = ({ token, refreshToken, expiresAt }) => {
   
   return (
     <div className="spotify-player-container">
-      {currentTrack ? (
+      {player ? (
         <div className="track-info">
-          <img
-            src={currentTrack.album.images[0].url}
-            alt={currentTrack.name}
-            className="track-image"
-          />
+          {(currentTrack) ? (
+            <img
+              src={currentTrack.album.images[0].url}
+              alt={currentTrack.name}
+              className="track-image"
+            />) : (
+            <img
+              src="https://img.freepik.com/premium-psd/music-icon-user-interface-element-3d-render-illustration_516938-1693.jpg"
+              alt="Placeholder"
+              className="track-image"></img>
+          )}
           <div className="track-details">
-            <p className="track-name"><strong>{currentTrack.name}</strong></p>
-            <p className="track-artist">{currentTrack.artists.map((a) => a.name).join(", ")}</p>
+          {(currentTrack) ? (
+            <div>
+              <p className="track-name"><strong>{currentTrack.name}</strong></p>
+              <p className="track-artist">{currentTrack.artists.map((a) => a.name).join(", ")}</p>
+            </div>
+          ) : (<div></div>)}
             <p className="track-duration">
               {formatDuration(trackProgress)} / {formatDuration(trackDuration)}
             </p>
