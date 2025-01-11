@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useRef } from "react";
 
 import "./SpotifyPlayer.css"
-import {BsPauseFill, BsPlayFill, BsSkipBackwardFill, BsSkipForwardCircleFill, BsSkipForwardFill} from "react-icons/bs";
+import {BsPauseFill, BsPlayFill, BsShuffle, BsSkipBackwardFill, BsSkipForwardCircleFill, BsSkipForwardFill} from "react-icons/bs";
 import {FiSkipForward} from "react-icons/fi";
 
 
@@ -13,30 +13,32 @@ const SpotifyPlayer = ({ token, refreshToken, expiresAt }) => {
   const player = useRef(null);
   const [currentToken, setCurrentToken] = useState(token);
   const [expirationTime, setExpirationTime] = useState(expiresAt);
+  const [deviceID, setDeviceID] = useState(null);
+  const [isShuffle, setShuffleState] = useState(false);
 
-  const refreshAccessToken = async () => {
-    try {
-      const response = await fetch(
-        `/refresh_token?refresh_token=${refreshToken}`
-      );
-      if (response.ok) {
-        const data = await response.json();
-        const newToken = data.access_token;
-        const newExpiresIn = data.expires_in; // Seconds
 
-        // Update token and expiration time
-        setCurrentToken(newToken);
-        setExpirationTime(Date.now() + newExpiresIn * 1000); // Convert to ms
-      } else {
-        console.error("Failed to refresh token:", response.statusText);
-      }
-    } catch (err) {
-      console.error("Error refreshing token:", err);
-    }
-  };
-
-  
   useEffect(() => {
+    const refreshAccessToken = async () => {
+      try {
+        const response = await fetch(
+          `/refresh_token?refresh_token=${refreshToken}`
+        );
+        if (response.ok) {
+          const data = await response.json();
+          const newToken = data.access_token;
+          const newExpiresIn = data.expires_in; // Seconds
+  
+          // Update token and expiration time
+          setCurrentToken(newToken);
+          setExpirationTime(Date.now() + newExpiresIn * 1000); // Convert to ms
+        } else {
+          console.error("Failed to refresh token:", response.statusText);
+        }
+      } catch (err) {
+        console.error("Error refreshing token:", err);
+      }
+    };
+  
     // Check token expiration periodically
     const interval = setInterval(() => {
       if (Date.now() >= expirationTime - 60000) {
@@ -46,7 +48,7 @@ const SpotifyPlayer = ({ token, refreshToken, expiresAt }) => {
     }, 5000); // Check every 5 seconds
 
     return () => clearInterval(interval);
-  }, [expirationTime]);
+  }, [expirationTime, refreshToken]);
 
   // Pass updated token to Spotify Web Playback SDK
   useEffect(() => {
@@ -113,7 +115,7 @@ const SpotifyPlayer = ({ token, refreshToken, expiresAt }) => {
       });
   };
 
-  const setPlaylistContext = (deviceId, playlistUri) => {
+  const setPlaylistContext = (deviceId, playlistUri, spotifyPlayer) => {
     fetch(`https://api.spotify.com/v1/me/player`, {
       method: "PUT",
       headers: {
@@ -121,7 +123,7 @@ const SpotifyPlayer = ({ token, refreshToken, expiresAt }) => {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        device_id: deviceId,
+        device_ids: [deviceId],
         context_uri: playlistUri, // Playlist URI
       }),
     })
@@ -129,7 +131,7 @@ const SpotifyPlayer = ({ token, refreshToken, expiresAt }) => {
         if (!response.ok) {
           throw new Error(`Failed to set playlist context: ${response.statusText}`);
         }
-        console.log("Playlist context set successfully!");
+        console.log("Playlist context set successfully!");         
       })
       .catch((err) => {
         console.error("Error setting playlist context:", err);
@@ -159,11 +161,14 @@ const SpotifyPlayer = ({ token, refreshToken, expiresAt }) => {
           startPlaylistPlayback(device_id);
         });
         */
+        
 
         spotifyPlayer.addListener("ready", ({ device_id }) => {
           console.log("Ready with Device ID:", device_id);
-          setPlaylistContext(device_id, "spotify:playlist:3GuG2wiCsxXEbc1hfFP3xn");
+          //startPlaylistPlayback(device_id, "spotify:playlist:3GuG2wiCsxXEbc1hfFP3xn", spotifyPlayer);
+          setDeviceID(device_id);
         });
+      
 
         spotifyPlayer.addListener("player_state_changed", (state) => {
           if (state) {
@@ -176,7 +181,7 @@ const SpotifyPlayer = ({ token, refreshToken, expiresAt }) => {
         });
 
         spotifyPlayer.connect();
-        //setPlayer(spotifyPlayer);
+
         player.current = spotifyPlayer; // Use ref instead of state
       };
       console.log("AB");
@@ -199,9 +204,39 @@ const SpotifyPlayer = ({ token, refreshToken, expiresAt }) => {
     localStorage.removeItem("spotifyAccessToken"); // Remove token from storage
   };
 
+  const setShuffle = () => {
+    setShuffleState(!isShuffle);
+    fetch(`https://api.spotify.com/v1/me/player/shuffle?device_id=${deviceID}`, {
+      method: "PUT",
+      headers: {
+        Authorization: `Bearer ${token}`, // your OAuth token
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        state: isShuffle,  // Set to `true` for shuffle, `false` to turn off shuffle
+      }),
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error(`Failed to set shuffle state: ${response.statusText}`);
+        }
+        console.log(`Shuffle ${isShuffle ? "enabled" : "disabled"}`);
+      })
+      .catch((err) => {
+        console.error("Error setting shuffle:", err);
+      });
+  };
+
+
   const togglePlay = () => {
     if (player) {
-      player.current.togglePlay().catch((err) => console.error("Toggle play error:", err));
+      if(currentTrack === null) {
+        console.log("currentTrack is null: ", deviceID);
+        startPlaylistPlayback(deviceID);
+        return
+      } else {
+        player.current.togglePlay().catch((err) => console.error("Toggle play error:", err));
+      }
     }
   };
 
@@ -217,16 +252,26 @@ const SpotifyPlayer = ({ token, refreshToken, expiresAt }) => {
   
   return (
     <div className="spotify-player-container">
-      {currentTrack ? (
+      {player ? (
         <div className="track-info">
-          <img
-            src={currentTrack.album.images[0].url}
-            alt={currentTrack.name}
-            className="track-image"
-          />
+          {(currentTrack) ? (
+            <img
+              src={currentTrack.album.images[0].url}
+              alt={currentTrack.name}
+              className="track-image"
+            />) : (
+            <img
+              src="https://image-cdn-ak.spotifycdn.com/image/ab67706c0000d72cdd7cb0d442bee004f48dee14"
+              alt="Placeholder"
+              className="track-image"></img>
+          )}
           <div className="track-details">
-            <p className="track-name"><strong>{currentTrack.name}</strong></p>
-            <p className="track-artist">{currentTrack.artists.map((a) => a.name).join(", ")}</p>
+          {(currentTrack) ? (
+            <div>
+              <p className="track-name"><strong>{currentTrack.name}</strong></p>
+              <p className="track-artist">{currentTrack.artists.map((a) => a.name).join(", ")}</p>
+            </div>
+          ) : (<div></div>)}
             <p className="track-duration">
               {formatDuration(trackProgress)} / {formatDuration(trackDuration)}
             </p>
@@ -249,6 +294,9 @@ const SpotifyPlayer = ({ token, refreshToken, expiresAt }) => {
               </button>
               <button className="play-pause-button" onClick={skipToNext}>
                 <BsSkipForwardFill size="25px" color="inherit"/>
+              </button>
+              <button className="play-pause-button" onClick={setShuffle}>
+                <BsShuffle size="25px" color="inherit"/>
               </button>
             </div>
           </div>
