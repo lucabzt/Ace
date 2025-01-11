@@ -10,8 +10,7 @@ const SpotifyComponent = () => {
     const [refreshtoken, setrefreshtoken] = useState(null);
     const [expridedata, setexpridedata] = useState(null);
 
-
-
+    
     useEffect(() => {
         // Extract access token from the URL hash
         const hash = window.location.hash;
@@ -35,9 +34,6 @@ const SpotifyComponent = () => {
           ?.split("=")[1];
           setexpridedata(expires_at);
     
-    
-    
-    
         if (accessToken) {
           console.log("Access Token Found:", accessToken);
           setToken(accessToken); // Update state with token
@@ -53,8 +49,6 @@ const SpotifyComponent = () => {
         }
       }, []);
     
-  
-      
       return (
         <div>
             {token ? (

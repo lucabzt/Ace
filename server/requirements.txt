@@ -29,4 +29,5 @@ opencv-python
 torchvision
 pycocotools
 jupyter
-uvicorn
+waitress
+flask-cors
