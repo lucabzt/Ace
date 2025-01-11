@@ -261,7 +261,7 @@ const SpotifyPlayer = ({ token, refreshToken, expiresAt }) => {
               className="track-image"
             />) : (
             <img
-              src="https://img.freepik.com/premium-psd/music-icon-user-interface-element-3d-render-illustration_516938-1693.jpg"
+              src="https://image-cdn-ak.spotifycdn.com/image/ab67706c0000d72cdd7cb0d442bee004f48dee14"
               alt="Placeholder"
               className="track-image"></img>
           )}
