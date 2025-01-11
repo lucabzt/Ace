@@ -47,7 +47,7 @@ const PokerGameUI = () => {
           }
         });
       }
-      console.log(`Chart updated for player: ${player.name}`);
+      // console.log(`Chart updated for player: ${player.name}`);
     });
   };
   // Update player positions based on container size

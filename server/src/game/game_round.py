@@ -35,6 +35,11 @@ class GameRound:
         self.shared_resources = shared_resources
         self.pnl_matrix = {player.name: [] for player in players}
 
+        timestamp = int(time.time() * 1000)  # Current timestamp in milliseconds
+        for player in self.players:
+            # Every player starts with pnl of 0
+            self.pnl_matrix[player.name].append([timestamp, 0])
+
     def play_round(self):
         """Plays a complete round of poker, with option to modify settings before starting."""
         if input("Would you like to make any changes before starting the round? (yes/no): ").lower() == 'yes':
@@ -212,6 +217,10 @@ class GameRound:
         """Update PnL matrix for all players."""
         timestamp = int(time.time() * 1000)  # Current timestamp in milliseconds
         for player in self.players:
+            # Check if the player is already in the matrix, add if not
+            if player.name not in self.pnl_matrix:
+                self.pnl_matrix[player.name] = []  # Add player to the matrix
+
             # Calculate PnL as the difference between the current balance and the absolute investment
             pnl = player.balance - player.absolute_investment
             # Append the PnL value with the current timestamp

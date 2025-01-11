@@ -24,11 +24,4 @@ fi
 echo "PYTHONPATH: $PYTHONPATH"
 echo -e "Running... $SCRIPT_DIR/app.py\n\n"
 
-# Run the app with Gunicorn
-if [[ "$OS" == "Darwin" || "$OS" == "Linux" ]]; then
-  # For macOS and Linux
-  gunicorn $SCRIPT_DIR/app.py:app
-elif [[ "$OS" == "CYGWIN"* || "$OS" == "MINGW"* || "$OS" == "MSYS"* ]]; then
-  # For Windows (Git Bash or similar)
-  python app.py
-fi
+python app.py
