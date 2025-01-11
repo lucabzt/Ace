@@ -13,8 +13,6 @@ from flask import render_template
 from flask_cors import CORS
 from waitress import serve
 
-
-
 from server.src.game.utils.game_utils import display_spade_art
 from server.src.game.game_round import GameRound  # Import your game logic
 from server.src.game.resources.player import Player
@@ -67,7 +65,7 @@ def get_players():
         {
             "name": player.name,
             "balance": player.balance,
-            "absInv": player.absolute_investment,
+            "pnl": game.pnl_matrix.get(player.name, []),
             "bet": game.bets.get(player.name),
             "cards": [{"rank": card.rank.value, "suit": card.suit.value, "faceUp": True} for card in player.cards],
             "probWin": round(player.win_prob, 2),
@@ -292,10 +290,8 @@ if __name__ == '__main__':
     DEBUG = True
 
     if DEBUG:
-        app.run(debug=True, host='127.0.0.1', port=5000
-            , ssl_context=('./cert.pem', './key.pem')
-            )
+        app.run(debug=False, host='127.0.0.1', port=5000
+                , ssl_context=('./cert.pem', './key.pem')
+                )
     else:
         serve(app, host='0.0.0.0', port=5000)
-
-    

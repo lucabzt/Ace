@@ -33,6 +33,12 @@ class GameRound:
         self.round_logs = []  # Logs for each round
         self.exit_game = False  # Flag to indicate game exit
         self.shared_resources = shared_resources
+        self.pnl_matrix = {player.name: [] for player in players}
+
+        timestamp = int(time.time() * 1000)  # Current timestamp in milliseconds
+        for player in self.players:
+            # Every player starts with pnl of 0
+            self.pnl_matrix[player.name].append([timestamp, 0])
 
     def play_round(self):
         """Plays a complete round of poker, with option to modify settings before starting."""
@@ -53,6 +59,7 @@ class GameRound:
         print("---------------")
         # Pre-Flop Betting
         if self.play_betting_round(betting_round, 'Pre-Flop', False):
+            self.update_pnl_matrix()
             self.reset_game()
             return
 
@@ -62,6 +69,7 @@ class GameRound:
 
         # Flop Betting
         if self.play_betting_round(betting_round, 'Flop', False):
+            self.update_pnl_matrix()
             self.reset_game()
             return
 
@@ -71,6 +79,7 @@ class GameRound:
 
         # Turn Betting
         if self.play_betting_round(betting_round, 'Turn', False):
+            self.update_pnl_matrix()
             self.reset_game()
             return
 
@@ -79,14 +88,17 @@ class GameRound:
 
         # River Betting
         if self.play_betting_round(betting_round, 'River', True):
+            self.update_pnl_matrix()
             self.reset_game()
             return
 
         # Showdown if more than one player remains
         self.showdown()
 
-        # Reset for next game
+        # Update PNL matrix
+        self.update_pnl_matrix()
 
+        # Reset for next game
         self.reset_game()
 
     def play_betting_round(self, betting_round, current_round, river):
@@ -200,6 +212,22 @@ class GameRound:
             player.clear_cards()
 
         self.rotate_blinds()  # Move blinds and dealer to the next players
+
+    def update_pnl_matrix(self):
+        """Update PnL matrix for all players."""
+        timestamp = int(time.time() * 1000)  # Current timestamp in milliseconds
+        for player in self.players:
+            # Check if the player is already in the matrix, add if not
+            if player.name not in self.pnl_matrix:
+                self.pnl_matrix[player.name] = []  # Add player to the matrix
+
+            # Calculate PnL as the difference between the current balance and the absolute investment
+            pnl = player.balance - player.absolute_investment
+            # Append the PnL value with the current timestamp
+            self.pnl_matrix[player.name].append([timestamp, pnl])
+
+        # Debug or log the updated PnL matrix
+        # print("Updated pnl_matrix:", self.pnl_matrix)
 
     def calculate_probabilities(self, river=False):
         # Create abbreviations for community and player cards

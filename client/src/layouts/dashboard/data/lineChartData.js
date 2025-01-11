@@ -1,35 +1,35 @@
 export const lineChartDataDashboard = [
   {
     name: "Bozzetti",
-    data: [[new Date().getTime(), 0.0]], // Start with a timestamp
+    data: [], // Start with a timestamp
   },
   {
     name: "Simon",
-    data: [[new Date().getTime(), 0.0]],
+    data: [],
   },
   {
     name: "Vorderbruegge",
-    data: [[new Date().getTime(), 0.0]],
+    data: [],
   },
   {
     name: "Meierlohr",
-    data: [[new Date().getTime(), 0.0]],
+    data: [],
   },
   {
     name: "Maier",
-    data: [[new Date().getTime(), 0.0]],
+    data: [],
   },
   {
     name: "Huber",
-    data: [[new Date().getTime(), 0.0]],
+    data: [],
   },
   {
     name: "Hoerter",
-    data: [[new Date().getTime(), 0.0]],
+    data: [],
   },
   {
     name: "Rogg",
-    data: [[new Date().getTime(), 0.0]],
+    data: [],
   },
 ];
 
