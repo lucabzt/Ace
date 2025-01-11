@@ -113,7 +113,28 @@ const SpotifyPlayer = ({ token, refreshToken, expiresAt }) => {
       });
   };
 
-
+  const setPlaylistContext = (deviceId, playlistUri) => {
+    fetch(`https://api.spotify.com/v1/me/player`, {
+      method: "PUT",
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        device_id: deviceId,
+        context_uri: playlistUri, // Playlist URI
+      }),
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error(`Failed to set playlist context: ${response.statusText}`);
+        }
+        console.log("Playlist context set successfully!");
+      })
+      .catch((err) => {
+        console.error("Error setting playlist context:", err);
+      });
+  };
 
   useEffect(() => {
     if (!token)
@@ -133,9 +154,15 @@ const SpotifyPlayer = ({ token, refreshToken, expiresAt }) => {
           getOAuthToken: (cb) => cb(token),
         });
 
-        spotifyPlayer.addListener("ready", ({ device_id }) => {
+        /*spotifyPlayer.addListener("ready", ({ device_id }) => {
           console.log("Ready with Device ID:", device_id);
           startPlaylistPlayback(device_id);
+        });
+        */
+
+        spotifyPlayer.addListener("ready", ({ device_id }) => {
+          console.log("Ready with Device ID:", device_id);
+          setPlaylistContext(device_id, "spotify:playlist:3GuG2wiCsxXEbc1hfFP3xn");
         });
 
         spotifyPlayer.addListener("player_state_changed", (state) => {
