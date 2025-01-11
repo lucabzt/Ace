@@ -228,7 +228,7 @@ function Configurator() {
         </VuiBox>
         <VuiBox display="flex" justifyContent="center">
           <GitHubButton
-            href="https://www.youtube.com/watch?v=dQw4w9WgXcQ&ab_channel=RickAstley"
+            href="https://github.com/lucabzt/Spade"
             data-icon="octicon-star"
             data-size="large"
             data-show-count="true"

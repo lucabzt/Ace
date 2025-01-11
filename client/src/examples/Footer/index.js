@@ -99,7 +99,7 @@ function Footer() {
           <VuiBox mr={{ xs: "20px", lg: "46px" }}>
             <VuiTypography
               component="a"
-              href="https://www.youtube.com/watch?v=dQw4w9WgXcQ&ab_channel=RickAstley"
+              href="https://github.com/lucabzt/Spade"
               variant="body2"
               color="white"
             >
