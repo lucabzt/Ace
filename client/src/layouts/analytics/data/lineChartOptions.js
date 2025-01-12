@@ -20,14 +20,24 @@ export const lineChartOptionsDashboard = {
   legend: {
     show: true,
     position: "top",
+    horizontalAlign: "center", // Align legend in the center
+    fontSize: "16px", // General font size for legend
+    fontWeight: 500, // Regular weight for legend text
     labels: {
-      style: {
-        colors: "#FFFFFF", // Force white color
-        fontSize: "16px",
-        fontWeight: "600",
-      },
+      colors: "#FFFFFF", // Force white text color for legend
+      useSeriesColors: false, // Prevent using series colors for legend text
     },
-    markers: { width: 10, height: 10, strokeWidth: 0 },
+    markers: {
+      size: 10, // Increase marker size slightly for better visibility
+      fillColors: undefined, // Default to series colors for markers
+      strokeWidth: 0, // Add a small stroke to markers
+    },
+    onItemClick: {
+      toggleDataSeries: true, // Allow toggling data series on click
+    },
+    onItemHover: {
+      highlightDataSeries: true, // Highlight series on hover
+    },
   },
   grid: {
     show: true,

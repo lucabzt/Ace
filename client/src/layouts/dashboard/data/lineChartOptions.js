@@ -46,20 +46,26 @@ export const lineChartOptionsDashboard = {
       },
     },
   },
-  legend: {
-    show: true, // Display legend so names are visible with colors
-    position: "top", // Optional: position the legend at the top of the chart
+ legend: {
+    show: true,
+    position: "top",
+    horizontalAlign: "center", // Align legend in the center
+    fontSize: "16px", // General font size for legend
+    fontWeight: 500, // Regular weight for legend text
     labels: {
-      style: {
-        color: "#FFFFFF", // Ensure that legend text is white
-        fontSize: "16px", // Increase font size for the legend text (e.g., 16px)
-        fontWeight: "600", // Set font weight to make text bolder
-      },
+      colors: "#FFFFFF", // Force white text color for legend
+      useSeriesColors: false, // Prevent using series colors for legend text
     },
     markers: {
-      width: 10, // Optional: change width of legend markers
-      height: 10, // Optional: change height of legend markers
-      strokeWidth: 0, // Optional: remove stroke on legend markers
+      size: 10, // Increase marker size slightly for better visibility
+      fillColors: undefined, // Default to series colors for markers
+      strokeWidth: 0, // Add a small stroke to markers
+    },
+    onItemClick: {
+      toggleDataSeries: true, // Allow toggling data series on click
+    },
+    onItemHover: {
+      highlightDataSeries: true, // Highlight series on hover
     },
   },
   grid: {
