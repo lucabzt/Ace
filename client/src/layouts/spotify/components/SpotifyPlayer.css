@@ -131,3 +131,25 @@
   background-color: currentColor;
   border-radius: 50%;
 }
+
+.lyrics-container {
+  margin-top: 20px;
+  width: 100%; /* Passt sich der Breite des Containers an */
+}
+
+.lyrics-box {
+  max-height: 150px; /* Höhe der Box begrenzen, damit sie nicht zu groß wird */
+  overflow-y: scroll; /* Scrollen bei Überschreitung der Höhe aktivieren */
+  background-color: rgba(0, 0, 0, 0.8); /* Halbtransparenter Hintergrund für besseren Kontrast */
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #444; /* Leichte Umrandung für besseren Fokus */
+}
+
+.lyrics-text {
+  color: white; /* Weißer Text */
+  font-size: 16px; /* Angenehme Schriftgröße */
+  line-height: 1.5; /* Lesbarer Zeilenabstand */
+  white-space: pre-wrap; /* Zeilenumbrüche intelligent handhaben */
+  margin: 0; /* Entfernt unnötige Ränder */
+}

@@ -17,19 +17,20 @@ const SpotifyPlayer = ({ token, refreshToken, expiresAt }) => {
   const [expirationTime, setExpirationTime] = useState(expiresAt);
   const [deviceID, setDeviceID] = useState(null);
   const [isShuffle, setShuffleState] = useState(false);
-
+  const [lyrics, setLyrics] = useState(null); // Lyrics state
+  const [loadingLyrics, setLoadingLyrics] = useState(false); // Loading state for lyrics
 
   useEffect(() => {
     const refreshAccessToken = async () => {
       try {
         const response = await fetch(
-          `/refresh_token?refresh_token=${refreshToken}`
+            `/refresh_token?refresh_token=${refreshToken}`
         );
         if (response.ok) {
           const data = await response.json();
           const newToken = data.access_token;
           const newExpiresIn = data.expires_in; // Seconds
-  
+
           // Update token and expiration time
           setCurrentToken(newToken);
           setExpirationTime(Date.now() + newExpiresIn * 1000); // Convert to ms
@@ -40,7 +41,7 @@ const SpotifyPlayer = ({ token, refreshToken, expiresAt }) => {
         console.error("Error refreshing token:", err);
       }
     };
-  
+
     // Check token expiration periodically
     const interval = setInterval(() => {
       if (Date.now() >= expirationTime - 60000) {
@@ -59,15 +60,12 @@ const SpotifyPlayer = ({ token, refreshToken, expiresAt }) => {
     }
   }, [currentToken]);
 
-  
-
 
   const [trackProgress, setTrackProgress] = useState(0); // Current progress in milliseconds
   useEffect(() => {
     const interval = setInterval(updateProgress, 1000); // Update progress every second
     return () => clearInterval(interval);
   }, [isPlaying]);
-
 
 
   const skipToNext = () => {
@@ -81,7 +79,6 @@ const SpotifyPlayer = ({ token, refreshToken, expiresAt }) => {
       player.current.previousTrack().catch((err) => console.error("Previous track error:", err));
     }
   };
-
 
 
   const updateProgress = () => {
@@ -106,15 +103,15 @@ const SpotifyPlayer = ({ token, refreshToken, expiresAt }) => {
         context_uri: "spotify:playlist:3GuG2wiCsxXEbc1hfFP3xn", // Replace with your playlist URI
       }),
     })
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error(`Failed to start playlist playback: ${response.statusText}`);
-        }
-        console.log("Playlist playback started successfully!");
-      })
-      .catch((err) => {
-        console.error("Error starting playlist playback:", err);
-      });
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error(`Failed to start playlist playback: ${response.statusText}`);
+          }
+          console.log("Playlist playback started successfully!");
+        })
+        .catch((err) => {
+          console.error("Error starting playlist playback:", err);
+        });
   };
 
   const setPlaylistContext = (deviceId, playlistUri, spotifyPlayer) => {
@@ -129,20 +126,20 @@ const SpotifyPlayer = ({ token, refreshToken, expiresAt }) => {
         context_uri: playlistUri, // Playlist URI
       }),
     })
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error(`Failed to set playlist context: ${response.statusText}`);
-        }
-        console.log("Playlist context set successfully!");         
-      })
-      .catch((err) => {
-        console.error("Error setting playlist context:", err);
-      });
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error(`Failed to set playlist context: ${response.statusText}`);
+          }
+          console.log("Playlist context set successfully!");
+        })
+        .catch((err) => {
+          console.error("Error setting playlist context:", err);
+        });
   };
 
   useEffect(() => {
     if (!token)
-         return;    
+      return;
     if (token) {
       console.log("useEffect: token = " + token);
       console.log("A");
@@ -163,14 +160,14 @@ const SpotifyPlayer = ({ token, refreshToken, expiresAt }) => {
           startPlaylistPlayback(device_id);
         });
         */
-        
 
-        spotifyPlayer.addListener("ready", ({ device_id }) => {
+
+        spotifyPlayer.addListener("ready", ({device_id}) => {
           console.log("Ready with Device ID:", device_id);
           //startPlaylistPlayback(device_id, "spotify:playlist:3GuG2wiCsxXEbc1hfFP3xn", spotifyPlayer);
           setDeviceID(device_id);
         });
-      
+
 
         spotifyPlayer.addListener("player_state_changed", (state) => {
           if (state) {
@@ -190,7 +187,7 @@ const SpotifyPlayer = ({ token, refreshToken, expiresAt }) => {
 
       return () => {
         if (player) {
-            player.current.disconnect(); // Disconnect player
+          player.current.disconnect(); // Disconnect player
         }
         document.body.removeChild(script);
       };
@@ -198,8 +195,8 @@ const SpotifyPlayer = ({ token, refreshToken, expiresAt }) => {
     }
   }, [token]);
 
-   // Disconnect the player on logout
-   const handlePlayerDisconnect = () => {
+  // Disconnect the player on logout
+  const handlePlayerDisconnect = () => {
     if (player) {
       player.current.disconnect();
     }
@@ -218,21 +215,21 @@ const SpotifyPlayer = ({ token, refreshToken, expiresAt }) => {
         state: isShuffle,  // Set to `true` for shuffle, `false` to turn off shuffle
       }),
     })
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error(`Failed to set shuffle state: ${response.statusText}`);
-        }
-        console.log(`Shuffle ${isShuffle ? "enabled" : "disabled"}`);
-      })
-      .catch((err) => {
-        console.error("Error setting shuffle:", err);
-      });
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error(`Failed to set shuffle state: ${response.statusText}`);
+          }
+          console.log(`Shuffle ${isShuffle ? "enabled" : "disabled"}`);
+        })
+        .catch((err) => {
+          console.error("Error setting shuffle:", err);
+        });
   };
 
 
   const togglePlay = () => {
     if (player) {
-      if(currentTrack === null) {
+      if (currentTrack === null) {
         console.log("currentTrack is null: ", deviceID);
         startPlaylistPlayback(deviceID);
         return
@@ -248,67 +245,123 @@ const SpotifyPlayer = ({ token, refreshToken, expiresAt }) => {
     return `${minutes}:${seconds < 10 ? "0" : ""}${seconds}`;
   };
 
+  const fetchLyrics = (artist, title) => {
+  // Use only the first artist, if multiple artists exist
+  const formattedArtist = artist.includes(",") ? artist.split(",")[0] : artist;
 
-  
+  // Remove " - " and everything after it in the title (if present)
+  const formattedTitle = title.includes(" - ") ? title.split(" - ")[0] : title;
+
+  setLoadingLyrics(true); // Set loading state
+
+  fetch(
+    `https://localhost:5000/lyrics?artist=${encodeURIComponent(
+      formattedArtist.trim() // Ensure no leading/trailing spaces
+    )}&title=${encodeURIComponent(formattedTitle.trim())}`
+  )
+    .then((res) => {
+      if (!res.ok) {
+        throw new Error("Failed to fetch lyrics");
+      }
+      return res.json();
+    })
+    .then((data) => {
+      if (data.error) {
+        console.error("Error fetching lyrics:", data.error);
+        setLyrics("Lyrics not found for this track.");
+      } else {
+        setLyrics(data.lyrics);
+        console.log("Fetched Lyrics:", data.lyrics); // Output lyrics to console
+      }
+    })
+    .catch((err) => {
+      console.error("Error fetching lyrics:", err);
+      setLyrics("An error occurred while fetching lyrics.");
+    })
+    .finally(() => {
+      setLoadingLyrics(false); // Reset loading state
+    });
+};
+
+  useEffect(() => {
+    if (currentTrack) {
+      const artist = currentTrack.artists.map((a) => a.name).join(", ");
+      const title = currentTrack.name;
+      fetchLyrics(artist, title); // Fetch lyrics for the current track
+    }
+  }, [currentTrack]);
+
   const progressPercentage = (trackProgress / trackDuration) * 100 || 0;
-  
+
   return (
-    <div className="spotify-player-container">
-      {player ? (
-        <div className="track-info">
-          {(currentTrack) ? (
-            <img
-              src={currentTrack.album.images[0].url}
-              alt={currentTrack.name}
-              className="track-image"
-            />) : (
-            <img
-              src="https://image-cdn-ak.spotifycdn.com/image/ab67706c0000d72cdd7cb0d442bee004f48dee14"
-              alt="Placeholder"
-              className="track-image"></img>
+      <div className="spotify-player-container">
+        {player ? (
+            <div className="track-info">
+              {(currentTrack) ? (
+                  <img
+                      src={currentTrack.album.images[0].url}
+                      alt={currentTrack.name}
+                      className="track-image"
+                  />) : (
+                  <img
+                      src="https://image-cdn-ak.spotifycdn.com/image/ab67706c0000d72cdd7cb0d442bee004f48dee14"
+                      alt="Placeholder"
+                      className="track-image"></img>
+              )}
+              <div className="track-details">
+                {(currentTrack) ? (
+                    <div>
+                      <p className="track-name"><strong>{currentTrack.name}</strong></p>
+                      <p className="track-artist">{currentTrack.artists.map((a) => a.name).join(", ")}</p>
+                    </div>
+                ) : (<div></div>)}
+                <p className="track-duration">
+                  {formatDuration(trackProgress)} / {formatDuration(trackDuration)}
+                </p>
+                <div className="progress-bar-container">
+                  <div
+                      className="progress-bar"
+                      style={{width: `${progressPercentage}%`}}
+                  ></div>
+                </div>
+                <div className="button-container"> {/* Neue Klasse hinzugefügt */}
+                  <button className="play-pause-button" onClick={skipToPrevious}>
+                    <BsSkipBackwardFill size="25px" color="inherit"/>
+                  </button>
+                  <button className="play-pause-button" onClick={togglePlay}>
+                    {isPlaying ? (
+                        <BsPauseFill size="25px" color="inherit"/>
+                    ) : (
+                        <BsPlayFill size="25px" color="inherit"/>
+                    )}
+                  </button>
+                  <button className="play-pause-button" onClick={skipToNext}>
+                    <BsSkipForwardFill size="25px" color="inherit"/>
+                  </button>
+                  <button className={`play-pause-button ${isShuffle ? "is-shuffle-active" : ""}`}
+                          onClick={setShuffle}
+                  >
+                    <PiShuffleBold size="25px" color="inherit"/>
+                  </button>
+                </div>
+              </div>
+            </div>
+        ) : (
+            <p>Loading Player...</p>
+        )}
+
+        {/* Lyrics Section */}
+        <div className="lyrics-container">
+          <h3>Lyrics:</h3>
+          {loadingLyrics ? (
+              <p>Loading lyrics...</p>
+          ) : (
+              <div className="lyrics-box">
+                <pre className="lyrics-text">{lyrics}</pre>
+              </div>
           )}
-          <div className="track-details">
-          {(currentTrack) ? (
-            <div>
-              <p className="track-name"><strong>{currentTrack.name}</strong></p>
-              <p className="track-artist">{currentTrack.artists.map((a) => a.name).join(", ")}</p>
-            </div>
-          ) : (<div></div>)}
-            <p className="track-duration">
-              {formatDuration(trackProgress)} / {formatDuration(trackDuration)}
-            </p>
-            <div className="progress-bar-container">
-              <div
-                className="progress-bar"
-                style={{ width: `${progressPercentage}%` }}
-              ></div>
-            </div>
-            <div className="button-container"> {/* Neue Klasse hinzugefügt */}
-              <button className="play-pause-button" onClick={skipToPrevious}>
-                <BsSkipBackwardFill size="25px" color="inherit"/>
-              </button>
-              <button className="play-pause-button" onClick={togglePlay}>
-                {isPlaying ? (
-                    <BsPauseFill size="25px" color="inherit"/>
-                ) : (
-                    <BsPlayFill size="25px" color="inherit"/>
-                )}
-              </button>
-              <button className="play-pause-button" onClick={skipToNext}>
-                <BsSkipForwardFill size="25px" color="inherit"/>
-              </button>
-              <button className={`play-pause-button ${isShuffle ? "is-shuffle-active" : ""}`}
-                  onClick={setShuffle}
-              >
-                <PiShuffleBold size="25px" color="inherit"/>
-              </button>
-            </div>
-          </div>
         </div>
-      ) : (
-          <p>Loading Player...</p>
-      )}
-    </div>
+      </div>
   );
 };
 

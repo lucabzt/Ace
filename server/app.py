@@ -13,6 +13,7 @@ from flask import render_template
 from flask_cors import CORS
 from waitress import serve
 
+import lyricsgenius
 from server.src.game.utils.game_utils import display_spade_art
 from server.src.game.game_round import GameRound  # Import your game logic
 from server.src.game.resources.player import Player
@@ -36,6 +37,9 @@ REDIRECT_URI = f"https://localhost:5000/callback"
 SPOTIFY_AUTH_URL = "https://accounts.spotify.com/authorize"
 SPOTIFY_TOKEN_URL = "https://accounts.spotify.com/api/token"
 
+# Your Genius API Access Token
+genius = lyricsgenius.Genius("UUODLxcCpDdlIm_k8hqQvP-qYcQrfnvOB9ULnwDAS7LsQ-ZVtQwwJ7n-vUW-s2M3")
+
 # Enable CORS for all routes
 CORS(app)
 
@@ -57,7 +61,30 @@ def get_index():
     return render_template("index.html")
 
 
-# Endpoints
+# Endpoints for Lyrics
+@app.route('/lyrics', methods=['GET'])
+def get_lyrics():
+    """Get the lyrics of a song based on input artist and song title."""
+    artist = request.args.get('artist')
+    song_title = request.args.get('title')
+
+    if not artist or not song_title:
+        return jsonify({"error": "Please provide both 'artist' and 'title' parameters."}), 400
+
+    try:
+        # Suche nach dem Song
+        song = genius.search_song(song_title, artist)
+        if song:
+            # Rückgabe der Songtexte
+            lyrics = song.lyrics
+            return jsonify({"artist": artist, "title": song_title, "lyrics": lyrics})
+        else:
+            return jsonify({"error": "Lyrics not found."}), 404
+    except Exception as e:
+        return jsonify({"error": f"An error occurred: {str(e)}"}), 500
+
+
+# Endpoints for Poker
 @app.route('/players', methods=['GET'])
 def get_players():
     """Get current state of players."""
