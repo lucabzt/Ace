@@ -271,7 +271,7 @@ const SpotifyPlayer = ({ token, refreshToken, expiresAt }) => {
         setLyrics("Lyrics not found for this track.");
       } else {
         setLyrics(data.lyrics);
-        console.log("Fetched Lyrics:", data.lyrics); // Output lyrics to console
+        //console.log("Fetched Lyrics:", data.lyrics); // Output lyrics to console
       }
     })
     .catch((err) => {
@@ -285,10 +285,12 @@ const SpotifyPlayer = ({ token, refreshToken, expiresAt }) => {
 
   useEffect(() => {
     if (currentTrack) {
+      // Prüft, wenn sich der Track (Name/ID) ändert:
       const artist = currentTrack.artists.map((a) => a.name).join(", ");
       const title = currentTrack.name;
-      fetchLyrics(artist, title); // Fetch lyrics for the current track
+      fetchLyrics(artist, title); // Ruft Lyrics nur bei Änderung des Tracks ab.
     }
+  // Nur ausführen wenn sich der currentTrack ändert.
   }, [currentTrack]);
 
   const progressPercentage = (trackProgress / trackDuration) * 100 || 0;

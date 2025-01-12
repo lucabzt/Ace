@@ -137,6 +137,10 @@
   width: 100%; /* Passt sich der Breite des Containers an */
 }
 
+.lyrics-container h3 {
+  color: white; /* Überschrift "Lyrics:" in Weiß */
+}
+
 .lyrics-box {
   max-height: 150px; /* Höhe der Box begrenzen, damit sie nicht zu groß wird */
   overflow-y: scroll; /* Scrollen bei Überschreitung der Höhe aktivieren */
@@ -152,4 +156,8 @@
   line-height: 1.5; /* Lesbarer Zeilenabstand */
   white-space: pre-wrap; /* Zeilenumbrüche intelligent handhaben */
   margin: 0; /* Entfernt unnötige Ränder */
+}
+
+.lyrics-container p {
+  color: white; /* Ladeanzeige "Loading lyrics..." in Weiß */
 }
