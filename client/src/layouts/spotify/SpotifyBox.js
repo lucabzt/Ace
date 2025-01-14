@@ -33,7 +33,7 @@ function SpotifyBox() {
       style={{
         ...fullscreenStyles,
         width: isFullscreen ? "100vw" : "100%",
-        height: isFullscreen ? "100vh" : "auto", // Automatische Höhe, um Inhalte anzupassen
+        height: isFullscreen ? "100vh" : isSmallScreen ? "300px" : "40vw",
         minHeight: "100vh", // Mindesthöhe für den kleinen Bildschirm
         display: "flex",
         justifyContent: "center",
