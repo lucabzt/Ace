@@ -1,34 +1,49 @@
 .spotify-player-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 20px;
-    border-radius: 8px;
-  }
+  margin-top: 20px;
+  display: grid;
+  grid-template-columns: 1fr 1fr; /* Teilt das Layout in zwei gleiche Spalten */
+  gap: 20px; /* Abstand zwischen den Spalten */
+  align-items: stretch; /* Beide Spalten bekommen dieselbe Höhe */
+  height: 100%; /* Ermöglicht, dass beide Container gleich hoch werden */
+}
 
-  .track-info {
-    display: flex;
-    align-items: center;
-    margin-bottom: 20px;
-    flex-wrap: wrap; /* Allow wrapping */
-    gap: 15px; /* Add spacing between wrapped items */
+.playback-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* Zentriert den Inhalt vertikal */
+  padding: 20px;
+  align-items: center; /* Zentriert den Inhalt horizontal */
+  border-radius: 8px;
+  transform: translateY(-50%); /* Verschiebt um 50% nach oben */
+  position: relative; /* Stellt sicher, dass transform für dieses Element korrekt funktioniert */
+  top: 50%; /* Setzt den Container 50% vom übergeordneten Element */
+}
 
-  }
+.track-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 20px;
+}
 
   .track-image {
-    width: 280px;
-    height: 280px;
-    border-radius: 12px;
-  }
+  width: 300px;
+  height: auto;
+  border-radius: 12px;
+  object-fit: cover; /* Sorgt für sauberes Resizing */
+}
 
   .track-details {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-  }
+  width: 100%; /* Nimmt die gesamte verfügbare Breite ein */
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+
+}
 
   .track-name {
-    font-size: 21px;
+    font-size: 25px;
     margin: 0;
      color: #d5cfcf;
 
@@ -36,13 +51,13 @@
 
   .track-artist {
     margin-top: 10px;
-    font-size: 16px;
+    font-size: 20px;
     color: #d5cfcf;
   }
 
   .track-duration {
     margin-top: 10px;
-    font-size: 14px;
+    font-size: 16px;
     color: #d5cfcf;
   }
 
@@ -134,28 +149,36 @@
 
 .lyrics-container {
   margin-top: 20px;
-  width: 100%; /* Passt sich der Breite des Containers an */
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  height: 80vh; /* Dynamisch: Begrenze die Höhe auf 80% des Viewports */
+  background-color: rgba(0, 0, 0, 0.8);
+  padding: 10px 20px;
+  border-radius: 15px;
+  overflow: auto; /* Ermöglicht Scrollen, falls der Inhalt zu groß wird */
+}
+
+.lyrics-box {
+  width: 100%;
+  max-height: 100%; /* Begrenze die Höhe der einzelnen Boxen auf einen Anteil des Containers */
+  overflow-y: auto; /* Verhindert Überlauf, aber keine Scrollleiste */
 }
 
 .lyrics-container h3 {
   color: white; /* Überschrift "Lyrics:" in Weiß */
+  font-size: 30px; /* Angenehm lesbare Schriftgröße */
 }
 
-.lyrics-box {
-  max-height: 150px; /* Höhe der Box begrenzen, damit sie nicht zu groß wird */
-  overflow-y: scroll; /* Scrollen bei Überschreitung der Höhe aktivieren */
-  background-color: rgba(0, 0, 0, 0.8); /* Halbtransparenter Hintergrund für besseren Kontrast */
-  padding: 10px;
-  border-radius: 8px;
-  border: 1px solid #444; /* Leichte Umrandung für besseren Fokus */
-}
 
 .lyrics-text {
-  color: white; /* Weißer Text */
-  font-size: 16px; /* Angenehme Schriftgröße */
-  line-height: 1.5; /* Lesbarer Zeilenabstand */
-  white-space: pre-wrap; /* Zeilenumbrüche intelligent handhaben */
-  margin: 0; /* Entfernt unnötige Ränder */
+  color: #eaeaea; /* Weicher weißer Farbton */
+  font-size: 20px; /* Angenehm lesbare Schriftgröße */
+  line-height: 1.8; /* Optimierter Zeilenabstand */
+  white-space: pre-wrap; /* Bricht lange Zeilen korrekt */
+  margin: 0; /* Keine zusätzlichen Außenabstände */
+  font-family: "Gotham Circular", "Proxima Nova", "Arial", sans-serif; /* Alternativen bei Nichtverfügbarkeit */
+  font-weight: 400; /* Normales Gewicht für klare Lesbarkeit */
 }
 
 .lyrics-container p {

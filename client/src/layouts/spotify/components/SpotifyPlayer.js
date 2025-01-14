@@ -295,76 +295,91 @@ const SpotifyPlayer = ({ token, refreshToken, expiresAt }) => {
 
   const progressPercentage = (trackProgress / trackDuration) * 100 || 0;
 
-  return (
-      <div className="spotify-player-container">
-        {player ? (
-            <div className="track-info">
-              {(currentTrack) ? (
-                  <img
-                      src={currentTrack.album.images[0].url}
-                      alt={currentTrack.name}
-                      className="track-image"
-                  />) : (
-                  <img
-                      src="https://image-cdn-ak.spotifycdn.com/image/ab67706c0000d72cdd7cb0d442bee004f48dee14"
-                      alt="Placeholder"
-                      className="track-image"></img>
+return (
+  <div className="spotify-player-container">
+    {player ? (
+      <>
+        {/* Left side: Song playback */}
+        <div className="playback-container">
+          <div className="track-info">
+            {currentTrack ? (
+              <img
+                src={currentTrack.album.images[0].url}
+                alt={currentTrack.name}
+                className="track-image"
+              />
+            ) : (
+              <img
+                src="https://image-cdn-ak.spotifycdn.com/image/ab67706c0000d72cdd7cb0d442bee004f48dee14"
+                alt="Placeholder"
+                className="track-image"
+              />
+            )}
+            <div className="track-details">
+              {currentTrack ? (
+                <div>
+                  <p className="track-name">
+                    <strong>{currentTrack.name}</strong>
+                  </p>
+                  <p className="track-artist">
+                    {currentTrack.artists.map((a) => a.name).join(", ")}
+                  </p>
+                </div>
+              ) : (
+                <div></div>
               )}
-              <div className="track-details">
-                {(currentTrack) ? (
-                    <div>
-                      <p className="track-name"><strong>{currentTrack.name}</strong></p>
-                      <p className="track-artist">{currentTrack.artists.map((a) => a.name).join(", ")}</p>
-                    </div>
-                ) : (<div></div>)}
-                <p className="track-duration">
-                  {formatDuration(trackProgress)} / {formatDuration(trackDuration)}
-                </p>
-                <div className="progress-bar-container">
-                  <div
-                      className="progress-bar"
-                      style={{width: `${progressPercentage}%`}}
-                  ></div>
-                </div>
-                <div className="button-container"> {/* Neue Klasse hinzugefügt */}
-                  <button className="play-pause-button" onClick={skipToPrevious}>
-                    <BsSkipBackwardFill size="25px" color="inherit"/>
-                  </button>
-                  <button className="play-pause-button" onClick={togglePlay}>
-                    {isPlaying ? (
-                        <BsPauseFill size="25px" color="inherit"/>
-                    ) : (
-                        <BsPlayFill size="25px" color="inherit"/>
-                    )}
-                  </button>
-                  <button className="play-pause-button" onClick={skipToNext}>
-                    <BsSkipForwardFill size="25px" color="inherit"/>
-                  </button>
-                  <button className={`play-pause-button ${isShuffle ? "is-shuffle-active" : ""}`}
-                          onClick={setShuffle}
-                  >
-                    <PiShuffleBold size="25px" color="inherit"/>
-                  </button>
-                </div>
+              <p className="track-duration">
+                {formatDuration(trackProgress)} / {formatDuration(trackDuration)}
+              </p>
+              <div className="progress-bar-container">
+                <div
+                  className="progress-bar"
+                  style={{ width: `${progressPercentage}%` }}
+                ></div>
+              </div>
+              <div className="button-container">
+                <button className="play-pause-button" onClick={skipToPrevious}>
+                  <BsSkipBackwardFill size="25px" color="inherit" />
+                </button>
+                <button className="play-pause-button" onClick={togglePlay}>
+                  {isPlaying ? (
+                    <BsPauseFill size="25px" color="inherit" />
+                  ) : (
+                    <BsPlayFill size="25px" color="inherit" />
+                  )}
+                </button>
+                <button className="play-pause-button" onClick={skipToNext}>
+                  <BsSkipForwardFill size="25px" color="inherit" />
+                </button>
+                <button
+                  className={`play-pause-button ${
+                    isShuffle ? "is-shuffle-active" : ""
+                  }`}
+                  onClick={setShuffle}
+                >
+                  <PiShuffleBold size="25px" color="inherit" />
+                </button>
               </div>
             </div>
-        ) : (
-            <p>Loading Player...</p>
-        )}
-
-        {/* Lyrics Section */}
+          </div>
+        </div>
+        {/* Right side: Lyrics */}
         <div className="lyrics-container">
           <h3>Lyrics:</h3>
           {loadingLyrics ? (
-              <p>Loading lyrics...</p>
+            <p>Loading lyrics...</p>
           ) : (
-              <div className="lyrics-box">
-                <pre className="lyrics-text">{lyrics}</pre>
-              </div>
+            <div className="lyrics-box">
+              <pre className="lyrics-text">{lyrics}</pre>
+            </div>
           )}
         </div>
-      </div>
-  );
+      </>
+    ) : (
+      <p>Loading Player...</p>
+    )}
+  </div>
+);
 };
 
 export default SpotifyPlayer;

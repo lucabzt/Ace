@@ -33,11 +33,12 @@ function SpotifyBox() {
       style={{
         ...fullscreenStyles,
         width: isFullscreen ? "100vw" : "100%",
-        height: isFullscreen
-          ? "100vh"
-          : isSmallScreen
-          ? "300px"
-          : "40vw",
+        height: isFullscreen ? "100vh" : "auto", // Automatische Höhe, um Inhalte anzupassen
+        minHeight: "100vh", // Mindesthöhe für den kleinen Bildschirm
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        overflow: "auto", // Scrollbar hinzufügen, falls Inhalt überläuft
         transition: "all 0.3s ease",
       }}
     >
@@ -56,6 +57,7 @@ function SpotifyBox() {
           boxShadow: isFullscreen
             ? "0 8px 20px rgba(255, 255, 255, 0.4)"
             : "0 4px 12px rgba(0, 0, 0, 0.3)",
+          overflow: "auto", // Scrollbar für überfließende Inhalte
         }}
       >
         {/* Fullscreen Button */}
