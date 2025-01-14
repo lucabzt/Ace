@@ -66,6 +66,9 @@ function SpotifyBox() {
           variant="contained"
           color="info"
           style={{
+            position: "absolute",
+            top: "20px",
+            right: "20px",
             fontSize: "1.3rem",
             padding: "0.4rem 0.8rem",
             backgroundColor: isFullscreen ? "#ff5252" : "royalblue",

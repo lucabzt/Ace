@@ -27,6 +27,7 @@ import Billing from "./layouts/billing";
 import Spotify from "./layouts/spotify"
 import Analytics from "./layouts/analytics"
 import Cheatsheet from "./layouts/cheatsheet"
+import HighLight from "./layouts/highlight"
 
 // Vision UI Dashboard React icons
 
@@ -34,6 +35,7 @@ import { BsSpotify, BsSuitSpadeFill } from "react-icons/bs";
 import { BsCreditCardFill } from "react-icons/bs";
 import { IoStatsChart } from "react-icons/io5";
 import { IoHome } from "react-icons/io5";
+import { FaRocket } from "react-icons/fa6";
 import {LuFileSpreadsheet} from "react-icons/lu";
 
 const routes = [
@@ -89,6 +91,15 @@ const routes = [
     route: "/billing",
     icon: <BsCreditCardFill size="15px" color="inherit" />,
     component: Billing,
+    noCollapse: true,
+  },
+  {
+    type: "collapse",
+    name: "Highlights",
+    key: "billing",
+    route: "/highlight",
+    icon: <FaRocket  size="15px" color="inherit" />,
+    component: HighLight,
     noCollapse: true,
   },
 ];

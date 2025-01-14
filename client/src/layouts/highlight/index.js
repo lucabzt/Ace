@@ -8,9 +8,9 @@ import DashboardNavbar from "../../examples/Navbars/DashboardNavbar";
 import Footer from "../../examples/Footer";
 
 // Import SpotifyBox
-import SpotifyBox from "./SpotifyBox";
+import HighlightBox from "./components/HighlightBox";
 
-function Spotify() {
+function Highlight() {
   const isSmallScreen = useMediaQuery("(max-width: 960px)"); // Responsive Breakpoint
 
   return (
@@ -33,7 +33,7 @@ function Spotify() {
           sx={{ flexGrow: 1 }}
         >
           {/* Render SpotifyBox */}
-          <SpotifyBox />
+          <HighlightBox />
         </VuiBox>
         <VuiBox mt="auto">
           <Footer />
@@ -43,4 +43,4 @@ function Spotify() {
   );
 }
 
-export default Spotify;
+export default Highlight;
