@@ -24,56 +24,66 @@ function AnalyticsDashboard() {
   const { columns, rows } = authorsTableData;
 
   return (
-    <DashboardLayout>
-      <DashboardNavbar />
-      <VuiBox py={3}>
-        {/* Line Chart Section */}
-        <VuiBox mb={3}>
-          <Card>
-            <VuiBox p={3}>
-              <VuiTypography variant="lg" color="white" fontWeight="bold" mb="5px">
-                Game Stats
-              </VuiTypography>
-              <VuiBox sx={{ height: "310px" }}>
-                <LineChart
-                  lineChartData={lineChartDataDashboard}
-                  lineChartOptions={lineChartOptionsDashboard}
-                />
-              </VuiBox>
+      <div
+          style={{
+            width: "100vw",
+            minHeight: "100vh",
+            overflow: "auto",
+            display: "flex",
+            flexDirection: "column",
+          }}
+      >
+        <DashboardLayout>
+          <DashboardNavbar/>
+          <VuiBox py={3}>
+            {/* Line Chart Section */}
+            <VuiBox mb={3}>
+              <Card>
+                <VuiBox p={3}>
+                  <VuiTypography variant="lg" color="white" fontWeight="bold" mb="5px">
+                    Game Stats
+                  </VuiTypography>
+                  <VuiBox sx={{height: "310px"}}>
+                    <LineChart
+                        lineChartData={lineChartDataDashboard}
+                        lineChartOptions={lineChartOptionsDashboard}
+                    />
+                  </VuiBox>
+                </VuiBox>
+              </Card>
             </VuiBox>
-          </Card>
-        </VuiBox>
 
-        {/* Authors Table Section */}
-        <VuiBox mb={3}>
-          <Card>
-            <VuiBox p={3}>
-              <VuiTypography variant="lg" color="white" fontWeight="bold" mb="5px">
-                Players
-              </VuiTypography>
+            {/* Authors Table Section */}
+            <VuiBox mb={3}>
+              <Card>
+                <VuiBox p={3}>
+                  <VuiTypography variant="lg" color="white" fontWeight="bold" mb="5px">
+                    Players
+                  </VuiTypography>
+                </VuiBox>
+                <VuiBox
+                    sx={{
+                      "& th": {
+                        borderBottom: ({borders: {borderWidth}, palette: {grey}}) =>
+                            `${borderWidth[1]} solid ${grey[700]}`,
+                      },
+                      "& .MuiTableRow-root:not(:last-child)": {
+                        "& td": {
+                          borderBottom: ({borders: {borderWidth}, palette: {grey}}) =>
+                              `${borderWidth[1]} solid ${grey[700]}`,
+                        },
+                      },
+                    }}
+                >
+                  <Table columns={columns} rows={rows}/>
+                </VuiBox>
+              </Card>
             </VuiBox>
-            <VuiBox
-              sx={{
-                "& th": {
-                  borderBottom: ({ borders: { borderWidth }, palette: { grey } }) =>
-                    `${borderWidth[1]} solid ${grey[700]}`,
-                },
-                "& .MuiTableRow-root:not(:last-child)": {
-                  "& td": {
-                    borderBottom: ({ borders: { borderWidth }, palette: { grey } }) =>
-                      `${borderWidth[1]} solid ${grey[700]}`,
-                  },
-                },
-              }}
-            >
-              <Table columns={columns} rows={rows} />
-            </VuiBox>
-          </Card>
-        </VuiBox>
-      </VuiBox>
-      <Footer />
-    </DashboardLayout>
-  );
-}
+          </VuiBox>
+          <Footer/>
+        </DashboardLayout>
+        </div>
+        );
+        }
 
-export default AnalyticsDashboard;
+        export default AnalyticsDashboard;

@@ -16,12 +16,12 @@ function Poker() {
   return (
       <div
           style={{
-              width: "100vw", // Take full width
-              height: "100vh", // Full height for the entire page
-              overflow: "auto", // Immer das Scrollen erlauben
+              width: "100vw",
+              minHeight: "100vh",
+              overflow: "auto",
               display: "flex",
               flexDirection: "column",
-          }}
+      }}
       >
           <DashboardLayout>
               <DashboardNavbar/>

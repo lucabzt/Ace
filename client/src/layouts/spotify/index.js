@@ -17,8 +17,8 @@ function Spotify() {
     <div
       style={{
         width: "100vw",
-        height: "100vh",
-        overflow: isSmallScreen ? "auto" : "hidden",
+        minHeight: "100vh",
+        overflow: "auto",
         display: "flex",
         flexDirection: "column",
       }}
@@ -30,7 +30,7 @@ function Spotify() {
           display="flex"
           justifyContent="center"
           alignItems="center"
-          sx={{ width: "100%" }}
+          sx={{ flexGrow: 1 }}>
         >
           {/* Render SpotifyBox */}
           <SpotifyBox />

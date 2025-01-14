@@ -19,27 +19,37 @@ import ChipDistributionCard from "./components/ChipDistributionCard";
 
 function Billing() {
   return (
-    <DashboardLayout>
-      <DashboardNavbar />
-      <VuiBox mt={4}>
-        <VuiBox mb={1.5}>
-          <Grid container spacing={3}>
-          <Grid item xs={12}>
-            <Grid container spacing={3}>
-              <Grid item xs={12} md={6}>
-                  <CheatSheet />
-              </Grid>
-              <Grid item xs={12} md={6}>
-                <ChipDistributionCard/>
-              </Grid>
-            </Grid>
-          </Grid>
-          </Grid>
-        </VuiBox>
-      </VuiBox>
-      <Footer />
-    </DashboardLayout>
-  );
-}
+          <div
+              style={{
+                  width: "100vw",
+                  minHeight: "100vh",
+                  overflow: "auto",
+                  display: "flex",
+                  flexDirection: "column",
+              }}
+          >
+          <DashboardLayout>
+              <DashboardNavbar/>
+              <VuiBox mt={4}>
+                  <VuiBox mb={1.5}>
+                      <Grid container spacing={3}>
+                          <Grid item xs={12}>
+                              <Grid container spacing={3}>
+                                  <Grid item xs={12} md={6}>
+                                      <CheatSheet/>
+                                  </Grid>
+                                  <Grid item xs={12} md={6}>
+                                      <ChipDistributionCard/>
+                                  </Grid>
+                              </Grid>
+                          </Grid>
+                      </Grid>
+                  </VuiBox>
+              </VuiBox>
+              <Footer/>
+          </DashboardLayout>
+              </div>
+          );
+          }
 
-export default Billing;
+          export default Billing;
