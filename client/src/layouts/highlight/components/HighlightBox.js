@@ -44,7 +44,6 @@ function HighlightBox() {
             alignItems: "center", // Center content horizontally in the inner container
             width: "100%",
             justifyContent: "space-between", // Ensure space between iframe and image
-            gap: "40px", // Add 10px gap between iframe and image
             height: "100%", // Fill available height
           }}
         >
@@ -58,19 +57,44 @@ function HighlightBox() {
               borderRadius: "15px", // Adding rounded corners to iframe
             }}
           />
-          <img
-            src={CheatsheetImage}
-            alt="Campus Kneipe"
-            style={{
-              //objectFit: "contain",
-              width: "47%", // Set image width to 45%
-              height: "62%", // Set image height to 100% of parent height
-              padding: "3px",
-              borderRadius: "16px",
-              filter: "contrast(1.3) brightness(0.9) hue-rotate(5deg) saturate(1)",
-            }}
-          />
-        </div>
+          <div
+          style={{
+            display: "flex",
+            justifyContent: "center", // Center content vertically in the inner container
+            alignItems: "center", // Center content horizontally in the inner container
+            width: "100%",
+            justifyContent: "space-between", // Ensure space between iframe and image
+            gap: "40px", // Add 10px gap between iframe and image
+            height: "100%", // Fill available height
+          }}
+          >
+            <img
+                src={CheatsheetImage}
+                alt="Campus Kneipe"
+                style={{
+                  //objectFit: "contain",
+                  width: "47%", // Set image width to 45%
+                  height: "62%", // Set image height to 100% of parent height
+                  padding: "3px",
+                  borderRadius: "16px",
+                  filter: "contrast(1.3) brightness(0.9) hue-rotate(5deg) saturate(1)",
+                }}
+              />
+              <iframe
+                src="https://m4rkus28.codeberg.page/Mandelbrot-Generator-WebappST/@works/Fraktalgenerator.html"
+                width="60%" // Set iframe width to 45%
+                height="62%" // Set iframe height to 100% of parent height
+                title="Mandelbrot"
+                allowFullScreen="true"
+                style={{
+                  borderRadius: "15px", // Adding rounded corners to iframe
+                }}
+              />
+            </div>
+
+
+          </div>
+          
       </Card>
     </div>
   );
