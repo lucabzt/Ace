@@ -31,3 +31,4 @@ pycocotools
 jupyter
 waitress
 flask-cors
+lyricsgenius

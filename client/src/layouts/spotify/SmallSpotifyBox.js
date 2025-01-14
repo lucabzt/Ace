@@ -42,7 +42,7 @@ function SmallSpotifyBox() {
             transformOrigin: "center",
           }}
         >
-          <SpotifyComponent />
+          <SpotifyComponent useLyrics={false} />
         </div>
       </Card>
     </div>

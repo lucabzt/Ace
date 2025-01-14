@@ -75,7 +75,7 @@ function SpotifyBox() {
         </VuiButton>
 
         {/* Spotify Component Rendering */}
-        <SpotifyComponent />
+        <SpotifyComponent useLyrics={true} />
       </Card>
     </div>
   );

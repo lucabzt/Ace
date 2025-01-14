@@ -4,7 +4,7 @@ import React, { useEffect, useState, useRef } from "react";
 import SpotifyLogin from "./SpotifyLogin";
 import SpotifyPlayer from "./SpotifyPlayer";
 
-const SpotifyComponent = () => {
+const SpotifyComponent = ({useLyrics}) => {
 
     const [token, setToken] = useState(null);
     const [refreshtoken, setrefreshtoken] = useState(null);
@@ -52,7 +52,7 @@ const SpotifyComponent = () => {
       return (
         <div>
             {token ? (
-                <SpotifyPlayer token={token} expiresAt={expridedata} refreshToken={refreshtoken}/>
+                <SpotifyPlayer token={token} expiresAt={expridedata} refreshToken={refreshtoken} useLyrics={useLyrics}/>
             ) : (
                 <SpotifyLogin onLoginSuccess={(newToken) => setToken(newToken)} />
             )}

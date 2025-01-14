@@ -7,7 +7,7 @@ import {ShuffleOnOutlined} from "@mui/icons-material";
 import {PiShuffleBold} from "react-icons/pi";
 
 
-const SpotifyPlayer = ({ token, refreshToken, expiresAt }) => {
+const SpotifyPlayer = ({ token, refreshToken, expiresAt, useLyrics }) => {
   //const [player, setPlayer] = useState(null);
   const [currentTrack, setCurrentTrack] = useState(null);
   const [isPlaying, setIsPlaying] = useState(false);
@@ -364,6 +364,7 @@ return (
           </div>
         </div>
         {/* Right side: Lyrics */}
+        {(useLyrics) ? (
         <div className="lyrics-container">
           <h3>Lyrics:</h3>
           {loadingLyrics ? (
@@ -373,7 +374,7 @@ return (
               <pre className="lyrics-text">{lyrics}</pre>
             </div>
           )}
-        </div>
+        </div>) : (<> </>)}
       </>
     ) : (
       <p>Loading Player...</p>
