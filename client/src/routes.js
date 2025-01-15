@@ -96,12 +96,12 @@ const routes = [
   {
     type: "collapse",
     name: "Highlights",
-    key: "billing",
+    key: "highlight",
     route: "/highlight",
     icon: <FaRocket  size="15px" color="inherit" />,
     component: HighLight,
     noCollapse: true,
-  },
+  }
 ];
 
 export default routes;
