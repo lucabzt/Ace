@@ -78,13 +78,13 @@ export const lineChartOptionsDashboard = {
     opacity: 0, // Set opacity to 0 so there's no fill under the line
   },
   colors: [
-    "#F39C12", // Color for Jura Jonas
-    "#1ABC9C", // Color for Sebastian
-    "#E74C3C", // Color for Paul
-    "#9B59B6", // Color for Eliah
-    "#2ECC71", // Color for Matthi
-    "#3498DB", // Color for Markus
-    "#F1C40F", // Color for Luca
-    "#8E44AD", // Color for Jonas
+      "#ff8800",
+      "#1ABC9C",
+      "#E74C3C",
+      "#cb208e",
+      "#2ECC71",
+      "#3498DB",
+      "#ffee20",
+      "#8E44AD"
   ],
 };

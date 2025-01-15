@@ -45,5 +45,13 @@ export const lineChartOptionsDashboard = {
     borderColor: "#56577A",
   },
   fill: { type: "solid", opacity: 0 },
-  colors: ["#F39C12", "#1ABC9C", "#E74C3C", "#9B59B6", "#2ECC71", "#3498DB", "#F1C40F", "#8E44AD"],
+  colors: [
+      "#ff8800",
+      "#1ABC9C",
+      "#E74C3C",
+      "#cb208e",
+      "#2ECC71",
+      "#3498DB",
+      "#ffee20",
+      "#8E44AD"],
 };
