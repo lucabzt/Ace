@@ -29,6 +29,7 @@
 		"@mui/styled-engine": "^5.16.0",
 		"@mui/styles": "^5.16.0",
 		"ajv": "^8.17.1",
+		"anychart": "^8.13.0",
 		"apexcharts": "^4.0.0",
 		"chroma-js": "2.1.2",
 		"components": "^0.1.0",

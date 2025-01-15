@@ -1,0 +1,2142 @@
+                     
+{
+  "chart": {
+    "zIndex": 0,
+    "enabled": true,
+    "type": "heat-map",
+    "title": {
+      "zIndex": 80,
+      "enabled": true,
+      "maxLength": null,
+      "fontSize": 16,
+      "fontFamily": "Verdana, Helvetica, Arial, sans-serif",
+      "fontColor": "#888888",
+      "fontOpacity": 1,
+      "fontDecoration": "none",
+      "fontStyle": "normal",
+      "fontVariant": "normal",
+      "fontWeight": "normal",
+      "letterSpacing": "normal",
+      "textDirection": "ltr",
+      "textShadow": "none",
+      "lineHeight": "normal",
+      "textIndent": 0,
+      "vAlign": "top",
+      "hAlign": "center",
+      "wordWrap": "normal",
+      "wordBreak": "normal",
+      "textOverflow": "",
+      "selectable": false,
+      "disablePointerEvents": false,
+      "useHtml": true,
+      "width": null,
+      "height": null,
+      "align": "left",
+      "text": "Poker Spread Sheet <span style='font-size: 13px; color:#B9B9B9'>(Texas Hold'em)</span>",
+      "margin": {
+        "left": 0,
+        "top": 0,
+        "bottom": 0,
+        "right": 0
+      },
+      "padding": {
+        "left": 5,
+        "top": 0,
+        "bottom": 10,
+        "right": 0
+      },
+      "background": {
+        "zIndex": 0,
+        "enabled": false
+      }
+    },
+    "background": {
+      "zIndex": 0.5,
+      "enabled": true
+    },
+    "tooltip": {
+      "enabled": true,
+      "title": {
+        "zIndex": 1,
+        "enabled": true,
+        "maxLength": null,
+        "fontSize": 13,
+        "fontFamily": "Verdana, Helvetica, Arial, sans-serif",
+        "fontColor": "#ffffff",
+        "fontOpacity": 1,
+        "fontDecoration": "none",
+        "fontStyle": "normal",
+        "fontVariant": "normal",
+        "fontWeight": "normal",
+        "letterSpacing": "normal",
+        "textDirection": "ltr",
+        "textShadow": "none",
+        "lineHeight": "normal",
+        "textIndent": 0,
+        "vAlign": "top",
+        "hAlign": "left",
+        "wordWrap": "normal",
+        "wordBreak": "normal",
+        "textOverflow": "",
+        "selectable": false,
+        "disablePointerEvents": false,
+        "useHtml": false,
+        "width": null,
+        "height": null,
+        "align": "left",
+        "orientation": "top",
+        "rotation": 0,
+        "text": "",
+        "margin": {
+          "left": 0,
+          "top": 0,
+          "bottom": 0,
+          "right": 0
+        },
+        "padding": {
+          "left": 0,
+          "top": 0,
+          "bottom": 0,
+          "right": 0
+        },
+        "background": {
+          "enabled": false
+        }
+      },
+      "separator": {
+        "zIndex": 1,
+        "enabled": true,
+        "fill": {
+          "color": "#42484d",
+          "opacity": 0.6
+        },
+        "stroke": "none",
+        "width": "100%",
+        "height": 1,
+        "orientation": "top",
+        "margin": {
+          "left": 0,
+          "top": 5,
+          "bottom": 5,
+          "right": 0
+        }
+      },
+      "background": {
+        "zIndex": 0,
+        "enabled": true
+      }
+    },
+    "margin": {
+      "left": 0,
+      "top": 0,
+      "bottom": 0,
+      "right": 0
+    },
+    "padding": {
+      "left": 20,
+      "top": 10,
+      "bottom": 10,
+      "right": 20
+    },
+    "a11y": {
+      "enabled": true,
+      "mode": "chart-elements"
+    },
+    "autoRedraw": true,
+    "bounds": {},
+    "contextMenu": {
+      "enabled": true
+    },
+    "credits": {
+      "text": "AnyChart",
+      "url": "https://www.anychart.com/?utm_source=registered",
+      "alt": "AnyChart - JavaScript Charts designed to be embedded and integrated{{anychart-version}}",
+      "imgAlt": "AnyChart - JavaScript Charts",
+      "logoSrc": "https://static.anychart.com/logo.png",
+      "enabled": false
+    },
+    "selectRectangleMarqueeFill": {
+      "color": "#d3d3d3",
+      "opacity": 0.4
+    },
+    "selectRectangleMarqueeStroke": "#d3d3d3",
+    "legend": {
+      "zIndex": 200,
+      "enabled": true,
+      "fontSize": 12,
+      "fontFamily": "Verdana, Helvetica, Arial, sans-serif",
+      "fontColor": "#888888",
+      "fontOpacity": 1,
+      "fontDecoration": "none",
+      "fontStyle": "normal",
+      "fontVariant": "normal",
+      "fontWeight": "normal",
+      "letterSpacing": "normal",
+      "textDirection": "ltr",
+      "textShadow": "none",
+      "lineHeight": "normal",
+      "textIndent": 0,
+      "vAlign": "bottom",
+      "hAlign": "start",
+      "wordWrap": "normal",
+      "wordBreak": "normal",
+      "textOverflow": "...",
+      "selectable": false,
+      "disablePointerEvents": false,
+      "useHtml": false,
+      "inverted": false,
+      "itemsLayout": "vertical",
+      "iconSize": 15,
+      "width": null,
+      "height": null,
+      "maxWidth": null,
+      "maxHeight": null,
+      "position": "right",
+      "positionMode": "outside",
+      "drag": false,
+      "itemsFormat": null,
+      "titleFormat": null,
+      "itemsHAlign": "left",
+      "itemsSpacing": 15,
+      "itemsSourceMode": "categories",
+      "hoverCursor": "pointer",
+      "iconTextSpacing": 5,
+      "align": "top",
+      "margin": {
+        "left": 0,
+        "top": 0,
+        "bottom": 0,
+        "right": 0
+      },
+      "padding": {
+        "left": 20,
+        "top": 2,
+        "bottom": 0,
+        "right": 10
+      },
+      "background": {
+        "enabled": false
+      },
+      "title": {
+        "enabled": false,
+        "maxLength": null,
+        "fontSize": 15,
+        "fontFamily": "Verdana, Helvetica, Arial, sans-serif",
+        "fontColor": "#888888",
+        "fontOpacity": 1,
+        "fontDecoration": "none",
+        "fontStyle": "normal",
+        "fontVariant": "normal",
+        "fontWeight": "normal",
+        "letterSpacing": "normal",
+        "textDirection": "ltr",
+        "textShadow": "none",
+        "lineHeight": "normal",
+        "textIndent": 0,
+        "vAlign": "top",
+        "hAlign": "center",
+        "wordWrap": "normal",
+        "wordBreak": "normal",
+        "textOverflow": "",
+        "selectable": false,
+        "disablePointerEvents": false,
+        "useHtml": false,
+        "width": null,
+        "height": null,
+        "align": "center",
+        "text": "Title text",
+        "margin": {
+          "left": 0,
+          "top": 0,
+          "bottom": 0,
+          "right": 0
+        },
+        "padding": {
+          "left": 0,
+          "top": 0,
+          "bottom": 0,
+          "right": 0
+        },
+        "background": {
+          "enabled": false
+        }
+      },
+      "titleSeparator": {
+        "zIndex": 1,
+        "enabled": false,
+        "fill": {
+          "color": "#42484d",
+          "opacity": 0.6
+        },
+        "stroke": "none",
+        "width": "100%",
+        "height": 1,
+        "orientation": "top",
+        "margin": {
+          "left": 0,
+          "top": 5,
+          "bottom": 5,
+          "right": 0
+        }
+      },
+      "paginator": {
+        "zIndex": 30,
+        "enabled": true,
+        "fontSize": 12,
+        "fontFamily": "Verdana, Helvetica, Arial, sans-serif",
+        "fontColor": "#545f69",
+        "fontOpacity": 1,
+        "fontDecoration": "none",
+        "fontStyle": "normal",
+        "fontVariant": "normal",
+        "fontWeight": "normal",
+        "letterSpacing": "normal",
+        "textDirection": "ltr",
+        "textShadow": "none",
+        "lineHeight": "normal",
+        "textIndent": 0,
+        "vAlign": "top",
+        "hAlign": "start",
+        "wordWrap": "normal",
+        "wordBreak": "normal",
+        "textOverflow": "",
+        "selectable": false,
+        "disablePointerEvents": false,
+        "useHtml": false,
+        "orientation": "right",
+        "layout": "horizontal",
+        "background": {
+          "enabled": false
+        },
+        "padding": {
+          "left": 5,
+          "top": 0,
+          "bottom": 0,
+          "right": 0
+        },
+        "margin": {
+          "left": 0,
+          "top": 0,
+          "bottom": 0,
+          "right": 0
+        }
+      },
+      "tooltip": {
+        "enabled": false,
+        "title": {
+          "zIndex": 1,
+          "enabled": false,
+          "maxLength": null,
+          "fontSize": 14,
+          "fontFamily": "Verdana, Helvetica, Arial, sans-serif",
+          "fontColor": "#ffffff",
+          "fontOpacity": 1,
+          "fontDecoration": "none",
+          "fontStyle": "normal",
+          "fontVariant": "normal",
+          "fontWeight": "normal",
+          "letterSpacing": "normal",
+          "textDirection": "ltr",
+          "textShadow": "none",
+          "lineHeight": "normal",
+          "textIndent": 0,
+          "vAlign": "top",
+          "hAlign": "left",
+          "wordWrap": "normal",
+          "wordBreak": "normal",
+          "textOverflow": "",
+          "selectable": false,
+          "disablePointerEvents": false,
+          "useHtml": false,
+          "width": null,
+          "height": null,
+          "align": "left",
+          "orientation": "top",
+          "rotation": 0,
+          "text": "",
+          "margin": {
+            "left": 0,
+            "top": 0,
+            "bottom": 0,
+            "right": 0
+          },
+          "padding": {
+            "left": 0,
+            "top": 0,
+            "bottom": 0,
+            "right": 0
+          },
+          "background": {
+            "enabled": false
+          }
+        },
+        "separator": {
+          "zIndex": 1,
+          "enabled": false,
+          "fill": {
+            "color": "#42484d",
+            "opacity": 0.6
+          },
+          "stroke": "none",
+          "width": "100%",
+          "height": 1,
+          "orientation": "top",
+          "margin": {
+            "left": 0,
+            "top": 5,
+            "bottom": 5,
+            "right": 0
+          }
+        },
+        "background": {
+          "zIndex": 0,
+          "enabled": true
+        }
+      }
+    },
+    "interactivity": {
+      "spotRadius": 2,
+      "multiSelectOnClick": false,
+      "unselectOnClickOutOfPoint": true,
+      "hoverMode": "single",
+      "selectionMode": "none"
+    },
+    "maxBubbleSize": "20%",
+    "minBubbleSize": "5%",
+    "maxPointWidth": "100%",
+    "minPointLength": 0,
+    "baseline": 0,
+    "palette": {
+      "type": "distinct",
+      "items": [
+        "#827717",
+        "#c77532",
+        "#998675",
+        "#6b617b",
+        "#c69c6d",
+        "#d29b9b",
+        "#879872",
+        "#16685d",
+        "#57a7b1",
+        "#bdbdbd"
+      ]
+    },
+    "markerPalette": {
+      "items": [
+        "circle",
+        "diamond",
+        "square",
+        "triangle-down",
+        "triangle-up",
+        "diagonal-cross",
+        "pentagon",
+        "cross",
+        "v-line",
+        "star5",
+        "star4",
+        "trapezium",
+        "star7",
+        "star6",
+        "star10"
+      ]
+    },
+    "hatchFillPalette": {
+      "items": [
+        {
+          "type": "backward-diagonal",
+          "color": "black 0.5",
+          "thickness": 1,
+          "size": 10
+        },
+        {
+          "type": "forward-diagonal",
+          "color": "black 0.5",
+          "thickness": 1,
+          "size": 10
+        },
+        {
+          "type": "horizontal",
+          "color": "black 0.5",
+          "thickness": 1,
+          "size": 10
+        },
+        {
+          "type": "vertical",
+          "color": "black 0.5",
+          "thickness": 1,
+          "size": 10
+        },
+        {
+          "type": "dashed-backward-diagonal",
+          "color": "black 0.5",
+          "thickness": 1,
+          "size": 10
+        },
+        {
+          "type": "grid",
+          "color": "black 0.5",
+          "thickness": 1,
+          "size": 10
+        },
+        {
+          "type": "dashed-forward-diagonal",
+          "color": "black 0.5",
+          "thickness": 1,
+          "size": 10
+        },
+        {
+          "type": "dashed-horizontal",
+          "color": "black 0.5",
+          "thickness": 1,
+          "size": 10
+        },
+        {
+          "type": "dashed-vertical",
+          "color": "black 0.5",
+          "thickness": 1,
+          "size": 10
+        },
+        {
+          "type": "diagonal-cross",
+          "color": "black 0.5",
+          "thickness": 1,
+          "size": 10
+        },
+        {
+          "type": "diagonal-brick",
+          "color": "black 0.5",
+          "thickness": 1,
+          "size": 10
+        },
+        {
+          "type": "divot",
+          "color": "black 0.5",
+          "thickness": 1,
+          "size": 10
+        },
+        {
+          "type": "horizontal-brick",
+          "color": "black 0.5",
+          "thickness": 1,
+          "size": 10
+        },
+        {
+          "type": "vertical-brick",
+          "color": "black 0.5",
+          "thickness": 1,
+          "size": 10
+        },
+        {
+          "type": "checker-board",
+          "color": "black 0.5",
+          "thickness": 1,
+          "size": 10
+        },
+        {
+          "type": "confetti",
+          "color": "black 0.5",
+          "thickness": 1,
+          "size": 10
+        },
+        {
+          "type": "plaid",
+          "color": "black 0.5",
+          "thickness": 1,
+          "size": 10
+        },
+        {
+          "type": "solid-diamond",
+          "color": "black 0.5",
+          "thickness": 1,
+          "size": 10
+        },
+        {
+          "type": "zig-zag",
+          "color": "black 0.5",
+          "thickness": 1,
+          "size": 10
+        },
+        {
+          "type": "weave",
+          "color": "black 0.5",
+          "thickness": 1,
+          "size": 10
+        },
+        {
+          "type": "percent-05",
+          "color": "black 0.5",
+          "thickness": 1,
+          "size": 10
+        },
+        {
+          "type": "percent-10",
+          "color": "black 0.5",
+          "thickness": 1,
+          "size": 10
+        },
+        {
+          "type": "percent-20",
+          "color": "black 0.5",
+          "thickness": 1,
+          "size": 10
+        },
+        {
+          "type": "percent-25",
+          "color": "black 0.5",
+          "thickness": 1,
+          "size": 10
+        },
+        {
+          "type": "percent-30",
+          "color": "black 0.5",
+          "thickness": 1,
+          "size": 10
+        },
+        {
+          "type": "percent-40",
+          "color": "black 0.5",
+          "thickness": 1,
+          "size": 10
+        },
+        {
+          "type": "percent-50",
+          "color": "black 0.5",
+          "thickness": 1,
+          "size": 10
+        },
+        {
+          "type": "percent-60",
+          "color": "black 0.5",
+          "thickness": 1,
+          "size": 10
+        },
+        {
+          "type": "percent-70",
+          "color": "black 0.5",
+          "thickness": 1,
+          "size": 10
+        },
+        {
+          "type": "percent-75",
+          "color": "black 0.5",
+          "thickness": 1,
+          "size": 10
+        },
+        {
+          "type": "percent-80",
+          "color": "black 0.5",
+          "thickness": 1,
+          "size": 10
+        },
+        {
+          "type": "percent-90",
+          "color": "black 0.5",
+          "thickness": 1,
+          "size": 10
+        }
+      ]
+    },
+    "normal": {
+      "stroke": "#fff",
+      "hatchFill": "none",
+      "risingHatchFill": "none",
+      "fallingHatchFill": "none",
+      "labels": {
+        "enabled": true,
+        "maxFontSize": 14
+      },
+      "minLabels": {
+        "enabled": null
+      },
+      "maxLabels": {
+        "enabled": null
+      },
+      "markers": {
+        "enabled": false,
+        "disablePointerEvents": false,
+        "position": "center",
+        "anchor": "center",
+        "offsetX": 0,
+        "offsetY": 0,
+        "type": "circle",
+        "rotation": 0,
+        "size": 4
+      },
+      "outlierMarkers": {
+        "enabled": null,
+        "anchor": "center",
+        "offsetX": 0,
+        "offsetY": 0,
+        "rotation": 0,
+        "size": 6
+      }
+    },
+    "hovered": {
+      "fill": "#545f69",
+      "stroke": {
+        "color": "#fff",
+        "thickness": 6
+      },
+      "hatchFill": "none",
+      "risingHatchFill": "none",
+      "fallingHatchFill": "none",
+      "labels": {
+        "enabled": true,
+        "fontColor": "#fff"
+      },
+      "minLabels": {
+        "enabled": null
+      },
+      "maxLabels": {
+        "enabled": null
+      },
+      "markers": {
+        "enabled": null,
+        "size": 6
+      },
+      "outlierMarkers": {
+        "enabled": null,
+        "anchor": "center",
+        "offsetX": 0,
+        "offsetY": 0,
+        "rotation": 0,
+        "size": 6
+      }
+    },
+    "selected": {
+      "fill": {
+        "color": "#333",
+        "opacity": 0.85
+      },
+      "negativeFill": {
+        "color": "#333",
+        "opacity": 0.85
+      },
+      "risingFill": {
+        "color": "#333",
+        "opacity": 0.85
+      },
+      "fallingFill": {
+        "color": "#333",
+        "opacity": 0.85
+      },
+      "stroke": {
+        "color": "#ffffff",
+        "thickness": 2
+      },
+      "lowStroke": {
+        "color": "#333",
+        "opacity": 0.85
+      },
+      "highStroke": {
+        "color": "#333",
+        "opacity": 0.85
+      },
+      "lowFill": {
+        "color": "#333",
+        "opacity": 0.85
+      },
+      "highFill": {
+        "color": "#333",
+        "opacity": 0.85
+      },
+      "negativeStroke": {
+        "color": "#333",
+        "opacity": 0.85
+      },
+      "risingStroke": {
+        "color": "#333",
+        "opacity": 0.85
+      },
+      "fallingStroke": {
+        "color": "#333",
+        "opacity": 0.85
+      },
+      "hatchFill": "none",
+      "risingHatchFill": "none",
+      "fallingHatchFill": "none",
+      "labels": {
+        "enabled": null
+      },
+      "minLabels": {
+        "enabled": null
+      },
+      "maxLabels": {
+        "enabled": null
+      },
+      "markers": {
+        "enabled": null,
+        "size": 6
+      },
+      "outlierMarkers": {
+        "enabled": null,
+        "anchor": "center",
+        "offsetX": 0,
+        "offsetY": 0,
+        "rotation": 0,
+        "size": 6
+      }
+    },
+    "xScale": 0,
+    "yScale": 1,
+    "data": [
+      {
+        "x": "A",
+        "y": "A",
+        "heat": 0.85,
+        "symbol": ""
+      },
+      {
+        "x": "K",
+        "y": "A",
+        "heat": 0.65,
+        "symbol": "u"
+      },
+      {
+        "x": "Q",
+        "y": "A",
+        "heat": 0.64,
+        "symbol": "u"
+      },
+      {
+        "x": "J",
+        "y": "A",
+        "heat": 0.64,
+        "symbol": "u"
+      },
+      {
+        "x": "T",
+        "y": "A",
+        "heat": 0.63,
+        "symbol": "u"
+      },
+      {
+        "x": "9",
+        "y": "A",
+        "heat": 0.61,
+        "symbol": "u"
+      },
+      {
+        "x": "8",
+        "y": "A",
+        "heat": 0.6,
+        "symbol": "u"
+      },
+      {
+        "x": "7",
+        "y": "A",
+        "heat": 0.59,
+        "symbol": "u"
+      },
+      {
+        "x": "6",
+        "y": "A",
+        "heat": 0.58,
+        "symbol": "u"
+      },
+      {
+        "x": "5",
+        "y": "A",
+        "heat": 0.58,
+        "symbol": "u"
+      },
+      {
+        "x": "4",
+        "y": "A",
+        "heat": 0.57,
+        "symbol": "u"
+      },
+      {
+        "x": "3",
+        "y": "A",
+        "heat": 0.56,
+        "symbol": "u"
+      },
+      {
+        "x": "2",
+        "y": "A",
+        "heat": 0.55,
+        "symbol": "u"
+      },
+      {
+        "x": "A",
+        "y": "K",
+        "heat": 0.76,
+        "symbol": "s"
+      },
+      {
+        "x": "K",
+        "y": "K",
+        "heat": 0.82,
+        "symbol": ""
+      },
+      {
+        "x": "Q",
+        "y": "K",
+        "heat": 0.61,
+        "symbol": "u"
+      },
+      {
+        "x": "J",
+        "y": "K",
+        "heat": 0.61,
+        "symbol": "u"
+      },
+      {
+        "x": "T",
+        "y": "K",
+        "heat": 0.59,
+        "symbol": "u"
+      },
+      {
+        "x": "9",
+        "y": "K",
+        "heat": 0.58,
+        "symbol": "u"
+      },
+      {
+        "x": "8",
+        "y": "K",
+        "heat": 0.56,
+        "symbol": "u"
+      },
+      {
+        "x": "7",
+        "y": "K",
+        "heat": 0.55,
+        "symbol": "u"
+      },
+      {
+        "x": "6",
+        "y": "K",
+        "heat": 0.54,
+        "symbol": "u"
+      },
+      {
+        "x": "5",
+        "y": "K",
+        "heat": 0.53,
+        "symbol": "u"
+      },
+      {
+        "x": "4",
+        "y": "K",
+        "heat": 0.52,
+        "symbol": "u"
+      },
+      {
+        "x": "3",
+        "y": "K",
+        "heat": 0.51,
+        "symbol": "u"
+      },
+      {
+        "x": "2",
+        "y": "K",
+        "heat": 0.51,
+        "symbol": "u"
+      },
+      {
+        "x": "A",
+        "y": "Q",
+        "heat": 0.66,
+        "symbol": "s"
+      },
+      {
+        "x": "K",
+        "y": "Q",
+        "heat": 0.63,
+        "symbol": "s"
+      },
+      {
+        "x": "Q",
+        "y": "Q",
+        "heat": 0.8,
+        "symbol": ""
+      },
+      {
+        "x": "J",
+        "y": "Q",
+        "heat": 0.58,
+        "symbol": "u"
+      },
+      {
+        "x": "T",
+        "y": "Q",
+        "heat": 0.57,
+        "symbol": "u"
+      },
+      {
+        "x": "9",
+        "y": "Q",
+        "heat": 0.55,
+        "symbol": "u"
+      },
+      {
+        "x": "8",
+        "y": "Q",
+        "heat": 0.54,
+        "symbol": "u"
+      },
+      {
+        "x": "7",
+        "y": "Q",
+        "heat": 0.52,
+        "symbol": "u"
+      },
+      {
+        "x": "6",
+        "y": "Q",
+        "heat": 0.51,
+        "symbol": "u"
+      },
+      {
+        "x": "5",
+        "y": "Q",
+        "heat": 0.5,
+        "symbol": "u"
+      },
+      {
+        "x": "4",
+        "y": "Q",
+        "heat": 0.49,
+        "symbol": "u"
+      },
+      {
+        "x": "3",
+        "y": "Q",
+        "heat": 0.48,
+        "symbol": "u"
+      },
+      {
+        "x": "2",
+        "y": "Q",
+        "heat": 0.47,
+        "symbol": "u"
+      },
+      {
+        "x": "A",
+        "y": "J",
+        "heat": 0.65,
+        "symbol": "s"
+      },
+      {
+        "x": "K",
+        "y": "J",
+        "heat": 0.63,
+        "symbol": "s"
+      },
+      {
+        "x": "Q",
+        "y": "J",
+        "heat": 0.6,
+        "symbol": "s"
+      },
+      {
+        "x": "J",
+        "y": "J",
+        "heat": 0.77,
+        "symbol": ""
+      },
+      {
+        "x": "T",
+        "y": "J",
+        "heat": 0.55,
+        "symbol": "u"
+      },
+      {
+        "x": "9",
+        "y": "J",
+        "heat": 0.53,
+        "symbol": "u"
+      },
+      {
+        "x": "8",
+        "y": "J",
+        "heat": 0.51,
+        "symbol": "u"
+      },
+      {
+        "x": "7",
+        "y": "J",
+        "heat": 0.5,
+        "symbol": "u"
+      },
+      {
+        "x": "6",
+        "y": "J",
+        "heat": 0.48,
+        "symbol": "u"
+      },
+      {
+        "x": "5",
+        "y": "J",
+        "heat": 0.47,
+        "symbol": "u"
+      },
+      {
+        "x": "4",
+        "y": "J",
+        "heat": 0.46,
+        "symbol": "u"
+      },
+      {
+        "x": "3",
+        "y": "J",
+        "heat": 0.45,
+        "symbol": "u"
+      },
+      {
+        "x": "2",
+        "y": "J",
+        "heat": 0.44,
+        "symbol": "u"
+      },
+      {
+        "x": "A",
+        "y": "T",
+        "heat": 0.65,
+        "symbol": "s"
+      },
+      {
+        "x": "K",
+        "y": "T",
+        "heat": 0.62,
+        "symbol": "s"
+      },
+      {
+        "x": "Q",
+        "y": "T",
+        "heat": 0.59,
+        "symbol": "s"
+      },
+      {
+        "x": "J",
+        "y": "T",
+        "heat": 0.58,
+        "symbol": "s"
+      },
+      {
+        "x": "T",
+        "y": "T",
+        "heat": 0.75,
+        "symbol": ""
+      },
+      {
+        "x": "9",
+        "y": "T",
+        "heat": 0.52,
+        "symbol": "u"
+      },
+      {
+        "x": "8",
+        "y": "T",
+        "heat": 0.5,
+        "symbol": "u"
+      },
+      {
+        "x": "7",
+        "y": "T",
+        "heat": 0.48,
+        "symbol": "u"
+      },
+      {
+        "x": "6",
+        "y": "T",
+        "heat": 0.46,
+        "symbol": "u"
+      },
+      {
+        "x": "5",
+        "y": "T",
+        "heat": 0.44,
+        "symbol": "u"
+      },
+      {
+        "x": "4",
+        "y": "T",
+        "heat": 0.44,
+        "symbol": "u"
+      },
+      {
+        "x": "3",
+        "y": "T",
+        "heat": 0.43,
+        "symbol": "u"
+      },
+      {
+        "x": "2",
+        "y": "T",
+        "heat": 0.42,
+        "symbol": "u"
+      },
+      {
+        "x": "A",
+        "y": "9",
+        "heat": 0.63,
+        "symbol": "s"
+      },
+      {
+        "x": "K",
+        "y": "9",
+        "heat": 0.6,
+        "symbol": "s"
+      },
+      {
+        "x": "Q",
+        "y": "9",
+        "heat": 0.58,
+        "symbol": "s"
+      },
+      {
+        "x": "J",
+        "y": "9",
+        "heat": 0.56,
+        "symbol": "s"
+      },
+      {
+        "x": "T",
+        "y": "9",
+        "heat": 0.54,
+        "symbol": "s"
+      },
+      {
+        "x": "9",
+        "y": "9",
+        "heat": 0.72,
+        "symbol": ""
+      },
+      {
+        "x": "8",
+        "y": "9",
+        "heat": 0.48,
+        "symbol": "u"
+      },
+      {
+        "x": "7",
+        "y": "9",
+        "heat": 0.46,
+        "symbol": "u"
+      },
+      {
+        "x": "6",
+        "y": "9",
+        "heat": 0.44,
+        "symbol": "u"
+      },
+      {
+        "x": "5",
+        "y": "9",
+        "heat": 0.43,
+        "symbol": "u"
+      },
+      {
+        "x": "4",
+        "y": "9",
+        "heat": 0.41,
+        "symbol": "u"
+      },
+      {
+        "x": "3",
+        "y": "9",
+        "heat": 0.4,
+        "symbol": "u"
+      },
+      {
+        "x": "2",
+        "y": "9",
+        "heat": 0.39,
+        "symbol": "u"
+      },
+      {
+        "x": "A",
+        "y": "8",
+        "heat": 0.62,
+        "symbol": "s"
+      },
+      {
+        "x": "K",
+        "y": "8",
+        "heat": 0.58,
+        "symbol": "s"
+      },
+      {
+        "x": "Q",
+        "y": "8",
+        "heat": 0.56,
+        "symbol": "s"
+      },
+      {
+        "x": "J",
+        "y": "8",
+        "heat": 0.54,
+        "symbol": "s"
+      },
+      {
+        "x": "T",
+        "y": "8",
+        "heat": 0.52,
+        "symbol": "s"
+      },
+      {
+        "x": "9",
+        "y": "8",
+        "heat": 0.51,
+        "symbol": "s"
+      },
+      {
+        "x": "8",
+        "y": "8",
+        "heat": 0.69,
+        "symbol": ""
+      },
+      {
+        "x": "7",
+        "y": "8",
+        "heat": 0.45,
+        "symbol": "u"
+      },
+      {
+        "x": "6",
+        "y": "8",
+        "heat": 0.43,
+        "symbol": "u"
+      },
+      {
+        "x": "5",
+        "y": "8",
+        "heat": 0.41,
+        "symbol": "u"
+      },
+      {
+        "x": "4",
+        "y": "8",
+        "heat": 0.39,
+        "symbol": "u"
+      },
+      {
+        "x": "3",
+        "y": "8",
+        "heat": 0.37,
+        "symbol": "u"
+      },
+      {
+        "x": "2",
+        "y": "8",
+        "heat": 0.37,
+        "symbol": "u"
+      },
+      {
+        "x": "A",
+        "y": "7",
+        "heat": 0.61,
+        "symbol": "s"
+      },
+      {
+        "x": "K",
+        "y": "7",
+        "heat": 0.58,
+        "symbol": "s"
+      },
+      {
+        "x": "Q",
+        "y": "7",
+        "heat": 0.54,
+        "symbol": "s"
+      },
+      {
+        "x": "J",
+        "y": "7",
+        "heat": 0.52,
+        "symbol": "s"
+      },
+      {
+        "x": "T",
+        "y": "7",
+        "heat": 0.51,
+        "symbol": "s"
+      },
+      {
+        "x": "9",
+        "y": "7",
+        "heat": 0.49,
+        "symbol": "s"
+      },
+      {
+        "x": "8",
+        "y": "7",
+        "heat": 0.48,
+        "symbol": "s"
+      },
+      {
+        "x": "7",
+        "y": "7",
+        "heat": 0.66,
+        "symbol": ""
+      },
+      {
+        "x": "6",
+        "y": "7",
+        "heat": 0.42,
+        "symbol": "u"
+      },
+      {
+        "x": "5",
+        "y": "7",
+        "heat": 0.41,
+        "symbol": "u"
+      },
+      {
+        "x": "4",
+        "y": "7",
+        "heat": 0.39,
+        "symbol": "u"
+      },
+      {
+        "x": "3",
+        "y": "7",
+        "heat": 0.37,
+        "symbol": "u"
+      },
+      {
+        "x": "2",
+        "y": "7",
+        "heat": 0.35,
+        "symbol": "u"
+      },
+      {
+        "x": "A",
+        "y": "6",
+        "heat": 0.6,
+        "symbol": "s"
+      },
+      {
+        "x": "K",
+        "y": "6",
+        "heat": 0.57,
+        "symbol": "s"
+      },
+      {
+        "x": "Q",
+        "y": "6",
+        "heat": 0.54,
+        "symbol": "s"
+      },
+      {
+        "x": "J",
+        "y": "6",
+        "heat": 0.51,
+        "symbol": "s"
+      },
+      {
+        "x": "T",
+        "y": "6",
+        "heat": 0.49,
+        "symbol": "s"
+      },
+      {
+        "x": "9",
+        "y": "6",
+        "heat": 0.47,
+        "symbol": "s"
+      },
+      {
+        "x": "8",
+        "y": "6",
+        "heat": 0.46,
+        "symbol": "s"
+      },
+      {
+        "x": "7",
+        "y": "6",
+        "heat": 0.45,
+        "symbol": "s"
+      },
+      {
+        "x": "6",
+        "y": "6",
+        "heat": 0.63,
+        "symbol": ""
+      },
+      {
+        "x": "5",
+        "y": "6",
+        "heat": 0.4,
+        "symbol": "u"
+      },
+      {
+        "x": "4",
+        "y": "6",
+        "heat": 0.38,
+        "symbol": "u"
+      },
+      {
+        "x": "3",
+        "y": "6",
+        "heat": 0.36,
+        "symbol": "u"
+      },
+      {
+        "x": "2",
+        "y": "6",
+        "heat": 0.34,
+        "symbol": "u"
+      },
+      {
+        "x": "A",
+        "y": "5",
+        "heat": 0.6,
+        "symbol": "s"
+      },
+      {
+        "x": "K",
+        "y": "5",
+        "heat": 0.56,
+        "symbol": "s"
+      },
+      {
+        "x": "Q",
+        "y": "5",
+        "heat": 0.53,
+        "symbol": "s"
+      },
+      {
+        "x": "J",
+        "y": "5",
+        "heat": 0.5,
+        "symbol": "s"
+      },
+      {
+        "x": "T",
+        "y": "5",
+        "heat": 0.47,
+        "symbol": "s"
+      },
+      {
+        "x": "9",
+        "y": "5",
+        "heat": 0.46,
+        "symbol": "s"
+      },
+      {
+        "x": "8",
+        "y": "5",
+        "heat": 0.45,
+        "symbol": "s"
+      },
+      {
+        "x": "7",
+        "y": "5",
+        "heat": 0.44,
+        "symbol": "s"
+      },
+      {
+        "x": "6",
+        "y": "5",
+        "heat": 0.43,
+        "symbol": "s"
+      },
+      {
+        "x": "5",
+        "y": "5",
+        "heat": 0.6,
+        "symbol": ""
+      },
+      {
+        "x": "4",
+        "y": "5",
+        "heat": 0.38,
+        "symbol": "u"
+      },
+      {
+        "x": "3",
+        "y": "5",
+        "heat": 0.36,
+        "symbol": "u"
+      },
+      {
+        "x": "2",
+        "y": "5",
+        "heat": 0.34,
+        "symbol": "u"
+      },
+      {
+        "x": "A",
+        "y": "4",
+        "heat": 0.59,
+        "symbol": "s"
+      },
+      {
+        "x": "K",
+        "y": "4",
+        "heat": 0.55,
+        "symbol": "s"
+      },
+      {
+        "x": "Q",
+        "y": "4",
+        "heat": 0.52,
+        "symbol": "s"
+      },
+      {
+        "x": "J",
+        "y": "4",
+        "heat": 0.49,
+        "symbol": "s"
+      },
+      {
+        "x": "T",
+        "y": "4",
+        "heat": 0.47,
+        "symbol": "s"
+      },
+      {
+        "x": "9",
+        "y": "4",
+        "heat": 0.44,
+        "symbol": "s"
+      },
+      {
+        "x": "8",
+        "y": "4",
+        "heat": 0.43,
+        "symbol": "s"
+      },
+      {
+        "x": "7",
+        "y": "4",
+        "heat": 0.42,
+        "symbol": "s"
+      },
+      {
+        "x": "6",
+        "y": "4",
+        "heat": 0.41,
+        "symbol": "s"
+      },
+      {
+        "x": "5",
+        "y": "4",
+        "heat": 0.41,
+        "symbol": "s"
+      },
+      {
+        "x": "4",
+        "y": "4",
+        "heat": 0.57,
+        "symbol": ""
+      },
+      {
+        "x": "3",
+        "y": "4",
+        "heat": 0.35,
+        "symbol": "u"
+      },
+      {
+        "x": "2",
+        "y": "4",
+        "heat": 0.33,
+        "symbol": "u"
+      },
+      {
+        "x": "A",
+        "y": "3",
+        "heat": 0.58,
+        "symbol": "s"
+      },
+      {
+        "x": "K",
+        "y": "3",
+        "heat": 0.54,
+        "symbol": "s"
+      },
+      {
+        "x": "Q",
+        "y": "3",
+        "heat": 0.51,
+        "symbol": "s"
+      },
+      {
+        "x": "J",
+        "y": "3",
+        "heat": 0.48,
+        "symbol": "s"
+      },
+      {
+        "x": "T",
+        "y": "3",
+        "heat": 0.46,
+        "symbol": "s"
+      },
+      {
+        "x": "9",
+        "y": "3",
+        "heat": 0.43,
+        "symbol": "s"
+      },
+      {
+        "x": "8",
+        "y": "3",
+        "heat": 0.41,
+        "symbol": "s"
+      },
+      {
+        "x": "7",
+        "y": "3",
+        "heat": 0.4,
+        "symbol": "s"
+      },
+      {
+        "x": "6",
+        "y": "3",
+        "heat": 0.4,
+        "symbol": "s"
+      },
+      {
+        "x": "5",
+        "y": "3",
+        "heat": 0.4,
+        "symbol": "s"
+      },
+      {
+        "x": "4",
+        "y": "3",
+        "heat": 0.39,
+        "symbol": "s"
+      },
+      {
+        "x": "3",
+        "y": "3",
+        "heat": 0.54,
+        "symbol": ""
+      },
+      {
+        "x": "2",
+        "y": "3",
+        "heat": 0.32,
+        "symbol": "u"
+      },
+      {
+        "x": "A",
+        "y": "2",
+        "heat": 0.57,
+        "symbol": "s"
+      },
+      {
+        "x": "K",
+        "y": "2",
+        "heat": 0.53,
+        "symbol": "s"
+      },
+      {
+        "x": "Q",
+        "y": "2",
+        "heat": 0.5,
+        "symbol": "s"
+      },
+      {
+        "x": "J",
+        "y": "2",
+        "heat": 0.47,
+        "symbol": "s"
+      },
+      {
+        "x": "T",
+        "y": "2",
+        "heat": 0.45,
+        "symbol": "s"
+      },
+      {
+        "x": "9",
+        "y": "2",
+        "heat": 0.42,
+        "symbol": "s"
+      },
+      {
+        "x": "8",
+        "y": "2",
+        "heat": 0.4,
+        "symbol": "s"
+      },
+      {
+        "x": "7",
+        "y": "2",
+        "heat": 0.38,
+        "symbol": "s"
+      },
+      {
+        "x": "6",
+        "y": "2",
+        "heat": 0.38,
+        "symbol": "s"
+      },
+      {
+        "x": "5",
+        "y": "2",
+        "heat": 0.38,
+        "symbol": "s"
+      },
+      {
+        "x": "4",
+        "y": "2",
+        "heat": 0.37,
+        "symbol": "s"
+      },
+      {
+        "x": "3",
+        "y": "2",
+        "heat": 0.36,
+        "symbol": "s"
+      },
+      {
+        "x": "2",
+        "y": "2",
+        "heat": 0.5,
+        "symbol": ""
+      }
+    ],
+    "isVertical": false,
+    "xAxes": [
+      {
+        "enabled": false,
+        "width": null,
+        "drawFirstLabel": true,
+        "drawLastLabel": true,
+        "overlapMode": "no-overlap",
+        "stroke": {
+          "color": "#636363",
+          "opacity": 0.6
+        },
+        "staggerMode": false,
+        "staggerMaxLines": 2,
+        "staggerLines": null,
+        "orientation": "top",
+        "value": null,
+        "title": {
+          "zIndex": 35,
+          "enabled": false,
+          "maxLength": null,
+          "fontSize": 13,
+          "fontFamily": "Verdana, Helvetica, Arial, sans-serif",
+          "fontColor": "#545f69",
+          "fontOpacity": 1,
+          "fontDecoration": "none",
+          "fontStyle": "normal",
+          "fontVariant": "normal",
+          "fontWeight": "normal",
+          "letterSpacing": "normal",
+          "textDirection": "ltr",
+          "textShadow": "none",
+          "lineHeight": "normal",
+          "textIndent": 0,
+          "vAlign": "top",
+          "hAlign": "center",
+          "wordWrap": "normal",
+          "wordBreak": "normal",
+          "textOverflow": "",
+          "selectable": false,
+          "disablePointerEvents": false,
+          "useHtml": false,
+          "width": null,
+          "height": null,
+          "align": "center",
+          "text": "X-Axis",
+          "margin": {
+            "left": 0,
+            "top": 0,
+            "bottom": 0,
+            "right": 0
+          },
+          "padding": {
+            "left": 5,
+            "top": 5,
+            "bottom": 5,
+            "right": 5
+          },
+          "background": {
+            "enabled": false
+          }
+        },
+        "labels": {
+          "zIndex": 35,
+          "enabled": true
+        },
+        "minorLabels": {
+          "zIndex": 35,
+          "enabled": false
+        },
+        "ticks": {
+          "zIndex": 35,
+          "enabled": false,
+          "stroke": {
+            "color": "#636363",
+            "opacity": 0.6
+          },
+          "length": 6,
+          "position": "outside"
+        },
+        "minorTicks": {
+          "zIndex": 35,
+          "enabled": false,
+          "stroke": {
+            "color": "#42484d",
+            "opacity": 0.6
+          },
+          "length": 4,
+          "position": "outside"
+        }
+      }
+    ],
+    "yAxes": [
+      {
+        "enabled": false,
+        "width": null,
+        "drawFirstLabel": true,
+        "drawLastLabel": true,
+        "overlapMode": "no-overlap",
+        "stroke": {
+          "color": "#636363",
+          "opacity": 0.6
+        },
+        "staggerMode": false,
+        "staggerMaxLines": 2,
+        "staggerLines": null,
+        "orientation": "left",
+        "value": null,
+        "title": {
+          "zIndex": 35,
+          "enabled": false,
+          "maxLength": null,
+          "fontSize": 13,
+          "fontFamily": "Verdana, Helvetica, Arial, sans-serif",
+          "fontColor": "#545f69",
+          "fontOpacity": 1,
+          "fontDecoration": "none",
+          "fontStyle": "normal",
+          "fontVariant": "normal",
+          "fontWeight": "normal",
+          "letterSpacing": "normal",
+          "textDirection": "ltr",
+          "textShadow": "none",
+          "lineHeight": "normal",
+          "textIndent": 0,
+          "vAlign": "top",
+          "hAlign": "center",
+          "wordWrap": "normal",
+          "wordBreak": "normal",
+          "textOverflow": "",
+          "selectable": false,
+          "disablePointerEvents": false,
+          "useHtml": false,
+          "width": null,
+          "height": null,
+          "align": "center",
+          "text": "Y-Axis",
+          "margin": {
+            "left": 0,
+            "top": 0,
+            "bottom": 0,
+            "right": 0
+          },
+          "padding": {
+            "left": 5,
+            "top": 5,
+            "bottom": 5,
+            "right": 5
+          },
+          "background": {
+            "enabled": false
+          }
+        },
+        "labels": {
+          "zIndex": 35,
+          "enabled": true
+        },
+        "minorLabels": {
+          "zIndex": 35,
+          "enabled": false
+        },
+        "ticks": {
+          "zIndex": 35,
+          "enabled": false,
+          "stroke": {
+            "color": "#636363",
+            "opacity": 0.6
+          },
+          "length": 6,
+          "position": "outside"
+        },
+        "minorTicks": {
+          "zIndex": 35,
+          "enabled": false,
+          "stroke": {
+            "color": "#42484d",
+            "opacity": 0.6
+          },
+          "length": 4,
+          "position": "outside"
+        }
+      }
+    ],
+    "labelsDisplayMode": "drop",
+    "colorScale": 2,
+    "scales": [
+      {
+        "type": "ordinal",
+        "inverted": false,
+        "ticks": {
+          "maxCount": 100
+        },
+        "mode": "discrete"
+      },
+      {
+        "type": "ordinal",
+        "inverted": true,
+        "ticks": {
+          "maxCount": 100
+        },
+        "mode": "discrete"
+      },
+      {
+        "type": "ordinal-color",
+        "inverted": false,
+        "ticks": {
+          "maxCount": 100
+        },
+        "ranges": [
+          {
+            "less": 0.35,
+            "color": "#e3f2fd"
+          },
+          {
+            "from": 0.35,
+            "to": 0.45,
+            "color": "#D3EDFC"
+          },
+          {
+            "from": 0.45,
+            "to": 0.5,
+            "color": "#BEE7FC"
+          },
+          {
+            "from": 0.5,
+            "to": 0.55,
+            "color": "#aee2fb"
+          },
+          {
+            "from": 0.55,
+            "to": 0.6,
+            "color": "#B3B0D3"
+          },
+          {
+            "from": 0.6,
+            "to": 0.65,
+            "color": "#B691BB"
+          },
+          {
+            "from": 0.65,
+            "to": 0.7,
+            "color": "#B973A3"
+          },
+          {
+            "from": 0.7,
+            "to": 0.75,
+            "color": "#BC558B"
+          },
+          {
+            "from": 0.75,
+            "to": 0.8,
+            "color": "#BF3673"
+          },
+          {
+            "greater": 0.8,
+            "color": "#c2185b"
+          },
+          {
+            "equal": null,
+            "less": null,
+            "greater": null,
+            "from": null,
+            "to": null
+          }
+        ]
+      }
+    ],
+    "crossing": {
+      "stroke": "none"
+    },
+    "quarters": {},
+    "yCrossAxes": [
+      0
+    ],
+    "xCrossAxes": [
+      0
+    ],
+    "xScroller": {
+      "zIndex": 35,
+      "enabled": false,
+      "height": 16,
+      "minHeight": null,
+      "maxHeight": null,
+      "orientation": "bottom",
+      "inverted": false,
+      "autoHide": false,
+      "fill": "#424242",
+      "selectedFill": "#616161",
+      "outlineStroke": "none",
+      "allowRangeChange": true,
+      "thumbs": {
+        "normal": {
+          "fill": "#E9E9E9",
+          "stroke": "#7c868e"
+        },
+        "hovered": {
+          "fill": "#bdbdbd",
+          "stroke": "#616161"
+        },
+        "enabled": true,
+        "autoHide": false
+      },
+      "position": "after-axes"
+    },
+    "yScroller": {
+      "zIndex": 35,
+      "enabled": false,
+      "height": 16,
+      "minHeight": null,
+      "maxHeight": null,
+      "orientation": "right",
+      "inverted": true,
+      "autoHide": false,
+      "fill": "#424242",
+      "selectedFill": "#616161",
+      "outlineStroke": "none",
+      "allowRangeChange": true,
+      "thumbs": {
+        "normal": {
+          "fill": "#E9E9E9",
+          "stroke": "#7c868e"
+        },
+        "hovered": {
+          "fill": "#bdbdbd",
+          "stroke": "#616161"
+        },
+        "enabled": true,
+        "autoHide": false
+      },
+      "position": "after-axes"
+    },
+    "xZoom": {
+      "startRatio": 0,
+      "endRatio": 1,
+      "continuous": true
+    },
+    "yZoom": {
+      "startRatio": 0,
+      "endRatio": 1,
+      "continuous": true
+    }
+  }
+}
+
+                
