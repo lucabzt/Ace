@@ -37,18 +37,18 @@ function PokerHeatmap() {
 
               // Definiere Farbskalen
               const colorScale = window.anychart.scales.ordinalColor();
-              colorScale.ranges([
-                { less: 0.35, color: "#e3f2fd" },
-                { from: 0.35, to: 0.45, color: "#D3EDFC" },
-                { from: 0.45, to: 0.5, color: "#BEE7FC" },
-                { from: 0.5, to: 0.55, color: "#aee2fb" },
-                { from: 0.55, to: 0.6, color: "#B3B0D3" },
-                { from: 0.6, to: 0.65, color: "#B691BB" },
-                { from: 0.65, to: 0.7, color: "#B973A3" },
-                { from: 0.7, to: 0.75, color: "#BC558B" },
-                { from: 0.75, to: 0.8, color: "#BF3673" },
-                { greater: 0.8, color: "#c2185b" },
-              ]);
+                 colorScale.ranges([
+            { less: 0.35, color: "#1E88E5" }, // Darker blue (perfect)
+            { from: 0.35, to: 0.45, color: "#64B5F6" }, // Light blue
+            { from: 0.45, to: 0.5, color: "#BBDEFB" }, // Very light blue
+            { from: 0.5, to: 0.55, color: "#FFE082" }, // Warm pale yellow-orange
+            { from: 0.55, to: 0.6, color: "#FFCA60" }, // Richer golden yellow
+            { from: 0.6, to: 0.65, color: "#FFA726" }, // Soft orange
+            { from: 0.65, to: 0.7, color: "#FF7043" }, // Light orange-red
+            { from: 0.7, to: 0.75, color: "#F4511E" }, // Muted orange-red
+            { from: 0.75, to: 0.8, color: "#D84315" }, // Warm reddish-orange
+            { greater: 0.8, color: "#BF360C" }, // Subdued red
+            ]);
               chart.colorScale(colorScale);
 
               // Chart konfigurieren
