@@ -1,8 +1,9 @@
 const xlsx = require('xlsx');
 const fs = require('fs');
+const path = require('path');
 
 // Function to extract data from Excel and inject it into the JavaScript file
-function updateLineChartDataDashboard(excelFilePath, jsFilePath) {
+function updateLineChartDataDashboard(excelFilePath, jsFilePath, optionsFilePath) {
   // Load the workbook
   const workbook = xlsx.readFile(excelFilePath);
 
@@ -74,26 +75,43 @@ function updateLineChartDataDashboard(excelFilePath, jsFilePath) {
     });
   }
 
+  // Calculate the number of days based on the number of elements in the first player's data array
+  const firstPlayerData = playerData[Object.keys(playerData)[0]];
+  const numberOfDays = firstPlayerData ? firstPlayerData.length : 0; // Number of days corresponds to the length of data for the first player
+  const categories = Array.from({ length: numberOfDays }, (_, index) => `Day ${index}`);
+
   // Convert the playerData object to the desired format
   const lineChartDataDashboard = Object.entries(playerData).map(([name, data]) => {
     return { name, data };
   });
 
-  // Read the JavaScript file
-  const jsFileContent = fs.readFileSync(jsFilePath, 'utf-8');
+  // Read the options file and update categories
+  const optionsFileContent = fs.readFileSync(optionsFilePath, 'utf-8');
 
-  // Replace the lineChartDataDashboard array in the JavaScript file
+  // Replace the categories part of the options with the generated days
+  const updatedOptionsFileContent = optionsFileContent.replace(
+    /categories: \[.*?\],/s, // Regex to match the existing categories array
+    `categories: ${JSON.stringify(categories, null, 2)},`
+  );
+
+  // Write the updated content back to the options file
+  fs.writeFileSync(optionsFilePath, updatedOptionsFileContent);
+  console.log(`Options file successfully updated with days in ${optionsFilePath}`);
+
+  // Optionally: Save the player data to the specified JS file
+  const jsFileContent = fs.readFileSync(jsFilePath, 'utf-8');
   const updatedJsFileContent = jsFileContent.replace(
     /export const lineChartDataDashboard = \[.*?\];/s, // Regex to match the existing array
     `export const lineChartDataDashboard = ${JSON.stringify(lineChartDataDashboard, null, 2)};`
   );
 
-  // Write the updated content back to the JavaScript file
+  // Write the updated content back to the JS file
   fs.writeFileSync(jsFilePath, updatedJsFileContent);
   console.log(`lineChartDataDashboard successfully updated in ${jsFilePath}`);
 }
 
 // Example usage
 const excelFilePath = './../../../../../Poker_Chip_Tracker.xlsx'; // Path to your Excel file
-const jsFilePath = './lineChartData.js'; // Path to your JavaScript file
-updateLineChartDataDashboard(excelFilePath, jsFilePath);
+const jsFilePath = './lineChartData.js'; // Path to your JavaScript file containing player data
+const optionsFilePath = './lineChartOptions.js'; // Path to the file containing the chart options
+updateLineChartDataDashboard(excelFilePath, jsFilePath, optionsFilePath);
