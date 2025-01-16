@@ -39,9 +39,13 @@ def refine_bounding_box(image, coordinates, padding=0.05):
 
 def detect_regions(image):
     """
-    Detect the coordinates of the two red spades and yellow rectangles.
+    Detect the coordinates of the two red spades and yellow rectangles with yellow outlines.
     :param image: Input image.
     :return: Detected coordinates, visualization mask.
+    #TODO PLAY AROUND HERE !!!!!!!
+    #TODO PLAY AROUND HERE !!!!!!!
+    #TODO PLAY AROUND HERE !!!!!!!
+    #TODO PLAY AROUND HERE !!!!!!!
     """
     # Convert the image to HSV color space
     hsv = cv2.cvtColor(image, cv2.COLOR_BGR2HSV)
@@ -53,43 +57,74 @@ def detect_regions(image):
     red_upper2 = np.array([180, 255, 255])
     mask_red = cv2.inRange(hsv, red_lower1, red_upper1) + cv2.inRange(hsv, red_lower2, red_upper2)
 
-    # Detect yellow regions (rectangles)
+    # Detect yellow regions (rectangles' outlines)
     yellow_lower = np.array([20, 100, 100])
     yellow_upper = np.array([30, 255, 255])
     mask_yellow = cv2.inRange(hsv, yellow_lower, yellow_upper)
 
-    # Combine masks
-    combined_mask = cv2.bitwise_or(mask_red, mask_yellow)
+    # Perform edge detection (Canny) to detect outlines
+    edges_yellow = cv2.Canny(mask_yellow, 100, 200) #TODO PLAY AROUND HERE !!!!!!!
 
-    # Find contours
-    contours, _ = cv2.findContours(combined_mask, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+    # Find contours for both red spades and yellow outlines
+    contours_red, _ = cv2.findContours(mask_red, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+    contours_yellow, _ = cv2.findContours(edges_yellow, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
 
-    # Separate spades (red) and rectangles (yellow)
     spades = []
-    others = []
-    for contour in contours:
+    rectangles = []
+
+    # Process red contours (spades)
+    for contour in contours_red:
         x, y, w, h = cv2.boundingRect(contour)
         aspect_ratio = float(w) / h
-        if aspect_ratio > 0.5 and aspect_ratio < 1.5 and w > 30 and h > 30:  # Likely spades
-            spades.append((x, y, w, h))
-        elif w > 50 and h > 50:  # Larger areas for yellow rectangles
-            others.append((x, y, w, h))
+
+        # Get the region of interest (ROI) to check the mean color
+        roi = image[y:y + h, x:x + w]
+        mean_color = np.mean(roi, axis=(0, 1))  # Calculate mean color for the region (in BGR)
+
+        # Detect spades (red)
+        if 0.5 < aspect_ratio < 2 and w > 20 and h > 20:  #TODO PLAY AROUND HERE !!!!!!!
+            if is_color_in_range(mean_color, red_lower1, red_upper1) or is_color_in_range(mean_color, red_lower2, red_upper2):
+                spades.append((x, y, w, h))
+
+    # Process yellow contours (rectangles with yellow outline)
+    for contour in contours_yellow:
+        x, y, w, h = cv2.boundingRect(contour)
+        aspect_ratio = float(w) / h
+
+        # Rectangles should be large and rectangular in shape
+        if w > 60 and h > 60 and h < 200 and w < 200: #TODO PLAY AROUND HERE !!!!!!!
+            rectangles.append((x, y, w, h))
 
     # Create a visualization of the mask
     mask_visualization = np.zeros_like(image)
     mask_visualization[:, :, 2] = mask_red  # Red areas highlighted in red
     mask_visualization[:, :, 1] = mask_yellow  # Yellow areas highlighted in green
 
-    return spades, others, mask_visualization
+    return spades, rectangles, mask_visualization
+
+
+def is_color_in_range(mean_color, lower_range, upper_range):
+    """
+    Check if the mean color is within the specified HSV color range.
+    :param mean_color: The mean color to check (BGR format).
+    :param lower_range: The lower bound of the color range (HSV format).
+    :param upper_range: The upper bound of the color range (HSV format).
+    :return: True if the mean color is within the range, otherwise False.
+    """
+    # Convert BGR color to HSV
+    mean_color_hsv = cv2.cvtColor(np.uint8([[mean_color]]), cv2.COLOR_BGR2HSV)[0][0]
+
+    # Check if the color is in range
+    return cv2.inRange(np.uint8([[mean_color_hsv]]), lower_range, upper_range)[0][0] > 0
 
 
 def crop_and_transform(image, spades, padding=0.05):
     """
-    Crop and transform the image to focus on the area of interest.
+    Crop and transform the image to focus on the area of interest with the original aspect ratio.
     :param image: Original input image.
     :param spades: Coordinates of detected spades.
     :param padding: Padding percentage around the bounding box.
-    :return: Highlighted image and cropped image.
+    :return: Image with highlighted rectangle and cropped image with original aspect ratio.
     """
     if len(spades) < 2:
         print("Error: Could not detect two spades. Returning the full image.")
@@ -103,17 +138,14 @@ def crop_and_transform(image, spades, padding=0.05):
     # Define the bounding box from the left spade to the right spade
     x_min, y_min, x_max, y_max = refine_bounding_box(image, [left_spade, right_spade], padding)
 
-    # Crop the image to this bounding box
-    cropped_image = image[y_min:y_max, x_min:x_max]
-
-    # Resize the cropped area for consistent display
-    resized_image = cv2.resize(cropped_image, (800, 600), interpolation=cv2.INTER_CUBIC)
-
-    # Highlight the selected area in the original image
+    # Highlight the selected area in the original image (without resizing)
     highlighted_image = image.copy()
     cv2.rectangle(highlighted_image, (x_min, y_min), (x_max, y_max), (0, 255, 0), 3)
 
-    return highlighted_image, resized_image
+    # Crop the image to the bounding box
+    cropped_image = image[y_min:y_max, x_min:x_max]
+
+    return highlighted_image, cropped_image
 
 
 def process_image(image):
