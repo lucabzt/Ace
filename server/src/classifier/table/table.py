@@ -1,26 +1,24 @@
 import cv2
 import numpy as np
-import pytesseract
 import os
 
 
-def refine_bounding_box(image, contours, padding=0.05):
+def refine_bounding_box(image, coordinates, padding=0.05):
     """
-    Calculate the bounding box that includes all contours, with added padding.
+    Refine the bounding box using provided coordinates of the spades or target regions.
     :param image: Original image.
-    :param contours: Contours detected from the mask.
+    :param coordinates: List of coordinates (x, y, w, h) for detected objects (spades, etc.).
     :param padding: Padding percentage to add around the bounding box.
     :return: Refined bounding box (x_min, y_min, x_max, y_max).
     """
-    if len(contours) == 0:
-        return 0, 0, image.shape[1], image.shape[0]  # If no contours, return the full image
+    if len(coordinates) == 0:
+        return 0, 0, image.shape[1], image.shape[0]  # If no objects, return the full image
 
     # Initialize bounds
     x_min, y_min, x_max, y_max = image.shape[1], image.shape[0], 0, 0
 
-    # Find the bounding box around all contours
-    for contour in contours:
-        x, y, w, h = cv2.boundingRect(contour)
+    # Calculate the bounding box around all provided coordinates
+    for x, y, w, h in coordinates:
         x_min = min(x_min, x)
         y_min = min(y_min, y)
         x_max = max(x_max, x + w)
@@ -41,68 +39,79 @@ def refine_bounding_box(image, contours, padding=0.05):
 
 def detect_regions(image):
     """
-    Detect red and yellow regions in the input image.
+    Detect the coordinates of the two red spades and yellow rectangles.
     :param image: Input image.
-    :return: Combined mask of red and yellow regions, contours, and mask visualization image.
+    :return: Detected coordinates, visualization mask.
     """
     # Convert the image to HSV color space
     hsv = cv2.cvtColor(image, cv2.COLOR_BGR2HSV)
 
-    '''Red Detection'''
-    # Range for lower red
+    # Detect red regions (spades)
     red_lower1 = np.array([0, 120, 70])
     red_upper1 = np.array([10, 255, 255])
-    mask_red1 = cv2.inRange(hsv, red_lower1, red_upper1)
-
-    # Range for upper red
     red_lower2 = np.array([170, 120, 70])
     red_upper2 = np.array([180, 255, 255])
-    mask_red2 = cv2.inRange(hsv, red_lower2, red_upper2)
+    mask_red = cv2.inRange(hsv, red_lower1, red_upper1) + cv2.inRange(hsv, red_lower2, red_upper2)
 
-    # Combine red masks
-    mask_red = mask_red1 + mask_red2
-
-    '''Yellow Detection'''
-    # Range for yellow
+    # Detect yellow regions (rectangles)
     yellow_lower = np.array([20, 100, 100])
     yellow_upper = np.array([35, 255, 255])
     mask_yellow = cv2.inRange(hsv, yellow_lower, yellow_upper)
 
-    '''Combined Mask'''
-    # Combine masks for red and yellow
+    # Combine masks
     combined_mask = cv2.bitwise_or(mask_red, mask_yellow)
 
-    # Find the contours from the combined mask
+    # Find contours
     contours, _ = cv2.findContours(combined_mask, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+
+    # Separate spades (red) and rectangles (yellow)
+    spades = []
+    others = []
+    for contour in contours:
+        x, y, w, h = cv2.boundingRect(contour)
+        aspect_ratio = float(w) / h
+        if aspect_ratio > 0.5 and aspect_ratio < 1.5 and w > 30 and h > 30:  # Likely spades
+            spades.append((x, y, w, h))
+        elif w > 50 and h > 50:  # Larger areas for yellow rectangles
+            others.append((x, y, w, h))
 
     # Create a visualization of the mask
     mask_visualization = np.zeros_like(image)
     mask_visualization[:, :, 2] = mask_red  # Red areas highlighted in red
     mask_visualization[:, :, 1] = mask_yellow  # Yellow areas highlighted in green
 
-    return combined_mask, contours, mask_visualization
+    return spades, others, mask_visualization
 
 
-def crop_and_transform(image, contours):
+def crop_and_transform(image, spades, padding=0.05):
     """
     Crop and transform the image to focus on the area of interest.
     :param image: Original input image.
-    :param contours: Detected contours from the mask.
-    :return: Highlighted image with bounding box and cropped image.
+    :param spades: Coordinates of detected spades.
+    :param padding: Padding percentage around the bounding box.
+    :return: Highlighted image and cropped image.
     """
-    # Refine the bounding box around the detected regions
-    bounding_box = refine_bounding_box(image, contours)
+    if len(spades) < 2:
+        print("Error: Could not detect two spades. Returning the full image.")
+        return image, image
 
-    # Crop the image to the bounding box
-    x_min, y_min, x_max, y_max = bounding_box
+    # Sort spades by x-coordinate to determine the left and right spades
+    spades = sorted(spades, key=lambda x: x[0])
+    left_spade = spades[0]
+    right_spade = spades[-1]
+
+    # Define the bounding box from the left spade to the right spade
+    x_min, y_min, x_max, y_max = refine_bounding_box(image, [left_spade, right_spade], padding)
+
+    # Crop the image to this bounding box
     cropped_image = image[y_min:y_max, x_min:x_max]
 
     # Resize the cropped area for consistent display
     resized_image = cv2.resize(cropped_image, (800, 600), interpolation=cv2.INTER_CUBIC)
 
-    # Create a highlighted version of the original image
+    # Highlight the selected area in the original image
     highlighted_image = image.copy()
-    cv2.rectangle(highlighted_image, (x_min, y_min), (x_max, y_max), (0, 255, 0), 3)  # Green rectangle
+    cv2.rectangle(highlighted_image, (x_min, y_min), (x_max, y_max), (0, 255, 0), 3)
 
     return highlighted_image, resized_image
 
@@ -113,11 +122,11 @@ def process_image(image):
     :param image: Input image.
     :return: Highlighted original image, cropped image, and mask visualization.
     """
-    # Detect yellow and red regions
-    combined_mask, contours, mask_visualization = detect_regions(image)
+    # Detect regions of interest
+    spades, others, mask_visualization = detect_regions(image)
 
-    # Crop and transform the image to focus on the detected area
-    highlighted_image, cropped_image = crop_and_transform(image, contours)
+    # Crop and highlight the area of interest
+    highlighted_image, cropped_image = crop_and_transform(image, spades)
 
     return highlighted_image, cropped_image, mask_visualization
 
@@ -155,7 +164,7 @@ def load_and_test_images_in_folder(folder_path):
     cv2.destroyAllWindows()
 
 
-# Specify the folder path that contains input images
+# Specify the folder path containing the input images
 test_folder_path = "images"  # Change this to your folder path
 
 # Process the images
