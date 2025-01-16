@@ -8,18 +8,18 @@ export const lineChartOptionsDashboard = {
   xaxis: {
     type: "datetime",
       categories: [
-    "Day 0",
-    "Day 1",
-    "Day 2",
-    "Day 3",
-    "Day 4",
-    "Day 5",
-    "Day 6",
-    "Day 7",
-    "Day 8",
-    "Day 9",
-    "Day 10"
-  ],
+  "Day 0",
+  "Day 1",
+  "Day 2",
+  "Day 3",
+  "Day 4",
+  "Day 5",
+  "Day 6",
+  "Day 7",
+  "Day 8",
+  "Day 9",
+  "Day 10"
+],
     labels: {
       style: { colors: "#FFF", fontSize: "12px", fontWeight: "600" },
     },

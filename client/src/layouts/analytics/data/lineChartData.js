@@ -12,7 +12,7 @@ export const lineChartDataDashboard = [
       28.2,
       11,
       13.4,
-      4.35
+      4.35,
     ]
   },
   {

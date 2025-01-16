@@ -17,6 +17,9 @@ import Sebastian from "../../../assets/images/players/Sebastian2.jpeg";
 import Paul from "../../../assets/images/players/Paul.jpeg";
 import Matthi from "../../../assets/images/players/Matthi.jpeg";
 import Eliah from "../../../assets/images/players/Eliah.png";
+import {useState} from "react";
+
+
 
 function Player({ image, name, username }) {
   return (
@@ -61,6 +64,38 @@ function getLatestPnL(playerName) {
   return 0; // Standardwert, falls kein Spieler gefunden wird
 }
 
+function getDaysPlayed(playerName) {
+  const chartData = lineChartDataDashboard.find((entry) => entry.name === playerName);
+  if (chartData) {
+    let daysPlayed = 0;
+    const data = chartData.data;
+    for (let i = 1; i < data.length; i++) {
+      if (data[i] !== data[i - 1]) {
+        daysPlayed++;
+      }
+    }
+    return daysPlayed;
+  }
+  return 0; // Standardwert, falls kein Spieler gefunden wird
+}
+
+function isActive(playerName) {
+  return fetch("https://localhost:5000/players")
+    .then((res) => {
+      if (!res.ok) {
+        throw new Error("Failed to fetch players data");
+      }
+      return res.json();
+    })
+    .then((players) => {
+      return players.some((player) => player.name === playerName) ? "Online" : "Offline";
+    })
+    .catch((error) => {
+      console.error("Error fetching players data:", error);
+      return "Offline"; // Return "Offline" in case of an error
+    });
+}
+
 export default {
   columns: [
     { name: "player", align: "left" },
@@ -89,7 +124,7 @@ export default {
           })}
         />
       ),
-      daysPlayed: <DaysPlayed value={45} />,
+      daysPlayed: <DaysPlayed value={getDaysPlayed("Sebastian")} />,
       action: (
         <VuiTypography component="a" href="#" variant="caption" color="text" fontWeight="medium">
           Edit
@@ -113,7 +148,7 @@ export default {
           })}
         />
       ),
-      daysPlayed: <DaysPlayed value={30} />,
+      daysPlayed: <DaysPlayed value={getDaysPlayed("Luca")} />,
       action: (
         <VuiTypography component="a" href="#" variant="caption" color="text" fontWeight="medium">
           Edit
@@ -138,7 +173,7 @@ export default {
           })}
         />
       ),
-      daysPlayed: <DaysPlayed value={60} />,
+      daysPlayed: <DaysPlayed value={getDaysPlayed("Jura Jonas")} />,
       action: (
         <VuiTypography component="a" href="#" variant="caption" color="text" fontWeight="medium">
           Edit
@@ -163,7 +198,7 @@ export default {
           })}
         />
       ),
-      daysPlayed: <DaysPlayed value={80} />,
+      daysPlayed: <DaysPlayed value={getDaysPlayed("Paul")} />,
       action: (
         <VuiTypography component="a" href="#" variant="caption" color="text" fontWeight="medium">
           Edit
@@ -188,7 +223,7 @@ export default {
           })}
         />
       ),
-      daysPlayed: <DaysPlayed value={50} />, // Dummy-Wert für Tage gespielt
+      daysPlayed: <DaysPlayed value={getDaysPlayed("Eliah")} />, // Dummy-Wert für Tage gespielt
       action: (
         <VuiTypography component="a" href="#" variant="caption" color="text" fontWeight="medium">
           Edit
@@ -212,7 +247,7 @@ export default {
           })}
         />
       ),
-      daysPlayed: <DaysPlayed value={25} />,
+      daysPlayed: <DaysPlayed value={getDaysPlayed("Markus")} />,
       action: (
         <VuiTypography component="a" href="#" variant="caption" color="text" fontWeight="medium">
           Edit
@@ -236,7 +271,7 @@ export default {
           })}
         />
       ),
-      daysPlayed: <DaysPlayed value={15} />,
+      daysPlayed: <DaysPlayed value={getDaysPlayed("Jonas")} />,
       action: (
         <VuiTypography component="a" href="#" variant="caption" color="text" fontWeight="medium">
           Edit
@@ -261,7 +296,7 @@ export default {
           })}
         />
       ),
-      daysPlayed: <DaysPlayed value={100} />,
+      daysPlayed: <DaysPlayed value={getDaysPlayed("Matthi")} />,
       action: (
         <VuiTypography component="a" href="#" variant="caption" color="text" fontWeight="medium">
           Edit
