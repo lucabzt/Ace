@@ -48,7 +48,8 @@
 		"stylis": "4.0.10",
 		"stylis-plugin-rtl": "2.1.0",
 		"uuid": "8.3.2",
-		"web-vitals": "1.0.1"
+		"web-vitals": "1.0.1",
+		"xlsx": "^0.18.5"
 	},
 	"devDependencies": {
 		"@babel/plugin-proposal-private-property-in-object": "^7.16.7",
