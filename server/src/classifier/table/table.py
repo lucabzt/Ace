@@ -125,6 +125,15 @@ def process_image(image):
     # Detect regions of interest
     spades, others, mask_visualization = detect_regions(image)
 
+    # Highlight detected spades and rectangles with nametags
+    for x, y, w, h in spades:
+        cv2.rectangle(image, (x, y), (x + w, y + h), (0, 0, 255), 3)  # Red border for spades
+        cv2.putText(image, "Spade", (x, y - 10), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 0, 255), 2)  # Nametag for spades
+    for x, y, w, h in others:
+        cv2.rectangle(image, (x, y), (x + w, y + h), (0, 255, 255), 3)  # Yellow border for rectangles
+        cv2.putText(image, "Rectangle", (x, y - 10), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 255, 255),
+                    2)  # Nametag for rectangles
+
     # Crop and highlight the area of interest
     highlighted_image, cropped_image = crop_and_transform(image, spades)
 
@@ -153,7 +162,7 @@ def load_and_test_images_in_folder(folder_path):
             highlighted_image, cropped_image, mask_visualization = process_image(image)
 
             # Show the results
-            cv2.imshow("Original Image with Highlighted Region", highlighted_image)
+            cv2.imshow("Original Image with Highlighted Objects", highlighted_image)
             cv2.imshow("Cropped and Resized Image", cropped_image)
             cv2.imshow("Color Highlighted Mask (Red and Yellow)", mask_visualization)
 
