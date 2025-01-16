@@ -55,7 +55,7 @@ def detect_regions(image):
 
     # Detect yellow regions (rectangles)
     yellow_lower = np.array([20, 100, 100])
-    yellow_upper = np.array([35, 255, 255])
+    yellow_upper = np.array([30, 255, 255])
     mask_yellow = cv2.inRange(hsv, yellow_lower, yellow_upper)
 
     # Combine masks
