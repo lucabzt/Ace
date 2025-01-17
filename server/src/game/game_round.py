@@ -34,6 +34,7 @@ class GameRound:
         self.exit_game = False  # Flag to indicate game exit
         self.shared_resources = shared_resources
         self.pnl_matrix = {player.name: [] for player in players}
+        self.play_sound = True
 
         timestamp = int(time.time() * 1000)  # Current timestamp in milliseconds
         for player in self.players:
@@ -54,7 +55,7 @@ class GameRound:
         self.deal_private_cards()
         betting_round = BettingRound(self.players, self.pot, self.current_bet, self.small_blind_index,
                                      self.folded_players, self.active_players, self.bets,
-                                     self.update_display, self, self.shared_resources)
+                                     self.update_display, self, self.shared_resources, self.play_sound)
 
         print("---------------")
         # Pre-Flop Betting

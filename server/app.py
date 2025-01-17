@@ -326,7 +326,7 @@ if __name__ == '__main__':
     DEBUG = True
 
     if DEBUG:
-        app.run(debug=True, host='127.0.0.1', port=5000
+        app.run(debug=False, host='127.0.0.1', port=5000
                 , ssl_context=('./cert.pem', './key.pem')
                 )
     else:
