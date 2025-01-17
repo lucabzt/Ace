@@ -620,7 +620,7 @@ heatmap_data = [
     {
         "x": "7",
         "y": "2",
-        "heat": 0.35,
+        "heat": 0.31,
         "symbol": "o\n 100"
     },
     {
@@ -698,7 +698,7 @@ heatmap_data = [
     {
         "x": "6",
         "y": "2",
-        "heat": 0.34,
+        "heat": 0.32,
         "symbol": "o\n 95"
     },
     {
@@ -932,7 +932,7 @@ heatmap_data = [
     {
         "x": "3",
         "y": "2",
-        "heat": 0.32,
+        "heat": 0.35,
         "symbol": "o\n 91"
     },
     {

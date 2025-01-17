@@ -38,16 +38,28 @@ function PokerHeatmap() {
               // Definiere Farbskalen
               const colorScale = window.anychart.scales.ordinalColor();
                  colorScale.ranges([
-            { less: 0.35, color: "#1E88E5" }, // Darker blue (perfect)
-            { from: 0.35, to: 0.45, color: "#64B5F6" }, // Light blue
-            { from: 0.45, to: 0.5, color: "#BBDEFB" }, // Very light blue
-            { from: 0.5, to: 0.55, color: "#FFE082" }, // Warm pale yellow-orange
-            { from: 0.55, to: 0.6, color: "#FFCA60" }, // Richer golden yellow
-            { from: 0.6, to: 0.65, color: "#FFA726" }, // Soft orange
-            { from: 0.65, to: 0.7, color: "#FF7043" }, // Light orange-red
-            { from: 0.7, to: 0.75, color: "#F4511E" }, // Muted orange-red
-            { from: 0.75, to: 0.8, color: "#D84315" }, // Warm reddish-orange
-            { greater: 0.8, color: "#BF360C" }, // Subdued red
+        { from: 0.3, to: 0.325, color: "#0D47A1" }, // Dark Blue
+        { from: 0.325, to: 0.35, color: "#1565C0" }, // Strong Blue
+        { from: 0.35, to: 0.375, color: "#1976D2" }, // Medium Blue
+        { from: 0.375, to: 0.4, color: "#1E88E5" }, // Darker Blue
+        { from: 0.4, to: 0.425, color: "#42A5F5" }, // Bright Blue
+        { from: 0.425, to: 0.45, color: "#64B5F6" }, // Light Blue
+        { from: 0.45, to: 0.475, color: "#90CAF9" }, // Very Light Blue
+        { from: 0.475, to: 0.5, color: "#BBDEFB" }, // Pale Blue
+        { from: 0.5, to: 0.525, color: "#FFEB3B" }, // Bright Yellow
+        { from: 0.525, to: 0.55, color: "#FFCA28" }, // Golden Yellow
+        { from: 0.55, to: 0.575, color: "#FFB300" }, // Deep Yellow
+        { from: 0.575, to: 0.6, color: "#FF9800" }, // Strong Orange
+        { from: 0.6, to: 0.625, color: "#FF5722" }, // Red-Orange
+        { from: 0.625, to: 0.65, color: "#F4511E" }, // Duller Orange-Red
+        { from: 0.65, to: 0.675, color: "#E34220" }, // Warm Orange-Red
+        { from: 0.675, to: 0.7, color: "#D84315" }, // Reddish Orange
+        { from: 0.7, to: 0.725, color: "#C73702" }, // Intense Red
+        { from: 0.725, to: 0.75, color: "#BF360C" }, // Deep Red
+        { from: 0.75, to: 0.775, color: "#9A2A11" }, // Dark Red-Orange
+        { from: 0.775, to: 0.8, color: "#8E2409" }, // Dark Red
+        { from: 0.8, to: 0.825, color: "#8B0000" }, // Darker Red
+        { greater: 0.85, color: "#7F0000" }  // Darkest Red
             ]);
               chart.colorScale(colorScale);
 
