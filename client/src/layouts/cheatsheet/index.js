@@ -5,12 +5,8 @@ import VuiBox from "../../components/VuiBox";
 import DashboardLayout from "../../examples/LayoutContainers/DashboardLayout";
 import DashboardNavbar from "../../examples/Navbars/DashboardNavbar";
 import Footer from "../../examples/Footer";
-import CheatSheet from "./components/CheatSheetCard";
 import ChipDistributionCard from "./components/ChipDistributionCard";
-import Chart from "./components/PokerHeatMap";
-import PokerGameBox from "../poker/PokerGameBox";
 import PokerHeatmap from "./components/PokerHeatMap";
-import background from "../../assets/images/body-background.png";
 
 function Billing() {
 
@@ -27,22 +23,10 @@ function Billing() {
       <DashboardLayout>
         <DashboardNavbar />
         <VuiBox mt={4}>
-
           <VuiBox mb={1.5}>
             {/* Heatmap container */}
           <PokerHeatmap />
-            <Grid container spacing={3}>
-              <Grid item xs={12}>
-                <Grid container spacing={3}>
-                  <Grid item xs={12} md={6}>
-                    <CheatSheet />
-                  </Grid>
-                  <Grid item xs={12} md={6}>
-                    <ChipDistributionCard />
-                  </Grid>
-                </Grid>
-              </Grid>
-            </Grid>
+            <ChipDistributionCard />
           </VuiBox>
         </VuiBox>
         <Footer />
