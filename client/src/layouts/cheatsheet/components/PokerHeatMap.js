@@ -31,7 +31,7 @@ function PokerHeatmap() {
 
           // Lade Daten und erstelle das Heatmap-Diagramm
           window.anychart.data.loadJsonFile(
-            "https://cdn.anychart.com/samples/heat-map-charts/heat-map-in-poker/data.json",
+                        "https://localhost:5000/heatmap",
             function (data) {
               const chart = window.anychart.heatMap(data);
 
@@ -94,7 +94,7 @@ function PokerHeatmap() {
               chart
                 .tooltip()
                 .titleFormat(function () {
-                  const s = this.getData("symbol") === "s" ? "suited" : "unsuited";
+                  const s = this.getData("symbol") === "s" ? "suited" : "offsuit";
                   return `${this.x}${this.y} ${s}`;
                 })
                 .format(function () {
@@ -148,6 +148,7 @@ function PokerHeatmap() {
   return <div id="heatmap-container" style={{ width: "100%", height: "80vh",
               background: `url('${background}') no-repeat center center, linear-gradient(135deg, #0070ba, #1546a0)`,
               borderRadius: "16px",
+              backgroundSize: "cover", // Hier wird sichergestellt, dass das Bild den Container vollständig ausfüllt
               alignItems: "center",
               justifyContent: "center",
               padding: "8px",
