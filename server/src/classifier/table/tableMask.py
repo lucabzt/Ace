@@ -2,7 +2,6 @@ import cv2
 import numpy as np
 import os
 
-
 def refine_bounding_box(image, coordinates, padding=0.05):
     """
     Refine the bounding box using provided coordinates of the spades or target regions.
@@ -36,7 +35,6 @@ def refine_bounding_box(image, coordinates, padding=0.05):
 
     return x_min, y_min, x_max, y_max
 
-
 def detect_regions(image):
     """
     Detect the coordinates of the two red spades and yellow rectangles with yellow outlines.
@@ -63,7 +61,7 @@ def detect_regions(image):
     mask_yellow = cv2.inRange(hsv, yellow_lower, yellow_upper)
 
     # Perform edge detection (Canny) to detect outlines
-    edges_yellow = cv2.Canny(mask_yellow, 100, 200) #TODO PLAY AROUND HERE !!!!!!!
+    edges_yellow = cv2.Canny(mask_yellow, 100, 200) #TODO PLAY AROUND HERE !!!!!!
 
     # Find contours for both red spades and yellow outlines
     contours_red, _ = cv2.findContours(mask_red, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
@@ -82,7 +80,7 @@ def detect_regions(image):
         mean_color = np.mean(roi, axis=(0, 1))  # Calculate mean color for the region (in BGR)
 
         # Detect spades (red)
-        if 0.5 < aspect_ratio < 2 and w > 20 and h > 20:  #TODO PLAY AROUND HERE !!!!!!!
+        if 0.3 < aspect_ratio < 3 and w > 10 and h > 10:  # Adjusted thresholds for more generous detection
             if is_color_in_range(mean_color, red_lower1, red_upper1) or is_color_in_range(mean_color, red_lower2, red_upper2):
                 spades.append((x, y, w, h))
 
@@ -92,7 +90,7 @@ def detect_regions(image):
         aspect_ratio = float(w) / h
 
         # Rectangles should be large and rectangular in shape
-        if w > 60 and h > 60 and h < 200 and w < 200: #TODO PLAY AROUND HERE !!!!!!!
+        if w > 20 and h > 20 and h < 50 and w < 50: #TODO PLAY AROUND HERE !!!!!!
             rectangles.append((x, y, w, h))
 
     # Create a visualization of the mask
@@ -101,7 +99,6 @@ def detect_regions(image):
     mask_visualization[:, :, 1] = mask_yellow  # Yellow areas highlighted in green
 
     return spades, rectangles, mask_visualization
-
 
 def is_color_in_range(mean_color, lower_range, upper_range):
     """
@@ -117,14 +114,14 @@ def is_color_in_range(mean_color, lower_range, upper_range):
     # Check if the color is in range
     return cv2.inRange(np.uint8([[mean_color_hsv]]), lower_range, upper_range)[0][0] > 0
 
-
 def crop_and_transform(image, spades, padding=0.05):
     """
     Crop and transform the image to focus on the area of interest with the original aspect ratio.
+    Resize the cropped image to full HD (1920x1080) for better readability.
     :param image: Original input image.
     :param spades: Coordinates of detected spades.
     :param padding: Padding percentage around the bounding box.
-    :return: Image with highlighted rectangle and cropped image with original aspect ratio.
+    :return: Image with highlighted rectangle and cropped image resized to full HD.
     """
     if len(spades) < 2:
         print("Error: Could not detect two spades. Returning the full image.")
@@ -145,7 +142,38 @@ def crop_and_transform(image, spades, padding=0.05):
     # Crop the image to the bounding box
     cropped_image = image[y_min:y_max, x_min:x_max]
 
-    return highlighted_image, cropped_image
+    # Resize the cropped image to 1920x1080 with padding to maintain aspect ratio
+    target_size = (1920, 1080)
+    cropped_resized = resize_with_padding(cropped_image, target_size)
+
+    return highlighted_image, cropped_resized
+
+
+def resize_with_padding(image, target_size):
+    """
+    Resize an image to the target size with padding to maintain aspect ratio.
+    :param image: Input image.
+    :param target_size: Tuple (width, height) specifying the target resolution.
+    :return: Resized image with padding.
+    """
+    target_width, target_height = target_size
+    h, w = image.shape[:2]
+
+    # Calculate scale and padding
+    scale = min(target_width / w, target_height / h)
+    new_w = int(w * scale)
+    new_h = int(h * scale)
+    resized_image = cv2.resize(image, (new_w, new_h), interpolation=cv2.INTER_AREA)
+
+    # Create a black canvas of the target size
+    canvas = np.zeros((target_height, target_width, 3), dtype=np.uint8)
+
+    # Center the resized image on the canvas
+    top = (target_height - new_h) // 2
+    left = (target_width - new_w) // 2
+    canvas[top:top + new_h, left:left + new_w] = resized_image
+
+    return canvas
 
 
 def process_image(image):
@@ -161,16 +189,15 @@ def process_image(image):
     for x, y, w, h in spades:
         cv2.rectangle(image, (x, y), (x + w, y + h), (0, 0, 255), 3)  # Red border for spades
         cv2.putText(image, "Spade", (x, y - 10), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 0, 255), 2)  # Nametag for spades
-    for x, y, w, h in others:
-        cv2.rectangle(image, (x, y), (x + w, y + h), (0, 255, 255), 3)  # Yellow border for rectangles
-        cv2.putText(image, "Rectangle", (x, y - 10), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 255, 255),
-                    2)  # Nametag for rectangles
+    #for x, y, w, h in others:
+     #   cv2.rectangle(image, (x, y), (x + w, y + h), (0, 255, 255), 3)  # Yellow border for rectangles
+      #  cv2.putText(image, "Rectangle", (x, y - 10), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 255, 255),
+       #             2)  # Nametag for rectangles
 
     # Crop and highlight the area of interest
     highlighted_image, cropped_image = crop_and_transform(image, spades)
 
     return highlighted_image, cropped_image, mask_visualization
-
 
 def load_and_test_images_in_folder(folder_path):
     """
@@ -205,8 +232,40 @@ def load_and_test_images_in_folder(folder_path):
     cv2.destroyAllWindows()
 
 
-# Specify the folder path containing the input images
-test_folder_path = "images"  # Change this to your folder path
+def process_video_from_webcam():
+    """
+    Process video from the webcam in real-time.
+    """
+    cap = cv2.VideoCapture(0)  # Open webcam (default camera index 0)
 
-# Process the images
-load_and_test_images_in_folder(test_folder_path)
+    if not cap.isOpened():
+        print("Error: Unable to access the webcam.")
+        return
+
+    print("Press 'q' to exit webcam processing.")
+
+    while True:
+        ret, frame = cap.read()
+        if not ret:
+            print("Error: Unable to read from the webcam.")
+            break
+
+        # Process the frame
+        highlighted_image, cropped_image, mask_visualization = process_image(frame)
+
+        # Display the results
+        cv2.imshow("Original Image with Highlighted Objects", highlighted_image)
+        cv2.imshow("Cropped and Resized Image", cropped_image)
+        cv2.imshow("Color Highlighted Mask (Red and Yellow)", mask_visualization)
+
+        # Exit on pressing 'q'
+        if cv2.waitKey(1) & 0xFF == ord('q'):
+            break
+
+    # Release the webcam and close all OpenCV windows
+    cap.release()
+    cv2.destroyAllWindows()
+
+
+# Uncomment to test video processing from webcam
+process_video_from_webcam()
