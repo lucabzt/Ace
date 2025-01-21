@@ -24,7 +24,7 @@
 import Dashboard from "./layouts/dashboard";
 import Poker from "./layouts/poker";
 import Billing from "./layouts/billing";
-import Spotify from "./layouts/spotify"
+import Spotify2 from "./layouts/spotify2"
 import Analytics from "./layouts/analytics"
 import Cheatsheet from "./layouts/cheatsheet"
 import HighLight from "./layouts/highlight"
@@ -63,7 +63,7 @@ const routes = [
     key: "spotify",
     route: "/spotify",
     icon: <BsSpotify size="15px" color="inherit" />,
-    component: Spotify,
+    component: Spotify2,
     noCollapse: true,
   },
   {

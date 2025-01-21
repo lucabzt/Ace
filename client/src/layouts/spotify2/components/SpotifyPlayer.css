@@ -1,0 +1,186 @@
+.spotify-player-container {
+  margin-top: 20px;
+  display: grid;
+  grid-template-columns: 1fr 1fr; /* Teilt das Layout in zwei gleiche Spalten */
+  gap: 20px; /* Abstand zwischen den Spalten */
+  align-items: stretch; /* Beide Spalten bekommen dieselbe Höhe */
+  height: 100%; /* Ermöglicht, dass beide Container gleich hoch werden */
+}
+
+.playback-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* Zentriert den Inhalt vertikal */
+  padding: 20px;
+  align-items: center; /* Zentriert den Inhalt horizontal */
+  border-radius: 8px;
+  transform: translateY(-50%); /* Verschiebt um 50% nach oben */
+  position: relative; /* Stellt sicher, dass transform für dieses Element korrekt funktioniert */
+  top: 50%; /* Setzt den Container 50% vom übergeordneten Element */
+}
+
+.track-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+  .track-image {
+  width: 300px;
+  height: auto;
+  border-radius: 12px;
+  object-fit: cover; /* Sorgt für sauberes Resizing */
+}
+
+  .track-details {
+  width: 100%; /* Nimmt die gesamte verfügbare Breite ein */
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+
+}
+
+  .track-name {
+    font-size: 25px;
+    margin: 0;
+     color: #d5cfcf;
+
+  }
+
+  .track-artist {
+    margin-top: 10px;
+    font-size: 20px;
+    color: #d5cfcf;
+  }
+
+  .track-duration {
+    margin-top: 10px;
+    font-size: 16px;
+    color: #d5cfcf;
+  }
+
+
+  .play-pause-button:hover {
+    background-color: #11d8d8;
+  }
+
+
+
+  .logout-button:hover {
+    background-color: #ff1a1a;
+  }
+
+
+  .track-controls {
+    margin: 30px 10px 15px 10px ;
+    padding: 6px 15px;
+    min-width: 80px;
+    background-color: #1262a3;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+
+  .track-controls button:hover {
+    background-color: #1e1870;
+  }
+
+  .progress-bar-container {
+    width: 100%;
+    height: 10px;
+    background-color: #e0e0e0;
+    border-radius: 5px;
+    margin-top: 10px;
+    overflow: hidden;
+    position: relative;
+  }
+
+  .progress-bar {
+    height: 100%;
+    background-color: #0be2e2;
+    transition: width 0.2s ease;
+    border-radius: 5px;
+  }
+
+  .play-pause-button {
+    margin-top: 10px;
+    padding: 10px 20px;
+    background-color: #1d2db9;
+    color: white;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 16px;
+    width: 100px;
+    margin-right: 25px;
+  }
+
+  .button-container {
+    display: flex;
+    justify-content: center; /* Zentriert die Buttons horizontal */
+    margin-top: 10px; /* Fügt Abstand zur Fortschrittsleiste hinzu */
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .play-pause-button {
+    margin: 0 5px; /* Fügt horizontalen Abstand zwischen den Buttons hinzu */
+  }
+
+
+.play-pause-button.is-shuffle-active {
+  position: relative;
+}
+
+.play-pause-button.is-shuffle-active:after {
+  content: "";
+  position: absolute;
+  bottom: 10px; /* Punkt näher am Symbol */
+  left: 50%;
+  transform: translateX(-50%);
+  width: 7px;
+  height: 7px;
+  background-color: currentColor;
+  border-radius: 50%;
+}
+
+.lyrics-container {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  height: 80vh; /* Dynamisch: Begrenze die Höhe auf 80% des Viewports */
+  background-color: rgba(0, 0, 0, 0.8);
+  padding: 10px 20px;
+  border-radius: 15px;
+  overflow: auto; /* Ermöglicht Scrollen, falls der Inhalt zu groß wird */
+}
+
+.lyrics-box {
+  width: 100%;
+  max-height: 100%; /* Begrenze die Höhe der einzelnen Boxen auf einen Anteil des Containers */
+  overflow-y: auto; /* Verhindert Überlauf, aber keine Scrollleiste */
+}
+
+.lyrics-container h3 {
+  color: white; /* Überschrift "Lyrics:" in Weiß */
+  font-size: 30px; /* Angenehm lesbare Schriftgröße */
+}
+
+
+.lyrics-text {
+  color: #eaeaea; /* Weicher weißer Farbton */
+  font-size: 20px; /* Angenehm lesbare Schriftgröße */
+  line-height: 1.8; /* Optimierter Zeilenabstand */
+  white-space: pre-wrap; /* Bricht lange Zeilen korrekt */
+  margin: 0; /* Keine zusätzlichen Außenabstände */
+  font-family: "Gotham Circular", "Proxima Nova", "Arial", sans-serif; /* Alternativen bei Nichtverfügbarkeit */
+  font-weight: 400; /* Normales Gewicht für klare Lesbarkeit */
+}
+
+.lyrics-container p {
+  color: white; /* Ladeanzeige "Loading lyrics..." in Weiß */
+}

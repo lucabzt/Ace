@@ -32,3 +32,5 @@ jupyter
 waitress
 flask-cors
 lyricsgenius
+roboflow
+supervision

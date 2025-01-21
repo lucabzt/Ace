@@ -6,13 +6,17 @@ import App from "./App";
 // Vision UI Dashboard React Context Provider
 import { VisionUIControllerProvider } from "./context";
 
+import { SpotifyProvider } from "./layouts/spotify2/components/SpotifyContext";
 
 
 ReactDOM.render(
-  <BrowserRouter>
-  <VisionUIControllerProvider>
-    <App />
-  </VisionUIControllerProvider>
-</BrowserRouter>,
+  <SpotifyProvider>
+    <BrowserRouter>
+      <VisionUIControllerProvider>
+        <App />
+      </VisionUIControllerProvider>
+    </BrowserRouter>
+  </SpotifyProvider>
+,
   document.getElementById('root')
 );
