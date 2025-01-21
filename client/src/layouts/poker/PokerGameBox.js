@@ -2,17 +2,17 @@ import React, { useState } from "react";
 import { Card, useMediaQuery } from "@mui/material";
 import PokerGameUI from "./components/PokerGameUI/PokerGameUI";
 import GameButtons from "./components/buttons/GameButtons";
-import VuiButton from "../../components/VuiButton"; // Importiere VuiButton
+import VuiButton from "../../components/VuiButton";
+import { FullscreenExitRounded, FullscreenRounded } from "@mui/icons-material";
 
 function PokerGameBox() {
-  const [isFullscreen, setIsFullscreen] = useState(false); // Fullscreen State
-  const isSmallScreen = useMediaQuery("(max-width: 960px)"); // Breakpoint for responsive design
+  const [isFullscreen, setIsFullscreen] = useState(false);
+  const isSmallScreen = useMediaQuery("(max-width: 960px)");
 
   const toggleFullscreen = () => {
     setIsFullscreen(!isFullscreen);
   };
 
-  // Fullscreen styles
   const fullscreenStyles = isFullscreen
     ? {
         position: "fixed",
@@ -21,11 +21,12 @@ function PokerGameBox() {
         width: "100vw",
         height: "100vh",
         backgroundColor: "rgba(0, 0, 0, 0.9)",
-        zIndex: 9999,
+        zIndex: 9998,
         overflow: "hidden",
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
+        pointerEvents: "none", // Prevent the fullscreen container from blocking clicks
       }
     : {};
 
@@ -40,6 +41,7 @@ function PokerGameBox() {
           ? "300px"
           : "50vw",
         transition: "all 0.3s ease",
+        pointerEvents: "auto", // Restore interactivity for children
       }}
     >
       <Card
@@ -57,6 +59,7 @@ function PokerGameBox() {
           boxShadow: isFullscreen
             ? "0 8px 20px rgba(255, 255, 255, 0.4)"
             : "0 4px 12px rgba(0, 0, 0, 0.3)",
+          overflow: "hidden",
         }}
       >
         {/* Fullscreen Button */}
@@ -65,12 +68,21 @@ function PokerGameBox() {
           variant="contained"
           color="info"
           style={{
-              fontSize: "1.3rem",
-              padding: "0.4rem 0.8rem",
-              backgroundColor: isFullscreen ? "#ff5252" : "royalblue",
+            position: "absolute",
+            top: "20px",
+            right: "20px",
+            fontSize: "2rem",
+            padding: "0",
+            zIndex: 9999, // Ensure button is on top
+            backgroundColor: isFullscreen ? "#ff5252" : "royalblue",
+            pointerEvents: "auto", // Make button clickable
           }}
         >
-          {isFullscreen ? "Exit Fullscreen" : "Play Fullscreen"}
+          {isFullscreen ? (
+            <FullscreenExitRounded style={{ fontSize: "3rem" }} color="inherit" />
+          ) : (
+            <FullscreenRounded style={{ fontSize: "3rem" }} color="inherit" />
+          )}
         </VuiButton>
 
         {/* Poker-UI Rendering */}
