@@ -1,7 +1,15 @@
 import React, { useState } from "react";
 import { Card, useMediaQuery } from "@mui/material";
 import VuiButton from "../../components/VuiButton";
-import SpotifyComponent from "./components/SpotifyComponent"; // Import Spotify-Komponente
+import SpotifyComponent from "./components/SpotifyComponent";
+import {BsFullscreen, BsFullscreenExit, BsSkipBackwardFill} from "react-icons/bs";
+import {
+    FullscreenExit,
+    FullscreenExitOutlined, FullscreenExitRounded,
+    FullscreenExitSharp,
+    FullscreenOutlined, FullscreenRounded,
+    FullscreenSharp
+} from "@mui/icons-material"; // Import Spotify-Komponente
 
 function SpotifyBox() {
   const [isFullscreen, setIsFullscreen] = useState(false); // Fullscreen Zustand
@@ -69,12 +77,16 @@ function SpotifyBox() {
             position: "absolute",
             top: "20px",
             right: "20px",
-            fontSize: "1.3rem",
-            padding: "0.4rem 0.8rem",
+            fontSize: "2rem",
+            padding: "0",
             backgroundColor: isFullscreen ? "#ff5252" : "royalblue",
           }}
         >
-          {isFullscreen ? "Exit Fullscreen" : "Enter Fullscreen"}
+          {isFullscreen ? (
+            <FullscreenExitRounded style={{ fontSize: "3rem" }} color="inherit" />
+          ) : (
+            <FullscreenRounded style={{ fontSize: "3rem" }} color="inherit" />
+          )}
         </VuiButton>
 
         {/* Spotify Component Rendering */}
