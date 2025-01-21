@@ -205,15 +205,14 @@ const SpotifyPlayer = ({ token, refreshToken, expiresAt, useLyrics }) => {
 
   const setShuffle = () => {
     setShuffleState(!isShuffle);
-    fetch(`https://api.spotify.com/v1/me/player/shuffle?device_id=${deviceID}`, {
+
+    console.log("set shuffle state to: ", isShuffle, " token: ", token, " deviceID: ", deviceID);
+
+    fetch(`https://api.spotify.com/v1/me/player/shuffle?state=${isShuffle}`, {
       method: "PUT",
       headers: {
         Authorization: `Bearer ${token}`, // your OAuth token
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        state: isShuffle,  // Set to `true` for shuffle, `false` to turn off shuffle
-      }),
+      }
     })
         .then((response) => {
           if (!response.ok) {
@@ -353,7 +352,7 @@ return (
                 </button>
                 <button
                   className={`play-pause-button ${
-                    isShuffle ? "is-shuffle-active" : ""
+                    !isShuffle ? "is-shuffle-active" : ""
                   }`}
                   onClick={setShuffle}
                 >
