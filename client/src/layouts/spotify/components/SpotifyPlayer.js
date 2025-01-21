@@ -91,6 +91,44 @@ const SpotifyPlayer = ({ token, refreshToken, expiresAt, useLyrics }) => {
     }
   };
 
+  async function checkShuffleState() {
+    const url = "https://api.spotify.com/v1/me/player";
+
+    try {
+        const response = await fetch(url, {
+            method: "GET",
+            headers: {
+                "Authorization": `Bearer ${token}`
+            }
+        });
+
+        if (!response.ok) {
+            console.error(`Error: ${response.status} - ${response.statusText}`);
+            return;
+        }
+
+        const data = await response.json();
+
+        // Check if shuffle_state exists and is true
+        if (data && typeof data.shuffle_state === "boolean") {
+            if (data.shuffle_state === true) {
+                console.log("Shuffle is enabled.");
+                setShuffleState(true);
+            } else {
+                console.log("Shuffle is disabled.");
+                setShuffleState(false);
+            }
+            return data.shuffle_state; // Returns true if enabled, false if not
+        } else {
+            console.error("shuffle_state not found in the response.");
+            return null;
+        }
+    } catch (error) {
+        console.error("Failed to fetch playback state:", error.message);
+        return null;
+    }
+}
+
 
   const startPlaylistPlayback = (id) => {
     fetch(`https://api.spotify.com/v1/me/player/play?device_id=${id}`, {
@@ -108,6 +146,7 @@ const SpotifyPlayer = ({ token, refreshToken, expiresAt, useLyrics }) => {
             throw new Error(`Failed to start playlist playback: ${response.statusText}`);
           }
           console.log("Playlist playback started successfully!");
+
         })
         .catch((err) => {
           console.error("Error starting playlist playback:", err);
@@ -131,11 +170,13 @@ const SpotifyPlayer = ({ token, refreshToken, expiresAt, useLyrics }) => {
             throw new Error(`Failed to set playlist context: ${response.statusText}`);
           }
           console.log("Playlist context set successfully!");
+          checkShuffleState();
         })
         .catch((err) => {
           console.error("Error setting playlist context:", err);
         });
   };
+
 
   useEffect(() => {
     if (!token)
