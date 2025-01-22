@@ -138,7 +138,7 @@
 .play-pause-button.is-shuffle-active:after {
   content: "";
   position: absolute;
-  bottom: 10px; /* Punkt näher am Symbol */
+  bottom: 10px;
   left: 50%;
   transform: translateX(-50%);
   width: 7px;
@@ -183,4 +183,82 @@
 
 .lyrics-container p {
   color: white; /* Ladeanzeige "Loading lyrics..." in Weiß */
+}
+
+/* Volume Controls */
+.volume-container {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-top: 20px;
+  width: 100%;
+  justify-content: left; /* Same centering as button container */
+}
+
+.volume-button {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  color: #e0e0e0; /* Dark blue matching other icons */
+  display: flex;
+  align-items: center;
+  transition: all 0.2s ease;
+  width: 50px; /* Matching button sizing */
+  height: 50px;
+  justify-content: right;
+}
+
+.volume-button:hover {
+  color: #2a3ec7; /* Lighter blue for hover */
+}
+
+.volume-slider {
+  -webkit-appearance: none;
+  width: 160px; /* Slightly wider for better control */
+  height: 6px;
+  background: #d5cfcf; /* Dark grey from track controls */
+  border-radius: 5px;
+  background-image: linear-gradient(#1d2db9, #1d2db9); /* Light blue fill */
+  background-size: var(--fill-level) 100%;
+  background-repeat: no-repeat;
+  margin: 0;
+}
+
+.volume-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  height: 16px;
+  width: 16px;
+  border-radius: 50%;
+  background: #1d2db9;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border: 2px solid #1d2db9; /* Dark blue border */
+  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
+.volume-slider::-webkit-slider-thumb:hover {
+  background: #1d2db9;
+  transform: scale(1.15);
+  border-color: #2a3ec7;
+}
+
+.volume-slider::-moz-range-thumb {
+  height: 16px;
+  width: 16px;
+  border-radius: 50%;
+  background: #e0e0e0;
+  cursor: pointer;
+  border: 3px solid #e0e0e0;
+}
+
+.volume-slider::-moz-range-progress {
+  background-color: #0be2e2;
+  height: 6px;
+  border-radius: 3px;
+}
+
+/* Added subtle transition for smooth interactions */
+.volume-slider {
+  transition: background-color 0.2s ease;
 }

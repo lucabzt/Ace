@@ -1,11 +1,16 @@
 import React, { useEffect, useState, useRef } from "react";
 
 import "./SpotifyPlayer.css"
-import {BsPauseFill, BsPlayFill, BsShuffle, BsSkipBackwardFill, BsSkipForwardCircleFill, BsSkipForwardFill} from "react-icons/bs";
-import {FiSkipForward} from "react-icons/fi";
-import {ShuffleOnOutlined} from "@mui/icons-material";
+import {
+  BsPauseFill,
+  BsPlayFill,
+  BsSkipBackwardFill,
+  BsSkipForwardFill,
+} from "react-icons/bs";
 import {PiShuffleBold} from "react-icons/pi";
-
+import { BsFillVolumeMuteFill } from "react-icons/bs";
+import {BiSolidVolumeFull} from "react-icons/bi";
+import { ImVolumeHigh, ImVolumeLow, ImVolumeMedium, ImVolumeMute2 } from "react-icons/im";
 
 const SpotifyPlayer = ({ token, refreshToken, expiresAt, useLyrics }) => {
   //const [player, setPlayer] = useState(null);
@@ -16,10 +21,12 @@ const SpotifyPlayer = ({ token, refreshToken, expiresAt, useLyrics }) => {
   const [currentToken, setCurrentToken] = useState(token);
   const [expirationTime, setExpirationTime] = useState(expiresAt);
   const [deviceID, setDeviceID] = useState(null);
-  const [isShuffle, setShuffleState] = useState(false);
+  const [isShuffle, setShuffleState] = useState(true);
   const [lyrics, setLyrics] = useState(null); // Lyrics state
   const [loadingLyrics, setLoadingLyrics] = useState(false); // Loading state for lyrics
   const [trackId, setTrackId] = useState(null); // Add trackId state
+  const [volume, setVolume] = useState(100); // Default volume 100%
+  const [isMuted, setIsMuted] = useState(false);
 
   useEffect(() => {
     const refreshAccessToken = async () => {
@@ -80,7 +87,6 @@ const SpotifyPlayer = ({ token, refreshToken, expiresAt, useLyrics }) => {
       player.current.previousTrack().catch((err) => console.error("Previous track error:", err));
     }
   };
-
 
   const updateProgress = () => {
     if (player.current && isPlaying) {
@@ -280,6 +286,24 @@ const SpotifyPlayer = ({ token, refreshToken, expiresAt, useLyrics }) => {
     }
   };
 
+  const handleVolumeChange = (e) => {
+  const newVolume = parseInt(e.target.value);
+  setVolume(newVolume);
+  if (player.current) {
+    player.current.setVolume(newVolume / 100); // Spotify expects 0-1
+  }
+  if (isMuted && newVolume > 0) setIsMuted(false);
+};
+
+  const toggleMute = () => {
+  if (isMuted) {
+    player.current.setVolume(volume / 100);
+  } else {
+    player.current.setVolume(0);
+  }
+  setIsMuted(!isMuted);
+};
+
   const formatDuration = (ms) => {
     const minutes = Math.floor(ms / 60000);
     const seconds = Math.floor((ms % 60000) / 1000);
@@ -343,6 +367,15 @@ const SpotifyPlayer = ({ token, refreshToken, expiresAt, useLyrics }) => {
   // Only execute when trackId changes
 }, [trackId]);
 
+  const getVolumeIcon = (volume, isMuted) => {
+    if (isMuted || volume === 0) return <ImVolumeMute2 size="25px" />;
+    if (volume <= 33) return <ImVolumeLow size="25px" />;
+    if (volume <= 66) return <ImVolumeMedium size="25px" />;
+    return <ImVolumeHigh size="25px" />;
+  };
+
+
+
   const progressPercentage = (trackProgress / trackDuration) * 100 || 0;
 
 return (
@@ -367,66 +400,82 @@ return (
             )}
             <div className="track-details">
               {currentTrack ? (
-                <div>
-                  <p className="track-name">
-                    <strong>{currentTrack.name}</strong>
-                  </p>
-                  <p className="track-artist">
-                    {currentTrack.artists.map((a) => a.name).join(", ")}
-                  </p>
-                </div>
+                  <div>
+                    <p className="track-name">
+                      <strong>{currentTrack.name}</strong>
+                    </p>
+                    <p className="track-artist">
+                      {currentTrack.artists.map((a) => a.name).join(", ")}
+                    </p>
+                  </div>
               ) : (
-                <div></div>
+                  <div></div>
               )}
               <p className="track-duration">
                 {formatDuration(trackProgress)} / {formatDuration(trackDuration)}
               </p>
               <div className="progress-bar-container">
                 <div
-                  className="progress-bar"
-                  style={{ width: `${progressPercentage}%` }}
+                    className="progress-bar"
+                    style={{width: `${progressPercentage}%`}}
                 ></div>
               </div>
               <div className="button-container">
                 <button className="play-pause-button" onClick={skipToPrevious}>
-                  <BsSkipBackwardFill size="25px" color="inherit" />
+                  <BsSkipBackwardFill size="25px" color="inherit"/>
                 </button>
                 <button className="play-pause-button" onClick={togglePlay}>
                   {isPlaying ? (
-                    <BsPauseFill size="25px" color="inherit" />
+                      <BsPauseFill size="25px" color="inherit"/>
                   ) : (
-                    <BsPlayFill size="25px" color="inherit" />
+                      <BsPlayFill size="25px" color="inherit"/>
                   )}
                 </button>
                 <button className="play-pause-button" onClick={skipToNext}>
-                  <BsSkipForwardFill size="25px" color="inherit" />
+                  <BsSkipForwardFill size="25px" color="inherit"/>
                 </button>
-                <button
-                  className={`play-pause-button ${
-                    !isShuffle ? "is-shuffle-active" : ""
-                  }`}
-                  onClick={setShuffle}
+                <button className={`play-pause-button ${
+                        isShuffle ? "" : "is-shuffle-active"
+                    }`}
+                    onClick={setShuffle}
                 >
-                  <PiShuffleBold size="25px" color="inherit" />
+                  <PiShuffleBold size="25px" color="inherit"/>
                 </button>
+              </div>
+              {/* Volume Controls */}
+              <div className="volume-container">
+                <button className="volume-button" onClick={toggleMute}>
+                  {getVolumeIcon(volume, isMuted)}
+                </button>
+                <input
+                    type="range"
+                    min="0"
+                    max="100"
+                    value={volume}
+                    onChange={handleVolumeChange}
+                    className="volume-slider"
+                    style={{'--fill-level': `${volume}%`}}
+                />
               </div>
             </div>
           </div>
         </div>
         {/* Right side: Lyrics */}
         {(useLyrics) ? (
-        <div className="lyrics-container">
-          <h3>Lyrics:</h3>
-          {loadingLyrics ? (
-            <p>Loading lyrics...</p>
-          ) : (
-            <div className="lyrics-box">
-              <pre className="lyrics-text">{lyrics}</pre>
-            </div>
-          )}
-        </div>) : (<> </>)}
-      </>
-    ) : (
+                <div className="lyrics-container">
+                  <h3>Lyrics:</h3>
+                  {loadingLyrics ? (
+                      <p>Loading lyrics...</p>
+                  ) : (
+                      <div className="lyrics-box">
+                        <pre className="lyrics-text">{lyrics}</pre>
+                      </div>
+                  )}
+                </div>) :
+  (<> </>)
+}
+</>
+) : (
       <p>Loading Player...</p>
     )}
   </div>
