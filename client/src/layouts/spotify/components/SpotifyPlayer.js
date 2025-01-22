@@ -19,6 +19,7 @@ const SpotifyPlayer = ({ token, refreshToken, expiresAt, useLyrics }) => {
   const [isShuffle, setShuffleState] = useState(false);
   const [lyrics, setLyrics] = useState(null); // Lyrics state
   const [loadingLyrics, setLoadingLyrics] = useState(false); // Loading state for lyrics
+  const [trackId, setTrackId] = useState(null); // Add trackId state
 
   useEffect(() => {
     const refreshAccessToken = async () => {
@@ -325,13 +326,22 @@ const SpotifyPlayer = ({ token, refreshToken, expiresAt, useLyrics }) => {
 
   useEffect(() => {
     if (currentTrack) {
-      // Prüft, wenn sich der Track (Name/ID) ändert:
-      const artist = currentTrack.artists.map((a) => a.name).join(", ");
-      const title = currentTrack.name;
-      fetchLyrics(artist, title); // Ruft Lyrics nur bei Änderung des Tracks ab.
+      const { id } = currentTrack;
+      if (id !== trackId) {
+        // Update trackId only if it's a new track
+        setTrackId(id);
+      }
     }
-  // Nur ausführen wenn sich der currentTrack ändert.
   }, [currentTrack]);
+
+  useEffect(() => {
+  if (trackId) {
+    const artist = currentTrack.artists.map((a) => a.name).join(", ");
+    const title = currentTrack.name;
+    fetchLyrics(artist, title); // Fetch lyrics for the new track
+  }
+  // Only execute when trackId changes
+}, [trackId]);
 
   const progressPercentage = (trackProgress / trackDuration) * 100 || 0;
 

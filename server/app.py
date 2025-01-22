@@ -14,6 +14,7 @@ from flask_cors import CORS
 from waitress import serve
 
 import lyricsgenius
+import re
 
 from server.assets.data.HeatMapData import heatmap_data
 from server.src.game.utils.game_utils import display_spade_art
@@ -74,12 +75,25 @@ def get_lyrics():
         return jsonify({"error": "Please provide both 'artist' and 'title' parameters."}), 400
 
     try:
-        # Suche nach dem Song
-        song = genius.search_song(song_title, artist)
+        # Search for the song
+        song = genius.search_song(song_title, artist, get_full_info=False)
         if song:
-            # Rückgabe der Songtexte
-            lyrics = song.lyrics
-            return jsonify({"artist": artist, "title": song_title, "lyrics": lyrics})
+            # Remove lines with unwanted terms
+            unwanted_terms = ['contributors', 'translations', 'lyrics']
+            lines = song.lyrics.split('\n')
+            filtered_lines = []
+            for line in lines:
+                line_lower = line.lower()
+                if not any(term in line_lower for term in unwanted_terms):
+                    filtered_lines.append(line)
+
+            # Remove text within square brackets and the brackets themselves
+            cleaned_lyrics = '\n'.join(filtered_lines)
+            cleaned_lyrics = re.sub(r'\[.*?\]', '', cleaned_lyrics).strip()
+
+            if not cleaned_lyrics:
+                return jsonify({"error": "Lyrics not found after filtering."}), 404
+            return jsonify({"artist": artist, "title": song_title, "lyrics": cleaned_lyrics})
         else:
             return jsonify({"error": "Lyrics not found."}), 404
     except Exception as e:
@@ -326,7 +340,7 @@ if __name__ == '__main__':
     DEBUG = True
 
     if DEBUG:
-        app.run(debug=False, host='127.0.0.1', port=5000
+        app.run(debug=True, host='127.0.0.1', port=5000
                 , ssl_context=('./cert.pem', './key.pem')
                 )
     else:

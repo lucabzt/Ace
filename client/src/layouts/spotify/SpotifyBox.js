@@ -71,21 +71,25 @@ function SpotifyBox() {
         {/* Fullscreen Button */}
         <VuiButton
           onClick={toggleFullscreen}
-          variant="contained"
+          variant="text" // Use "text" variant to remove background
           color="info"
           style={{
             position: "absolute",
             top: "20px",
             right: "20px",
             fontSize: "2rem",
-            padding: "0",
-            backgroundColor: isFullscreen ? "#ff5252" : "royalblue",
+            backgroundColor: "transparent", // Remove background color
+            boxShadow: "none", // Remove any shadow
+            minWidth: "auto", // Remove minimum width
+            "&:hover": {
+              backgroundColor: "transparent", // Ensure no background on hover
+            },
           }}
         >
           {isFullscreen ? (
-            <FullscreenExitRounded style={{ fontSize: "3rem" }} color="inherit" />
+            <FullscreenExitRounded style={{ transform: "scale(2.5)", color: "white" }} />
           ) : (
-            <FullscreenRounded style={{ fontSize: "3rem" }} color="inherit" />
+            <FullscreenRounded style={{ transform: "scale(2.5)", color: "white" }} />
           )}
         </VuiButton>
 
