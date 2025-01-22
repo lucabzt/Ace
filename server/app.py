@@ -78,18 +78,19 @@ def get_lyrics():
         # Search for the song
         song = genius.search_song(song_title, artist, get_full_info=False)
         if song:
-            # Remove lines with unwanted terms
+            # Remove lines with unwanted terms or square brackets
             unwanted_terms = ['contributors', 'translations', 'lyrics']
             lines = song.lyrics.split('\n')
             filtered_lines = []
             for line in lines:
                 line_lower = line.lower()
-                if not any(term in line_lower for term in unwanted_terms):
+
+                # Exclude lines with unwanted terms or square bracketed sections
+                if not any(term in line_lower for term in unwanted_terms) and not re.search(r'\[.*?\]', line):
                     filtered_lines.append(line)
 
-            # Remove text within square brackets and the brackets themselves
-            cleaned_lyrics = '\n'.join(filtered_lines)
-            cleaned_lyrics = re.sub(r'\[.*?\]', '', cleaned_lyrics).strip()
+            # Join the filtered lines and remove any extra spaces
+            cleaned_lyrics = '\n'.join(filtered_lines).strip()
 
             if not cleaned_lyrics:
                 return jsonify({"error": "Lyrics not found after filtering."}), 404
