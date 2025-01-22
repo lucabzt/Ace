@@ -341,7 +341,9 @@ const SpotifyPlayer = ({ token, refreshToken, expiresAt, useLyrics }) => {
     })
     .catch((err) => {
       console.error("Error fetching lyrics:", err);
-      setLyrics("An error occurred while fetching lyrics.");
+      setLyrics("An error occurred while fetching lyrics... ¯\\_(ツ)_/¯\n" +
+          "\n" +
+          "Maybe this song doesn't have any lyrics after all?");
     })
     .finally(() => {
       setLoadingLyrics(false); // Reset loading state
