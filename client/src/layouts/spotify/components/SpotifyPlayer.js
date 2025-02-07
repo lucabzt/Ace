@@ -27,6 +27,8 @@ const SpotifyPlayer = ({ token, refreshToken, expiresAt, useLyrics }) => {
   const [trackId, setTrackId] = useState(null); // Add trackId state
   const [volume, setVolume] = useState(100); // Default volume 100%
   const [isMuted, setIsMuted] = useState(false);
+  const lyricsContainerRef = useRef(null); // Ref for the lyrics container
+  const [isAutoScrolling, setIsAutoScrolling] = useState(false); // Track if auto-scroll is active
 
   useEffect(() => {
     const refreshAccessToken = async () => {
@@ -310,18 +312,15 @@ const SpotifyPlayer = ({ token, refreshToken, expiresAt, useLyrics }) => {
     return `${minutes}:${seconds < 10 ? "0" : ""}${seconds}`;
   };
 
-  const fetchLyrics = (artist, title) => {
-  // Use only the first artist, if multiple artists exist
+const fetchLyrics = (artist, title) => {
   const formattedArtist = artist.includes(",") ? artist.split(",")[0] : artist;
-
-  // Remove " - " and everything after it in the title (if present)
   const formattedTitle = title.includes(" - ") ? title.split(" - ")[0] : title;
 
-  setLoadingLyrics(true); // Set loading state
+  setLoadingLyrics(true);
 
   fetch(
     `https://localhost:5000/lyrics?artist=${encodeURIComponent(
-      formattedArtist.trim() // Ensure no leading/trailing spaces
+      formattedArtist.trim()
     )}&title=${encodeURIComponent(formattedTitle.trim())}`
   )
     .then((res) => {
@@ -335,8 +334,17 @@ const SpotifyPlayer = ({ token, refreshToken, expiresAt, useLyrics }) => {
         console.error("Error fetching lyrics:", data.error);
         setLyrics("Lyrics not found for this track.");
       } else {
-        setLyrics(data.lyrics);
-        //console.log("Fetched Lyrics:", data.lyrics); // Output lyrics to console
+        const currentArtists = currentTrack.artists.map((a) => a.name.toLowerCase());
+        const fetchedArtist = data.artist.toLowerCase();
+
+        //if (!currentArtists.includes(fetchedArtist)) {
+          // Fetched lyrics belong to an outdated song, fetch again for the correct track
+          //const newArtist = currentTrack.artists.map((a) => a.name).join(", ");
+          //const newTitle = currentTrack.name;
+          //fetchLyrics(newArtist, newTitle);
+        //} else {
+          setLyrics(data.lyrics);
+        //}
       }
     })
     .catch((err) => {
@@ -346,7 +354,7 @@ const SpotifyPlayer = ({ token, refreshToken, expiresAt, useLyrics }) => {
           "Maybe this song doesn't have any lyrics after all?");
     })
     .finally(() => {
-      setLoadingLyrics(false); // Reset loading state
+      setLoadingLyrics(false);
     });
 };
 
@@ -366,7 +374,6 @@ const SpotifyPlayer = ({ token, refreshToken, expiresAt, useLyrics }) => {
     const title = currentTrack.name;
     fetchLyrics(artist, title); // Fetch lyrics for the new track
   }
-  // Only execute when trackId changes
 }, [trackId]);
 
   const getVolumeIcon = (volume, isMuted) => {
@@ -375,6 +382,49 @@ const SpotifyPlayer = ({ token, refreshToken, expiresAt, useLyrics }) => {
     if (volume <= 66) return <ImVolumeMedium size="25px" />;
     return <ImVolumeHigh size="25px" />;
   };
+
+   useEffect(() => {
+    let scrollInterval;
+    let startScrollTimeout;
+
+    if (lyrics && trackDuration > 0) {
+      // Start auto-scroll 10 seconds into the song
+      startScrollTimeout = setTimeout(() => {
+        setIsAutoScrolling(true);
+
+        const container = lyricsContainerRef.current;
+        if (!container) return;
+
+        const scrollHeight = container.scrollHeight - container.clientHeight; // Total scrollable height
+        const scrollDuration = trackDuration - 40000; // Time for scrolling (ms)
+
+        // Calculate scroll speed (pixels/ms)
+        const scrollSpeed = scrollHeight / scrollDuration;
+
+        scrollInterval = setInterval(() => {
+          if (isPlaying && container) {
+            const currentScrollTop = container.scrollTop;
+            const newScrollTop = currentScrollTop + scrollSpeed * 200;
+
+            // Scroll until the end of the container
+            if (newScrollTop < scrollHeight) {
+              container.scrollTo({
+                top: newScrollTop,
+                behavior: "smooth",
+              });
+            } else {
+              clearInterval(scrollInterval); // Stop scrolling at the end
+            }
+          }
+        }, 50); // Update scroll position every second
+      }, 20000); // Start after 10 seconds
+    }
+
+    return () => {
+      clearTimeout(startScrollTimeout);
+      clearInterval(scrollInterval);
+    };
+  }, [lyrics, trackDuration, isPlaying]);
 
 
 
@@ -465,20 +515,20 @@ return (
         {/* Right side: Lyrics */}
         {(useLyrics) ? (
                 <div className="lyrics-container">
-                  <h3>Lyrics:</h3>
-                  {loadingLyrics ? (
-                      <p>Loading lyrics...</p>
-                  ) : (
-                      <div className="lyrics-box">
-                        <pre className="lyrics-text">{lyrics}</pre>
-                      </div>
-                  )}
+          <h3>Lyrics:</h3>
+          {loadingLyrics ? (
+            <p>Loading lyrics...</p>
+          ) : (
+              <div ref={lyricsContainerRef} className="lyrics-box" >
+                <pre className="lyrics-text">{lyrics}</pre>
+              </div>
+          )}
                 </div>) :
-  (<> </>)
-}
-</>
-) : (
-      <p>Loading Player...</p>
+            (<> </>)
+        }
+      </>
+    ) : (
+        <p>Loading Player...</p>
     )}
   </div>
 );

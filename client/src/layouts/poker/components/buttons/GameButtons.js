@@ -10,6 +10,17 @@ function GameButtons() {
   const [showRaiseSlider, setShowRaiseSlider] = useState(false); // Raise Slider State
   const [raiseAmount, setRaiseAmount] = useState(10); // Raise Amount
 
+  // Fetch player data
+  const fetchPlayers = () => {
+    fetch(`${serverAddress}/players`)
+      .then((res) => {
+        if (!res.ok) {
+          throw new Error("Failed to fetch players data");
+        }
+        return res.json();
+      })
+  };
+
   // API-Anfrage, um Spieleraktionen zu senden
   const sendAction = async (action) => {
     await fetch(`${serverAddress}/player-action`, {

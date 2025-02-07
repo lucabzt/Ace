@@ -85,9 +85,14 @@ def get_lyrics():
             for line in lines:
                 line_lower = line.lower()
 
-                # Exclude lines with unwanted terms or square bracketed sections
-                if not any(term in line_lower for term in unwanted_terms) and not re.search(r'\[.*?\]', line):
-                    filtered_lines.append(line)
+                # Stop processing if "number embed" pattern is found
+                if re.search(r'\d+embed', line_lower):
+                    break
+
+                # Exclude lines with unwanted terms or square brackets
+                if (not any(term in line_lower for term in unwanted_terms) and
+                        not re.search(r'\[.*?\]', line)):
+                    filtered_lines.append(line.strip())
 
             # Join the filtered lines and remove any extra spaces
             cleaned_lyrics = '\n'.join(filtered_lines).strip()
@@ -99,6 +104,7 @@ def get_lyrics():
             return jsonify({"error": "Lyrics not found."}), 404
     except Exception as e:
         return jsonify({"error": f"An error occurred: {str(e)}"}), 500
+
 
 
 # Endpoints for Poker
@@ -341,7 +347,7 @@ if __name__ == '__main__':
     DEBUG = True
 
     if DEBUG:
-        app.run(debug=True, host='127.0.0.1', port=5000
+        app.run(debug=False, host='127.0.0.1', port=5000
                 , ssl_context=('./cert.pem', './key.pem')
                 )
     else:
